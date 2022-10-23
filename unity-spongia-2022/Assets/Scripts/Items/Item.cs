@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AE.Inventory
+namespace AE.Items
 {
     public enum ItemClass
     {
@@ -41,7 +41,7 @@ namespace AE.Inventory
         Damage,
         Crit,
         Armor,
-        Doge,
+        Dodge,
         Mana,
         Weight,
     }
@@ -75,12 +75,6 @@ namespace AE.Inventory
             {ItemType.Weapon, ItemUsage.Weapon},
         };
 
-        public Dictionary<ItemUsage, StatType[]> RelevantStats = new Dictionary<ItemUsage, StatType[]>
-        {
-            {ItemUsage.Armor, new StatType[] {StatType.Armor, StatType.Doge, StatType.Mana, StatType.Weight } },
-            {ItemUsage.Weapon, new StatType[] {StatType.Damage, StatType.Crit, StatType.Mana, StatType.Weight } },
-        };
-
         public Item(ItemClass _class, ItemTier tier, ItemType type,
             int? damageBonus = null, int? critPercentBonus = null,
             int? armorBonus = null, int? dodgeBonus = null,
@@ -93,11 +87,14 @@ namespace AE.Inventory
             Usage = Type == ItemType.Weapon ? ItemUsage.Weapon : ItemUsage.Armor;
             
             DamageBonus = damageBonus is not null ? (int)damageBonus :
-                (GenerateStat(StatType.Damage) );
-            CritPercentBonus = critPercentBonus is not null ? (int)critPercentBonus : GenerateStat(StatType.Damage);
-            ArmorBonus = armorBonus is not null ? (int)armorBonus : GenerateStat(StatType.Damage);
-            DodgeBonus = dodgeBonus is not null ? (int)dodgeBonus : GenerateStat(StatType.Damage);
-            ManaBonus = manaBonus is not null ? (int)manaBonus : GenerateStat(StatType.Damage);
+                (Usage == ItemUsage.Weapon ? GenerateStat(StatType.Damage) : 0);
+            CritPercentBonus = critPercentBonus is not null ? (int)critPercentBonus :
+                (Usage == ItemUsage.Weapon ? GenerateStat(StatType.Crit) : 0);
+            ArmorBonus = armorBonus is not null ? (int)armorBonus :
+                (Usage == ItemUsage.Armor ? GenerateStat(StatType.Armor) : 0);
+            DodgeBonus = dodgeBonus is not null ? (int)dodgeBonus :
+                (Usage == ItemUsage.Armor ? GenerateStat(StatType.Dodge) : 0);
+            ManaBonus = manaBonus is not null ? (int)manaBonus : GenerateStat(StatType.Mana);
             Weight = weight is not null ? (int)weight : GenerateStat(StatType.Damage);
         }
 
