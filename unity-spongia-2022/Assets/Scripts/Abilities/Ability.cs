@@ -35,21 +35,21 @@ namespace Abilities
         public float SelfMana;
         public float SelfWeight;
 
-      
 
-        
-       
-        
 
-        public void UseAbility(GameObject Caster,GameObject Target )
+
+
+
+
+        public void UseAbility(GameObject Caster, GameObject Target)
         {
 
-             //Check if you can cast the spell
-            float Weight =Caster.GetComponent<RealtimeStatsHolder>().Weight;
+            //Check if you can cast the spell
+            float Weight = Caster.GetComponent<RealtimeStatsHolder>().Weight;
             float Stamina = Caster.GetComponent<RealtimeStatsHolder>().Stamina;
             float Mana = Caster.GetComponent<RealtimeStatsHolder>().Mana;
             var OutputStaminaCost = StaminaCost + StaminaCost * Weight / 80;
-            if (Stamina < OutputStaminaCost || Mana< ManaCost) { return; }
+            if (Stamina < OutputStaminaCost || Mana < ManaCost) { return; }
             //Stamina and Mana taking
             Caster.GetComponent<RealtimeStatsHolder>().Mana -= ManaCost;
             Caster.GetComponent<RealtimeStatsHolder>().Stamina -= OutputStaminaCost;
@@ -59,16 +59,16 @@ namespace Abilities
             int Chance = UnityEngine.Random.Range(1, 101);
             int CriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
             //Caclulating TargetOutput Damage
-            float TargetOutputDamage = (float)Math.Round(Damage*TargetDamageMultiplier)*CriticalMultiplier;
+            float TargetOutputDamage = (float)Math.Round(Damage * TargetDamageMultiplier) * CriticalMultiplier;
             //Calculating SelfOutput Damage
             float SelfOutputDamage = (float)Math.Round(Damage * SelfDamageMultiplier) * CriticalMultiplier;
             //All spells that dont affect Caster
-            if (Target!= null )
+            if (Target != null)
             {
                 //Altering Target Deffence
                 Target.GetComponent<RealtimeStatsHolder>().DamageReduction += TargetDamageReduction;
                 //Altering Target Stamina %
-                Target.GetComponent<RealtimeStatsHolder>().Stamina += (Target.GetComponent<RealtimeStatsHolder>().Stamina*TargetStamina/100);
+                Target.GetComponent<RealtimeStatsHolder>().Stamina += (Target.GetComponent<RealtimeStatsHolder>().Stamina * TargetStamina / 100);
                 //Altering Target CritChance 
                 Target.GetComponent<RealtimeStatsHolder>().CritChance -= TargetCritChance;
                 //Altering Target Damage %
@@ -81,8 +81,8 @@ namespace Abilities
                 Target.GetComponent<RealtimeStatsHolder>().Weight += (Target.GetComponent<RealtimeStatsHolder>().Weight * TargetWeight / 100);
                 //AlteringTargetHealth
                 float TargetHealthChange = TargetOutputDamage * (1 - Target.GetComponent<RealtimeStatsHolder>().DamageReduction / 100);
-                Target.GetComponent<RealtimeStatsHolder>().HealthPoints += TargetHealthChange + TargetHealthPoints; 
-               
+                Target.GetComponent<RealtimeStatsHolder>().HealthPoints += TargetHealthChange + TargetHealthPoints;
+
             }
             //Altering Self Deffence
             Caster.GetComponent<RealtimeStatsHolder>().DamageReduction += SelfDamageReduction;
@@ -101,14 +101,14 @@ namespace Abilities
             //Altering SelfHealth
             float SelfHealthChange = SelfOutputDamage * (1 - Caster.GetComponent<RealtimeStatsHolder>().DamageReduction / 100);
             Caster.GetComponent<RealtimeStatsHolder>().HealthPoints += SelfHealthChange + SelfHealthPoints;
-            
+
 
 
 
 
 
         }
-        
+
 
     }
 
