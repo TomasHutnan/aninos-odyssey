@@ -1,3 +1,5 @@
+using AE.CharacterStats;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,9 +26,9 @@ namespace AE.Items
     {
         Helmet,
         Chestplate,
-        Gloves,
         Leggings,
         Boots,
+        Shield,
         Weapon,
     }
 
@@ -64,12 +66,12 @@ namespace AE.Items
         public ItemUsage Usage;
 
         public bool equipped;
-        public Character character;
+        public Sprite icon;
 
         public Dictionary<ItemType, ItemUsage> ItemTypeToUsage = new Dictionary<ItemType, ItemUsage> { 
             {ItemType.Helmet, ItemUsage.Armor},
             {ItemType.Chestplate, ItemUsage.Armor},
-            {ItemType.Gloves, ItemUsage.Armor},
+            {ItemType.Shield, ItemUsage.Armor},
             {ItemType.Leggings, ItemUsage.Armor},
             {ItemType.Boots, ItemUsage.Armor},
             {ItemType.Weapon, ItemUsage.Weapon},
@@ -101,6 +103,32 @@ namespace AE.Items
         public int GenerateStat(StatType statusType)
         {
             return 0;
+        }
+
+        public void Equip(Character c)
+        {
+            if (DamageBonus != 0)
+                c.Damage.AddModifier(new StatModifier(DamageBonus, StatModType.Flat, this));
+            if (CritPercentBonus != 0)
+                c.CritChance.AddModifier(new StatModifier(CritPercentBonus, StatModType.Flat, this));
+            if (ArmorBonus != 0)
+                c.DamageReduction.AddModifier(new StatModifier(ArmorBonus, StatModType.InverseProp, this));
+            if (DodgeBonus != 0)
+                c.DodgeChance.AddModifier(new StatModifier(DodgeBonus, StatModType.InverseProp, this));
+            if (ManaBonus != 0)
+                c.Mana.AddModifier(new StatModifier(ManaBonus, StatModType.Flat, this));
+            if (Weight != 0)
+                c.Weight.AddModifier(new StatModifier(Weight, StatModType.Flat, this));
+        }
+
+        public void Unequip(Character c)
+        {
+            c.Damage.RemoveAllModifiersFromSource(this);
+            c.CritChance.RemoveAllModifiersFromSource(this);
+            c.DamageReduction.RemoveAllModifiersFromSource(this);
+            c.DodgeChance.RemoveAllModifiersFromSource(this);
+            c.Mana.RemoveAllModifiersFromSource(this);
+            c.Weight.RemoveAllModifiersFromSource(this);
         }
     }
 }

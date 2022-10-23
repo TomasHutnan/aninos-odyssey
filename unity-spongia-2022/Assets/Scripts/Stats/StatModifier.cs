@@ -5,6 +5,7 @@ namespace AE.CharacterStats
         Flat = 100,
         PercentAdd = 200,
         PercentMult = 300,
+        InverseProp = 400,
     }
 
     public class StatModifier
