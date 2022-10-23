@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using AE.CharacterStats;
+
 public class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CharacterStat Damage;
+    public CharacterStat CritChance;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public CharacterStat HealthPoints;
+    public CharacterStat DamageReduction;
+    public CharacterStat Dodge;
+
+    public CharacterStat Stamina;
+    public CharacterStat StaminaRegen;
+    public CharacterStat Mana;
+
+    public CharacterStat Weight;
 }
