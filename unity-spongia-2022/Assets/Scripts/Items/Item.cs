@@ -1,5 +1,6 @@
 using AE.CharacterStats;
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,23 +51,27 @@ namespace AE.Items
 
     public class Item : MonoBehaviour
     {
-        public int DamageBonus;
-        public int CritPercentBonus;
+        public float DamageBonus;
+        public float CritPercentBonus;
 
-        public int ArmorBonus;
-        public int DodgeBonus;
+        public float ArmorBonus;
+        public float DodgeBonus;
 
-        public int ManaBonus;
+        public float ManaBonus;
 
-        public int Weight;
+        public float Weight;
 
         public ItemClass Class;
         public ItemTier Tier;
         public ItemType Type;
         public ItemUsage Usage;
 
+        public int value;
+
         public bool equipped;
+        
         public Sprite icon;
+        public Sprite image;
 
         public Dictionary<ItemType, ItemUsage> ItemTypeToUsage = new Dictionary<ItemType, ItemUsage> { 
             {ItemType.Helmet, ItemUsage.Armor},
@@ -78,9 +83,9 @@ namespace AE.Items
         };
 
         public Item(ItemClass _class, ItemTier tier, ItemType type,
-            int? damageBonus = null, int? critPercentBonus = null,
-            int? armorBonus = null, int? dodgeBonus = null,
-            int? manaBonus = null,
+            float? damageBonus = null, float? critPercentBonus = null,
+            float? armorBonus = null, float? dodgeBonus = null,
+            float? manaBonus = null,
             float? weight = null)
         {
             Class = _class;
@@ -88,21 +93,21 @@ namespace AE.Items
             Type = type;
             Usage = Type == ItemType.Weapon ? ItemUsage.Weapon : ItemUsage.Armor;
             
-            DamageBonus = damageBonus is not null ? (int)damageBonus :
+            DamageBonus = damageBonus is not null ? (float)damageBonus :
                 (Usage == ItemUsage.Weapon ? GenerateStat(StatType.Damage) : 0);
-            CritPercentBonus = critPercentBonus is not null ? (int)critPercentBonus :
+            CritPercentBonus = critPercentBonus is not null ? (float)critPercentBonus :
                 (Usage == ItemUsage.Weapon ? GenerateStat(StatType.Crit) : 0);
-            ArmorBonus = armorBonus is not null ? (int)armorBonus :
+            ArmorBonus = armorBonus is not null ? (float)armorBonus :
                 (Usage == ItemUsage.Armor ? GenerateStat(StatType.Armor) : 0);
-            DodgeBonus = dodgeBonus is not null ? (int)dodgeBonus :
+            DodgeBonus = dodgeBonus is not null ? (float)dodgeBonus :
                 (Usage == ItemUsage.Armor ? GenerateStat(StatType.Dodge) : 0);
-            ManaBonus = manaBonus is not null ? (int)manaBonus : GenerateStat(StatType.Mana);
-            Weight = weight is not null ? (int)weight : GenerateStat(StatType.Damage);
+            ManaBonus = manaBonus is not null ? (float)manaBonus : GenerateStat(StatType.Mana);
+            Weight = weight is not null ? (float)weight : GenerateStat(StatType.Damage);
         }
 
-        public int GenerateStat(StatType statusType)
+        public float GenerateStat(StatType statType)
         {
-            return 0;
+            return (float)Math.Round(EquipmentStatRanges.GenerateRandom(Usage, statType, Class, Tier), 1);
         }
 
         public void Equip(Character c)
