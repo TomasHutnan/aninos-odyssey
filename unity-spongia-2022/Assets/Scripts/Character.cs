@@ -5,6 +5,7 @@ using UnityEngine;
 using AE.CharacterStats;
 using AE.Items;
 using AE.GameSave;
+using System;
 
 public class Character : MonoBehaviour
 {
@@ -26,15 +27,19 @@ public class Character : MonoBehaviour
     public List<Item> Inventory;
     public Dictionary<ItemType, Item> EquippedItems;
 
+    public event Action InventoryUpdateEvent;
+
     public bool AddItem(Item item)
     {
         Inventory.Add(item);
+        InventoryUpdateEvent?.Invoke();
         return true;
     }
     public bool RemoveItem(Item item)
     {
         if (Inventory.Remove(item))
         {
+            InventoryUpdateEvent?.Invoke();
             return true;
         }
         return false;
@@ -50,6 +55,7 @@ public class Character : MonoBehaviour
         EquippedItems[item.Type] = item;
         RemoveItem(item);
 
+        InventoryUpdateEvent?.Invoke();
         return true;
     }
     public bool UnequipItem(Item item)
@@ -59,6 +65,8 @@ public class Character : MonoBehaviour
 
         AddItem(item);
         EquippedItems[item.Type] = null;
+
+        InventoryUpdateEvent?.Invoke();
         return true;
     }
 
@@ -69,6 +77,12 @@ public class Character : MonoBehaviour
             Money = SaveData.Money;
             Inventory = SaveData.Inventory;
             EquippedItems = SaveData.EquippedItems;
+        }
+        else
+        {
+            Money = 0;
+            Inventory = new List<Item> { };
+            EquippedItems = new Dictionary<ItemType, Item> { };
         }
     }
 
