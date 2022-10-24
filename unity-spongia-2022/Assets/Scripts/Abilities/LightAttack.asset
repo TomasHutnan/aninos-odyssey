@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: LightAttack
   m_EditorClassIdentifier: 
-  StaminaCost: 10
+  StaminaCost: 20
   ManaCost: 0
   TargetDamageMultiplier: 1
   SelfDamageMultiplier: 0
   TargetFinisherDamage: 0
-  TargetHealthPoints: -100
+  TargetHealthPoints: 0
   TargetCritChance: 0
   TargetDamage: 0
   TargetDamageReduction: 0

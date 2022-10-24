@@ -14,18 +14,19 @@ public class RealtimeStatsHolder : MonoBehaviour
     public float StaminaRegen;
     public float Mana;
     public float Weight;
+    public GameObject Fighter;
     // Start is called before the first frame update
     void Start()
     {
-         HealthPoints = transform.gameObject.GetComponent<Character>().HealthPoints.Value;
-         CritChance = transform.gameObject.GetComponent<Character>().Damage.Value;
-         Damage = transform.gameObject.GetComponent<Character>().Damage.Value;
-         DamageReduction = transform.gameObject.GetComponent<Character>().DamageReduction.Value;
-         Doge = transform.gameObject.GetComponent<Character>().Dodge.Value;
-         Stamina = transform.gameObject.GetComponent<Character>().Stamina.Value;
-         StaminaRegen = transform.gameObject.GetComponent<Character>().StaminaRegen.Value;
-         Mana = transform.gameObject.GetComponent<Character>().Mana.Value;
-         Weight = transform.gameObject.GetComponent<Character>().Weight.Value;
+         HealthPoints = Fighter.GetComponent<Character>().HealthPoints.Value;
+         CritChance = Fighter.GetComponent<Character>().Damage.Value;
+         Damage = Fighter.GetComponent<Character>().Damage.Value;
+         DamageReduction = Fighter.GetComponent<Character>().DamageReduction.Value;
+         Doge = Fighter.GetComponent<Character>().Dodge.Value;
+         Stamina = Fighter.GetComponent<Character>().Stamina.Value;
+         StaminaRegen = Fighter.GetComponent<Character>().StaminaRegen.Value;
+         Mana = Fighter.GetComponent<Character>().Mana.Value;
+         Weight = Fighter.GetComponent<Character>().Weight.Value;
 
     }
 

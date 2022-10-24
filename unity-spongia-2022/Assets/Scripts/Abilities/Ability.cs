@@ -65,42 +65,45 @@ namespace Abilities
             //All spells that dont affect Caster
             if (Target != null)
             {
+                RealtimeStatsHolder TargetComponent = Target.GetComponent<RealtimeStatsHolder>();
                 //Altering Target Deffence
-                Target.GetComponent<RealtimeStatsHolder>().DamageReduction += TargetDamageReduction;
+
+                TargetComponent.DamageReduction += TargetDamageReduction;
                 //Altering Target Stamina %
-                Target.GetComponent<RealtimeStatsHolder>().Stamina += (Target.GetComponent<RealtimeStatsHolder>().Stamina * TargetStamina / 100);
+                TargetComponent.Stamina += (Target.GetComponent<RealtimeStatsHolder>().Stamina * TargetStamina / 100);
                 //Altering Target CritChance 
-                Target.GetComponent<RealtimeStatsHolder>().CritChance -= TargetCritChance;
+                TargetComponent.CritChance -= TargetCritChance;
                 //Altering Target Damage %
-                Target.GetComponent<RealtimeStatsHolder>().Damage += (Target.GetComponent<RealtimeStatsHolder>().Damage * TargetDamage / 100);
+                TargetComponent.Damage += (Target.GetComponent<RealtimeStatsHolder>().Damage * TargetDamage / 100);
                 //Altering Target Doge 
-                Target.GetComponent<RealtimeStatsHolder>().Doge += TargetDoge;
+                TargetComponent.Doge += TargetDoge;
                 //Altering Target Mana %
-                Target.GetComponent<RealtimeStatsHolder>().Mana += (Target.GetComponent<RealtimeStatsHolder>().Mana * TargetMana / 100);
+                TargetComponent.Mana += (Target.GetComponent<RealtimeStatsHolder>().Mana * TargetMana / 100);
                 //Altering Target Weight %
-                Target.GetComponent<RealtimeStatsHolder>().Weight += (Target.GetComponent<RealtimeStatsHolder>().Weight * TargetWeight / 100);
+                TargetComponent.Weight += (Target.GetComponent<RealtimeStatsHolder>().Weight * TargetWeight / 100);
                 //AlteringTargetHealth
                 float TargetHealthChange = TargetOutputDamage * (1 - Target.GetComponent<RealtimeStatsHolder>().DamageReduction / 100);
-                Target.GetComponent<RealtimeStatsHolder>().HealthPoints += TargetHealthChange + TargetHealthPoints;
+                TargetComponent.HealthPoints += TargetHealthChange + TargetHealthPoints;
 
             }
+            RealtimeStatsHolder CasterComponent = Caster.GetComponent<RealtimeStatsHolder>();
             //Altering Self Deffence
-            Caster.GetComponent<RealtimeStatsHolder>().DamageReduction += SelfDamageReduction;
+            CasterComponent.DamageReduction += SelfDamageReduction;
             //Altering Self Stamina %
-            Caster.GetComponent<RealtimeStatsHolder>().Stamina += (Caster.GetComponent<RealtimeStatsHolder>().Stamina * SelfStamina / 100);
+            CasterComponent.Stamina += (Caster.GetComponent<RealtimeStatsHolder>().Stamina * SelfStamina / 100);
             //Altering Self CritChance 
-            Caster.GetComponent<RealtimeStatsHolder>().CritChance -= SelfCritChance;
+            CasterComponent.CritChance -= SelfCritChance;
             //Altering Self Damage %
-            Caster.GetComponent<RealtimeStatsHolder>().Damage += (Caster.GetComponent<RealtimeStatsHolder>().Damage * SelfDamage / 100);
+            CasterComponent.Damage += (Caster.GetComponent<RealtimeStatsHolder>().Damage * SelfDamage / 100);
             //Altering Self Doge 
-            Caster.GetComponent<RealtimeStatsHolder>().Doge += SelfDoge;
+            CasterComponent.Doge += SelfDoge;
             //Altering Self Mana %
-            Caster.GetComponent<RealtimeStatsHolder>().Mana += (Caster.GetComponent<RealtimeStatsHolder>().Mana * SelfMana / 100);
+            CasterComponent.Mana += (Caster.GetComponent<RealtimeStatsHolder>().Mana * SelfMana / 100);
             //Altering Self Weight %
-            Caster.GetComponent<RealtimeStatsHolder>().Weight += (Caster.GetComponent<RealtimeStatsHolder>().Weight * SelfWeight / 100);
+            CasterComponent.Weight += (Caster.GetComponent<RealtimeStatsHolder>().Weight * SelfWeight / 100);
             //Altering SelfHealth
             float SelfHealthChange = SelfOutputDamage * (1 - Caster.GetComponent<RealtimeStatsHolder>().DamageReduction / 100);
-            Caster.GetComponent<RealtimeStatsHolder>().HealthPoints += SelfHealthChange + SelfHealthPoints;
+            CasterComponent.HealthPoints += SelfHealthChange + SelfHealthPoints;
 
 
 
