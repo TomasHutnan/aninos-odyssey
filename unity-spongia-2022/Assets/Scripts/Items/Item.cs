@@ -68,8 +68,9 @@ namespace AE.Items
 
         public int value;
         
-        public Sprite icon;
-        public Sprite image;
+        public Sprite Icon;
+
+        public string Name;
 
         public Dictionary<ItemType, ItemUsage> ItemTypeToUsage = new Dictionary<ItemType, ItemUsage> { 
             {ItemType.Helmet, ItemUsage.Armor},
@@ -84,7 +85,8 @@ namespace AE.Items
             float? damageBonus = null, float? critPercentBonus = null,
             float? armorBonus = null, float? dodgeBonus = null,
             float? manaBonus = null,
-            float? weight = null)
+            float? weight = null,
+            string name = null)
         {
             Class = _class;
             Tier = tier;
@@ -100,12 +102,21 @@ namespace AE.Items
             DodgeBonus = dodgeBonus is not null ? (float)dodgeBonus :
                 (Usage == ItemUsage.Armor ? GenerateStat(StatType.Dodge) : 0);
             ManaBonus = manaBonus is not null ? (float)manaBonus : GenerateStat(StatType.Mana);
-            Weight = weight is not null ? (float)weight : GenerateStat(StatType.Damage);
+            Weight = weight is not null ? (float)weight : GenerateStat(StatType.Weight);
+
+            Name = name is not null ? (string)name : GenerateName();
+
+            Icon = Resources.Load<Sprite>("Items\\icon.jpg");
         }
 
-        public float GenerateStat(StatType statType)
+        private float GenerateStat(StatType statType)
         {
             return (float)Math.Round(EquipmentStatRanges.GenerateRandom(Usage, statType, Class, Tier), 1);
+        }
+
+        private string GenerateName()
+        {
+            return EquipmentNames.GetRandom();
         }
 
         public void Equip(Character c)

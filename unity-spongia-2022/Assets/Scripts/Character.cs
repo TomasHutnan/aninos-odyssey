@@ -64,7 +64,7 @@ public class Character : MonoBehaviour
 
     void Awake()
     {
-        if (transform.name == "CharacterManager")
+        if (transform.name == "PlayerCharacterManager")
         {
             Money = SaveData.Money;
             Inventory = SaveData.Inventory;
@@ -74,17 +74,17 @@ public class Character : MonoBehaviour
 
     private void defaultStats()
     {
-        Damage = new CharacterStat(10);
+        Damage = new CharacterStat(1);
         CritChance = new CharacterStat(0);
 
-        HealthPoints = new CharacterStat(100);
+        HealthPoints = new CharacterStat(20);
         DamageReduction = new CharacterStat(0);
         DodgeChance = new CharacterStat(0);
 
-        Stamina = new CharacterStat(50);
-        StaminaRegen = new CharacterStat(10);
-        Mana = new CharacterStat(20);
+        Stamina = new CharacterStat(100);
+        StaminaRegen = new CharacterStat(0);
+        Mana = new CharacterStat(100);
 
-        Weight = new CharacterStat(70);
+        Weight = new CharacterStat(80);
     }
 }

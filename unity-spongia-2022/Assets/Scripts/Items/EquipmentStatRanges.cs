@@ -6,7 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AE.Items {
+namespace AE.Items 
+{
 
     public class EquipmentStatRanges {
         static EquipmentStatRanges () {
