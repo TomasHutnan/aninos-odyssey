@@ -102,7 +102,7 @@ namespace AE.Items
             DodgeBonus = dodgeBonus is not null ? (float)dodgeBonus :
                 (Usage == ItemUsage.Armor ? GenerateStat(StatType.Dodge) : 0);
             ManaBonus = manaBonus is not null ? (float)manaBonus : GenerateStat(StatType.Mana);
-            Weight = weight is not null ? (float)weight : GenerateStat(StatType.Damage);
+            Weight = weight is not null ? (float)weight : GenerateStat(StatType.Weight);
         }
 
         public float GenerateStat(StatType statType)
