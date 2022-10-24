@@ -19,7 +19,7 @@ namespace Abilities
         public float TargetCritChance;
         public float TargetDamage;
         public float TargetDamageReduction;
-        public float TargetDoge;
+        public float TargetDodge;
         public float TargetStamina;
         public float TargetStaminaRegen;
         public float TargetMana;
@@ -29,7 +29,7 @@ namespace Abilities
         public float SelfCritChance;
         public float SelfDamage;
         public float SelfDamageReduction;
-        public float SelfDoge;
+        public float SelfDodge;
         public float SelfStamina;
         public float SelfStaminaRegen;
         public float SelfMana;
@@ -75,8 +75,8 @@ namespace Abilities
                 TargetComponent.CritChance -= TargetCritChance;
                 //Altering Target Damage %
                 TargetComponent.Damage += (Target.GetComponent<RealtimeStatsHolder>().Damage * TargetDamage / 100);
-                //Altering Target Doge 
-                TargetComponent.Doge += TargetDoge;
+                //Altering Target Dodge 
+                TargetComponent.DodgeChance += TargetDodge;
                 //Altering Target Mana %
                 TargetComponent.Mana += (Target.GetComponent<RealtimeStatsHolder>().Mana * TargetMana / 100);
                 //Altering Target Weight %
@@ -95,8 +95,8 @@ namespace Abilities
             CasterComponent.CritChance -= SelfCritChance;
             //Altering Self Damage %
             CasterComponent.Damage += (Caster.GetComponent<RealtimeStatsHolder>().Damage * SelfDamage / 100);
-            //Altering Self Doge 
-            CasterComponent.Doge += SelfDoge;
+            //Altering Self Dodge 
+            CasterComponent.DodgeChance += SelfDodge;
             //Altering Self Mana %
             CasterComponent.Mana += (Caster.GetComponent<RealtimeStatsHolder>().Mana * SelfMana / 100);
             //Altering Self Weight %

@@ -9,7 +9,7 @@ public class RealtimeStatsHolder : MonoBehaviour
     public float CritChance;
     public float Damage;
     public float DamageReduction;
-    public float Doge;
+    public float DodgeChance;
     public float Stamina;
     public float StaminaRegen;
     public float Mana;
@@ -22,7 +22,7 @@ public class RealtimeStatsHolder : MonoBehaviour
          CritChance = Fighter.GetComponent<Character>().Damage.Value;
          Damage = Fighter.GetComponent<Character>().Damage.Value;
          DamageReduction = Fighter.GetComponent<Character>().DamageReduction.Value;
-         Doge = Fighter.GetComponent<Character>().Dodge.Value;
+         DodgeChance = Fighter.GetComponent<Character>().DodgeChance.Value;
          Stamina = Fighter.GetComponent<Character>().Stamina.Value;
          StaminaRegen = Fighter.GetComponent<Character>().StaminaRegen.Value;
          Mana = Fighter.GetComponent<Character>().Mana.Value;
