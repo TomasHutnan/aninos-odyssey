@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-namespace AE.Items {
-    public class SaveData {
+using AE.Items;
+
+namespace AE.GameSave
+{
+    public class SaveData
+    {
 
         public static int Money = 0;
         public static List<Item> Inventory = new List<Item>();

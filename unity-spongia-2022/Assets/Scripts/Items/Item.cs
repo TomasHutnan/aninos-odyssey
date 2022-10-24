@@ -67,8 +67,6 @@ namespace AE.Items
         public ItemUsage Usage;
 
         public int value;
-
-        public bool equipped;
         
         public Sprite icon;
         public Sprite image;
