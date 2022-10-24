@@ -4,6 +4,7 @@ using UnityEngine;
 
 using AE.CharacterStats;
 using AE.Items;
+using AE.GameSave;
 
 public class Character : MonoBehaviour
 {
@@ -20,19 +21,19 @@ public class Character : MonoBehaviour
 
     public CharacterStat Weight;
 
-    public int Money = 0;
+    public int Money;
 
-    public List<Item> inventory = new List<Item> { };
-    public Dictionary<ItemType, Item> equippedItems = new Dictionary<ItemType, Item> { };
+    public List<Item> Inventory;
+    public Dictionary<ItemType, Item> EquippedItems;
 
     public bool AddItem(Item item)
     {
-        inventory.Add(item);
+        Inventory.Add(item);
         return true;
     }
     public bool RemoveItem(Item item)
     {
-        if (inventory.Remove(item))
+        if (Inventory.Remove(item))
         {
             return true;
         }
@@ -41,23 +42,49 @@ public class Character : MonoBehaviour
 
     public bool EquipItem(Item item)
     {
-        if (equippedItems[item.Type])
+        if (EquippedItems[item.Type])
         {
-            AddItem(equippedItems[item.Type]);
+            AddItem(EquippedItems[item.Type]);
         }
 
-        equippedItems[item.Type] = item;
+        EquippedItems[item.Type] = item;
         RemoveItem(item);
 
         return true;
     }
     public bool UnequipItem(Item item)
     {
-        if (!equippedItems[item.Type] == item)
+        if (!EquippedItems[item.Type] == item)
             return false;
 
         AddItem(item);
-        equippedItems[item.Type] = null;
+        EquippedItems[item.Type] = null;
         return true;
+    }
+
+    void Awake()
+    {
+        if (transform.name == "CharacterManager")
+        {
+            Money = SaveData.Money;
+            Inventory = SaveData.Inventory;
+            EquippedItems = SaveData.EquippedItems;
+        }
+    }
+
+    private void defaultStats()
+    {
+        Damage = new CharacterStat(10);
+        CritChance = new CharacterStat(0);
+
+        HealthPoints = new CharacterStat(100);
+        DamageReduction = new CharacterStat(0);
+        DodgeChance = new CharacterStat(0);
+
+        Stamina = new CharacterStat(50);
+        StaminaRegen = new CharacterStat(10);
+        Mana = new CharacterStat(20);
+
+        Weight = new CharacterStat(70);
     }
 }
