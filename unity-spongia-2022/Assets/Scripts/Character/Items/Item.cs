@@ -50,7 +50,7 @@ namespace AE.Items
         Weight,
     }
 
-    public class Item : MonoBehaviour
+    public class Item : ScriptableObject
     {
         public float DamageBonus;
         public float CritPercentBonus;
@@ -89,9 +89,9 @@ namespace AE.Items
             float? weight = null,
             string name = null)
         {
-            Class = (ItemClass)_class;
-            Tier = (ItemTier)tier;
-            Type = (ItemType)type;
+            Class = _class is not null ? (ItemClass)_class : EnumUtils.RandomEnumValue<ItemClass>();
+            Tier = tier is not null ? (ItemTier)tier : EnumUtils.RandomEnumValue<ItemTier>(); ;
+            Type = type is not null ? (ItemType)type : EnumUtils.RandomEnumValue<ItemType>(); ;
             Usage = Type == ItemType.Weapon ? ItemUsage.Weapon : ItemUsage.Armor;
             
             DamageBonus = damageBonus is not null ? (float)damageBonus :
@@ -107,7 +107,7 @@ namespace AE.Items
 
             Name = name is not null ? (string)name : GenerateName();
 
-            Icon = Resources.Load<Sprite>("Items\\icon.jpg");
+            Icon = Resources.Load<Sprite>("Items\\icon");
         }
 
         private float GenerateStat(StatType statType)

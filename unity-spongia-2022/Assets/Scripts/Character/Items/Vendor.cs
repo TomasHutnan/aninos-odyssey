@@ -12,30 +12,25 @@ namespace AE.Items
         public int Money;
 
         public event Action InventoryUpdateEvent;
-
-        private int inventorySize = 3;
         public bool AddItem(Item item)
         {
             Inventory.Add(item);
-            InventoryUpdateEvent?.Invoke();
+            triggerInventoryUpdateEvent();
             return true;
         }
         public bool RemoveItem(Item item)
         {
             if (Inventory.Remove(item))
             {
-                InventoryUpdateEvent?.Invoke();
+                triggerInventoryUpdateEvent();
                 return true;
             }
             return false;
         }
 
-        private void Start()
+        protected void triggerInventoryUpdateEvent()
         {
-            for (int i = 0; i < inventorySize; i++)
-            {
-                Item item = new Item();
-            }
+            InventoryUpdateEvent?.Invoke();
         }
     }
 }
