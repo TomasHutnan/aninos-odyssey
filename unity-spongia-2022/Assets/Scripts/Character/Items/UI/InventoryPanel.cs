@@ -40,14 +40,12 @@ public class InventoryPanel : MonoBehaviour
     private void RefreshUI()
     {
         updatePagesCount();
-        print($"inventoryPagesCount: {inventoryPagesCount}");
 
         CurrentPageText.text = $"Page {currentPage + 1}";
 
         int i = 0;
         for (; i < c.Inventory.Count - itemSlots.Length * currentPage && i < itemSlots.Length; i++)
         {
-            //print(itemSlots.Length * currentPage + i);
             itemSlots[i].Item = c.Inventory[itemSlots.Length * currentPage + i];
         }
         for (; i < itemSlots.Length; i++)
@@ -58,8 +56,6 @@ public class InventoryPanel : MonoBehaviour
 
     public void NextPage()
     {
-        print($"inventoryPagesCount: {inventoryPagesCount}");
-
         if (inventoryPagesCount == 0)
             return;
 
@@ -68,14 +64,10 @@ public class InventoryPanel : MonoBehaviour
         else
             currentPage = 0;
 
-        print($"currentPage: {currentPage}");
-
         RefreshUI();
     }
     public void PreviousPage()
     {
-        print($"inventoryPagesCount: {inventoryPagesCount}");
-
         if (inventoryPagesCount == 0)
             return;
 
@@ -83,8 +75,6 @@ public class InventoryPanel : MonoBehaviour
             currentPage -= 1;
         else
             currentPage = inventoryPagesCount;
-
-        print($"currentPage: {currentPage}");
 
         RefreshUI();
     }
