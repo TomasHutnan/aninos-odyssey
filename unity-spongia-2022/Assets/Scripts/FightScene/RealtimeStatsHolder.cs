@@ -2,34 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
-public class RealtimeStatsHolder : MonoBehaviour
+namespace AE.FightManager
 {
-    public float HealthPoints;
-    public float CritChance;
-    public float Damage;
-    public float DamageReduction;
-    public float DodgeChance;
-    public float Stamina;
-    public float StaminaRegen;
-    public float Mana;
-    public float Weight;
-    public GameObject Fighter;
-    // Start is called before the first frame update
-    void Start()
+    public enum Stat
     {
-         HealthPoints = Fighter.GetComponent<Character>().HealthPoints.Value;
-         CritChance = Fighter.GetComponent<Character>().Damage.Value;
-         Damage = Fighter.GetComponent<Character>().Damage.Value;
-         DamageReduction = Fighter.GetComponent<Character>().DamageReduction.Value;
-         DodgeChance = Fighter.GetComponent<Character>().DodgeChance.Value;
-         Stamina = Fighter.GetComponent<Character>().Stamina.Value;
-         StaminaRegen = Fighter.GetComponent<Character>().StaminaRegen.Value;
-         Mana = Fighter.GetComponent<Character>().Mana.Value;
-         Weight = Fighter.GetComponent<Character>().Weight.Value;
+        HealthPoints,
+        CritChance,
+        Damage,
+        DamageReduction,
+        DodgeChance,
+        Stamina,
+        StaminaRegen,
+        Mana,
+        Weight,
 
     }
-
-    // Update is called once per frame
     
+    public class RealtimeStatsHolder : MonoBehaviour
+    {
+        public List<ActiveEffect> activeEffects = new List<ActiveEffect>();
+
+        public Dictionary<Stat, float> StatHolder = new Dictionary<Stat, float>();
+
+        public GameObject Fighter;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            StatHolder.Add(Stat.HealthPoints, Fighter.GetComponent<Character>().HealthPoints.Value);
+            StatHolder.Add(Stat.CritChance, Fighter.GetComponent<Character>().CritChance.Value);
+            StatHolder.Add(Stat.Damage, Fighter.GetComponent<Character>().Damage.Value);
+            StatHolder.Add(Stat.DamageReduction, Fighter.GetComponent<Character>().DamageReduction.Value);
+            StatHolder.Add(Stat.DodgeChance, Fighter.GetComponent<Character>().DodgeChance.Value);
+            StatHolder.Add(Stat.Stamina, Fighter.GetComponent<Character>().Stamina.Value);
+            StatHolder.Add(Stat.StaminaRegen, Fighter.GetComponent<Character>().StaminaRegen.Value);
+            StatHolder.Add(Stat.Mana, Fighter.GetComponent<Character>().Mana.Value);
+            StatHolder.Add(Stat.Weight, Fighter.GetComponent<Character>().Weight.Value);
+
+
+
+        }
+
+        // Update is called once per frame
+
+    }
 }
