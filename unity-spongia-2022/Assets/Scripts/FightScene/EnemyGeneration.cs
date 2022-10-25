@@ -27,8 +27,8 @@ public class EnemyGeneration : MonoBehaviour
         character.DamageReduction = new CharacterStat(0);
         character.DodgeChance = new CharacterStat(0);
         character.Mana = new CharacterStat(0);
-        character.inventory = new List<Item> { };
-        character.equippedItems = new Dictionary<ItemType, Item> { };
+        character.Inventory = new List<Item> { };
+        character.EquippedItems = new Dictionary<ItemType, Item> { };
 
         Array classes = ItemClass.GetValues(typeof(ItemClass));
         ItemClass EnemyClass = (ItemClass)classes.GetValue(UnityEngine.Random.Range(0, classes.Length));

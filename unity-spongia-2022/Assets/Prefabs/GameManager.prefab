@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2799145709388390193}
   - component: {fileID: 2799145709388390192}
   m_Layer: 0
-  m_Name: PlayerCharacterManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 463cf78910073904d9dd2a7dc11b3bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: 0
+  SellValueMultiplier: 0
   Inventory: []
+  Money: 0
 --- !u!114 &2799145709388390192
 MonoBehaviour:
   m_ObjectHideFlags: 0
