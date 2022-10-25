@@ -2,17 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using AE.Items;
+using UnityEngine.UI;
+using System;
+using UnityEngine.EventSystems;
+
 public class ItemSlot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Image image;
+
+    public event Action<Item> OnClickEvent;
+
+    private Item _item;
+    public Item Item
     {
-        
+        get { return _item; }
+        set
+        {
+            _item = value;
+
+            if (_item == null)
+                image.enabled = false;
+            else
+            {
+                image.sprite = _item.Icon;
+                image.enabled = true;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        
+        if (eventData != null && 
+           (eventData.button == PointerEventData.InputButton.Left || 
+            eventData.button == PointerEventData.InputButton.Right))
+        {
+            if (Item != null && OnClickEvent != null)
+                OnClickEvent(Item);
+        }
+    }
+
+    protected virtual void OnValidate()
+    {
+        if (image == null)
+            image = GetComponent<Image>();
     }
 }
