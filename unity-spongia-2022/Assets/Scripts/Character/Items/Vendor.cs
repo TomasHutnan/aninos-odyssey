@@ -34,7 +34,7 @@ namespace AE.Items
         {
             for (int i = 0; i < inventorySize; i++)
             {
-                Item item = new Item()
+                Item item = new Item();
             }
         }
     }
