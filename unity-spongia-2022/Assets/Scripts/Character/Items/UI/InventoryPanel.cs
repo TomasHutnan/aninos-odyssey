@@ -9,8 +9,6 @@ public class InventoryPanel : MonoBehaviour
     private Character c;
     void Start()
     {
-        c = PlayerUtils.GetCharacter();
-
         c.InventoryUpdateEvent -= RefreshUI;
     }
 

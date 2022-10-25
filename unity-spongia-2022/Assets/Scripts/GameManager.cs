@@ -1,3 +1,5 @@
+using AE.GameSave;
+using AE.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +7,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    public static Character PlayerCharacter;
+    public static ItemTier GameStage;
 
     private void Awake()
     {
@@ -16,6 +21,9 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(transform);
+
+            PlayerCharacter = transform.GetComponent<Character>();
+            GameStage = SaveData.GameStage;
         }
     }
 }

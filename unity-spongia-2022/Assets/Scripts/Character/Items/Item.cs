@@ -1,4 +1,5 @@
 using AE.CharacterStats;
+using AE.Utils;
 
 using System;
 using System.Collections;
@@ -81,16 +82,16 @@ namespace AE.Items
             {ItemType.Weapon, ItemUsage.Weapon},
         };
 
-        public Item(ItemClass _class, ItemTier tier, ItemType type,
+        public Item(ItemClass? _class = null, ItemTier? tier = null, ItemType? type = null,
             float? damageBonus = null, float? critPercentBonus = null,
             float? armorBonus = null, float? dodgeBonus = null,
             float? manaBonus = null,
             float? weight = null,
             string name = null)
         {
-            Class = _class;
-            Tier = tier;
-            Type = type;
+            Class = (ItemClass)_class;
+            Tier = (ItemTier)tier;
+            Type = (ItemType)type;
             Usage = Type == ItemType.Weapon ? ItemUsage.Weapon : ItemUsage.Armor;
             
             DamageBonus = damageBonus is not null ? (float)damageBonus :
