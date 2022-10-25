@@ -12,6 +12,7 @@ namespace AE.GameSave
         public static List<Item> Inventory = new List<Item>();
         public static Dictionary<ItemType, Item> EquippedItems = new Dictionary<ItemType, Item>();
 
+        public static ItemTier GameStage = ItemTier.Mortal;
         // + stage, xp/amount of fights done in a stage?
 
     }

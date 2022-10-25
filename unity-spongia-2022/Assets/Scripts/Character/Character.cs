@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 using AE.CharacterStats;
 using AE.Items;
 using AE.GameSave;
 
-public class Character : MonoBehaviour
+public class Character : Vendor
 {
     public CharacterStat Damage;
     public CharacterStat CritChance;
@@ -21,24 +22,9 @@ public class Character : MonoBehaviour
 
     public CharacterStat Weight;
 
-    public int Money;
-
-    public List<Item> Inventory;
     public Dictionary<ItemType, Item> EquippedItems;
 
-    public bool AddItem(Item item)
-    {
-        Inventory.Add(item);
-        return true;
-    }
-    public bool RemoveItem(Item item)
-    {
-        if (Inventory.Remove(item))
-        {
-            return true;
-        }
-        return false;
-    }
+
 
     public bool EquipItem(Item item)
     {
@@ -59,6 +45,7 @@ public class Character : MonoBehaviour
 
         AddItem(item);
         EquippedItems[item.Type] = null;
+
         return true;
     }
 
@@ -69,6 +56,12 @@ public class Character : MonoBehaviour
             Money = SaveData.Money;
             Inventory = SaveData.Inventory;
             EquippedItems = SaveData.EquippedItems;
+        }
+        else
+        {
+            Money = 0;
+            Inventory = new List<Item> { };
+            EquippedItems = new Dictionary<ItemType, Item> { };
         }
     }
 
