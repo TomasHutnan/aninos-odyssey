@@ -63,6 +63,7 @@ public class Character : Vendor
             Inventory = new List<Item> { };
             EquippedItems = new Dictionary<ItemType, Item> { };
         }
+        defaultStats();
     }
 
     private void defaultStats()
