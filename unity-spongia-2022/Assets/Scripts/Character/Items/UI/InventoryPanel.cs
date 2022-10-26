@@ -71,7 +71,7 @@ public class InventoryPanel : MonoBehaviour
         if (inventoryPagesCount == 0)
             return;
 
-        if (currentPage > inventoryPagesCount)
+        if (currentPage > 0)
             currentPage -= 1;
         else
             currentPage = inventoryPagesCount;
