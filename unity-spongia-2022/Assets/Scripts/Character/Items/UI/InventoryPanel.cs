@@ -6,92 +6,107 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-using AE.Items;
-
-public class InventoryPanel : MonoBehaviour
+namespace AE.Items.UI
 {
-    [SerializeField] Transform ItemSlotsGrid;
-    [SerializeField] TextMeshProUGUI CurrentPageText;
-    [SerializeField] ItemSlot[] itemSlots;
-
-    public event Action<Item> OnItemClickedEvent;
-
-    private Character c;
-
-    private int inventoryPagesCount;
-    private int currentPage = 0;
-
-    void Start()
+    public class InventoryPanel : MonoBehaviour
     {
-        c = GameManager.PlayerCharacter;
-        c.InventoryUpdateEvent += RefreshUI;
+        [SerializeField] Transform ItemSlotsGrid;
+        [SerializeField] TextMeshProUGUI CurrentPageText;
+        [SerializeField] ItemSlot[] itemSlots;
 
-        for (int i = 0; i < itemSlots.Length; i++)
-            itemSlots[i].OnClickEvent += OnItemClickedEvent;
+        public event Action<Item> OnItemRightClickedEvent;
+        public event Action<Item> OnItemLeftClickedEvent;
 
-        RefreshUI();
-    }
+        [SerializeField] Character c;
 
-    private void OnDisable()
-    {
-        c.InventoryUpdateEvent -= RefreshUI;
-    }
+        private int inventoryPagesCount;
+        private int currentPage = 0;
 
-    private void RefreshUI()
-    {
-        updatePagesCount();
-
-        CurrentPageText.text = $"Page {currentPage + 1}";
-
-        int i = 0;
-        for (; i < c.Inventory.Count - itemSlots.Length * currentPage && i < itemSlots.Length; i++)
+        void Start()
         {
-            itemSlots[i].Item = c.Inventory[itemSlots.Length * currentPage + i];
+            if (c is null)
+                c = GameManager.PlayerCharacter;
+
+            c.InventoryUpdateEvent += RefreshUI;
+
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                itemSlots[i].OnItemRightClickedEvent += OnItemRightClickedEvent;
+                itemSlots[i].OnItemLeftClickedEvent += OnItemLeftClickedEvent;
+
+                //itemSlots[i].OnItemRightClickedEvent += OnItemRightClickedEvent;
+                itemSlots[i].OnItemLeftClickedEvent += handleLeftClick;
+            }
+
+            RefreshUI();
         }
-        for (; i < itemSlots.Length; i++)
+
+        private void OnDisable()
         {
-            itemSlots[i].Item = null;
+            c.InventoryUpdateEvent -= RefreshUI;
         }
-    }
 
-    public void NextPage()
-    {
-        if (inventoryPagesCount == 0)
-            return;
+        private void RefreshUI()
+        {
+            updatePagesCount();
 
-        if (currentPage < inventoryPagesCount)
-            currentPage += 1;
-        else
-            currentPage = 0;
+            CurrentPageText.text = $"Page {currentPage + 1}";
 
-        RefreshUI();
-    }
-    public void PreviousPage()
-    {
-        if (inventoryPagesCount == 0)
-            return;
+            int i = 0;
+            for (; i < c.Inventory.Count - itemSlots.Length * currentPage && i < itemSlots.Length; i++)
+            {
+                itemSlots[i].Item = c.Inventory[itemSlots.Length * currentPage + i];
+            }
+            for (; i < itemSlots.Length; i++)
+            {
+                itemSlots[i].Item = null;
+            }
+        }
 
-        if (currentPage > 0)
-            currentPage -= 1;
-        else
-            currentPage = inventoryPagesCount;
+        private void handleLeftClick(Item item)
+        {
+            c.EquipItem(item);
+        }
 
-        RefreshUI();
-    }
+        public void NextPage()
+        {
+            if (inventoryPagesCount == 0)
+                return;
 
-    private void OnValidate()
-    {
-        if (ItemSlotsGrid != null)
-            itemSlots = ItemSlotsGrid.GetComponentsInChildren<ItemSlot>();
-    }
+            if (currentPage < inventoryPagesCount)
+                currentPage += 1;
+            else
+                currentPage = 0;
 
-    private void updatePagesCount()
-    {
-        int count = c.Inventory.Count;
+            RefreshUI();
+        }
+        public void PreviousPage()
+        {
+            if (inventoryPagesCount == 0)
+                return;
 
-        if (count <= itemSlots.Length)
-            inventoryPagesCount = 0;
-        else
-            inventoryPagesCount = (int)Math.Floor((float)(count / itemSlots.Length)) - ((count % itemSlots.Length == 0) ? 1 : 0);
+            if (currentPage > 0)
+                currentPage -= 1;
+            else
+                currentPage = inventoryPagesCount;
+
+            RefreshUI();
+        }
+
+        private void OnValidate()
+        {
+            if (ItemSlotsGrid != null)
+                itemSlots = ItemSlotsGrid.GetComponentsInChildren<ItemSlot>();
+        }
+
+        private void updatePagesCount()
+        {
+            int count = c.Inventory.Count;
+
+            if (count <= itemSlots.Length)
+                inventoryPagesCount = 0;
+            else
+                inventoryPagesCount = (int)Math.Floor((float)(count / itemSlots.Length)) - ((count % itemSlots.Length == 0) ? 1 : 0);
+        }
     }
 }

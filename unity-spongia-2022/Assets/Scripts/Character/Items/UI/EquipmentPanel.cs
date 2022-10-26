@@ -1,18 +1,71 @@
+using AE.Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquipmentPanel : MonoBehaviour
+namespace AE.Items.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class EquipmentPanel : MonoBehaviour
     {
-        
-    }
+        [SerializeField] Transform[] equipmentSlotsGrids;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField] Dictionary<ItemType, EquipmentSlot> equipmentSlots = new Dictionary<ItemType, EquipmentSlot> { };
+
+        public event Action<Item> OnItemRightClickedEvent;
+        public event Action<Item> OnItemLeftClickedEvent;
+
+        [SerializeField] Character c;
+
+        private void Start()
+        {
+            if (c is null)
+                c = GameManager.PlayerCharacter;
+
+            c.EquipmentUpdateEvent += RefreshUI;
+
+            foreach (EquipmentSlot equipmentSlot in equipmentSlots.Values)
+            {
+                equipmentSlot.OnItemRightClickedEvent += OnItemRightClickedEvent;
+                equipmentSlot.OnItemLeftClickedEvent += OnItemLeftClickedEvent;
+
+                //equipmentSlot.OnItemRightClickedEvent += OnItemRightClickedEvent;
+                equipmentSlot.OnItemLeftClickedEvent += handleLeftClick;
+            }
+
+            RefreshUI();
+        }
+
+        private void OnDisable()
+        {
+            c.EquipmentUpdateEvent -= RefreshUI;
+        }
+
+        private void RefreshUI()
+        {
+            foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
+            {
+                if (c.EquippedItems.ContainsKey(itemType) && c.EquippedItems[itemType] is not null)
+                {
+                    equipmentSlots[itemType].Item = c.EquippedItems[itemType];
+                }
+                else
+                    equipmentSlots[itemType].Item = null;
+            }
+        }
+
+        private void handleLeftClick(Item item)
+        {
+            c.UnequipItem(item);
+        }
+
+        private void OnValidate()
+        {
+            foreach (Transform slotGrid in equipmentSlotsGrids)
+                foreach (EquipmentSlot equipmentSlot in slotGrid.GetComponentsInChildren<EquipmentSlot>())
+                {
+                    equipmentSlots[equipmentSlot.ItemType] = equipmentSlot;
+                }
+        }
     }
 }

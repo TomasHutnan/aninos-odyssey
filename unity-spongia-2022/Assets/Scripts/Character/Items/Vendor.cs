@@ -14,12 +14,18 @@ namespace AE.Items
         public event Action InventoryUpdateEvent;
         public bool AddItem(Item item)
         {
+            if (item is null)
+                return false;
+
             Inventory.Add(item);
             triggerInventoryUpdateEvent();
             return true;
         }
         public bool RemoveItem(Item item)
         {
+            if (item is null)
+                return false;
+
             if (Inventory.Remove(item))
             {
                 triggerInventoryUpdateEvent();

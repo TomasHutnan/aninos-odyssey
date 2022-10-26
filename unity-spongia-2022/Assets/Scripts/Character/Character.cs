@@ -24,28 +24,34 @@ public class Character : Vendor
 
     public Dictionary<ItemType, Item> EquippedItems;
 
-
+    public event Action EquipmentUpdateEvent;
 
     public bool EquipItem(Item item)
     {
-        if (EquippedItems[item.Type])
-        {
-            AddItem(EquippedItems[item.Type]);
-        }
+        Item equippedItem;
+        bool isEquipped = EquippedItems.TryGetValue(item.Type, out equippedItem);
+
+        if (isEquipped)
+            AddItem(equippedItem);
 
         EquippedItems[item.Type] = item;
         RemoveItem(item);
 
+        EquipmentUpdateEvent?.Invoke();
         return true;
     }
     public bool UnequipItem(Item item)
     {
-        if (!EquippedItems[item.Type] == item)
+        Item equippedItem;
+        bool isEquipped = EquippedItems.TryGetValue(item.Type, out equippedItem);
+
+        if (!isEquipped || equippedItem != item)
             return false;
 
         AddItem(item);
         EquippedItems[item.Type] = null;
 
+        EquipmentUpdateEvent?.Invoke();
         return true;
     }
 
