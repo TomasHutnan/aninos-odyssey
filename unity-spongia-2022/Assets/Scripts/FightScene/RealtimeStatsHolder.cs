@@ -62,6 +62,7 @@ namespace AE.FightManager
         // Update is called once per frame
         private void Update()
         {
+            //print(activeEffects.Count);
             string String = "";
             foreach (Stat item in Enum.GetValues(typeof(Stat)))
             {
