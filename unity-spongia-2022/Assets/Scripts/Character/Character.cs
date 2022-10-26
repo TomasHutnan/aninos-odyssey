@@ -51,7 +51,7 @@ public class Character : Vendor
 
     void Awake()
     {
-        if (transform.name == "PlayerCharacterManager")
+        if (transform.name == "GameManager")
         {
             Money = SaveData.Money;
             Inventory = SaveData.Inventory;
@@ -63,6 +63,7 @@ public class Character : Vendor
             Inventory = new List<Item> { };
             EquippedItems = new Dictionary<ItemType, Item> { };
         }
+        defaultStats();
     }
 
     private void defaultStats()
