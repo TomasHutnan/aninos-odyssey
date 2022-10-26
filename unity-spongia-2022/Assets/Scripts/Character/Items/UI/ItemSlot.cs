@@ -13,6 +13,8 @@ namespace AE.Items.UI
     {
         [SerializeField] Image image;
 
+        private Sprite defaultSprite;
+
         public event Action<Item> OnItemRightClickedEvent;
         public event Action<Item> OnItemLeftClickedEvent;
 
@@ -25,11 +27,10 @@ namespace AE.Items.UI
                 _item = value;
 
                 if (_item == null)
-                    image.enabled = false;
+                    image.sprite = defaultSprite;
                 else
                 {
                     image.sprite = _item.Icon;
-                    image.enabled = true;
                 }
             }
         }
@@ -59,6 +60,9 @@ namespace AE.Items.UI
         {
             if (image == null)
                 image = GetComponent<Image>();
+
+            if (defaultSprite == null)
+                defaultSprite = GetComponent<Image>().sprite;
         }
     }
 }

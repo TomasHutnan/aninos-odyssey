@@ -22,6 +22,9 @@ public class Character : Vendor
 
     public CharacterStat Weight;
 
+    public int Level;
+    public int Exp;
+
     public Dictionary<ItemType, Item> EquippedItems;
 
     public event Action EquipmentUpdateEvent;
@@ -30,11 +33,14 @@ public class Character : Vendor
     {
         Item equippedItem;
         bool isEquipped = EquippedItems.TryGetValue(item.Type, out equippedItem);
-
-        if (isEquipped)
+        if (isEquipped && equippedItem is not null)
+        {
             AddItem(equippedItem);
+            equippedItem.Unequip(this);
+        }
 
         EquippedItems[item.Type] = item;
+        item.Equip(this);
         RemoveItem(item);
 
         EquipmentUpdateEvent?.Invoke();
@@ -50,6 +56,7 @@ public class Character : Vendor
 
         AddItem(item);
         EquippedItems[item.Type] = null;
+        equippedItem.Unequip(this);
 
         EquipmentUpdateEvent?.Invoke();
         return true;
@@ -70,6 +77,22 @@ public class Character : Vendor
             EquippedItems = new Dictionary<ItemType, Item> { };
         }
         defaultStats();
+
+        Damage.Label = "Damage";
+        CritChance.Label = "Crit Chance";
+        CritChance.IsPercentual = true;
+
+        HealthPoints.Label = "Health";
+        DamageReduction.Label = "Resistance";
+        DamageReduction.IsPercentual = true;
+        DodgeChance.Label = "Dodge Chance";
+        DodgeChance.IsPercentual = true;
+
+        Stamina.Label = "Stamina";
+        StaminaRegen.Label = "Stamina Regen";
+        Mana.Label = "Mana";
+
+        Weight.Label = "Weight";
     }
 
     private void defaultStats()
