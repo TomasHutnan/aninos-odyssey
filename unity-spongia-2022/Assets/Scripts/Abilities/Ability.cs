@@ -77,11 +77,13 @@ namespace Abilities
 
             var Caster = CasterObject.GetComponent<RealtimeStatsHolder>().StatHolder;
             var Target = TargetObject.GetComponent<RealtimeStatsHolder>().StatHolder;
+            Debug.Log($"Caster:{CasterObject.name}");
+            Debug.Log($"Target:{TargetObject.name}");
             //Check if you can cast the spell
             float Weight = Caster[Stat.Weight];
             float Stamina = Caster[Stat.Stamina];
             float Mana = Caster[Stat.Mana];
-            var OutputStaminaCost = StaminaCost + StaminaCost * Weight / 80;
+            var OutputStaminaCost = StaminaCost * Weight / 80;
             if (Stamina < OutputStaminaCost || Mana < ManaCost) { return; }
             //Stamina and Mana taking
             Caster[Stat.Mana] -= ManaCost;
@@ -114,7 +116,7 @@ namespace Abilities
                 //Altering Target Weight %
                 Target[Stat.Weight] += (Target[Stat.Weight] * TargetEffects[Stat.Weight] / 100);
                 //Altering Target Health
-                float TargetHealthChange = TargetOutputDamage * (1 - Target[Stat.DamageReduction] / 100);
+                float TargetHealthChange = -TargetOutputDamage * (1 - Target[Stat.DamageReduction] / 100);
                 Target[Stat.HealthPoints] += TargetHealthChange + TargetEffects[Stat.HealthPoints] ;
                 float TargetMaxHealth = TargetObject.GetComponent<Character>().HealthPoints.Value;
                 float TargetCurrentHealth = Target[Stat.HealthPoints];
@@ -139,7 +141,7 @@ namespace Abilities
             //Altering Self Weight %
             Caster[Stat.Weight] += (Caster[Stat.Weight] * SelfEffects[Stat.Weight] / 100);
             //Altering Self Health
-            float SelfHealthChange = SelfOutputDamage * (1 - Caster[Stat.DamageReduction] / 100);
+            float SelfHealthChange = -SelfOutputDamage * (1 - Caster[Stat.DamageReduction] / 100);
             Caster[Stat.HealthPoints] += SelfHealthChange + SelfEffects[Stat.HealthPoints] ;
             float SelfMaxHealth = CasterObject.GetComponent<Character>().HealthPoints.Value;
             float SelfCurrentHealth = Caster[Stat.HealthPoints];

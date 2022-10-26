@@ -58,8 +58,7 @@ public class EnemyGeneration : MonoBehaviour
             EnemyGear.Add(item,CurrentItem );
             CurrentItem.Equip(character);
         }
-        print(character.Weight.Value);
-        print(EnemyClass);
+       
 
 
 
