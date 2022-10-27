@@ -109,7 +109,8 @@ namespace AE.Items
 
             Icon = Resources.Load<Sprite>("Items\\icon");
 
-            value = UnityEngine.Random.Range(5, 100);
+            float sumBonus = DamageBonus + CritPercentBonus + ArmorBonus + DodgeBonus + ManaBonus - Weight;
+            value = (int)Math.Round(Math.Pow(sumBonus, 1+0.1*(int)Tier));
         }
 
         private float GenerateStat(StatType statType)
