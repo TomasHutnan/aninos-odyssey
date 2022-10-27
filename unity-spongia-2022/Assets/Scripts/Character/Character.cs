@@ -69,7 +69,7 @@ public class Character : Vendor
 
         Money += item.value;
 
-        triggerInventoryUpdateEvent();
+        triggerMoneyUpdateEvent();
         return true;
     }
 
