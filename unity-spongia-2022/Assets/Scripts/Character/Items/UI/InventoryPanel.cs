@@ -81,7 +81,10 @@ namespace AE.Items.UI
                 sellPrompt.SellableItem = item;
             }
             else
+            {
                 c.SellItem(item);
+                EventManager.EventManager.TriggerItemSlotExit();
+            }
         }
 
         public void NextPage()

@@ -110,7 +110,7 @@ namespace AE.Items
             Icon = Resources.Load<Sprite>("Items\\icon");
 
             float sumBonus = DamageBonus + CritPercentBonus + ArmorBonus + DodgeBonus + ManaBonus - Weight;
-            value = (int)Math.Round(Math.Pow(sumBonus, 1+0.1*(int)Tier));
+            value = (int)Math.Round(Math.Pow(Math.Abs(sumBonus), 1+0.1*(int)Tier));
         }
 
         private float GenerateStat(StatType statType)
