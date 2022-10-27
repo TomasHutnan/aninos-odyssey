@@ -26,10 +26,12 @@ namespace AE.Items.UI
                 _item = value;
 
                 if (_item == null)
-                    image.sprite = defaultSprite;
+                    image.enabled = false;
+                //image.sprite = defaultSprite;
                 else
                 {
                     image.sprite = _item.Icon;
+                    image.enabled = true;
                 }
             }
         }
@@ -39,9 +41,15 @@ namespace AE.Items.UI
             if (eventData != null && Item != null)
             {
                 if (eventData.button == PointerEventData.InputButton.Left)
+                {
                     OnItemLeftClickedEvent?.Invoke(Item);
+                    EventManager.EventManager.TriggerItemSlotExit();
+                }
                 else if (eventData.button == PointerEventData.InputButton.Right)
+                {
                     OnItemRightClickedEvent?.Invoke(Item);
+                    EventManager.EventManager.TriggerItemSlotExit();
+                }
             }
         }
 

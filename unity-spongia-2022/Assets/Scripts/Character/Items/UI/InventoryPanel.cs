@@ -83,7 +83,6 @@ namespace AE.Items.UI
             else
             {
                 c.SellItem(item);
-                EventManager.EventManager.TriggerItemSlotExit();
             }
         }
 

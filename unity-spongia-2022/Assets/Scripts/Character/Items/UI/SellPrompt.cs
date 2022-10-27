@@ -46,7 +46,6 @@ public class SellPrompt : MonoBehaviour
             SaveData.ConfirmSell = false;
 
         c.SellItem(SellableItem);
-        EventManager.TriggerItemSlotExit();
         gameObject.SetActive(false);
     }
     public void No()
