@@ -29,8 +29,8 @@ namespace AE.Items.UI
                 equipmentSlot.OnItemRightClickedEvent += OnItemRightClickedEvent;
                 equipmentSlot.OnItemLeftClickedEvent += OnItemLeftClickedEvent;
 
-                //equipmentSlot.OnItemRightClickedEvent += OnItemRightClickedEvent;
-                equipmentSlot.OnItemLeftClickedEvent += handleLeftClick;
+                equipmentSlot.OnItemRightClickedEvent += handleUnequip;
+                equipmentSlot.OnItemLeftClickedEvent += handleUnequip;
             }
 
             RefreshUI();
@@ -54,7 +54,7 @@ namespace AE.Items.UI
             }
         }
 
-        private void handleLeftClick(Item item)
+        private void handleUnequip(Item item)
         {
             c.UnequipItem(item);
         }

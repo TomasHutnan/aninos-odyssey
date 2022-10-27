@@ -28,8 +28,8 @@ namespace AE.Items
     {
         Helmet,
         Chestplate,
-        Leggings,
-        Boots,
+        Armguards,
+        Shinguards,
         Shield,
         Weapon,
     }
@@ -76,9 +76,9 @@ namespace AE.Items
         public Dictionary<ItemType, ItemUsage> ItemTypeToUsage = new Dictionary<ItemType, ItemUsage> { 
             {ItemType.Helmet, ItemUsage.Armor},
             {ItemType.Chestplate, ItemUsage.Armor},
+            {ItemType.Armguards, ItemUsage.Armor},
+            {ItemType.Shinguards, ItemUsage.Armor},
             {ItemType.Shield, ItemUsage.Armor},
-            {ItemType.Leggings, ItemUsage.Armor},
-            {ItemType.Boots, ItemUsage.Armor},
             {ItemType.Weapon, ItemUsage.Weapon},
         };
 
@@ -108,6 +108,9 @@ namespace AE.Items
             Name = name is not null ? (string)name : GenerateName();
 
             Icon = Resources.Load<Sprite>("Items\\icon");
+
+            float sumBonus = DamageBonus + CritPercentBonus + ArmorBonus + DodgeBonus + ManaBonus - Weight;
+            value = (int)Math.Round(Math.Pow(Math.Abs(sumBonus), 1+0.1*(int)Tier));
         }
 
         private float GenerateStat(StatType statType)
