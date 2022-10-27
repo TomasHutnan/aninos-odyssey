@@ -56,7 +56,10 @@ namespace AE.Items.UI
         {
             updatePagesCount();
 
-            CurrentPageText.text = $"Page {currentPage + 1}";
+            if (currentPage > inventoryPagesCount)
+                currentPage = inventoryPagesCount;
+
+            CurrentPageText.text = $"{currentPage + 1} / {inventoryPagesCount + 1}";
 
             int i = 0;
             for (; i < c.Inventory.Count - itemSlots.Length * currentPage && i < itemSlots.Length; i++)
@@ -89,9 +92,12 @@ namespace AE.Items.UI
         public void NextPage()
         {
             if (inventoryPagesCount == 0)
-                return;
-
-            if (currentPage < inventoryPagesCount)
+            {
+                if (currentPage == 0)
+                    return;
+                currentPage = 0;
+            }
+            else if (currentPage < inventoryPagesCount)
                 currentPage += 1;
             else
                 currentPage = 0;
@@ -101,9 +107,12 @@ namespace AE.Items.UI
         public void PreviousPage()
         {
             if (inventoryPagesCount == 0)
-                return;
-
-            if (currentPage > 0)
+            {
+                if (currentPage == 0)
+                    return;
+                currentPage = 0;
+            }
+            else if (currentPage > 0)
                 currentPage -= 1;
             else
                 currentPage = inventoryPagesCount;
