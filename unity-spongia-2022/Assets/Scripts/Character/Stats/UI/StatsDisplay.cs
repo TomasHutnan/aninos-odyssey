@@ -1,8 +1,9 @@
+using AE.EventManager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace AE.CharacterStats.UI
@@ -36,12 +37,12 @@ namespace AE.CharacterStats.UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-
+            EventManager.EventManager.TriggerStatEnter(Stat);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-
+            EventManager.EventManager.TriggerStatExit();
         }
     }
 }

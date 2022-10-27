@@ -1,11 +1,10 @@
+using AE.EventManager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using UnityEngine.UI;
-using System;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
+using UnityEngine.UI;
 
 namespace AE.Items.UI
 {
@@ -40,20 +39,21 @@ namespace AE.Items.UI
             if (eventData != null && Item != null)
             {
                 if (eventData.button == PointerEventData.InputButton.Left)
-                    OnItemLeftClickedEvent(Item);
+                    OnItemLeftClickedEvent?.Invoke(Item);
                 else if (eventData.button == PointerEventData.InputButton.Right)
-                    OnItemRightClickedEvent(Item);
+                    OnItemRightClickedEvent?.Invoke(Item);
             }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-
+            if (Item != null)
+                EventManager.EventManager.TriggerItemSlotEnter(Item);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-
+            EventManager.EventManager.TriggerItemSlotExit();
         }
 
         protected virtual void OnValidate()
