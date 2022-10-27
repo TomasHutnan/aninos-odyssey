@@ -1696,10 +1696,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8307741191749758482, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f823f72dc0f54464caf10cd176af35bf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
 --- !u!1 &617241909
@@ -1783,7 +1779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2146940842250927331, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
       propertyPath: m_Name
-      value: Leggings Slot
+      value: Armguards Slot
       objectReference: {fileID: 0}
     - target: {fileID: 7389477188790504926, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
       propertyPath: m_Pivot.x
@@ -1869,10 +1865,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8307741191749758482, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f823f72dc0f54464caf10cd176af35bf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
 --- !u!1001 &665397251
@@ -2193,10 +2185,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8307741191749758482, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f823f72dc0f54464caf10cd176af35bf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
 --- !u!1001 &806028608
@@ -5023,7 +5011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2146940842250927331, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
       propertyPath: m_Name
-      value: Boots Slot
+      value: Shinguards Slot
       objectReference: {fileID: 0}
     - target: {fileID: 7389477188790504926, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
       propertyPath: m_Pivot.x
@@ -5109,10 +5097,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8307741191749758482, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f823f72dc0f54464caf10cd176af35bf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
 --- !u!1 &1494747376
@@ -5389,10 +5373,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8307741191749758482, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f823f72dc0f54464caf10cd176af35bf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
 --- !u!1 &1540701126
@@ -6170,10 +6150,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8307741191749758482, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f823f72dc0f54464caf10cd176af35bf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17300d5aaedc9d54aa35b97d68b36917, type: 3}
 --- !u!1001 &1650676664
