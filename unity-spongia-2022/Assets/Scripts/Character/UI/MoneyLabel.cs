@@ -15,13 +15,13 @@ public class MoneyLabel : MonoBehaviour
         if (c is null)
             c = GameManager.PlayerCharacter;
 
-        c.EquipmentUpdateEvent += updateMoneyLabel;
+        c.InventoryUpdateEvent += updateMoneyLabel;
         updateMoneyLabel();
     }
 
     private void OnDisable()
     {
-        c.EquipmentUpdateEvent -= updateMoneyLabel;
+        c.InventoryUpdateEvent -= updateMoneyLabel;
     }
 
     private void updateMoneyLabel()

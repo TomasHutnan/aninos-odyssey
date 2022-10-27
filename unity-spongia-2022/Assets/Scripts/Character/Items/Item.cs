@@ -108,6 +108,8 @@ namespace AE.Items
             Name = name is not null ? (string)name : GenerateName();
 
             Icon = Resources.Load<Sprite>("Items\\icon");
+
+            value = UnityEngine.Random.Range(5, 100);
         }
 
         private float GenerateStat(StatType statType)

@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using AE.GameSave;
+
 namespace AE.Items.UI
 {
     public class InventoryPanel : MonoBehaviour
@@ -13,16 +15,20 @@ namespace AE.Items.UI
         [SerializeField] Transform ItemSlotsGrid;
         [SerializeField] TextMeshProUGUI CurrentPageText;
         [SerializeField] ItemSlot[] itemSlots;
+        [Space]
+        [SerializeField] Character c;
+        [Space]
+        [SerializeField] GameObject sellPromptTransform;
+
+        private SellPrompt sellPrompt;
 
         public event Action<Item> OnItemRightClickedEvent;
         public event Action<Item> OnItemLeftClickedEvent;
 
-        [SerializeField] Character c;
-
         private int inventoryPagesCount;
         private int currentPage = 0;
 
-        void Start()
+        private void Start()
         {
             if (c is null)
                 c = GameManager.PlayerCharacter;
@@ -34,7 +40,7 @@ namespace AE.Items.UI
                 itemSlots[i].OnItemRightClickedEvent += OnItemRightClickedEvent;
                 itemSlots[i].OnItemLeftClickedEvent += OnItemLeftClickedEvent;
 
-                //itemSlots[i].OnItemRightClickedEvent += OnItemRightClickedEvent;
+                itemSlots[i].OnItemRightClickedEvent += handleRightClick;
                 itemSlots[i].OnItemLeftClickedEvent += handleLeftClick;
             }
 
@@ -67,6 +73,16 @@ namespace AE.Items.UI
         {
             c.EquipItem(item);
         }
+        private void handleRightClick(Item item)
+        {
+            if (SaveData.ConfirmSell)
+            {
+                sellPromptTransform.SetActive(true);
+                sellPrompt.SellableItem = item;
+            }
+            else
+                c.SellItem(item);
+        }
 
         public void NextPage()
         {
@@ -97,6 +113,9 @@ namespace AE.Items.UI
         {
             if (ItemSlotsGrid != null)
                 itemSlots = ItemSlotsGrid.GetComponentsInChildren<ItemSlot>();
+
+            if (sellPromptTransform is not null)
+                sellPrompt = sellPromptTransform.GetComponent<SellPrompt>();
         }
 
         private void updatePagesCount()

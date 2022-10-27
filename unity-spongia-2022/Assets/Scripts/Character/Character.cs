@@ -62,6 +62,17 @@ public class Character : Vendor
         return true;
     }
 
+    public bool SellItem(Item item)
+    {
+        if (!RemoveItem(item))
+            return false;
+
+        Money += item.value;
+
+        triggerInventoryUpdateEvent();
+        return true;
+    }
+
     void Awake()
     {
         if (transform.name == "GameManager")
