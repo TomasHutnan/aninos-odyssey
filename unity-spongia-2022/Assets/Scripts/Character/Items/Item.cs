@@ -50,7 +50,7 @@ namespace AE.Items
         Weight,
     }
 
-    public class Item : ScriptableObject
+    public class Item
     {
         public float DamageBonus;
         public float CritPercentBonus;
