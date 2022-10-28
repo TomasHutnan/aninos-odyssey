@@ -110,6 +110,7 @@ public class Character : Vendor
             {
                 LevelUpSystem = SaveData.LevelUpSystem;
                 LevelUpSystem.UpdateActiveCharacter(this);
+                // LevelUpSystem.addExp(300); // Level Up Panel Test
             }
             else
             {

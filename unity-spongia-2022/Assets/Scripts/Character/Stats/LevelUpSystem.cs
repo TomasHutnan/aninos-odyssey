@@ -20,6 +20,8 @@ namespace AE.CharacterStats
         public int Level { get; private set; }
         private int Exp;
 
+        public int UnspentSkillPoints { get { return Level - Levels.Values.Sum(); } }
+
         private int defaultExpRequirment = 80;
         private int incrementalExpRequirement = 100;
 
@@ -68,27 +70,32 @@ namespace AE.CharacterStats
 
         private Character character;
 
-        public LevelUpSystem(Character c = null, int? damageBonus = null, int? critChanceBonus = null,
-            int? healthBonus = null, int? resistanceBonus = null, int? dodgeChanceBonus = null,
-            int? staminaBonus = null)
+        public LevelUpSystem(Character c = null, int level = 0, int exp = 0,
+            int damageBonus = 0, int critChanceBonus = 0,
+            int healthBonus = 0, int resistanceBonus = 0, int dodgeChanceBonus = 0,
+            int staminaBonus = 0)
         {
             character = c;
 
+            Level = level;
+            Exp = 0;
+            addExp(exp);
+
             Levels = new Dictionary<LevelUpModType, int> { };
 
-            Damage = damageBonus is not null ? (int)damageBonus : 0;
-            CritChance = critChanceBonus is not null ? (int)critChanceBonus : 0;
-            Health = healthBonus is not null ? (int)healthBonus : 0;
-            Resistance = resistanceBonus is not null ? (int)resistanceBonus : 0;
-            DodgeChance = dodgeChanceBonus is not null ? (int)dodgeChanceBonus : 0;
-            Stamina = staminaBonus is not null ? (int)staminaBonus : 0;
+            Damage = damageBonus;
+            CritChance = critChanceBonus;
+            Health = healthBonus;
+            Resistance = resistanceBonus;
+            DodgeChance = dodgeChanceBonus;
+            Stamina = staminaBonus;
 
             UpdateMods();
         }
 
         public void addExp(int exp)
         {
-            int remainingExp = exp;
+            int remainingExp = Exp + exp;
 
             while (remainingExp - (defaultExpRequirment + Level * incrementalExpRequirement) >= 0)
             {
@@ -101,7 +108,7 @@ namespace AE.CharacterStats
 
         public bool LevelUp(LevelUpModType modType)
         {
-            if (Levels.Values.Sum() < Level)
+            if (UnspentSkillPoints > 0)
             {
                 Levels[modType]++;
                 UpdateMods();
