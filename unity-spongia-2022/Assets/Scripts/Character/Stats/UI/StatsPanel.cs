@@ -9,7 +9,7 @@ namespace AE.CharacterStats.UI
         [SerializeField] Character c;
         [SerializeField] StatsDisplay[] statsDisplays;
 
-        void Start()
+        private void OnEnable()
         {
             if (c is null)
                 c = GameManager.PlayerCharacter;
