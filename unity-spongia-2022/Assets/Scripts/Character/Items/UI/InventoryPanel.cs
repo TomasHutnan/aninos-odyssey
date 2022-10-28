@@ -30,6 +30,10 @@ namespace AE.Items.UI
 
         private void Start()
         {
+            RefreshUI();
+        }
+        private void OnEnable()
+        {
             if (c is null)
                 c = GameManager.PlayerCharacter;
 
@@ -43,13 +47,20 @@ namespace AE.Items.UI
                 itemSlots[i].OnItemRightClickedEvent += handleRightClick;
                 itemSlots[i].OnItemLeftClickedEvent += handleLeftClick;
             }
-
-            RefreshUI();
         }
 
         private void OnDisable()
         {
             c.InventoryUpdateEvent -= RefreshUI;
+
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                itemSlots[i].OnItemRightClickedEvent -= OnItemRightClickedEvent;
+                itemSlots[i].OnItemLeftClickedEvent -= OnItemLeftClickedEvent;
+
+                itemSlots[i].OnItemRightClickedEvent -= handleRightClick;
+                itemSlots[i].OnItemLeftClickedEvent -= handleLeftClick;
+            }
         }
 
         private void RefreshUI()

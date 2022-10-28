@@ -19,6 +19,11 @@ namespace AE.Items.UI
 
         private void Start()
         {
+            RefreshUI();
+        }
+
+        private void OnEnable()
+        {
             if (c is null)
                 c = GameManager.PlayerCharacter;
 
@@ -32,13 +37,20 @@ namespace AE.Items.UI
                 equipmentSlot.OnItemRightClickedEvent += handleUnequip;
                 equipmentSlot.OnItemLeftClickedEvent += handleUnequip;
             }
-
-            RefreshUI();
         }
 
         private void OnDisable()
         {
             c.EquipmentUpdateEvent -= RefreshUI;
+
+            foreach (EquipmentSlot equipmentSlot in equipmentSlots.Values)
+            {
+                equipmentSlot.OnItemRightClickedEvent -= OnItemRightClickedEvent;
+                equipmentSlot.OnItemLeftClickedEvent -= OnItemLeftClickedEvent;
+
+                equipmentSlot.OnItemRightClickedEvent -= handleUnequip;
+                equipmentSlot.OnItemLeftClickedEvent -= handleUnequip;
+            }
         }
 
         private void RefreshUI()
