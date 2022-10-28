@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
+  m_Name: New Ability
+  m_EditorClassIdentifier: 
+  StaminaCost: 0
+  ManaCost: 0
+  Duration: 0
+  TargetDamageMultiplier: 0
+  SelfDamageMultiplier: 0
+  TargetHealthPoints: 0
+  TargetCritChance: 0
+  TargetDamage: 0
+  TargetDamageReduction: 0
+  TargetDodge: 0
+  TargetStamina: 0
+  TargetStaminaRegen: 0
+  TargetMana: 0
+  TargetWeight: 0
+  TargetFinisher: 0
+  SelfHealthPoints: 0
+  SelfCritChance: 0
+  SelfDamage: 0
+  SelfDamageReduction: 0
+  SelfDodge: 0
+  SelfStamina: 0
+  SelfStaminaRegen: 0
+  SelfMana: 0
+  SelfWeight: 0
+  SelfFinisher: 0

@@ -8,6 +8,7 @@ public class ActiveEffect
     
     public float change;
     public Stat stat;
-    public int duration;
+    public float duration;
+    public float delay;
     
 }

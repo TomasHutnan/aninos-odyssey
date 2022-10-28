@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AE.FightManager;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Abilities
 {
     [CreateAssetMenu]
@@ -10,36 +14,109 @@ namespace Abilities
     {
         public int StaminaCost;
         public int ManaCost;
-        public int Duration;
         public float TargetDamageMultiplier;
         public float SelfDamageMultiplier;
+        public bool AffectsTarget;
+        public bool AffectsCaster;
 
         //TargetEffects
-        
-        public float TargetHealthPoints;
-        public float TargetCritChance;
-        public float TargetDamage;
-        public float TargetDamageReduction;
-        public float TargetDodge;
-        public float TargetStamina;
-        public float TargetStaminaRegen;
-        public float TargetMana;
-        public float TargetWeight;
-        public float TargetFinisher;
+
+        [System.NonSerialized] public float TargetHealthPoints;
+        float TargetHealthDuration;
+        float TargetHealthDelay;
+
+        [System.NonSerialized] public float TargetCritChance;
+        float TargetCritDuration;
+        float TargetCritDelay;
+
+        [System.NonSerialized] public float TargetDamage;
+        float TargetDamageDuration;
+        float TargetDamageDelay;
+
+
+        [System.NonSerialized] public float TargetDamageReduction;
+        float TargetDamageReductionDuration;
+        float TargetDamageReductionDelay;
+
+
+        [System.NonSerialized] public float TargetDodge;
+        float TargetDodgeDuration;
+        float TargetDodgeDelay;
+
+
+        [System.NonSerialized] public float TargetStamina;
+        float TargetStaminaDuration;
+        float TargetStaminaDelay;
+
+
+        [System.NonSerialized] public float TargetStaminaRegen;
+        float TargetStaminaRegenDuration;
+        float TargetStaminaRegenDelay;
+
+
+        [System.NonSerialized] public float TargetMana;
+        float TargetManaDuration;
+        float TargetManaDelay;
+
+
+        [System.NonSerialized] public float TargetWeight;
+        float TargetWeightDuration;
+        float TargetWeightDelay;
+
+
+        [System.NonSerialized] public float TargetFinisher;
+
+
+
         //SelfEffects
-        
-        public float SelfHealthPoints; 
-        public float SelfCritChance;
-        public float SelfDamage;
-        public float SelfDamageReduction;
-        public float SelfDodge;
-        public float SelfStamina;
-        public float SelfStaminaRegen;
-        public float SelfMana;
-        public float SelfWeight;
-        public float SelfFinisher;
+
+        [System.NonSerialized] public float SelfHealthPoints;
+        float SelfHealthDuration;
+        float SelfHealthDelay;
+
+        [System.NonSerialized] public float SelfCritChance;
+        float SelfCritDuration;
+        float SelfCritDelay;
+
+        [System.NonSerialized] public float SelfDamage;
+        float SelfDamageDuration;
+        float SelfDamageDelay;
 
 
+        [System.NonSerialized] public float SelfDamageReduction;
+        float SelfDamageReductionDuration;
+        float SelfDamageReductionDelay;
+
+
+        [System.NonSerialized] public float SelfDodge;
+        float SelfDodgeDuration;
+        float SelfDodgeDelay;
+
+        [System.NonSerialized] public float SelfStamina;
+        float SelfStaminaDuration;
+        float SelfStaminaDelay;
+
+        [System.NonSerialized] public float SelfStaminaRegen;
+        float SelfStaminaRegenDuration;
+        float SelfStaminaRegenDelay;
+
+        [System.NonSerialized] public float SelfMana;
+         float SelfManaDuration;
+         float SelfManaDelay;
+
+
+
+        [System.NonSerialized] public float SelfWeight;
+         float SelfWeightDuration;
+         float SelfWeightDelay;
+
+
+        [System.NonSerialized] public float SelfFinisher;
+
+
+
+
+     
 
 
 
@@ -48,6 +125,63 @@ namespace Abilities
 
         public void UseAbility(GameObject CasterObject, GameObject TargetObject)
         {
+            Dictionary<Stat, float> SelfDurations = new Dictionary<Stat, float>()
+            {
+                {Stat.HealthPoints,SelfHealthDuration },
+                {Stat.CritChance,SelfCritDuration },
+                {Stat.Damage,SelfDamageDuration },
+                {Stat.DamageReduction,SelfDamageReductionDuration },
+                {Stat.DodgeChance,SelfDodgeDuration },
+                {Stat.Stamina,SelfStaminaDuration },
+                {Stat.StaminaRegen,SelfStaminaRegenDuration },
+                {Stat.Mana,SelfManaDuration },
+                {Stat.Weight,SelfWeightDuration },
+
+            };
+
+            Dictionary<Stat, float> SelfDelays = new Dictionary<Stat, float>()
+            {
+                {Stat.HealthPoints,SelfHealthDelay },
+                {Stat.CritChance,SelfCritDelay },
+                {Stat.Damage,SelfDamageDelay },
+                {Stat.DamageReduction,SelfDamageReductionDelay },
+                {Stat.DodgeChance,SelfDodgeDelay },
+                {Stat.Stamina,SelfStaminaDelay },
+                {Stat.StaminaRegen,SelfStaminaRegenDelay },
+                {Stat.Mana,SelfManaDelay },
+                {Stat.Weight,SelfWeightDelay },
+
+            };
+
+            Dictionary<Stat, float> TargetDelays = new Dictionary<Stat, float>()
+            {
+                {Stat.HealthPoints,TargetHealthDelay },
+                {Stat.CritChance,TargetCritDelay },
+                {Stat.Damage,TargetDamageDelay },
+                {Stat.DamageReduction,TargetDamageReductionDelay },
+                {Stat.DodgeChance,TargetDodgeDelay },
+                {Stat.Stamina,TargetStaminaDelay },
+                {Stat.StaminaRegen,TargetStaminaRegenDelay },
+                {Stat.Mana,TargetManaDelay },
+                {Stat.Weight,TargetWeightDelay },
+
+            };
+
+            Dictionary<Stat, float> TargetDurations = new Dictionary<Stat, float>()
+            {
+                {Stat.HealthPoints,TargetHealthDuration },
+                {Stat.CritChance,TargetCritDuration },
+                {Stat.Damage,TargetDamageDuration },
+                {Stat.DamageReduction,TargetDamageReductionDuration },
+                {Stat.DodgeChance,TargetDodgeDuration },
+                {Stat.Stamina,TargetStaminaDuration },
+                {Stat.StaminaRegen,TargetStaminaRegenDuration },
+                {Stat.Mana,TargetManaDuration },
+                {Stat.Weight,TargetWeightDuration },
+
+            };
+
+
             Dictionary<Stat, float> TargetEffects = new Dictionary<Stat, float>()
             {
                 {Stat.HealthPoints,TargetHealthPoints },
@@ -151,30 +285,49 @@ namespace Abilities
             }
             foreach (var effect in SelfEffects)
             {
-                if(effect.Value != 0)
+                if(effect.Value != 0 & SelfDelays[effect.Key] != 0)
                 {
                     ActiveEffect activeEffect = new ActiveEffect();
+                    activeEffect.delay = SelfDelays[effect.Key];
                     activeEffect.change = effect.Value;
-                    activeEffect.duration = Duration;
+                    activeEffect.duration = SelfDurations[effect.Key];
+                    activeEffect.stat = effect.Key;
+                    CasterObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(activeEffect);
+                }
+                else if (effect.Value != 0 & SelfDelays[effect.Key] == 0)
+                {
+                    ActiveEffect activeEffect = new ActiveEffect();
+                    activeEffect.delay = SelfDelays[effect.Key];
+                    activeEffect.change = effect.Value;
+                    activeEffect.duration = SelfDurations[effect.Key];
                     activeEffect.stat = effect.Key;
                     CasterObject.GetComponent<RealtimeStatsHolder>().activeEffects.Add(activeEffect);
                 }
             }
-            if(Duration != 0)
+            
+            foreach (var effect in TargetEffects)
             {
-                foreach (var effect in TargetEffects)
+                if (effect.Value != 0 & TargetDelays[effect.Key] != 0)
                 {
-                    if (effect.Value != 0)
-                    {
-                        ActiveEffect activeEffect = new ActiveEffect();
-                        activeEffect.change = effect.Value;
-                        activeEffect.duration = Duration;
-                        activeEffect.stat = effect.Key;
-                        CasterObject.GetComponent<RealtimeStatsHolder>().activeEffects.Add(activeEffect);
-                    }
+                    ActiveEffect activeEffect = new ActiveEffect();
+                    activeEffect.delay = TargetDelays[effect.Key];
+                    activeEffect.change = effect.Value;
+                    activeEffect.duration = TargetDurations[effect.Key]; ;
+                    activeEffect.stat = effect.Key;
+                    CasterObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(activeEffect);
                 }
-
+                else if (effect.Value != 0 & TargetDelays[effect.Key] == 0)
+                {
+                    ActiveEffect activeEffect = new ActiveEffect();
+                    activeEffect.delay = TargetDelays[effect.Key];
+                    activeEffect.change = effect.Value;
+                    activeEffect.duration = TargetDurations[effect.Key]; ;
+                    activeEffect.stat = effect.Key;
+                    CasterObject.GetComponent<RealtimeStatsHolder>().activeEffects.Add(activeEffect);
+                }
             }
+
+            
             
 
 
@@ -185,9 +338,89 @@ namespace Abilities
 
 
         }
+#if UNITY_EDITOR
+        [CustomEditor(typeof(Ability))]
+        public class MyEditor : Editor
+        {
+            override public void OnInspectorGUI()
+            {
+                void AddOptions(string Name,ref float OriginalStat,ref float Delay,ref float Duration)
+                {
+                    EditorGUILayout.Space(5);
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField(Name, GUILayout.MaxWidth(150));
+                    OriginalStat = EditorGUILayout.FloatField(OriginalStat);
+                    EditorGUILayout.EndHorizontal();
+
+                    if (OriginalStat != 0)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        EditorGUILayout.Space(30);
+                        EditorGUILayout.LabelField("Delay", GUILayout.MaxWidth(50));
+                        Delay = EditorGUILayout.FloatField(Delay);
+                        EditorGUILayout.LabelField("Duration", GUILayout.MaxWidth(60));
+                        Duration = EditorGUILayout.FloatField(Duration);
+
+                        EditorGUILayout.EndHorizontal();
+
+                    }
+                    
+
+                }
+               
+                base.OnInspectorGUI();
+                Ability myScript = (Ability)target;
+                if (myScript.AffectsTarget)
+                {
+                    AddOptions("TargetHealthPoints", ref myScript.TargetHealthPoints, ref myScript.TargetHealthDelay, ref myScript.TargetHealthDuration);
+                    AddOptions("TargetCritChance", ref myScript.TargetCritChance, ref myScript.TargetCritDelay, ref myScript.TargetCritDuration);
+                    AddOptions("TargetDamage", ref myScript.TargetDamage, ref myScript.TargetDamageDelay, ref myScript.TargetDamageDuration);
+                    AddOptions("TargetDamageReduction", ref myScript.TargetDamageReduction, ref myScript.TargetDamageReductionDelay, ref myScript.TargetDamageReductionDuration);
+                    AddOptions("TargetDodge", ref myScript.TargetDodge, ref myScript.TargetDodgeDelay, ref myScript.TargetDodgeDuration);
+                    AddOptions("TargetStamina", ref myScript.TargetStamina, ref myScript.TargetStaminaDelay, ref myScript.TargetStaminaDuration);
+                    AddOptions("TargetStaminaRegen", ref myScript.TargetStaminaRegen, ref myScript.TargetStaminaRegenDelay, ref myScript.TargetStaminaRegenDuration);
+                    AddOptions("TargetMana", ref myScript.TargetMana, ref myScript.TargetManaDelay, ref myScript.TargetManaDuration);
+                    AddOptions("TargetWeight", ref myScript.TargetWeight, ref myScript.TargetWeightDelay, ref myScript.TargetWeightDuration);
+                    EditorGUILayout.Space(5);
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField("TargetFinisher", GUILayout.MaxWidth(150));
+                    myScript.TargetFinisher = EditorGUILayout.FloatField(myScript.TargetFinisher);
+                    EditorGUILayout.EndHorizontal();
+
+                }
 
 
+
+                if (myScript.AffectsCaster)
+                {
+                    AddOptions("SelfHealthPoints", ref myScript.SelfHealthPoints, ref myScript.SelfHealthDelay, ref myScript.SelfHealthDuration);
+                    AddOptions("SelfCritChance", ref myScript.SelfCritChance, ref myScript.SelfCritDelay, ref myScript.SelfCritDuration);
+                    AddOptions("SelfDamage", ref myScript.SelfDamage, ref myScript.SelfDamageDelay, ref myScript.SelfDamageDuration);
+                    AddOptions("SelfDamageReduction", ref myScript.SelfDamageReduction, ref myScript.SelfDamageReductionDelay, ref myScript.SelfDamageReductionDuration);
+                    AddOptions("SelfDodge", ref myScript.SelfDodge, ref myScript.SelfDodgeDelay, ref myScript.SelfDodgeDuration);
+                    AddOptions("SelfStamina", ref myScript.SelfStamina, ref myScript.SelfStaminaDelay, ref myScript.SelfStaminaDuration);
+                    AddOptions("SelfStaminaRegen", ref myScript.SelfStaminaRegen, ref myScript.SelfStaminaRegenDelay, ref myScript.SelfStaminaRegenDuration);
+                    AddOptions("SelfMana", ref myScript.SelfMana, ref myScript.SelfManaDelay, ref myScript.SelfManaDuration);
+                    AddOptions("SelfWeight", ref myScript.SelfWeight, ref myScript.SelfWeightDelay, ref myScript.SelfWeightDuration);
+                    EditorGUILayout.Space(5);
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField("SelfFinisher", GUILayout.MaxWidth(150));
+                    myScript.SelfFinisher = EditorGUILayout.FloatField(myScript.SelfFinisher);
+                    EditorGUILayout.EndHorizontal();
+
+                }
+                
+
+
+
+            }
+#endif
+
+
+        }
     }
+
+    
 
 
 }

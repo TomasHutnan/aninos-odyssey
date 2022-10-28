@@ -23,6 +23,7 @@ namespace AE.FightManager
     public class RealtimeStatsHolder : MonoBehaviour
     {
         public TextMeshProUGUI text;
+        public List<ActiveEffect> delayedEffects = new List<ActiveEffect>();
         public List<ActiveEffect> activeEffects = new List<ActiveEffect>();
 
         public Dictionary<Stat, float> StatHolder = new Dictionary<Stat, float>();
