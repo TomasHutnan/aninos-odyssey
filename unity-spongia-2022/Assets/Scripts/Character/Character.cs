@@ -22,8 +22,7 @@ public class Character : Vendor
 
     public CharacterStat Weight;
 
-    public int Level;
-    public int Exp;
+    public LevelUpSystem LevelUpSystem;
 
     public Dictionary<ItemType, Item> EquippedItems;
 
@@ -104,6 +103,19 @@ public class Character : Vendor
         Mana.Label = "Mana";
 
         Weight.Label = "Weight";
+
+        if (LevelUpSystem is null)
+        {
+            if (transform.name == "GameManager")
+            {
+                LevelUpSystem = SaveData.LevelUpSystem;
+                LevelUpSystem.UpdateActiveCharacter(this);
+            }
+            else
+            {
+                LevelUpSystem = new LevelUpSystem(this);
+            }
+        }
     }
 
     private void defaultStats()
