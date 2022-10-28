@@ -160,17 +160,22 @@ namespace Abilities
                     CasterObject.GetComponent<RealtimeStatsHolder>().activeEffects.Add(activeEffect);
                 }
             }
-            foreach (var effect in TargetEffects)
+            if(Duration != 0)
             {
-                if (effect.Value != 0)
+                foreach (var effect in TargetEffects)
                 {
-                    ActiveEffect activeEffect = new ActiveEffect();
-                    activeEffect.change = effect.Value;
-                    activeEffect.duration = Duration;
-                    activeEffect.stat = effect.Key;
-                    CasterObject.GetComponent<RealtimeStatsHolder>().activeEffects.Add(activeEffect);
+                    if (effect.Value != 0)
+                    {
+                        ActiveEffect activeEffect = new ActiveEffect();
+                        activeEffect.change = effect.Value;
+                        activeEffect.duration = Duration;
+                        activeEffect.stat = effect.Key;
+                        CasterObject.GetComponent<RealtimeStatsHolder>().activeEffects.Add(activeEffect);
+                    }
                 }
+
             }
+            
 
 
 
