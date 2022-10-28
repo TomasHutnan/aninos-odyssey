@@ -32,7 +32,6 @@ namespace AE.CharacterStats.UI
 
             for (int i = 0; i < Enum.GetValues(typeof(LevelUpModType)).Length; i++)
             {
-                print(i);
                 levelUpDisplays[i].LevelUpSelectEvent += handleLevelUp;
             }
         }
@@ -55,7 +54,6 @@ namespace AE.CharacterStats.UI
 
         private void updateUnspentPointsText()
         {
-            print(c.LevelUpSystem.UnspentSkillPoints);
             unspentPointsText.text = $"{c.LevelUpSystem.UnspentSkillPoints} Unspent Skill Points";
         }
 
