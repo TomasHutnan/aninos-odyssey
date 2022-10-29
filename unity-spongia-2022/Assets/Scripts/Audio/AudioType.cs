@@ -7,23 +7,29 @@ namespace AE.Audio
 
         // Sound Tracks
         //  - Game Location Themes
-        ST_LOC_GR_01,
-        ST_LOC_RO_01,
-        ST_LOC_EG_01,
-        ST_SHOP_01,
+        OST_LOC_GR_01,
+        OST_LOC_RO_01,
+        OST_LOC_EG_01,
+        OST_SHOP_01,
 
         //  - Intro Scene
-        ST_INTRO_01,
+        OST_INTRO_01,
 
         //  - Fight Location Themes
-        ST_FIGHT_GR_NORMAL_01,
-        ST_FIGHT_GR_BOSS_01,
+        OST_FIGHT_GR_NORMAL_INTRO,
+        OST_FIGHT_GR_NORMAL_MAIN,
+        OST_FIGHT_GR_BOSS_INTRO,
+        OST_FIGHT_GR_BOSS_MAIN,
 
-        ST_FIGHT_RO_NORMAL_01,
-        ST_FIGHT_RO_BOSS_01,
+        OST_FIGHT_RO_NORMAL_INTRO,
+        OST_FIGHT_RO_NORMAL_MAIN,
+        OST_FIGHT_RO_BOSS_INTRO,
+        OST_FIGHT_RO_BOSS_MAIN,
 
-        ST_FIGHT_EG_NORMAL_01,
-        ST_FIGHT_EG_BOSS_01,
+        OST_FIGHT_EG_NORMAL_INTRO,
+        OST_FIGHT_EG_NORMAL_MAIN,
+        OST_FIGHT_EG_BOSS_INTRO,
+        OST_FIGHT_EG_BOSS_MAIN,
 
         // Sound Effects
         //  - UI

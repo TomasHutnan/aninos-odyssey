@@ -9,7 +9,7 @@ namespace AE.Audio.PlayControl
         [SerializeField] AudioController audioController;
         [Space]
         [SerializeField] AudioType locatioSoundTrack;
-        [SerializeField] AudioType shopSoundTrack = AudioType.ST_SHOP_01;
+        [SerializeField] AudioType shopSoundTrack = AudioType.OST_SHOP_01;
         [Space]
         [Space]
         [SerializeField] GameObject[] shopGameObjects;
