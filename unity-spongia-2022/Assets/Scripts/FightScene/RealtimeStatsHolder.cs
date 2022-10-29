@@ -24,7 +24,18 @@ namespace AE.FightManager
     {
         public TextMeshProUGUI text;
         public List<ActiveEffect> delayedEffects = new List<ActiveEffect>();
-        public List<ActiveEffect> activeEffects = new List<ActiveEffect>();
+        public Dictionary<Stat, List<ActiveEffect>> activeEffects =new Dictionary<Stat, List<ActiveEffect>>()
+        {
+            {Stat.HealthPoints, new List<ActiveEffect>()},
+            {Stat.CritChance, new List<ActiveEffect>()},
+            {Stat.Damage, new List<ActiveEffect>()},
+            {Stat.DamageReduction, new List<ActiveEffect>()},
+            {Stat.DodgeChance, new List<ActiveEffect>()},
+            {Stat.Stamina, new List<ActiveEffect>()},
+            {Stat.StaminaRegen, new List<ActiveEffect>()},
+            {Stat.Mana, new List<ActiveEffect>()},
+            {Stat.Weight, new List<ActiveEffect>()},
+        };
 
         public Dictionary<Stat, float> StatHolder = new Dictionary<Stat, float>();
         public Dictionary<Stat, string> StatNamer = new Dictionary<Stat, string>()
@@ -41,7 +52,80 @@ namespace AE.FightManager
         };
 
         public GameObject Fighter;
+        public void NextRound()
+        {
+            List<ActiveEffect> ToDelete = new List<ActiveEffect>();
+            foreach (var item in activeEffects)
+            {
+                foreach (var item2 in item.Value)
+                {
+                    item2.duration -= 1;
+                    if (item2.duration == 0)
+                    {
+                        StatHolder[item.Key] += item2.change * -1;
+                        ToDelete.Add(item2);
+                    }
+                    
 
+                }
+                foreach (var delete in ToDelete)
+                {
+                    item.Value.Remove(delete);
+
+                }
+                ToDelete.Clear();
+
+            }
+
+
+            foreach (var item in delayedEffects)
+            {
+                item.delay -= 1;
+                if (item.delay == 0)
+                {
+                    activeEffects[item.stat].Add(item);
+                    ToDelete.Add(item);
+                }
+               
+
+            }
+            foreach (var delete in ToDelete)
+            {
+                delayedEffects.Remove(delete);
+
+            }
+
+        }
+        public void ChangeInStats(Stat StatToChange,float ChangeValue)
+        {
+            StatHolder[StatToChange] += ChangeValue;
+            List<ActiveEffect> ToDelete = new List<ActiveEffect>();
+            foreach (var item in activeEffects[StatToChange])
+            {
+                if(item.type == StatType.Percentual) { continue; };
+                //Check if sign of our current change is the opposite of change in active effects buffer
+                if(item.change/Math.Abs(item.change)*-1 == ChangeValue / Math.Abs(ChangeValue))
+                {
+                    item.change += ChangeValue;
+                    if(item.change <= 0)
+                    {
+                        ChangeValue = item.change*-1;
+                        ToDelete.Add(item);
+                        
+                    }
+                    else
+                    {
+                        ChangeValue = 0;
+                        break;
+                    }
+                }
+
+            }
+            foreach (var item in ToDelete)
+            {
+                activeEffects[StatToChange].Remove(item);
+            }
+        }
         // Start is called before the first frame update
         void Start()
         {
@@ -63,6 +147,19 @@ namespace AE.FightManager
         // Update is called once per frame
         private void Update()
         {
+            foreach (var item in delayedEffects)
+            {
+                if(item.delay != 0) { continue; };
+                ChangeInStats(item.stat, item.change);
+                if(item.duration != 0) 
+                {
+                    activeEffects[item.stat].Add(item);
+                };
+                //delayedEffects.Remove(item);
+            }
+
+
+
             //print(activeEffects.Count);
             string String = "";
             foreach (Stat item in Enum.GetValues(typeof(Stat)))
