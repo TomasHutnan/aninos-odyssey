@@ -17,6 +17,8 @@ namespace AE.GameSave
         public static bool ConfirmSell = true;
 
         public static LevelUpSystem LevelUpSystem = new LevelUpSystem();
+
+        public static bool[] IsMuted = { false, false };
         // + stage, xp/amount of fights done in a stage?
 
     }

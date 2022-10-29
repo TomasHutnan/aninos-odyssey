@@ -14,6 +14,8 @@ namespace AE.EventManager
         public static event Action<CharacterStat> OnStatEnterEvent;
         public static event Action OnStatExitEvent;
 
+        public static event Action OnSoundSettingsUpdate;
+
         public static void TriggerItemSlotEnter(Item item)
         {
             OnItemSlotEnterEvent?.Invoke(item);
@@ -30,6 +32,11 @@ namespace AE.EventManager
         public static void TriggerStatExit()
         {
             OnStatExitEvent?.Invoke();
+        }
+
+        public static void TriggerSoundSettingsUpdate()
+        {
+            OnSoundSettingsUpdate?.Invoke();
         }
     }
 }
