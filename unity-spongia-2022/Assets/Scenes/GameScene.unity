@@ -403,7 +403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -337.5
+      value: -334.2857
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -933,6 +933,7 @@ MonoBehaviour:
   - {fileID: 2010755019}
   - {fileID: 245979912}
   - {fileID: 726246274}
+  - {fileID: 1296128336}
   c: {fileID: 0}
 --- !u!1 &117836790
 GameObject:
@@ -1604,13 +1605,14 @@ RectTransform:
   - {fileID: 2010755017}
   - {fileID: 245979910}
   - {fileID: 726246272}
+  - {fileID: 1296128334}
   m_Father: {fileID: 99423793}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 300, y: 450}
+  m_SizeDelta: {x: 300, y: 520}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &195237873
 MonoBehaviour:
@@ -2294,7 +2296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -262.5
+      value: -260
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6438,7 +6440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -37.5
+      value: -37.142857
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6853,7 +6855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -187.5
+      value: -185.71428
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7290,6 +7292,119 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291139222}
   m_CullTransparentMesh: 1
+--- !u!1001 &1296128333
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 195237872}
+    m_Modifications:
+    - target: {fileID: 6021849123635759824, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_Name
+      value: Level Up Display (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -482.85712
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+--- !u!224 &1296128334 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+  m_PrefabInstance: {fileID: 1296128333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1296128336 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6021849123635759827, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
+  m_PrefabInstance: {fileID: 1296128333}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb3bcedc661b9f40a4a14c3e1423184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1303794979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7882,7 +7997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -112.5
+      value: -111.42857
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12227,7 +12342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose Your LEvel Up Bonus
+  m_text: Choose Your Level Up Bonus
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08bc40ff162426c4b8b33b0bc6becf8c, type: 2}
   m_sharedMaterial: {fileID: -531695955195461402, guid: 08bc40ff162426c4b8b33b0bc6becf8c, type: 2}
@@ -13246,7 +13361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -412.5
+      value: -408.5714
       objectReference: {fileID: 0}
     - target: {fileID: 6021849123635759825, guid: 1a253ba2346e16b4c830d0c944d3ae8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

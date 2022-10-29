@@ -13,6 +13,7 @@ namespace AE.CharacterStats
         Resistance,
         DodgeChance,
         Stamina,
+        Mana,
     }
 
     public class LevelUpSystem
@@ -57,6 +58,11 @@ namespace AE.CharacterStats
             get { return Levels[LevelUpModType.Stamina]; }
             private set { Levels[LevelUpModType.Stamina] = value; }
         }
+        public int Mana
+        {
+            get { return Levels[LevelUpModType.Mana]; }
+            private set { Levels[LevelUpModType.Mana] = value; }
+        }
 
         private Dictionary<LevelUpModType, float> statBonuses = new Dictionary<LevelUpModType, float>()
         {
@@ -66,6 +72,7 @@ namespace AE.CharacterStats
             {LevelUpModType.Resistance, 5 },
             {LevelUpModType.DodgeChance, 5 },
             {LevelUpModType.Stamina, 10 },
+            {LevelUpModType.Mana, 10 },
         };
 
         private Character character;
@@ -73,7 +80,7 @@ namespace AE.CharacterStats
         public LevelUpSystem(Character c = null, int level = 0, int exp = 0,
             int damageBonus = 0, int critChanceBonus = 0,
             int healthBonus = 0, int resistanceBonus = 0, int dodgeChanceBonus = 0,
-            int staminaBonus = 0)
+            int staminaBonus = 0, int manaBonus = 0)
         {
             character = c;
 
@@ -89,6 +96,7 @@ namespace AE.CharacterStats
             Resistance = resistanceBonus;
             DodgeChance = dodgeChanceBonus;
             Stamina = staminaBonus;
+            Mana = manaBonus;
 
             UpdateMods();
         }
@@ -137,19 +145,22 @@ namespace AE.CharacterStats
             character.DamageReduction.RemoveAllModifiersFromSource(this);
             character.DodgeChance.RemoveAllModifiersFromSource(this);
             character.Stamina.RemoveAllModifiersFromSource(this);
+            character.Mana.RemoveAllModifiersFromSource(this);
 
             if (Damage != 0)
-                character.Damage.AddModifier(new StatModifier(Damage, StatModType.Flat, this));
+                character.Damage.AddModifier(new StatModifier(statBonuses[LevelUpModType.Damage] * Damage, StatModType.Flat, this));
             if (CritChance != 0)
-                character.CritChance.AddModifier(new StatModifier(CritChance, StatModType.Flat, this));
+                character.CritChance.AddModifier(new StatModifier(statBonuses[LevelUpModType.CritChance] * CritChance, StatModType.Flat, this));
             if (Health != 0)
-                character.HealthPoints.AddModifier(new StatModifier(Health, StatModType.Flat, this));
+                character.HealthPoints.AddModifier(new StatModifier(statBonuses[LevelUpModType.Health] * Health, StatModType.Flat, this));
             if (Resistance != 0)
-                character.DamageReduction.AddModifier(new StatModifier(Resistance, StatModType.InverseProp, this));
+                character.DamageReduction.AddModifier(new StatModifier(statBonuses[LevelUpModType.Resistance] * Resistance, StatModType.InverseProp, this));
             if (DodgeChance != 0)
-                character.DodgeChance.AddModifier(new StatModifier(DodgeChance, StatModType.InverseProp, this));
+                character.DodgeChance.AddModifier(new StatModifier(statBonuses[LevelUpModType.DodgeChance] * DodgeChance, StatModType.InverseProp, this));
             if (Stamina != 0)
-                character.Stamina.AddModifier(new StatModifier(Stamina, StatModType.Flat, this));
+                character.Stamina.AddModifier(new StatModifier(statBonuses[LevelUpModType.Stamina] * Stamina, StatModType.Flat, this));
+            if (Mana != 0)
+                character.Mana.AddModifier(new StatModifier(statBonuses[LevelUpModType.Mana] * Mana, StatModType.Flat, this));
         }
     }
 }
