@@ -28,6 +28,7 @@ namespace Abilities
     [CreateAssetMenu]
     public class Ability : ScriptableObject
     {
+        public int AbilityCount;
         public int StaminaCost;
         public int ManaCost;
         public float TargetDamageMultiplier;
@@ -143,6 +144,8 @@ namespace Abilities
         {
             Character TargetCharacter = TargetObject.GetComponent<Character>();
             Character CasterCharacter = CasterObject.GetComponent<Character>();
+            RealtimeStatsHolder TargetHolder = TargetObject.GetComponent<RealtimeStatsHolder>();
+            RealtimeStatsHolder CasterHolder = CasterObject.GetComponent<RealtimeStatsHolder>();
             Dictionary<Stat, StatProperties> CasterStats = new Dictionary<Stat, StatProperties>()
             {
                 {Stat.HealthPoints,new StatProperties(CasterHealthPoints,CasterCharacter.HealthPoints.Value,CasterHealthDuration,CasterHealthDelay,StatType.Flat) },
@@ -175,8 +178,8 @@ namespace Abilities
 
             
 
-            var Caster = CasterObject.GetComponent<RealtimeStatsHolder>().StatHolder;
-            var Target = TargetObject.GetComponent<RealtimeStatsHolder>().StatHolder;
+            var Caster = CasterHolder.StatHolder;
+            var Target = TargetHolder.StatHolder;
             //Check if you can cast the spell
             float Weight = Caster[Stat.Weight];
             float Stamina = Caster[Stat.Stamina];
@@ -205,14 +208,14 @@ namespace Abilities
                 {
                     float change =( item.Value.Change * (item.Value.Maximum / 100) ) + (-CasterOutputDamage * (1 - Target[Stat.DamageReduction] / 100));
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
-                    TargetObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
+                    TargetHolder.delayedEffects.Add(effect);
 
                 }
                 else if(item.Value.Change != 0)
                 {
                     float change = item.Value.Change * (item.Value.Maximum/100);
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
-                    TargetObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
+                    TargetHolder.delayedEffects.Add(effect);
                 }
             }
             foreach (var item in CasterStats)
@@ -221,21 +224,21 @@ namespace Abilities
                 {
                     float change = (item.Value.Change * (item.Value.Maximum / 100)) + (-TargetOutputDamage * (1 - Caster[Stat.DamageReduction] / 100));
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
-                    CasterObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
+                    CasterHolder.delayedEffects.Add(effect);
 
                 }
                 else if (item.Value.Change != 0)
                 {
                     float change = item.Value.Change * (item.Value.Maximum / 100);
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
-                    CasterObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
+                    CasterHolder.delayedEffects.Add(effect);
                 }
             }
 
             //All spells that dont affect Caster
             if (Target != null)
             { 
-                float TargetMaxHealth = TargetObject.GetComponent<Character>().HealthPoints.Value;
+                float TargetMaxHealth = TargetCharacter.HealthPoints.Value;
                 float TargetCurrentHealth = Target[Stat.HealthPoints];
 
                 if (TargetCurrentHealth / (TargetMaxHealth / 100) <= TargetFinisher & TargetFinisher != 0)
@@ -243,7 +246,7 @@ namespace Abilities
                     Target[Stat.HealthPoints] = 0;
                 }
             }
-            float CasterMaxHealth = CasterObject.GetComponent<Character>().HealthPoints.Value;
+            float CasterMaxHealth = CasterCharacter.HealthPoints.Value;
             float CasterCurrentHealth = Caster[Stat.HealthPoints];
             if (CasterCurrentHealth / (CasterMaxHealth / 100) <= CasterFinisher & CasterFinisher != 0)
             {

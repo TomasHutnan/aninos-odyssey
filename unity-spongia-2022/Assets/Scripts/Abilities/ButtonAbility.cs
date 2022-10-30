@@ -14,8 +14,14 @@ public class ButtonAbility : MonoBehaviour
             var child = FightManager.GetChild(i);
             if(child != transform.parent)
             {
-                Target = child.gameObject;
-                transform.parent.gameObject.GetComponent<Character>().Ability[AbbilityNumber].UseAbility(transform.parent.gameObject, Target);
+                Ability ability = transform.parent.gameObject.GetComponent<Character>().Ability[AbbilityNumber];
+                for (int x = 0; x < ability.AbilityCount; x++)
+                {
+                    Target = child.gameObject;
+                    ability.UseAbility(transform.parent.gameObject, Target);
+
+                }
+                
 
             }
 
