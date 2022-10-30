@@ -7,7 +7,7 @@ using AE.CharacterStats;
 using AE.Items;
 using AE.GameSave;
 using Abilities;
-public class Character : Vendor
+public class Character : InventoryHolder
 {
     public CharacterStat Damage;
     public CharacterStat CritChance;
@@ -27,8 +27,10 @@ public class Character : Vendor
     public LevelUpSystem LevelUpSystem;
 
     public Dictionary<ItemType, Item> EquippedItems;
-
     public event Action EquipmentUpdateEvent;
+
+    public int Money;
+    public event Action MoneyUpdateEvent;
 
     public bool EquipItem(Item item)
     {
@@ -70,7 +72,7 @@ public class Character : Vendor
 
         Money += item.value;
 
-        triggerMoneyUpdateEvent();
+        MoneyUpdateEvent?.Invoke();
         return true;
     }
 

@@ -5,14 +5,11 @@ using System;
 
 namespace AE.Items
 {
-    public class Vendor : MonoBehaviour
+    public class InventoryHolder : MonoBehaviour
     {
-        public float SellValueMultiplier;
         public List<Item> Inventory;
-        public int Money;
 
         public event Action InventoryUpdateEvent;
-        public event Action MoneyUpdateEvent;
         public bool AddItem(Item item)
         {
             if (item is null)
@@ -38,10 +35,6 @@ namespace AE.Items
         protected void triggerInventoryUpdateEvent()
         {
             InventoryUpdateEvent?.Invoke();
-        }
-        protected void triggerMoneyUpdateEvent()
-        {
-            MoneyUpdateEvent?.Invoke();
         }
     }
 }

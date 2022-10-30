@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AE.Items
 {
-    public class Shop : Vendor
+    public class Shop : InventoryHolder
     {
         private int inventorySize = 3;
 
