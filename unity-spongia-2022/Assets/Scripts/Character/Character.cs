@@ -6,11 +6,13 @@ using System;
 using AE.CharacterStats;
 using AE.Items;
 using AE.GameSave;
-
+using Abilities;
 public class Character : Vendor
 {
     public CharacterStat Damage;
     public CharacterStat CritChance;
+
+    public List<Ability> Ability = new List<Ability>();
 
     public CharacterStat HealthPoints;
     public CharacterStat DamageReduction;
@@ -87,7 +89,7 @@ public class Character : Vendor
             EquippedItems = new Dictionary<ItemType, Item> { };
         }
         defaultStats();
-
+        
         Damage.Label = "Damage";
         CritChance.Label = "Crit Chance";
         CritChance.IsPercentual = true;
@@ -121,6 +123,8 @@ public class Character : Vendor
 
     private void defaultStats()
     {
+
+
         Damage = new CharacterStat(1);
         CritChance = new CharacterStat(0);
 

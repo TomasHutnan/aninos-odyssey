@@ -6,29 +6,31 @@ using AE.Items;
 using System;
 using Unity.PlasticSCM.Editor.WebApi;
 using AE.CharacterStats;
+
 public class EnemyGeneration : MonoBehaviour
 {
     private void Start()
     {
         Generate(ItemTier.Earth);
     }
-
+    
     public void Generate(ItemTier Stage)
     {
+        
         int[] priority = new int[] {60,85,95,100 };
 
         Character character = gameObject.GetComponent<Character>();
-        character.Weight = new CharacterStat(80);
-        character.CritChance = new CharacterStat(0);
-        character.HealthPoints = new CharacterStat(0);
-        character.Stamina = new CharacterStat(0);
-        character.StaminaRegen = new CharacterStat(0);
-        character.Damage = new CharacterStat(0);
-        character.DamageReduction = new CharacterStat(0);
-        character.DodgeChance = new CharacterStat(0);
-        character.Mana = new CharacterStat(0);
-        character.Inventory = new List<Item> { };
-        character.EquippedItems = new Dictionary<ItemType, Item> { };
+        //character.Weight = new CharacterStat(80);
+        //character.CritChance = new CharacterStat(0);
+        //character.HealthPoints = new CharacterStat(0);
+        //character.Stamina = new CharacterStat(0);
+        //character.StaminaRegen = new CharacterStat(0);
+        //character.Damage = new CharacterStat(0);
+        //character.DamageReduction = new CharacterStat(0);
+        //character.DodgeChance = new CharacterStat(0);
+        //character.Mana = new CharacterStat(0);
+        //character.Inventory = new List<Item> { };
+        //character.EquippedItems = new Dictionary<ItemType, Item> { };
 
         Array classes = ItemClass.GetValues(typeof(ItemClass));
         ItemClass EnemyClass = (ItemClass)classes.GetValue(UnityEngine.Random.Range(0, classes.Length));
@@ -56,8 +58,7 @@ public class EnemyGeneration : MonoBehaviour
             EnemyGear.Add(item,CurrentItem );
             CurrentItem.Equip(character);
         }
-        print(character.Weight.Value);
-        print(EnemyClass);
+       
 
 
 
