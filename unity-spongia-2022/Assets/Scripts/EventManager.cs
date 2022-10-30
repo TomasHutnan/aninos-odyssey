@@ -1,5 +1,6 @@
 using AE.CharacterStats;
 using AE.Items;
+using AE.Items.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace AE.EventManager
         public static event Action OnStatExitEvent;
 
         public static event Action OnSoundSettingsUpdate;
+
+        public static event Action<Item, PromptType> ItemPromptQuestionEvent;
+        public static event Action<Item, PromptType, bool> ItemPromptAnswerEvent;
 
         public static void TriggerItemSlotEnter(Item item)
         {
@@ -37,6 +41,15 @@ namespace AE.EventManager
         public static void TriggerSoundSettingsUpdate()
         {
             OnSoundSettingsUpdate?.Invoke();
+        }
+
+        public static void TriggerItemPromptQuestion(Item item, PromptType promptType)
+        {
+            ItemPromptQuestionEvent?.Invoke(item, promptType);
+        }
+        public static void TriggerItemPromptAnswer(Item item, PromptType promptType, bool answer)
+        {
+            ItemPromptAnswerEvent?.Invoke(item, promptType, answer);
         }
     }
 }
