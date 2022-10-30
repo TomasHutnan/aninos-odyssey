@@ -6,6 +6,9 @@ namespace AE.Audio
         None,
 
         // Sound Tracks
+        //  - Menu
+        OST_MENU_01,
+
         //  - Game Location Themes
         OST_LOC_GR_01,
         OST_LOC_RO_01,
