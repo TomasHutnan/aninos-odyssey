@@ -37,97 +37,97 @@ namespace Abilities
 
         //TargetEffects
 
-        [System.NonSerialized] public float TargetHealthPoints;
+       float TargetHealthPoints;
         float TargetHealthDuration;
         float TargetHealthDelay;
 
-        [System.NonSerialized] public float TargetCritChance;
+        float TargetCritChance;
         float TargetCritDuration;
         float TargetCritDelay;
 
-        [System.NonSerialized] public float TargetDamage;
+        float TargetDamage;
         float TargetDamageDuration;
         float TargetDamageDelay;
 
 
-        [System.NonSerialized] public float TargetDamageReduction;
+        float TargetDamageReduction;
         float TargetDamageReductionDuration;
         float TargetDamageReductionDelay;
 
 
-        [System.NonSerialized] public float TargetDodge;
+         float TargetDodge;
         float TargetDodgeDuration;
         float TargetDodgeDelay;
 
 
-        [System.NonSerialized] public float TargetStamina;
+        float TargetStamina;
         float TargetStaminaDuration;
         float TargetStaminaDelay;
 
 
-        [System.NonSerialized] public float TargetStaminaRegen;
+       float TargetStaminaRegen;
         float TargetStaminaRegenDuration;
         float TargetStaminaRegenDelay;
 
 
-        [System.NonSerialized] public float TargetMana;
+        float TargetMana;
         float TargetManaDuration;
         float TargetManaDelay;
 
 
-        [System.NonSerialized] public float TargetWeight;
+       float TargetWeight;
         float TargetWeightDuration;
         float TargetWeightDelay;
 
 
-        [System.NonSerialized] public float TargetFinisher;
+        float TargetFinisher;
 
 
 
         //CasterEffects
 
-        [System.NonSerialized] public float CasterHealthPoints;
+        float CasterHealthPoints;
         float CasterHealthDuration;
         float CasterHealthDelay;
 
-        [System.NonSerialized] public float CasterCritChance;
+        float CasterCritChance;
         float CasterCritDuration;
         float CasterCritDelay;
 
-        [System.NonSerialized] public float CasterDamage;
+         float CasterDamage;
         float CasterDamageDuration;
         float CasterDamageDelay;
 
 
-        [System.NonSerialized] public float CasterDamageReduction;
+        float CasterDamageReduction;
         float CasterDamageReductionDuration;
         float CasterDamageReductionDelay;
 
 
-        [System.NonSerialized] public float CasterDodge;
+        float CasterDodge;
         float CasterDodgeDuration;
         float CasterDodgeDelay;
 
-        [System.NonSerialized] public float CasterStamina;
+        float CasterStamina;
         float CasterStaminaDuration;
         float CasterStaminaDelay;
 
-        [System.NonSerialized] public float CasterStaminaRegen;
+        float CasterStaminaRegen;
         float CasterStaminaRegenDuration;
         float CasterStaminaRegenDelay;
 
-        [System.NonSerialized] public float CasterMana;
+        float CasterMana;
          float CasterManaDuration;
          float CasterManaDelay;
 
 
 
-        [System.NonSerialized] public float CasterWeight;
+         float CasterWeight;
          float CasterWeightDuration;
          float CasterWeightDelay;
 
 
-        [System.NonSerialized] public float CasterFinisher;
+        float CasterFinisher;
 
 
 
@@ -203,7 +203,9 @@ namespace Abilities
             {
                 if (item.Key == Stat.HealthPoints)
                 {
-                    float change = item.Value.Change * (item.Value.Maximum / 100) + -CasterOutputDamage * (1 - Target[Stat.DamageReduction] / 100);
+                    float change =( item.Value.Change * (item.Value.Maximum / 100) ) + (-CasterOutputDamage * (1 - Target[Stat.DamageReduction] / 100));
+                    ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
+                    TargetObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
 
                 }
                 else if(item.Value.Change != 0)
@@ -217,7 +219,9 @@ namespace Abilities
             {
                 if(item.Key == Stat.HealthPoints)
                 {
-                    float change = item.Value.Change * (item.Value.Maximum / 100) + -TargetOutputDamage * (1 - Caster[Stat.DamageReduction] / 100);
+                    float change = (item.Value.Change * (item.Value.Maximum / 100)) + (-TargetOutputDamage * (1 - Caster[Stat.DamageReduction] / 100));
+                    ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
+                    CasterObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
 
                 }
                 else if (item.Value.Change != 0)
@@ -233,14 +237,15 @@ namespace Abilities
             { 
                 float TargetMaxHealth = TargetObject.GetComponent<Character>().HealthPoints.Value;
                 float TargetCurrentHealth = Target[Stat.HealthPoints];
-                if (TargetCurrentHealth / (TargetMaxHealth / 100) <= TargetFinisher)
+
+                if (TargetCurrentHealth / (TargetMaxHealth / 100) <= TargetFinisher & TargetFinisher != 0)
                 {
                     Target[Stat.HealthPoints] = 0;
                 }
             }
             float CasterMaxHealth = CasterObject.GetComponent<Character>().HealthPoints.Value;
             float CasterCurrentHealth = Caster[Stat.HealthPoints];
-            if (CasterCurrentHealth / (CasterMaxHealth / 100) <= CasterFinisher)
+            if (CasterCurrentHealth / (CasterMaxHealth / 100) <= CasterFinisher & CasterFinisher != 0)
             {
                 Caster[Stat.HealthPoints] = 0;
             }

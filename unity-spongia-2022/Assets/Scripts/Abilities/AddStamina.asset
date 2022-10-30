@@ -14,26 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StaminaCost: 0
   ManaCost: 0
-  Duration: 3
   TargetDamageMultiplier: 0
-  SelfDamageMultiplier: 0
-  TargetHealthPoints: 0
-  TargetCritChance: 0
-  TargetDamage: 0
-  TargetDamageReduction: 0
-  TargetDodge: 0
-  TargetStamina: 0
-  TargetStaminaRegen: 0
-  TargetMana: 0
-  TargetWeight: 0
-  TargetFinisher: 0
-  SelfHealthPoints: 0
-  SelfCritChance: 0
-  SelfDamage: 0
-  SelfDamageReduction: 0
-  SelfDodge: 0
-  SelfStamina: 100
-  SelfStaminaRegen: 0
-  SelfMana: 0
-  SelfWeight: 0
-  SelfFinisher: 0
+  CasterDamageMultiplier: 1
+  AffectsTarget: 0
+  AffectsCaster: 1

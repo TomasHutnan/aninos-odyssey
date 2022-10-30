@@ -54,7 +54,11 @@ namespace AE.FightManager
         public GameObject Fighter;
         public void NextRound()
         {
+            print("NextRound");
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
+            
+            
+
             foreach (var item in activeEffects)
             {
                 foreach (var item2 in item.Value)
@@ -76,17 +80,19 @@ namespace AE.FightManager
                 ToDelete.Clear();
 
             }
-
-
             foreach (var item in delayedEffects)
             {
                 item.delay -= 1;
                 if (item.delay == 0)
                 {
-                    activeEffects[item.stat].Add(item);
+                    ChangeInStats(item.stat, item.change);
                     ToDelete.Add(item);
+                    if (item.duration != 0)
+                    {
+                        activeEffects[item.stat].Add(item);
+                    }
                 }
-               
+
 
             }
             foreach (var delete in ToDelete)
@@ -95,9 +101,13 @@ namespace AE.FightManager
 
             }
 
+
+
+
         }
         public void ChangeInStats(Stat StatToChange,float ChangeValue)
         {
+            print($"ChangingStats,{StatToChange},{ChangeValue},{StatHolder[StatToChange]}");
             StatHolder[StatToChange] += ChangeValue;
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
             foreach (var item in activeEffects[StatToChange])
@@ -107,7 +117,8 @@ namespace AE.FightManager
                 if(item.change/Math.Abs(item.change)*-1 == ChangeValue / Math.Abs(ChangeValue))
                 {
                     item.change += ChangeValue;
-                    if(item.change <= 0)
+                    //BULLSHIT
+                    if((item.change / Math.Abs(item.change) )* item.change <= 0)
                     {
                         ChangeValue = item.change*-1;
                         ToDelete.Add(item);
@@ -147,6 +158,8 @@ namespace AE.FightManager
         // Update is called once per frame
         private void Update()
         {
+            List<ActiveEffect> ToDelete = new List<ActiveEffect>();
+            print($"ActiveEffectLength{activeEffects[Stat.HealthPoints].Count}");
             foreach (var item in delayedEffects)
             {
                 if(item.delay != 0) { continue; };
@@ -155,10 +168,13 @@ namespace AE.FightManager
                 {
                     activeEffects[item.stat].Add(item);
                 };
-                //delayedEffects.Remove(item);
+                ToDelete.Add(item); 
             }
 
-
+            foreach (var item in ToDelete)
+            {
+                delayedEffects.Remove(item);
+            }
 
             //print(activeEffects.Count);
             string String = "";
