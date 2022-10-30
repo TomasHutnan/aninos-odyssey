@@ -75,6 +75,17 @@ public class Character : InventoryHolder
         MoneyUpdateEvent?.Invoke();
         return true;
     }
+    public bool BuyItem(Item item, int cost)
+    {
+        if (Money < cost)
+            return false;
+
+        AddItem(item);
+        Money -= cost;
+
+        MoneyUpdateEvent?.Invoke();
+        return true;
+    }
 
     void Awake()
     {

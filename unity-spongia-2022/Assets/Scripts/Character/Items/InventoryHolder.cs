@@ -7,7 +7,7 @@ namespace AE.Items
 {
     public class InventoryHolder : MonoBehaviour
     {
-        public List<Item> Inventory;
+        public List<Item> Inventory = new List<Item> { };
 
         public event Action InventoryUpdateEvent;
         public bool AddItem(Item item)

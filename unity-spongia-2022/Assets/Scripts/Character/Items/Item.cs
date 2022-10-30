@@ -70,6 +70,7 @@ namespace AE.Items
         public int value;
         
         public Sprite Icon;
+        public Sprite Image;
 
         public string Name;
 

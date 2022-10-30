@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static Character PlayerCharacter;
     public static ItemTier GameStage;
 
+    public static float ShopValueMultiplier = 10;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
