@@ -24,37 +24,59 @@ public class Character : Vendor
 
     public CharacterStat Weight;
 
+    public LevelUpSystem LevelUpSystem;
+
     public Dictionary<ItemType, Item> EquippedItems;
 
-
+    public event Action EquipmentUpdateEvent;
 
     public bool EquipItem(Item item)
     {
-        if (EquippedItems[item.Type])
+        Item equippedItem;
+        bool isEquipped = EquippedItems.TryGetValue(item.Type, out equippedItem);
+        if (isEquipped && equippedItem is not null)
         {
-            AddItem(EquippedItems[item.Type]);
+            AddItem(equippedItem);
+            equippedItem.Unequip(this);
         }
 
         EquippedItems[item.Type] = item;
+        item.Equip(this);
         RemoveItem(item);
 
+        EquipmentUpdateEvent?.Invoke();
         return true;
     }
     public bool UnequipItem(Item item)
     {
-        if (!EquippedItems[item.Type] == item)
+        Item equippedItem;
+        bool isEquipped = EquippedItems.TryGetValue(item.Type, out equippedItem);
+
+        if (!isEquipped || equippedItem != item)
             return false;
 
         AddItem(item);
         EquippedItems[item.Type] = null;
+        equippedItem.Unequip(this);
 
+        EquipmentUpdateEvent?.Invoke();
+        return true;
+    }
+
+    public bool SellItem(Item item)
+    {
+        if (!RemoveItem(item))
+            return false;
+
+        Money += item.value;
+
+        triggerMoneyUpdateEvent();
         return true;
     }
 
     void Awake()
     {
-
-        if (transform.name == "PlayerCharacterManager")
+        if (transform.name == "GameManager")
         {
             Money = SaveData.Money;
             Inventory = SaveData.Inventory;
@@ -67,6 +89,36 @@ public class Character : Vendor
             EquippedItems = new Dictionary<ItemType, Item> { };
         }
         defaultStats();
+        
+        Damage.Label = "Damage";
+        CritChance.Label = "Crit Chance";
+        CritChance.IsPercentual = true;
+
+        HealthPoints.Label = "Health";
+        DamageReduction.Label = "Resistance";
+        DamageReduction.IsPercentual = true;
+        DodgeChance.Label = "Dodge Chance";
+        DodgeChance.IsPercentual = true;
+
+        Stamina.Label = "Stamina";
+        StaminaRegen.Label = "Stamina Regen";
+        Mana.Label = "Mana";
+
+        Weight.Label = "Weight";
+
+        if (LevelUpSystem is null)
+        {
+            if (transform.name == "GameManager")
+            {
+                LevelUpSystem = SaveData.LevelUpSystem;
+                LevelUpSystem.UpdateActiveCharacter(this);
+                // LevelUpSystem.addExp(300); // Level Up Panel Test
+            }
+            else
+            {
+                LevelUpSystem = new LevelUpSystem(this);
+            }
+        }
     }
 
     private void defaultStats()

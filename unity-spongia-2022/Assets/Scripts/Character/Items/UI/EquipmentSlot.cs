@@ -1,18 +1,18 @@
+using AE.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquipmentSlot : MonoBehaviour
+namespace AE.Items.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class EquipmentSlot : ItemSlot
     {
-        
-    }
+        public ItemType ItemType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            gameObject.name = ItemType.ToString() + " Slot";
+        }
     }
 }

@@ -7,6 +7,8 @@ namespace AE.CharacterStats
     public class CharacterStat
 	{
 		public float BaseValue;
+		public string Label = "";
+		public bool IsPercentual = false;
 
 		protected bool isDirty = true;
 		protected float lastBaseValue;
@@ -77,8 +79,11 @@ namespace AE.CharacterStats
 		protected virtual float CalculateFinalValue()
 		{
 			float finalValue = BaseValue;
+
 			float sumPercentAdd = 0;
 			float sumInverseProp = 0;
+
+			bool includeInverse = false;
 
 			statModifiers.Sort(CompareModifierOrder);
 
@@ -107,9 +112,13 @@ namespace AE.CharacterStats
 				else if (mod.Type == StatModType.InverseProp)
 				{
 					sumInverseProp += mod.Value;
-				}
+					includeInverse = true;
+
+                }
 			}
-			finalValue += 100 / (100 + sumInverseProp);
+
+			if (includeInverse)
+				finalValue += (1 - 100 / (100 + sumInverseProp))*100;
 
 			// Workaround for float calculation errors, like displaying 12.00001 instead of 12
 			return (float)Math.Round(finalValue, 1);
