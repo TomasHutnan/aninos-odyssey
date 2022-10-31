@@ -7,10 +7,6 @@ using Newtonsoft.Json.Converters;
 
 namespace AE.GameSave
 {
-    public class JSONBase {
-        public JSONSave AutoSave {get; set;}
-        public Dictionary<int, JSONSave> Saves {get; set;}
-    }
     public class JSONSave {
         public int LastModified;
         public int Money {get; set;}
