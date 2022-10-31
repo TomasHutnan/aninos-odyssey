@@ -33,6 +33,14 @@ namespace AE.GameSave
             SaveData.SetDefaults();
         }
 
+        public static void DeleteSave(SaveSlot slot) {
+            if (!isSlotOccupied(slot))
+                return;
+            
+            data.Remove((int) slot);
+            SaveToFile();
+        }
+
         public static void ActivateSave(SaveSlot slot) {
             if (!isSlotOccupied(slot)) {
                 StartNew();
@@ -42,7 +50,7 @@ namespace AE.GameSave
             SaveData.Load(data[(int) slot]);
         }
 
-        public static void SaveDataTo(SaveSlot slot) {
+        public static void SaveCurrentDataTo(SaveSlot slot) {
             if (slot == SaveSlot.None)
                 throw new ArgumentException("Cannot save to slot None!");
 
@@ -75,6 +83,10 @@ namespace AE.GameSave
                 }
             });
 
+            SaveToFile();
+        }
+
+        public static void SaveToFile() {
             File.WriteAllText(Path.Combine(Application.persistentDataPath, "no_topping_left_beef.json"), JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings{ NullValueHandling = NullValueHandling.Include }));
         }
 
@@ -93,6 +105,10 @@ namespace AE.GameSave
                 Weight = item.Weight,
                 Name = item.Name
             };
+        }
+
+        public static DateTime getLastModified(SaveSlot slot) {
+            return isSlotOccupied(slot) ? new DateTime(data[slot].LastModified) : null;
         }
 
         public static bool isSlotOccupied(SaveSlot slot) {

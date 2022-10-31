@@ -50,7 +50,7 @@ namespace AE.GameSave
                 throw new ArgumentException("Cannot save to slot None!");
 
             SaveData.slot = slot;
-            SaveController.SaveDataTo(slot);
+            SaveController.SaveCurrentDataTo(slot);
         }
 
         public static void Load(JSONSave save) {
