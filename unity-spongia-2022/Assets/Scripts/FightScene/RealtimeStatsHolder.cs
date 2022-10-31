@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using System;
+using Abilities;
+
 namespace AE.FightManager
 {
     public enum Stat
@@ -17,11 +19,14 @@ namespace AE.FightManager
         StaminaRegen,
         Mana,
         Weight,
+        Stun,
 
     }
    
     public class RealtimeStatsHolder : MonoBehaviour
     {
+
+        public List<Ability> AvailableAbilities = new List<Ability>();
         public TextMeshProUGUI text;
         public List<ActiveEffect> delayedEffects = new List<ActiveEffect>();
         public Dictionary<Stat, List<ActiveEffect>> activeEffects =new Dictionary<Stat, List<ActiveEffect>>()
@@ -35,6 +40,7 @@ namespace AE.FightManager
             {Stat.StaminaRegen, new List<ActiveEffect>()},
             {Stat.Mana, new List<ActiveEffect>()},
             {Stat.Weight, new List<ActiveEffect>()},
+            {Stat.Stun, new List<ActiveEffect>()},
         };
 
         public Dictionary<Stat, float> StatHolder = new Dictionary<Stat, float>();
@@ -48,16 +54,18 @@ namespace AE.FightManager
             {Stat.Mana,"Mana" },
             {Stat.Stamina,"Stamina" },
             {Stat.StaminaRegen,"StaminaRegen" },
-            {Stat.Weight,"Weight" }
+            {Stat.Weight,"Weight" },
+            {Stat.Stun,"Stun" }
         };
 
-        public GameObject Fighter;
+        public Character Fighter;
         public void NextRound()
         {
             print("NextRound");
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
-            
-            
+            AvailableAbilities = Fighter.EquipedAbilities;
+
+
 
             foreach (var item in activeEffects)
             {
@@ -107,15 +115,18 @@ namespace AE.FightManager
         }
         public void ChangeInStats(Stat StatToChange,float ChangeValue)
         {
-            print($"ChangingStats,{StatToChange},{ChangeValue},{StatHolder[StatToChange]}");
+           
+           
             StatHolder[StatToChange] += ChangeValue;
+            
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
             foreach (var item in activeEffects[StatToChange])
             {
-                if(item.type == StatType.Percentual) { continue; };
+                if(item.type == StatType.Percentual || item.type == StatType.Stun) { continue; };
                 //Check if sign of our current change is the opposite of change in active effects buffer
                 if(item.change/Math.Abs(item.change)*-1 == ChangeValue / Math.Abs(ChangeValue))
                 {
+                    print($"Detected,{item.change},{ChangeValue}");
                     item.change += ChangeValue;
                     //BULLSHIT
                     if((item.change / Math.Abs(item.change) )* item.change <= 0)
@@ -140,17 +151,18 @@ namespace AE.FightManager
         // Start is called before the first frame update
         void Start()
         {
-            Fighter = gameObject;
-            StatHolder.Add(Stat.HealthPoints, Fighter.GetComponent<Character>().HealthPoints.Value);
-            StatHolder.Add(Stat.CritChance, Fighter.GetComponent<Character>().CritChance.Value);
-            StatHolder.Add(Stat.Damage, Fighter.GetComponent<Character>().Damage.Value);
-            StatHolder.Add(Stat.DamageReduction, Fighter.GetComponent<Character>().DamageReduction.Value);
-            StatHolder.Add(Stat.DodgeChance, Fighter.GetComponent<Character>().DodgeChance.Value);
-            StatHolder.Add(Stat.Stamina, Fighter.GetComponent<Character>().Stamina.Value);
-            StatHolder.Add(Stat.StaminaRegen, Fighter.GetComponent<Character>().StaminaRegen.Value);
-            StatHolder.Add(Stat.Mana, Fighter.GetComponent<Character>().Mana.Value);
-            StatHolder.Add(Stat.Weight, Fighter.GetComponent<Character>().Weight.Value);
-
+            Fighter = gameObject.GetComponent<Character>();
+            StatHolder.Add(Stat.HealthPoints, Fighter.HealthPoints.Value);
+            StatHolder.Add(Stat.CritChance, Fighter.CritChance.Value);
+            StatHolder.Add(Stat.Damage, Fighter.Damage.Value);
+            StatHolder.Add(Stat.DamageReduction, Fighter.DamageReduction.Value);
+            StatHolder.Add(Stat.DodgeChance, Fighter.DodgeChance.Value);
+            StatHolder.Add(Stat.Stamina, Fighter.Stamina.Value);
+            StatHolder.Add(Stat.StaminaRegen, 1);
+            StatHolder.Add(Stat.Mana, Fighter.Mana.Value);
+            StatHolder.Add(Stat.Weight, Fighter.Weight.Value);
+            StatHolder.Add(Stat.Stun, 0);
+            AvailableAbilities = Fighter.EquipedAbilities;
 
 
         }
@@ -159,7 +171,7 @@ namespace AE.FightManager
         private void Update()
         {
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
-            print($"ActiveEffectLength{activeEffects[Stat.HealthPoints].Count}");
+            print($"DelayedEffectLength{delayedEffects.Count}");
             foreach (var item in delayedEffects)
             {
                 if(item.delay != 0) { continue; };

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AE.FightManager;
+using Unity.VisualScripting.FullSerializer;
+using System.Diagnostics;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -25,9 +27,40 @@ namespace Abilities
             StatType = _StatType;
         }
     }
+    public enum AbilityTags
+    {
+        //Effected stats
+        Healt,
+        Mana,
+        Stamina,
+        Damage,
+        CritChance,
+        Defense,
+        DodgeChance,
+        Weight,
+
+        //Attack abilities
+        PriestAttack,
+        FighterAttack,
+        TankAttack,
+        RogueAttack,
+        StunAttack,
+
+        //Miscellaneous
+        CasterBuff,
+        CasterDebuff,
+        TargetBuff,
+        TargerDebuff,
+        Delay,
+        Temporary,
+        Permanent,
+    }
     [CreateAssetMenu]
     public class Ability : ScriptableObject
     {
+        public List<AbilityTags> AbilityTags;
+        public string AbilityDescription;
+        public int AbilityCount = 1;
         public int StaminaCost;
         public int ManaCost;
         public float TargetDamageMultiplier;
@@ -35,9 +68,19 @@ namespace Abilities
         public bool AffectsTarget;
         public bool AffectsCaster;
 
+        float TargetStunned;
+        float TargetStunDuration;
+        float TargetStunDelay;
+
+
+
+        float CasterStunned;
+        float CasterStunDuration;
+        float CasterStunDelay;
+
         //TargetEffects
 
-       float TargetHealthPoints;
+        float TargetHealthPoints;
         float TargetHealthDuration;
         float TargetHealthDelay;
 
@@ -141,11 +184,14 @@ namespace Abilities
 
         public void UseAbility(GameObject CasterObject, GameObject TargetObject)
         {
+        
             Character TargetCharacter = TargetObject.GetComponent<Character>();
             Character CasterCharacter = CasterObject.GetComponent<Character>();
+            RealtimeStatsHolder TargetHolder = TargetObject.GetComponent<RealtimeStatsHolder>();
+            RealtimeStatsHolder CasterHolder = CasterObject.GetComponent<RealtimeStatsHolder>();
+            if (CasterHolder.StatHolder[Stat.Stun] != 0) { return; }
             Dictionary<Stat, StatProperties> CasterStats = new Dictionary<Stat, StatProperties>()
             {
-                {Stat.HealthPoints,new StatProperties(CasterHealthPoints,CasterCharacter.HealthPoints.Value,CasterHealthDuration,CasterHealthDelay,StatType.Flat) },
                 {Stat.CritChance,new StatProperties(CasterCritChance,100,CasterCritDuration,CasterCritDelay,StatType.Percentual) },
                 {Stat.Damage,new StatProperties(CasterDamage,CasterCharacter.Damage.Value,CasterDamageDuration,CasterDamageDelay,StatType.Flat) },
                 {Stat.DamageReduction,new StatProperties(CasterDamageReduction,100,CasterDamageReductionDuration,CasterDamageReductionDelay,StatType.Percentual) },
@@ -154,11 +200,11 @@ namespace Abilities
                 {Stat.StaminaRegen,new StatProperties(CasterStaminaRegen,CasterCharacter.StaminaRegen.Value,CasterStaminaRegenDuration,CasterStaminaRegenDelay,StatType.Flat) },
                 {Stat.Mana,new StatProperties(CasterMana,CasterCharacter.Mana.Value,CasterManaDuration,CasterManaDelay,StatType.Flat) },
                 {Stat.Weight,new StatProperties(CasterWeight,CasterCharacter.Weight.Value,CasterWeightDuration,CasterWeightDelay,StatType.Flat) },
-
+                {Stat.Stun,new StatProperties(CasterStunned,1,CasterStunDuration,CasterStunDelay,StatType.Stun) },
+                {Stat.HealthPoints,new StatProperties(CasterHealthPoints,CasterCharacter.HealthPoints.Value,CasterHealthDuration,CasterHealthDelay,StatType.Flat) },
             };
             Dictionary<Stat, StatProperties> TargetStats = new Dictionary<Stat, StatProperties>()
             {
-                {Stat.HealthPoints,new StatProperties(TargetHealthPoints,TargetCharacter.HealthPoints.Value,TargetHealthDuration,TargetHealthDelay,StatType.Flat) },
                 {Stat.CritChance,new StatProperties(TargetCritChance,100,TargetCritDuration,TargetCritDelay,StatType.Percentual) },
                 {Stat.Damage,new StatProperties(TargetDamage,TargetCharacter.Damage.Value,TargetDamageDuration,TargetDamageDelay,StatType.Flat) },
                 {Stat.DamageReduction,new StatProperties(TargetDamageReduction,100,TargetDamageReductionDuration,TargetDamageReductionDelay,StatType.Percentual) },
@@ -167,7 +213,8 @@ namespace Abilities
                 {Stat.StaminaRegen,new StatProperties(TargetStaminaRegen,TargetCharacter.StaminaRegen.Value,TargetStaminaRegenDuration,TargetStaminaRegenDelay,StatType.Flat) },
                 {Stat.Mana,new StatProperties(TargetMana,TargetCharacter.Mana.Value,TargetManaDuration,TargetManaDelay,StatType.Flat) },
                 {Stat.Weight,new StatProperties(TargetWeight,TargetCharacter.Weight.Value,TargetWeightDuration,TargetWeightDelay,StatType.Flat) },
-
+                {Stat.Stun,new StatProperties(TargetStunned,100,TargetStunDuration,TargetStunDelay,StatType.Stun) },
+                {Stat.HealthPoints,new StatProperties(TargetHealthPoints,TargetCharacter.HealthPoints.Value,TargetHealthDuration,TargetHealthDelay,StatType.Flat) },
             };
 
 
@@ -175,8 +222,8 @@ namespace Abilities
 
             
 
-            var Caster = CasterObject.GetComponent<RealtimeStatsHolder>().StatHolder;
-            var Target = TargetObject.GetComponent<RealtimeStatsHolder>().StatHolder;
+            var Caster = CasterHolder.StatHolder;
+            var Target = TargetHolder.StatHolder;
             //Check if you can cast the spell
             float Weight = Caster[Stat.Weight];
             float Stamina = Caster[Stat.Stamina];
@@ -186,56 +233,82 @@ namespace Abilities
             //Stamina and Mana taking
             Caster[Stat.Mana] -= ManaCost;
             Caster[Stat.Stamina] -= OutputStaminaCost;
-            //CalculatingCritChance
-            float Damage = Caster[Stat.Damage];
-            float CriticalChance = Caster[Stat.CritChance];
-            int Chance = UnityEngine.Random.Range(1, 101);
-            int TargetCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
-            Chance = UnityEngine.Random.Range(1, 101);
-            int CasterCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
-            //Caclulating TargetOutput Damage
-            float TargetOutputDamage = (float)Math.Round(Target[Stat.Damage] * TargetDamageMultiplier) * TargetCriticalMultiplier;
-            //Calculating CasterOutput Damage
-            float CasterOutputDamage = (float)Math.Round(Caster[Stat.Damage] * CasterDamageMultiplier) * CasterCriticalMultiplier;
-
+            
 
             foreach (var item in TargetStats)
             {
-                if (item.Key == Stat.HealthPoints)
+
+                if (item.Key == Stat.Stun)
                 {
+                    float change = item.Value.Change;
+                    ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
+                    TargetHolder.delayedEffects.Add(effect);
+
+                }
+                else if(item.Key == Stat.HealthPoints)
+                {
+                    float Damage = Caster[Stat.Damage];
+                    float CriticalChance = Caster[Stat.CritChance];
+                    int Chance = UnityEngine.Random.Range(1, 101);
+                    int DodgeRoll = UnityEngine.Random.Range(1, 101);
+                    float DodgeChance = Target[Stat.DodgeChance];
+                    int DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
+                    int CasterCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
+                    //Calculating CasterOutput Damage
+                    float CasterOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * CasterCriticalMultiplier * DodgeMultiplier;
+
                     float change =( item.Value.Change * (item.Value.Maximum / 100) ) + (-CasterOutputDamage * (1 - Target[Stat.DamageReduction] / 100));
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
-                    TargetObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
+                    TargetHolder.delayedEffects.Add(effect);
 
                 }
                 else if(item.Value.Change != 0)
                 {
+                    
                     float change = item.Value.Change * (item.Value.Maximum/100);
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
-                    TargetObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
+                    TargetHolder.delayedEffects.Add(effect);
                 }
             }
             foreach (var item in CasterStats)
             {
-                if(item.Key == Stat.HealthPoints)
+                if(item.Key == Stat.Stun)
                 {
+                    float change = item.Value.Change;
+                    ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
+                    CasterHolder.delayedEffects.Add(effect);
+
+                }
+                else if(item.Key == Stat.HealthPoints)
+                {
+                    float Damage = Caster[Stat.Damage];
+                    float CriticalChance = Caster[Stat.CritChance];
+                    int DodgeRoll = UnityEngine.Random.Range(1, 101);
+                    float DodgeChance = Caster[Stat.DodgeChance];
+                    int DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
+                    int Chance = UnityEngine.Random.Range(1, 101);
+                    int TargetCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
+                    //Caclulating TargetOutput Damage
+                    float TargetOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * TargetCriticalMultiplier * DodgeMultiplier;
+                   
                     float change = (item.Value.Change * (item.Value.Maximum / 100)) + (-TargetOutputDamage * (1 - Caster[Stat.DamageReduction] / 100));
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
-                    CasterObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
+                    CasterHolder.delayedEffects.Add(effect);
 
                 }
                 else if (item.Value.Change != 0)
                 {
+                    
                     float change = item.Value.Change * (item.Value.Maximum / 100);
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
-                    CasterObject.GetComponent<RealtimeStatsHolder>().delayedEffects.Add(effect);
+                    CasterHolder.delayedEffects.Add(effect);
                 }
             }
 
             //All spells that dont affect Caster
             if (Target != null)
             { 
-                float TargetMaxHealth = TargetObject.GetComponent<Character>().HealthPoints.Value;
+                float TargetMaxHealth = TargetCharacter.HealthPoints.Value;
                 float TargetCurrentHealth = Target[Stat.HealthPoints];
 
                 if (TargetCurrentHealth / (TargetMaxHealth / 100) <= TargetFinisher & TargetFinisher != 0)
@@ -243,7 +316,7 @@ namespace Abilities
                     Target[Stat.HealthPoints] = 0;
                 }
             }
-            float CasterMaxHealth = CasterObject.GetComponent<Character>().HealthPoints.Value;
+            float CasterMaxHealth = CasterCharacter.HealthPoints.Value;
             float CasterCurrentHealth = Caster[Stat.HealthPoints];
             if (CasterCurrentHealth / (CasterMaxHealth / 100) <= CasterFinisher & CasterFinisher != 0)
             {
@@ -307,11 +380,14 @@ namespace Abilities
                     AddOptions("TargetStaminaRegen", ref myScript.TargetStaminaRegen, ref myScript.TargetStaminaRegenDelay, ref myScript.TargetStaminaRegenDuration);
                     AddOptions("TargetMana", ref myScript.TargetMana, ref myScript.TargetManaDelay, ref myScript.TargetManaDuration);
                     AddOptions("TargetWeight", ref myScript.TargetWeight, ref myScript.TargetWeightDelay, ref myScript.TargetWeightDuration);
+                    AddOptions("TargetStun(0 or 1)", ref myScript.TargetStunned, ref myScript.TargetStunDelay, ref myScript.TargetStunDuration);
                     EditorGUILayout.Space(5);
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField("TargetFinisher", GUILayout.MaxWidth(150));
                     myScript.TargetFinisher = EditorGUILayout.FloatField(myScript.TargetFinisher);
                     EditorGUILayout.EndHorizontal();
+
+                    
 
                 }
 
