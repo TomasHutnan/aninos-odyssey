@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,10 +18,10 @@ namespace AE.GameSave
     public class SaveController
     {
         static SaveController() {
-            string path = Path.Combine(Application.persistentDataPath, "no_topping_left_beef.json");
+            string path = Path.Combine(Application.persistentDataPath, "no_topping_left_beef.dat");
             if (File.Exists(path)) {
                 StreamReader reader = new StreamReader(path);
-                data = JsonConvert.DeserializeObject<Dictionary<int, JSONSave>>(reader.ReadToEnd());
+                data = JsonConvert.DeserializeObject<Dictionary<int, JSONSave>>(Encoding.UTF8.GetString(Convert.FromBase64String(reader.ReadToEnd())));
                 reader.Close();
             } else {
                 data = new Dictionary<int, JSONSave>();
@@ -87,7 +88,7 @@ namespace AE.GameSave
         }
 
         public static void SaveToFile() {
-            File.WriteAllText(Path.Combine(Application.persistentDataPath, "no_topping_left_beef.json"), JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings{ NullValueHandling = NullValueHandling.Include }));
+            File.WriteAllText(Path.Combine(Application.persistentDataPath, "no_topping_left_beef.dat"), Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings{ NullValueHandling = NullValueHandling.Include }))));
         }
 
         private static JSONItem toJSONItem(Item item) {
