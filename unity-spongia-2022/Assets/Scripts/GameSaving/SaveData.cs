@@ -53,7 +53,8 @@ namespace AE.GameSave
             SaveController.SaveCurrentDataTo(slot);
         }
 
-        public static void Load(JSONSave save) {
+        public static void Load(SaveSlot slot, JSONSave save) {
+            SaveData.slot = slot;
             Money = save.Money;
             
             Inventory = new List<Item>(save.Inventory.Count);

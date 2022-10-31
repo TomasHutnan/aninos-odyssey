@@ -35,7 +35,7 @@ namespace AE.GameSave
         }
 
         public static void DeleteSave(SaveSlot slot) {
-            if (!isSlotOccupied(slot))
+            if (!IsSlotOccupied(slot))
                 return;
             
             data.Remove((int) slot);
@@ -43,12 +43,12 @@ namespace AE.GameSave
         }
 
         public static void ActivateSave(SaveSlot slot) {
-            if (!isSlotOccupied(slot)) {
+            if (!IsSlotOccupied(slot)) {
                 StartNew();
                 return;
             }
 
-            SaveData.Load(data[(int) slot]);
+            SaveData.Load(slot, data[(int) slot]);
         }
 
         public static void SaveCurrentDataTo(SaveSlot slot) {
@@ -57,9 +57,9 @@ namespace AE.GameSave
 
             List<JSONItem> inventory = new List<JSONItem>(), equippedItems = new List<JSONItem>();
             foreach (Item item in SaveData.Inventory)
-                inventory.Add(toJSONItem(item));
+                inventory.Add(ToJSONItem(item));
             foreach (Item item in SaveData.EquippedItems.Values)
-                equippedItems.Add(toJSONItem(item));
+                equippedItems.Add(ToJSONItem(item));
 
             data.Add((int) slot, new JSONSave{
                 LastModified = DateTime.Now.Ticks,
@@ -109,7 +109,7 @@ namespace AE.GameSave
         }
 
         public static DateTime? GetLastModified(SaveSlot slot) {
-            return isSlotOccupied(slot) ? new DateTime(data[(int) slot].LastModified) : null;
+            return IsSlotOccupied(slot) ? new DateTime(data[(int) slot].LastModified) : null;
         }
 
         public static bool IsSlotOccupied(SaveSlot slot) {
