@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using Abilities;
+using Newtonsoft.Json.Linq;
 
 namespace AE.FightManager
 {
@@ -57,13 +58,30 @@ namespace AE.FightManager
             {Stat.Weight,"Weight" },
             {Stat.Stun,"Stun" }
         };
-
-        public Character Fighter;
+        public Character _fighter;
+        public void SetCharacter(Character character)
+        {
+            print("HEJJEBEMI");
+            StatHolder.Add(Stat.HealthPoints, character.HealthPoints.Value);
+            print(StatHolder[Stat.HealthPoints]);
+            StatHolder.Add(Stat.CritChance, character.CritChance.Value);
+            StatHolder.Add(Stat.Damage, character.Damage.Value);
+            StatHolder.Add(Stat.DamageReduction, character.DamageReduction.Value);
+            StatHolder.Add(Stat.DodgeChance, character.DodgeChance.Value);
+            StatHolder.Add(Stat.Stamina, character.Stamina.Value);
+            StatHolder.Add(Stat.StaminaRegen, 1);
+            StatHolder.Add(Stat.Mana, character.Mana.Value);
+            StatHolder.Add(Stat.Weight, character.Weight.Value);
+            StatHolder.Add(Stat.Stun, 0);
+            AvailableAbilities = character.EquippedAbilities;
+            _fighter = character;
+        }
+       
         public void NextRound()
         {
             print("NextRound");
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
-            AvailableAbilities = Fighter.EquipedAbilities;
+            AvailableAbilities = _fighter.EquippedAbilities;
 
 
 
@@ -151,18 +169,8 @@ namespace AE.FightManager
         // Start is called before the first frame update
         void Start()
         {
-            Fighter = gameObject.GetComponent<Character>();
-            StatHolder.Add(Stat.HealthPoints, Fighter.HealthPoints.Value);
-            StatHolder.Add(Stat.CritChance, Fighter.CritChance.Value);
-            StatHolder.Add(Stat.Damage, Fighter.Damage.Value);
-            StatHolder.Add(Stat.DamageReduction, Fighter.DamageReduction.Value);
-            StatHolder.Add(Stat.DodgeChance, Fighter.DodgeChance.Value);
-            StatHolder.Add(Stat.Stamina, Fighter.Stamina.Value);
-            StatHolder.Add(Stat.StaminaRegen, 1);
-            StatHolder.Add(Stat.Mana, Fighter.Mana.Value);
-            StatHolder.Add(Stat.Weight, Fighter.Weight.Value);
-            StatHolder.Add(Stat.Stun, 0);
-            AvailableAbilities = Fighter.EquipedAbilities;
+            
+           
 
 
         }

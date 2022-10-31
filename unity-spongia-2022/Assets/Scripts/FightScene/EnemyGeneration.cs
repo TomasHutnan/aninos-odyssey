@@ -7,20 +7,17 @@ using System;
 using Unity.PlasticSCM.Editor.WebApi;
 using AE.CharacterStats;
 
-public class EnemyGeneration : MonoBehaviour
+public class EnemyGeneration 
 {
-    private void Start()
-    {
-        Generate(ItemTier.Earth);
-    }
-    
-    public void Generate(ItemTier Stage)
+
+   
+    public static Character Generate(ItemTier Stage)
     {
         
         int[] priority = new int[] {60,85,95,100 };
 
-        Character character = gameObject.GetComponent<Character>();
-        character.LevelUpSystem = new LevelUpSystem();
+        Character character = new Character();
+        
         //character.Weight = new CharacterStat(80);
         //character.CritChance = new CharacterStat(0);
         //character.HealthPoints = new CharacterStat(0);
@@ -54,11 +51,13 @@ public class EnemyGeneration : MonoBehaviour
             else if(Dice > GearChance[EnemyClass][ItemClass.Priest][0] & Dice <= GearChance[EnemyClass][ItemClass.Priest][1]) { itemClass = ItemClass.Priest; }
 
             Item CurrentItem = new Item(itemClass, Stage, item);
-            print($"{CurrentItem.Weight},{itemClass}");
+            
             
             EnemyGear.Add(item,CurrentItem );
             CurrentItem.Equip(character);
+            
         }
+        return character;
        
 
 

@@ -185,10 +185,11 @@ namespace Abilities
         public void UseAbility(GameObject CasterObject, GameObject TargetObject)
         {
         
-            Character TargetCharacter = TargetObject.GetComponent<Character>();
-            Character CasterCharacter = CasterObject.GetComponent<Character>();
+           
             RealtimeStatsHolder TargetHolder = TargetObject.GetComponent<RealtimeStatsHolder>();
             RealtimeStatsHolder CasterHolder = CasterObject.GetComponent<RealtimeStatsHolder>();
+            Character TargetCharacter = TargetHolder._fighter;
+            Character CasterCharacter = CasterHolder._fighter;
             if (CasterHolder.StatHolder[Stat.Stun] != 0) { return; }
             Dictionary<Stat, StatProperties> CasterStats = new Dictionary<Stat, StatProperties>()
             {
@@ -197,7 +198,7 @@ namespace Abilities
                 {Stat.DamageReduction,new StatProperties(CasterDamageReduction,100,CasterDamageReductionDuration,CasterDamageReductionDelay,StatType.Percentual) },
                 {Stat.DodgeChance,new StatProperties(CasterDodge,100,CasterDodgeDuration,CasterDodgeDelay,StatType.Percentual) },
                 {Stat.Stamina,new StatProperties(CasterStamina,CasterCharacter.Stamina.Value,CasterStaminaDuration,CasterStaminaDelay,StatType.Flat) },
-                {Stat.StaminaRegen,new StatProperties(CasterStaminaRegen,CasterCharacter.StaminaRegen.Value,CasterStaminaRegenDuration,CasterStaminaRegenDelay,StatType.Flat) },
+                {Stat.StaminaRegen,new StatProperties(CasterStaminaRegen,1,CasterStaminaRegenDuration,CasterStaminaRegenDelay,StatType.Percentual) },
                 {Stat.Mana,new StatProperties(CasterMana,CasterCharacter.Mana.Value,CasterManaDuration,CasterManaDelay,StatType.Flat) },
                 {Stat.Weight,new StatProperties(CasterWeight,CasterCharacter.Weight.Value,CasterWeightDuration,CasterWeightDelay,StatType.Flat) },
                 {Stat.Stun,new StatProperties(CasterStunned,1,CasterStunDuration,CasterStunDelay,StatType.Stun) },
@@ -210,7 +211,7 @@ namespace Abilities
                 {Stat.DamageReduction,new StatProperties(TargetDamageReduction,100,TargetDamageReductionDuration,TargetDamageReductionDelay,StatType.Percentual) },
                 {Stat.DodgeChance,new StatProperties(TargetDodge,100,TargetDodgeDuration,TargetDodgeDelay,StatType.Percentual) },
                 {Stat.Stamina,new StatProperties(TargetStamina,TargetCharacter.Stamina.Value,TargetStaminaDuration,TargetStaminaDelay,StatType.Flat) },
-                {Stat.StaminaRegen,new StatProperties(TargetStaminaRegen,TargetCharacter.StaminaRegen.Value,TargetStaminaRegenDuration,TargetStaminaRegenDelay,StatType.Flat) },
+                {Stat.StaminaRegen,new StatProperties(TargetStaminaRegen,1,TargetStaminaRegenDuration,TargetStaminaRegenDelay,StatType.Percentual) },
                 {Stat.Mana,new StatProperties(TargetMana,TargetCharacter.Mana.Value,TargetManaDuration,TargetManaDelay,StatType.Flat) },
                 {Stat.Weight,new StatProperties(TargetWeight,TargetCharacter.Weight.Value,TargetWeightDuration,TargetWeightDelay,StatType.Flat) },
                 {Stat.Stun,new StatProperties(TargetStunned,100,TargetStunDuration,TargetStunDelay,StatType.Stun) },
