@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(transform);
 
-            PlayerCharacter = transform.GetComponent<Character>();
+            PlayerCharacter = new Character();
         }
     }
 }
