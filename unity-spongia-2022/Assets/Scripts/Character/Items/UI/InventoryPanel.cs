@@ -48,6 +48,8 @@ namespace AE.Items.UI
             }
 
             EventManager.EventManager.ItemPromptAnswerEvent += handlePromptAnswer;
+
+            RefreshUI();
         }
 
         private void OnDisable()

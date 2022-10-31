@@ -13,7 +13,7 @@ namespace AE.Items.UI.Shop
         [SerializeField] InventoryHolder inventoryHolder = new InventoryHolder();
         [SerializeField] Character c;
 
-        private ItemShowcase sellableItemShowcase = null;
+        private Item sellableItem = null;
 
         private void Start()
         {
@@ -56,17 +56,26 @@ namespace AE.Items.UI.Shop
 
         private void handleItemClick(Item _item)
         {
+            sellableItem = _item;
             EventManager.EventManager.TriggerItemPromptQuestion(_item, PromptType.Buy);
         }
 
         private void handlePromptAnswer(Item _item, PromptType _promptType, bool _answer)
         {
-            if (_answer || _promptType == PromptType.Sell || _item == sellableItemShowcase.Item)
-            {
-                c.BuyItem(_item, (int)Mathf.Round(_item.value * GameManager.ShopValueMultiplier));
-                inventoryHolder.RemoveItem(_item);
-                sellableItemShowcase.Item = null;
-            }
+            if (!_answer || _promptType != PromptType.Buy || _item != sellableItem)
+                return;
+
+            if (!c.BuyItem(_item, (int)Mathf.Round(_item.value * GameManager.ShopValueMultiplier)))
+                return;
+
+            inventoryHolder.RemoveItem(_item);
+
+            foreach (ItemShowcase itemShowcase in itemShowcases)
+                if (itemShowcase.Item == sellableItem)
+                {
+                    itemShowcase.Item = null;
+                    break;
+                }
         }
 
         private void OnValidate()

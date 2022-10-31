@@ -10,17 +10,14 @@ public class MoneyLabel : MonoBehaviour
 
     Character c;
 
-    private void Start()
-    {
-        updateMoneyLabel();
-    }
-
     private void OnEnable()
     {
         if (c is null)
             c = GameManager.PlayerCharacter;
 
         c.MoneyUpdateEvent += updateMoneyLabel;
+
+        updateMoneyLabel();
     }
 
     private void OnDisable()
