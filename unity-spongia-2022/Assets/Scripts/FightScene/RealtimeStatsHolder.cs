@@ -158,7 +158,7 @@ namespace AE.FightManager
             StatHolder.Add(Stat.DamageReduction, Fighter.DamageReduction.Value);
             StatHolder.Add(Stat.DodgeChance, Fighter.DodgeChance.Value);
             StatHolder.Add(Stat.Stamina, Fighter.Stamina.Value);
-            StatHolder.Add(Stat.StaminaRegen, Fighter.StaminaRegen.Value);
+            StatHolder.Add(Stat.StaminaRegen, 1);
             StatHolder.Add(Stat.Mana, Fighter.Mana.Value);
             StatHolder.Add(Stat.Weight, Fighter.Weight.Value);
             StatHolder.Add(Stat.Stun, 0);
