@@ -138,7 +138,7 @@ namespace AE.CharacterStats
 
         private void UpdateMods()
         {
-            if (character != null)
+            if (character == null)
                 return;
 
             character.Damage.RemoveAllModifiersFromSource(this);
