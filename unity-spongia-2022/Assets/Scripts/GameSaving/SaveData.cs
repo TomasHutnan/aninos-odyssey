@@ -33,6 +33,7 @@ namespace AE.GameSave
             LevelUpSystem = new LevelUpSystem();
 
             PlayerCharacter = new Character();
+            PlayerCharacter.PostInit();
         }
 
         public static bool HasSlot() {
@@ -95,6 +96,7 @@ namespace AE.GameSave
             PlayerCharacter = new Character(
                 Money, EquippedItems, Inventory, LevelUpSystem,
                 null, null);
+            PlayerCharacter.PostInit();
         }
     }
 }

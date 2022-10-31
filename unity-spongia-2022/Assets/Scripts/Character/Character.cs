@@ -106,8 +106,7 @@ public class Character : InventoryHolder
         EquippedItems = _equippedItems ?? new Dictionary<ItemType, Item>();
         Inventory = _inventory ?? new List<Item>();
 
-        LevelUpSystem = _levelUpSystem ?? new LevelUpSystem(this);
-        LevelUpSystem.UpdateActiveCharacter(this);
+        LevelUpSystem = _levelUpSystem ?? new LevelUpSystem();
 
         UnlockedAbilities = _unlockedAbilities ?? new List<Ability>();
         EquippedAbilities = _equippedAbilities ?? new List<Ability>();
@@ -140,5 +139,15 @@ public class Character : InventoryHolder
         Mana.Label = "Mana";
 
         Weight.Label = "Weight";
+    }
+
+    public void PostInit()
+    {
+        LevelUpSystem.UpdateActiveCharacter(this);
+
+        foreach (Item item in EquippedItems.Values)
+        {
+            EquipItem(item);
+        }
     }
 }
