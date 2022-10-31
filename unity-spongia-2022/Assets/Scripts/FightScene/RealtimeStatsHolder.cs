@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using System;
+using Abilities;
+
 namespace AE.FightManager
 {
     public enum Stat
@@ -23,6 +25,8 @@ namespace AE.FightManager
    
     public class RealtimeStatsHolder : MonoBehaviour
     {
+
+        public List<Ability> AvailableAbilities = new List<Ability>();
         public TextMeshProUGUI text;
         public List<ActiveEffect> delayedEffects = new List<ActiveEffect>();
         public Dictionary<Stat, List<ActiveEffect>> activeEffects =new Dictionary<Stat, List<ActiveEffect>>()
@@ -54,13 +58,14 @@ namespace AE.FightManager
             {Stat.Stun,"Stun" }
         };
 
-        public GameObject Fighter;
+        public Character Fighter;
         public void NextRound()
         {
             print("NextRound");
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
-            
-            
+            AvailableAbilities = Fighter.EquipedAbilities;
+
+
 
             foreach (var item in activeEffects)
             {
@@ -146,18 +151,18 @@ namespace AE.FightManager
         // Start is called before the first frame update
         void Start()
         {
-            Fighter = gameObject;
-            StatHolder.Add(Stat.HealthPoints, Fighter.GetComponent<Character>().HealthPoints.Value);
-            StatHolder.Add(Stat.CritChance, Fighter.GetComponent<Character>().CritChance.Value);
-            StatHolder.Add(Stat.Damage, Fighter.GetComponent<Character>().Damage.Value);
-            StatHolder.Add(Stat.DamageReduction, Fighter.GetComponent<Character>().DamageReduction.Value);
-            StatHolder.Add(Stat.DodgeChance, Fighter.GetComponent<Character>().DodgeChance.Value);
-            StatHolder.Add(Stat.Stamina, Fighter.GetComponent<Character>().Stamina.Value);
-            StatHolder.Add(Stat.StaminaRegen, Fighter.GetComponent<Character>().StaminaRegen.Value);
-            StatHolder.Add(Stat.Mana, Fighter.GetComponent<Character>().Mana.Value);
-            StatHolder.Add(Stat.Weight, Fighter.GetComponent<Character>().Weight.Value);
+            Fighter = gameObject.GetComponent<Character>();
+            StatHolder.Add(Stat.HealthPoints, Fighter.HealthPoints.Value);
+            StatHolder.Add(Stat.CritChance, Fighter.CritChance.Value);
+            StatHolder.Add(Stat.Damage, Fighter.Damage.Value);
+            StatHolder.Add(Stat.DamageReduction, Fighter.DamageReduction.Value);
+            StatHolder.Add(Stat.DodgeChance, Fighter.DodgeChance.Value);
+            StatHolder.Add(Stat.Stamina, Fighter.Stamina.Value);
+            StatHolder.Add(Stat.StaminaRegen, Fighter.StaminaRegen.Value);
+            StatHolder.Add(Stat.Mana, Fighter.Mana.Value);
+            StatHolder.Add(Stat.Weight, Fighter.Weight.Value);
             StatHolder.Add(Stat.Stun, 0);
-
+            AvailableAbilities = Fighter.EquipedAbilities;
 
 
         }

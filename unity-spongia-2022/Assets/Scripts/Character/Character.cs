@@ -12,7 +12,7 @@ public class Character : Vendor
     public CharacterStat Damage;
     public CharacterStat CritChance;
 
-    public List<Ability> Ability = new List<Ability>();
+    public List<Ability> EquipedAbilities = new List<Ability>();
 
     public CharacterStat HealthPoints;
     public CharacterStat DamageReduction;
