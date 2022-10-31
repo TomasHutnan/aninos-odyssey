@@ -44,6 +44,10 @@ namespace AE.GameSave
 
         public static void SaveDataTo(SaveSlot slot) {
             List<JSONItem> inventory = new List<JSONItem>(), equippedItems = new List<JSONItem>();
+            foreach (Item item in SaveData.Inventory)
+                inventory.Add(toJSONItem(item));
+            foreach (Item item in SaveData.EquippedItems.Values)
+                equippedItems.Add(toJSONItem(item));
 
             data.Add((int) slot, new JSONSave{
                 LastModified = DateTime.Now.Ticks,
@@ -54,9 +58,36 @@ namespace AE.GameSave
                 EquippedAbilities = new List<int>(SaveData.EquippedAbilities),
                 GameStage = SaveData.GameStage,
                 LevelUpSystem = new JSONLevelUpSystem{
-
+                    Level = SaveData.LevelUpSystem.Level,
+                    Exp = SaveData.LevelUpSystem.Exp,
+                    Bonuses = new JSONLevelUpSystemBonuses{
+                        Damage = SaveData.LevelUpSystem.Damage,
+                        CritChance = SaveData.LevelUpSystem.CritChance,
+                        Health = SaveData.LevelUpSystem.Health,
+                        Resistance = SaveData.LevelUpSystem.Resistance,
+                        DodgeChance = SaveData.LevelUpSystem.DodgeChance,
+                        Stamina = SaveData.LevelUpSystem.Stamina,
+                        Mana = SaveData.LevelUpSystem.Mana,
+                    }
                 }
             });
+        }
+
+        private static JSONItem toJSONItem(Item item) {
+            return new JSONItem{
+                Class = item.Class,
+                Tier = item.Tier,
+                Type = item.Type,
+                Bonuses = new JSONItemBonuses{
+                    Damage = item.DamageBonus,
+                    CritPercent = item.CritPercentBonus,
+                    Armor = item.ArmorBonus,
+                    Dodge = item.DodgeBonus,
+                    Mana = item.ManaBonus,
+                },
+                Weight = item.Weight,
+                Name = item.Name
+            };
         }
 
         public static bool isSlotOccupied(SaveSlot slot) {
