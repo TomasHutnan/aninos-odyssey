@@ -19,17 +19,14 @@ namespace AE.GameSave
             string path = Path.Combine(Application.persistentDataPath, "no_topping_left_beef.json");
             if (File.Exists(path)) {
                 StreamReader reader = new StreamReader(path);
-                data = JsonConvert.DeserializeObject<JSONBase>(reader.ReadToEnd());
+                data = JsonConvert.DeserializeObject<Dictionary<int, JSONSave>>(reader.ReadToEnd());
                 reader.Close();
             } else {
-                data = new JSONBase {
-                    AutoSave = null,
-                    Saves = new Dictionary<int, JSONSave>()
-                };
+                data = new Dictionary<int, JSONSave>();
             }
         }
 
-        private static JSONBase data;
+        private static Dictionary<int, JSONSave> data;
 
         public static void StartNew() {
             SaveData.SetDefaults();
@@ -44,8 +41,12 @@ namespace AE.GameSave
             SaveData.Load(data.Saves[(int) slot]);
         }
 
+        public static void SaveDataTo(SaveSlot slot) {
+
+        }
+
         public static bool isSlotOccupied(SaveSlot slot) {
-            return slot == SaveSlot.AutoSave ? data.AutoSave != null : data.Saves.ContainsKey((int) slot);
+            return data.Saves.ContainsKey((int) slot);
         }
 
     }
