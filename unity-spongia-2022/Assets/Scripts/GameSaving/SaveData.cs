@@ -20,6 +20,8 @@ namespace AE.GameSave
         public static ItemTier GameStage = ItemTier.Mortal;
         public static LevelUpSystem LevelUpSystem = new LevelUpSystem();
 
+        public static Character PlayerCharacter = new Character();
+
         public static void SetDefaults() {
             slot = SaveSlot.None;
             Money = 0;
@@ -29,6 +31,8 @@ namespace AE.GameSave
             EquippedAbilities = new HashSet<int>();
             GameStage = ItemTier.Mortal;
             LevelUpSystem = new LevelUpSystem();
+
+            PlayerCharacter = new Character();
         }
 
         public static bool HasSlot() {
@@ -46,6 +50,13 @@ namespace AE.GameSave
         }
 
         public static void Save(SaveSlot slot) {
+            Money = PlayerCharacter.Money;
+            Inventory = PlayerCharacter.Inventory;
+            EquippedItems = PlayerCharacter.EquippedItems;
+            OwnedAbilities = null;
+            EquippedAbilities = null;
+            LevelUpSystem = PlayerCharacter.LevelUpSystem;
+
             if (slot == SaveSlot.None)
                 throw new ArgumentException("Cannot save to slot None!");
 
@@ -80,6 +91,10 @@ namespace AE.GameSave
             GameStage = save.GameStage;
             LevelUpSystem = new LevelUpSystem(null, save.LevelUpSystem.Level, save.LevelUpSystem.Exp,
                 save.LevelUpSystem.Bonuses.Damage, save.LevelUpSystem.Bonuses.CritChance, save.LevelUpSystem.Bonuses.Health, save.LevelUpSystem.Bonuses.Resistance, save.LevelUpSystem.Bonuses.DodgeChance, save.LevelUpSystem.Bonuses.Stamina, save.LevelUpSystem.Bonuses.Mana);
+
+            PlayerCharacter = new Character(
+                Money, EquippedItems, Inventory, LevelUpSystem,
+                null, null);
         }
     }
 }
