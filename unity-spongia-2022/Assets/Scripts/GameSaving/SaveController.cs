@@ -91,7 +91,7 @@ namespace AE.GameSave
             File.WriteAllText(Path.Combine(Application.persistentDataPath, "no_topping_left_beef.dat"), Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings{ NullValueHandling = NullValueHandling.Include }))));
         }
 
-        private static JSONItem toJSONItem(Item item) {
+        private static JSONItem ToJSONItem(Item item) {
             return new JSONItem{
                 Class = item.Class,
                 Tier = item.Tier,
@@ -108,11 +108,11 @@ namespace AE.GameSave
             };
         }
 
-        public static DateTime? getLastModified(SaveSlot slot) {
+        public static DateTime? GetLastModified(SaveSlot slot) {
             return isSlotOccupied(slot) ? new DateTime(data[(int) slot].LastModified) : null;
         }
 
-        public static bool isSlotOccupied(SaveSlot slot) {
+        public static bool IsSlotOccupied(SaveSlot slot) {
             return data.ContainsKey((int) slot);
         }
 
