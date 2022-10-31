@@ -107,8 +107,8 @@ namespace AE.GameSave
             };
         }
 
-        public static DateTime getLastModified(SaveSlot slot) {
-            return isSlotOccupied(slot) ? new DateTime(data[slot].LastModified) : null;
+        public static DateTime? getLastModified(SaveSlot slot) {
+            return isSlotOccupied(slot) ? new DateTime(data[(int) slot].LastModified) : null;
         }
 
         public static bool isSlotOccupied(SaveSlot slot) {
