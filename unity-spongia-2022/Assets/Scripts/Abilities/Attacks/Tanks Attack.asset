@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Tanks Attack
   m_EditorClassIdentifier: 
+  AbilityTags: 0a0000000d0000000500000012000000
+  AbilityDescription: 
+  AbilityCount: 1
   StaminaCost: 30
   ManaCost: 0
   TargetDamageMultiplier: 0

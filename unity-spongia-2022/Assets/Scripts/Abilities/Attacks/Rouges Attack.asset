@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Rouges Attack
   m_EditorClassIdentifier: 
+  AbilityTags: 0b000000
+  AbilityDescription: You can attack a maximum of 5 times. Each attack costs you
+    5 stamina.
+  AbilityCount: 5
   StaminaCost: 5
   ManaCost: 0
   TargetDamageMultiplier: 0

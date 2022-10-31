@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Greater CritChance Blessing
   m_EditorClassIdentifier: 
+  AbilityTags: 0d000000040000001200000011000000
+  AbilityDescription: 
   AbilityCount: 0
-  StaminaCost: 40
-  ManaCost: 0
+  StaminaCost: 0
+  ManaCost: 45
   TargetDamageMultiplier: 0
   CasterDamageMultiplier: 0
   AffectsTarget: 0

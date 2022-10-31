@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
-  m_Name: Priests Attack
+  m_Name: Lesser Attack
   m_EditorClassIdentifier: 
-  AbilityTags: 080000000d0000000100000013000000
+  AbilityTags: 08000000090000000a0000000b000000
   AbilityDescription: 
   AbilityCount: 1
-  StaminaCost: 25
+  StaminaCost: 20
   ManaCost: 0
   TargetDamageMultiplier: 0
-  CasterDamageMultiplier: 0.8
+  CasterDamageMultiplier: 0.5
   AffectsTarget: 0
-  AffectsCaster: 1
+  AffectsCaster: 0
