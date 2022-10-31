@@ -69,7 +69,7 @@ namespace AE.Items.UI
         public void Yes()
         {
             if (dontAskAgain == true && promptType == PromptType.Sell)
-                SaveData.ConfirmSell = false;
+                Preferences.ConfirmSell = false;
 
             handleAnswer(true);
         }

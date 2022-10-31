@@ -17,13 +17,13 @@ namespace AE.Audio
         }
         private void OnDisable()
         {
-            EventManager.EventManager.OnSoundSettingsUpdate += UpdatePrefs;
+            EventManager.EventManager.OnSoundSettingsUpdate -= UpdatePrefs;
         }
 
         private void UpdatePrefs()
         {
-            for (int i = 0; i < audioSources.Length; i++)
-                audioSources[i].mute = SaveData.IsMuted[i];
+            audioSources[0].mute = Preferences.MuteMusic;
+            audioSources[1].mute = Preferences.MuteSFX;
         }
 
         private void OnValidate()

@@ -13,18 +13,18 @@ namespace AE.Settings.UI
         [SerializeField] Toggle sfxToggle;
         void OnEnable()
         {
-            musicToggle.isOn = !SaveData.IsMuted[0];
-            sfxToggle.isOn = !SaveData.IsMuted[1];
+            musicToggle.isOn = !Preferences.MuteMusic;
+            sfxToggle.isOn = !Preferences.MuteSFX;
         }
 
         public void ToggleMusic(bool value)
         {
-            SaveData.IsMuted[0] = !value;
+            Preferences.MuteMusic = !value;
             EventManager.EventManager.TriggerSoundSettingsUpdate();
         }
         public void ToggleSFX(bool value)
         {
-            SaveData.IsMuted[1] = !value;
+            Preferences.MuteSFX = !value;
             EventManager.EventManager.TriggerSoundSettingsUpdate();
         }
     }

@@ -94,7 +94,7 @@ namespace AE.Items.UI
         }
         private void handleRightClick(Item _item)
         {
-            if (SaveData.ConfirmSell)
+            if (Preferences.ConfirmSell)
             {
                 sellableItem = _item;
                 EventManager.EventManager.TriggerItemPromptQuestion(_item, PromptType.Sell);
