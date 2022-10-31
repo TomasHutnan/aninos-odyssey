@@ -31,7 +31,7 @@ namespace AE.GameSave
             LevelUpSystem = new LevelUpSystem();
         }
 
-        public static bool hasSlot() {
+        public static bool HasSlot() {
             return slot != SaveSlot.None;
         }
 
