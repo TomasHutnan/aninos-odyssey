@@ -199,7 +199,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SellValueMultiplier: 0
-  Inventory: []
   Money: 0
   Ability:
   - {fileID: 11400000, guid: 6a082df05967a924eb4aa277c6ad2301, type: 2}
@@ -1774,10 +1773,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SellValueMultiplier: 0
-  Inventory: []
   Money: 0
   Ability:
-  - {fileID: 11400000, guid: 30fcf06bc54b2e84389d9af12b599ae5, type: 2}
+  - {fileID: 11400000, guid: 3e6721bf789191640bc146c2039b8dd5, type: 2}
 --- !u!114 &1365485809
 MonoBehaviour:
   m_ObjectHideFlags: 0

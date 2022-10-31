@@ -14,6 +14,7 @@ public class ButtonAbility : MonoBehaviour
             var child = FightManager.GetChild(i);
             if(child != transform.parent)
             {
+              
                 Ability ability = transform.parent.gameObject.GetComponent<Character>().Ability[AbbilityNumber];
                 for (int x = 0; x < ability.AbilityCount; x++)
                 {

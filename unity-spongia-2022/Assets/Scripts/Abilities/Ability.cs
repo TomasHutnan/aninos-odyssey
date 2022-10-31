@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AE.FightManager;
+using Unity.VisualScripting.FullSerializer;
+using System.Diagnostics;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -25,10 +27,17 @@ namespace Abilities
             StatType = _StatType;
         }
     }
+    public enum AbilityTags
+    {
+        Defensive,
+
+    }
     [CreateAssetMenu]
     public class Ability : ScriptableObject
     {
-        public int AbilityCount;
+        public List<AbilityTags> AbilityTags;
+        public string AbilityDescription;
+        public int AbilityCount = 1;
         public int StaminaCost;
         public int ManaCost;
         public float TargetDamageMultiplier;
@@ -36,9 +45,19 @@ namespace Abilities
         public bool AffectsTarget;
         public bool AffectsCaster;
 
+        float TargetStunned;
+        float TargetStunDuration;
+        float TargetStunDelay;
+
+
+
+        float CasterStunned;
+        float CasterStunDuration;
+        float CasterStunDelay;
+
         //TargetEffects
 
-       float TargetHealthPoints;
+        float TargetHealthPoints;
         float TargetHealthDuration;
         float TargetHealthDelay;
 
@@ -142,10 +161,12 @@ namespace Abilities
 
         public void UseAbility(GameObject CasterObject, GameObject TargetObject)
         {
+        
             Character TargetCharacter = TargetObject.GetComponent<Character>();
             Character CasterCharacter = CasterObject.GetComponent<Character>();
             RealtimeStatsHolder TargetHolder = TargetObject.GetComponent<RealtimeStatsHolder>();
             RealtimeStatsHolder CasterHolder = CasterObject.GetComponent<RealtimeStatsHolder>();
+            if (CasterHolder.StatHolder[Stat.Stun] != 0) { return; }
             Dictionary<Stat, StatProperties> CasterStats = new Dictionary<Stat, StatProperties>()
             {
                 {Stat.HealthPoints,new StatProperties(CasterHealthPoints,CasterCharacter.HealthPoints.Value,CasterHealthDuration,CasterHealthDelay,StatType.Flat) },
@@ -157,6 +178,8 @@ namespace Abilities
                 {Stat.StaminaRegen,new StatProperties(CasterStaminaRegen,CasterCharacter.StaminaRegen.Value,CasterStaminaRegenDuration,CasterStaminaRegenDelay,StatType.Flat) },
                 {Stat.Mana,new StatProperties(CasterMana,CasterCharacter.Mana.Value,CasterManaDuration,CasterManaDelay,StatType.Flat) },
                 {Stat.Weight,new StatProperties(CasterWeight,CasterCharacter.Weight.Value,CasterWeightDuration,CasterWeightDelay,StatType.Flat) },
+                {Stat.Stun,new StatProperties(CasterStunned,1,CasterStunDuration,CasterStunDelay,StatType.Stun) },
+
 
             };
             Dictionary<Stat, StatProperties> TargetStats = new Dictionary<Stat, StatProperties>()
@@ -170,6 +193,7 @@ namespace Abilities
                 {Stat.StaminaRegen,new StatProperties(TargetStaminaRegen,TargetCharacter.StaminaRegen.Value,TargetStaminaRegenDuration,TargetStaminaRegenDelay,StatType.Flat) },
                 {Stat.Mana,new StatProperties(TargetMana,TargetCharacter.Mana.Value,TargetManaDuration,TargetManaDelay,StatType.Flat) },
                 {Stat.Weight,new StatProperties(TargetWeight,TargetCharacter.Weight.Value,TargetWeightDuration,TargetWeightDelay,StatType.Flat) },
+                {Stat.Stun,new StatProperties(TargetStunned,100,TargetStunDuration,TargetStunDelay,StatType.Stun) },
 
             };
 
@@ -204,8 +228,17 @@ namespace Abilities
 
             foreach (var item in TargetStats)
             {
-                if (item.Key == Stat.HealthPoints)
+
+                if (item.Key == Stat.Stun)
                 {
+                    float change = item.Value.Change;
+                    ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
+                    TargetHolder.delayedEffects.Add(effect);
+
+                }
+                else if(item.Key == Stat.HealthPoints)
+                {
+                   
                     float change =( item.Value.Change * (item.Value.Maximum / 100) ) + (-CasterOutputDamage * (1 - Target[Stat.DamageReduction] / 100));
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
                     TargetHolder.delayedEffects.Add(effect);
@@ -213,6 +246,7 @@ namespace Abilities
                 }
                 else if(item.Value.Change != 0)
                 {
+                    
                     float change = item.Value.Change * (item.Value.Maximum/100);
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
                     TargetHolder.delayedEffects.Add(effect);
@@ -220,8 +254,16 @@ namespace Abilities
             }
             foreach (var item in CasterStats)
             {
-                if(item.Key == Stat.HealthPoints)
+                if(item.Key == Stat.Stun)
                 {
+                    float change = item.Value.Change;
+                    ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
+                    CasterHolder.delayedEffects.Add(effect);
+
+                }
+                else if(item.Key == Stat.HealthPoints)
+                {
+                  
                     float change = (item.Value.Change * (item.Value.Maximum / 100)) + (-TargetOutputDamage * (1 - Caster[Stat.DamageReduction] / 100));
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
                     CasterHolder.delayedEffects.Add(effect);
@@ -229,6 +271,7 @@ namespace Abilities
                 }
                 else if (item.Value.Change != 0)
                 {
+                    
                     float change = item.Value.Change * (item.Value.Maximum / 100);
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
                     CasterHolder.delayedEffects.Add(effect);
@@ -310,11 +353,14 @@ namespace Abilities
                     AddOptions("TargetStaminaRegen", ref myScript.TargetStaminaRegen, ref myScript.TargetStaminaRegenDelay, ref myScript.TargetStaminaRegenDuration);
                     AddOptions("TargetMana", ref myScript.TargetMana, ref myScript.TargetManaDelay, ref myScript.TargetManaDuration);
                     AddOptions("TargetWeight", ref myScript.TargetWeight, ref myScript.TargetWeightDelay, ref myScript.TargetWeightDuration);
+                    AddOptions("TargetStun(0 or 1)", ref myScript.TargetStunned, ref myScript.TargetStunDelay, ref myScript.TargetStunDuration);
                     EditorGUILayout.Space(5);
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField("TargetFinisher", GUILayout.MaxWidth(150));
                     myScript.TargetFinisher = EditorGUILayout.FloatField(myScript.TargetFinisher);
                     EditorGUILayout.EndHorizontal();
+
+                    
 
                 }
 

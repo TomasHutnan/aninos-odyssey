@@ -6,7 +6,8 @@ using AE.FightManager;
 public enum StatType
 {
     Flat,
-    Percentual
+    Percentual,
+    Stun
             
 }
 public class ActiveEffect
