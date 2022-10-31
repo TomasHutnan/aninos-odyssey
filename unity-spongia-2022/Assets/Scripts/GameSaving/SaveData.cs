@@ -47,7 +47,7 @@ namespace AE.GameSave
 
         public static void Save(SaveSlot slot) {
             if (slot == SaveSlot.None)
-                throw new ArgumentException("Cannot save to None slot!");
+                throw new ArgumentException("Cannot save to slot None!");
 
             SaveData.slot = slot;
             SaveController.SaveDataTo(slot);
