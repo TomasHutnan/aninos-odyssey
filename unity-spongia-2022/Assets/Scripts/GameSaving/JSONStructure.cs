@@ -20,9 +20,7 @@ namespace AE.GameSave
         public List<int> EquippedAbilities {get; set;}
         [JsonConverter(typeof(StringEnumConverter))]
         public ItemTier GameStage {get; set;}
-        public bool ConfirmSell {get; set;}
         public JSONLevelUpSystem LevelUpSystem {get; set;}
-        public List<bool> IsMuted {get; set;}
     }
 
     public class JSONLevelUpSystem {

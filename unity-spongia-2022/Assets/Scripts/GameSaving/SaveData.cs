@@ -11,19 +11,14 @@ namespace AE.GameSave
         private static SaveSlot slot = SaveSlot.None;
 
         public static int Money = 0;
+
         public static List<Item> Inventory = new List<Item>();
         public static Dictionary<ItemType, Item> EquippedItems = new Dictionary<ItemType, Item>();
 
         public static HashSet<int> OwnedAbilities = new HashSet<int>(), EquippedAbilities = new HashSet<int>();
 
         public static ItemTier GameStage = ItemTier.Mortal;
-
-        public static bool ConfirmSell = true;
-
         public static LevelUpSystem LevelUpSystem = new LevelUpSystem();
-
-        public static bool[] IsMuted = { false, false };
-        // + stage, xp/amount of fights done in a stage?
 
         public static void SetDefaults() {
             slot = SaveSlot.None;
@@ -33,9 +28,7 @@ namespace AE.GameSave
             OwnedAbilities = new HashSet<int>();
             EquippedAbilities = new HashSet<int>();
             GameStage = ItemTier.Mortal;
-            ConfirmSell = true;
             LevelUpSystem = new LevelUpSystem();
-            IsMuted = new bool[]{false, false};
         }
 
         public static bool hasSlot() {
@@ -81,10 +74,8 @@ namespace AE.GameSave
             OwnedAbilities = new HashSet<int>(save.OwnedAbilities);
             EquippedAbilities = new HashSet<int>(save.EquippedAbilities);
             GameStage = save.GameStage;
-            ConfirmSell = save.ConfirmSell;
             LevelUpSystem = new LevelUpSystem(null, save.LevelUpSystem.Level, save.LevelUpSystem.Exp,
                 save.LevelUpSystem.Bonuses.Damage, save.LevelUpSystem.Bonuses.CritChance, save.LevelUpSystem.Bonuses.Health, save.LevelUpSystem.Bonuses.Resistance, save.LevelUpSystem.Bonuses.DodgeChance, save.LevelUpSystem.Bonuses.Stamina, save.LevelUpSystem.Bonuses.Mana);
-            IsMuted = save.IsMuted.ToArray();
         }
     }
 }
