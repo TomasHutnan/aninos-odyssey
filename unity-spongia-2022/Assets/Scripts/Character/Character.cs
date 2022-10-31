@@ -9,29 +9,28 @@ using AE.GameSave;
 using Abilities;
 public class Character : InventoryHolder
 {
+    public int Money;
+    public event Action MoneyUpdateEvent;
+
+    public Dictionary<ItemType, Item> EquippedItems;
+    public event Action EquipmentUpdateEvent;
+
+    public LevelUpSystem LevelUpSystem;
+
+    public List<Ability> UnlockedAbilities = new List<Ability>();
+    public List<Ability> EquippedAbilities = new List<Ability>();
+
     public CharacterStat Damage;
     public CharacterStat CritChance;
-    
-    public List<Ability> UnlockedAbilities = new List<Ability>();
-    public List<Ability> Ability = new List<Ability>();
 
     public CharacterStat HealthPoints;
     public CharacterStat DamageReduction;
     public CharacterStat DodgeChance;
 
     public CharacterStat Stamina;
-    public CharacterStat StaminaRegen;
     public CharacterStat Mana;
 
     public CharacterStat Weight;
-
-    public LevelUpSystem LevelUpSystem;
-
-    public Dictionary<ItemType, Item> EquippedItems;
-    public event Action EquipmentUpdateEvent;
-
-    public int Money;
-    public event Action MoneyUpdateEvent;
 
     public bool EquipItem(Item item)
     {
@@ -88,22 +87,45 @@ public class Character : InventoryHolder
         return true;
     }
 
-    void Awake()
+    public Character
+        (
+        int _money = 0, Dictionary<ItemType, Item> _equippedItems = null, List<Item> _inventory = null,
+        LevelUpSystem _levelUpSystem = null,
+        List<Ability> _unlockedAbilities = null, List<Ability> _equippedAbilities = null,
+        int _baseDamage = 10,
+        int _baseCritChance = 0,
+        int _baseHealthPoints = 200,
+        int _baseDamageReduction = 0,
+        int _baseDodgeChance = 0,
+        int _baseStamina = 100,
+        int _baseMana = 100,
+        int _baseWeight = 80
+        )
     {
-        if (transform.name == "GameManager")
-        {
-            Money = SaveData.Money;
-            Inventory = SaveData.Inventory;
-            EquippedItems = SaveData.EquippedItems;
-        }
-        else
-        {
-            Money = 0;
-            Inventory = new List<Item> { };
-            EquippedItems = new Dictionary<ItemType, Item> { };
-        }
-        defaultStats();
-        
+        Money = _money;
+        EquippedItems = _equippedItems ?? new Dictionary<ItemType, Item>();
+        Inventory = _inventory ?? new List<Item>();
+
+        LevelUpSystem = _levelUpSystem ?? new LevelUpSystem(this);
+        LevelUpSystem.UpdateActiveCharacter(this);
+
+        UnlockedAbilities = _unlockedAbilities ?? new List<Ability>();
+        EquippedAbilities = _equippedAbilities ?? new List<Ability>();
+
+        // Stat base value
+        Damage = new CharacterStat(_baseDamage);
+        CritChance = new CharacterStat(_baseCritChance);
+
+        HealthPoints = new CharacterStat(_baseHealthPoints);
+        DamageReduction = new CharacterStat(_baseDamageReduction);
+        DodgeChance = new CharacterStat(_baseDodgeChance);
+
+        Stamina = new CharacterStat(_baseStamina);
+        Mana = new CharacterStat(_baseMana);
+
+        Weight = new CharacterStat(_baseWeight);
+
+        // Stat Labels
         Damage.Label = "Damage";
         CritChance.Label = "Crit Chance";
         CritChance.IsPercentual = true;
@@ -115,41 +137,8 @@ public class Character : InventoryHolder
         DodgeChance.IsPercentual = true;
 
         Stamina.Label = "Stamina";
-        StaminaRegen.Label = "Stamina Regen";
         Mana.Label = "Mana";
 
         Weight.Label = "Weight";
-
-        if (LevelUpSystem is null)
-        {
-            if (transform.name == "GameManager")
-            {
-                LevelUpSystem = SaveData.LevelUpSystem;
-                LevelUpSystem.UpdateActiveCharacter(this);
-                // LevelUpSystem.addExp(300); // Level Up Panel Test
-            }
-            else
-            {
-                LevelUpSystem = new LevelUpSystem(this);
-            }
-        }
-    }
-
-    private void defaultStats()
-    {
-
-
-        Damage = new CharacterStat(1);
-        CritChance = new CharacterStat(0);
-
-        HealthPoints = new CharacterStat(20);
-        DamageReduction = new CharacterStat(0);
-        DodgeChance = new CharacterStat(0);
-
-        Stamina = new CharacterStat(100);
-        StaminaRegen = new CharacterStat(0);
-        Mana = new CharacterStat(100);
-
-        Weight = new CharacterStat(80);
     }
 }

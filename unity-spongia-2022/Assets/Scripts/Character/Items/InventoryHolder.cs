@@ -5,7 +5,7 @@ using System;
 
 namespace AE.Items
 {
-    public class InventoryHolder : MonoBehaviour
+    public class InventoryHolder
     {
         public List<Item> Inventory = new List<Item> { };
 
