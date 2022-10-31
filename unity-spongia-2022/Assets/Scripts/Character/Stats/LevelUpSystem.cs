@@ -98,7 +98,8 @@ namespace AE.CharacterStats
             Stamina = staminaBonus;
             Mana = manaBonus;
 
-            UpdateMods();
+            if (character != null)
+                UpdateMods();
         }
 
         public void addExp(int exp)
@@ -132,11 +133,12 @@ namespace AE.CharacterStats
         public void UpdateActiveCharacter(Character c)
         {
             character = c;
+            UpdateMods();
         }
 
         private void UpdateMods()
         {
-            if (character is null)
+            if (character != null)
                 return;
 
             character.Damage.RemoveAllModifiersFromSource(this);
