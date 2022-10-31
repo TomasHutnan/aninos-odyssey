@@ -43,6 +43,9 @@ namespace AE.GameSave
         }
 
         public static void SaveDataTo(SaveSlot slot) {
+            if (slot == SaveSlot.None)
+                throw new ArgumentException("Cannot save to slot None!");
+
             List<JSONItem> inventory = new List<JSONItem>(), equippedItems = new List<JSONItem>();
             foreach (Item item in SaveData.Inventory)
                 inventory.Add(toJSONItem(item));
@@ -71,6 +74,8 @@ namespace AE.GameSave
                     }
                 }
             });
+
+            File.WriteAllText(Path.Combine(Application.persistentDataPath, "no_topping_left_beef.json"), JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings{ NullValueHandling = NullValueHandling.Include }));
         }
 
         private static JSONItem toJSONItem(Item item) {
