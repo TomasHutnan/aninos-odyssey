@@ -1,3 +1,4 @@
+using AE.GameSave;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace AE.Items.UI.Shop
                 Item _item = new Item
                 (
                     _class: itemShowcases[i].randomizeClass ? null : itemShowcases[i].Class,
-                    tier: GameManager.GameStage,
+                    tier: SaveData.GameStage,
                     type: itemShowcases[i].Type
                 );
                 inventoryHolder.AddItem(_item);
