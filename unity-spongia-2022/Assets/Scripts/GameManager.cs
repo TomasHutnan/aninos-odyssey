@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public static Character PlayerCharacter;
-    public static ItemTier GameStage;
+
+    public static float ShopValueMultiplier = 10;
 
     private void Awake()
     {
@@ -23,7 +24,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(transform);
 
             PlayerCharacter = transform.GetComponent<Character>();
-            GameStage = SaveData.GameStage;
         }
     }
 }

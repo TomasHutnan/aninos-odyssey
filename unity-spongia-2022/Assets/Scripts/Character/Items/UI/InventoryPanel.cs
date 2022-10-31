@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 
 using AE.GameSave;
+using AE.EventManager;
 
 namespace AE.Items.UI
 {
@@ -17,16 +18,14 @@ namespace AE.Items.UI
         [SerializeField] ItemSlot[] itemSlots;
         [Space]
         [SerializeField] Character c;
-        [Space]
-        [SerializeField] GameObject sellPromptTransform;
-
-        private SellPrompt sellPrompt;
 
         public event Action<Item> OnItemRightClickedEvent;
         public event Action<Item> OnItemLeftClickedEvent;
 
         private int inventoryPagesCount;
         private int currentPage = 0;
+
+        private Item sellableItem = null;
 
         private void Start()
         {
@@ -47,6 +46,10 @@ namespace AE.Items.UI
                 itemSlots[i].OnItemRightClickedEvent += handleRightClick;
                 itemSlots[i].OnItemLeftClickedEvent += handleLeftClick;
             }
+
+            EventManager.EventManager.ItemPromptAnswerEvent += handlePromptAnswer;
+
+            RefreshUI();
         }
 
         private void OnDisable()
@@ -61,6 +64,8 @@ namespace AE.Items.UI
                 itemSlots[i].OnItemRightClickedEvent -= handleRightClick;
                 itemSlots[i].OnItemLeftClickedEvent -= handleLeftClick;
             }
+
+            EventManager.EventManager.ItemPromptAnswerEvent -= handlePromptAnswer;
         }
 
         private void RefreshUI()
@@ -83,21 +88,30 @@ namespace AE.Items.UI
             }
         }
 
-        private void handleLeftClick(Item item)
+        private void handleLeftClick(Item _item)
         {
-            c.EquipItem(item);
+            c.EquipItem(_item);
         }
-        private void handleRightClick(Item item)
+        private void handleRightClick(Item _item)
         {
-            if (SaveData.ConfirmSell)
+            if (Preferences.ConfirmSell)
             {
-                sellPromptTransform.SetActive(true);
-                sellPrompt.SellableItem = item;
+                sellableItem = _item;
+                EventManager.EventManager.TriggerItemPromptQuestion(_item, PromptType.Sell);
             }
             else
             {
-                c.SellItem(item);
+                c.SellItem(_item);
             }
+        }
+
+        private void handlePromptAnswer(Item _item, PromptType _promptType, bool _answer)
+        {
+            if (_promptType != PromptType.Sell || !_answer || _item != sellableItem)
+                return;
+
+            sellableItem = null;
+            c.SellItem(_item);
         }
 
         public void NextPage()
@@ -135,9 +149,6 @@ namespace AE.Items.UI
         {
             if (ItemSlotsGrid != null)
                 itemSlots = ItemSlotsGrid.GetComponentsInChildren<ItemSlot>();
-
-            if (sellPromptTransform is not null)
-                sellPrompt = sellPromptTransform.GetComponent<SellPrompt>();
         }
 
         private void updatePagesCount()

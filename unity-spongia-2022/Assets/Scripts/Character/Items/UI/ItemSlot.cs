@@ -10,15 +10,15 @@ namespace AE.Items.UI
 {
     public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] Image image;
+        [SerializeField] protected Image image;
 
         private Sprite defaultSprite;
 
         public event Action<Item> OnItemRightClickedEvent;
         public event Action<Item> OnItemLeftClickedEvent;
 
-        private Item _item;
-        public Item Item
+        protected Item _item;
+        public virtual Item Item
         {
             get { return _item; }
             set
