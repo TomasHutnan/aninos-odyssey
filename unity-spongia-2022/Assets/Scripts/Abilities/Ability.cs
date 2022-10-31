@@ -250,9 +250,12 @@ namespace Abilities
                     float Damage = Caster[Stat.Damage];
                     float CriticalChance = Caster[Stat.CritChance];
                     int Chance = UnityEngine.Random.Range(1, 101);
+                    int DodgeRoll = UnityEngine.Random.Range(1, 101);
+                    float DodgeChance = Target[Stat.DodgeChance];
+                    int DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
                     int CasterCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
                     //Calculating CasterOutput Damage
-                    float CasterOutputDamage = (float)Math.Round(Caster[Stat.Damage] * CasterDamageMultiplier) * CasterCriticalMultiplier;
+                    float CasterOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * CasterCriticalMultiplier * DodgeMultiplier;
 
                     float change =( item.Value.Change * (item.Value.Maximum / 100) ) + (-CasterOutputDamage * (1 - Target[Stat.DamageReduction] / 100));
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
@@ -280,10 +283,13 @@ namespace Abilities
                 {
                     float Damage = Caster[Stat.Damage];
                     float CriticalChance = Caster[Stat.CritChance];
+                    int DodgeRoll = UnityEngine.Random.Range(1, 101);
+                    float DodgeChance = Caster[Stat.DodgeChance];
+                    int DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
                     int Chance = UnityEngine.Random.Range(1, 101);
                     int TargetCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
                     //Caclulating TargetOutput Damage
-                    float TargetOutputDamage = (float)Math.Round(Target[Stat.Damage] * TargetDamageMultiplier) * TargetCriticalMultiplier;
+                    float TargetOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * TargetCriticalMultiplier * DodgeMultiplier;
                    
                     float change = (item.Value.Change * (item.Value.Maximum / 100)) + (-TargetOutputDamage * (1 - Caster[Stat.DamageReduction] / 100));
                     ActiveEffect effect = new ActiveEffect(change, item.Key, item.Value.Duration, item.Value.Delay, item.Value.StatType);
