@@ -11,7 +11,8 @@ public class Character : InventoryHolder
 {
     public CharacterStat Damage;
     public CharacterStat CritChance;
-
+    
+    public List<Ability> UnlockedAbilities = new List<Ability>();
     public List<Ability> Ability = new List<Ability>();
 
     public CharacterStat HealthPoints;
