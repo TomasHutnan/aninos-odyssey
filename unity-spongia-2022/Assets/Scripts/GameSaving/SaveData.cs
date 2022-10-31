@@ -12,6 +12,8 @@ namespace AE.GameSave
         public static List<Item> Inventory = new List<Item>();
         public static Dictionary<ItemType, Item> EquippedItems = new Dictionary<ItemType, Item>();
 
+        public static HashSet<int> OwnedAbilities = new HashSet<int>(), EquippedAbilities = new HashSet<int>();
+
         public static ItemTier GameStage = ItemTier.Mortal;
 
         public static bool ConfirmSell = true;
