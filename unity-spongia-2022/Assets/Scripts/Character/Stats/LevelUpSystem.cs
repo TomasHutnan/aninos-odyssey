@@ -23,7 +23,7 @@ namespace AE.CharacterStats
 
         public int UnspentSkillPoints { get { return Level - Levels.Values.Sum(); } }
 
-        private int defaultExpRequirment = 80;
+        private int defaultExpRequirement = 80;
         private int incrementalExpRequirement = 100;
 
         public Dictionary<LevelUpModType, int> Levels;
@@ -105,9 +105,9 @@ namespace AE.CharacterStats
         {
             int remainingExp = Exp + exp;
 
-            while (remainingExp - (defaultExpRequirment + Level * incrementalExpRequirement) >= 0)
+            while (remainingExp - (defaultExpRequirement + Level * incrementalExpRequirement) >= 0)
             {
-                remainingExp -= defaultExpRequirment + Level * incrementalExpRequirement;
+                remainingExp -= defaultExpRequirement + Level * incrementalExpRequirement;
                 Level++;
             }
 
