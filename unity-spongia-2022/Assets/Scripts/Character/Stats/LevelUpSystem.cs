@@ -19,7 +19,7 @@ namespace AE.CharacterStats
     public class LevelUpSystem
     {
         public int Level { get; private set; }
-        private int Exp;
+        private int Exp { get; set; }
 
         public int UnspentSkillPoints { get { return Level - Levels.Values.Sum(); } }
 
