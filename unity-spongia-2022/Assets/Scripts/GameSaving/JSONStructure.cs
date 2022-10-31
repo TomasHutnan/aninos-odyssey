@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace AE.GameSave
 {
     public class JSONSave {
-        public int LastModified;
+        public long LastModified;
         public int Money {get; set;}
         public List<JSONItem> Inventory {get; set;}
         public List<JSONItem> EquippedItems {get; set;}

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,15 +39,28 @@ namespace AE.GameSave
                 return;
             }
 
-            SaveData.Load(data.Saves[(int) slot]);
+            SaveData.Load(data[(int) slot]);
         }
 
         public static void SaveDataTo(SaveSlot slot) {
+            List<JSONItem> inventory = new List<JSONItem>(), equippedItems = new List<JSONItem>();
 
+            data.Add((int) slot, new JSONSave{
+                LastModified = DateTime.Now.Ticks,
+                Money = SaveData.Money,
+                Inventory = inventory,
+                EquippedItems = equippedItems,
+                OwnedAbilities = new List<int>(SaveData.OwnedAbilities),
+                EquippedAbilities = new List<int>(SaveData.EquippedAbilities),
+                GameStage = SaveData.GameStage,
+                LevelUpSystem = new JSONLevelUpSystem{
+
+                }
+            });
         }
 
         public static bool isSlotOccupied(SaveSlot slot) {
-            return data.Saves.ContainsKey((int) slot);
+            return data.ContainsKey((int) slot);
         }
 
     }
