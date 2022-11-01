@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using AE.GameSave;
 
 namespace AE.CharacterStats.UI
 {
@@ -27,7 +28,7 @@ namespace AE.CharacterStats.UI
         private void OnEnable()
         {
             if (c is null)
-                c = GameManager.PlayerCharacter;
+                c = SaveData.PlayerCharacter;
             updateUnspentPointsText();
 
             for (int i = 0; i < Enum.GetValues(typeof(LevelUpModType)).Length; i++)

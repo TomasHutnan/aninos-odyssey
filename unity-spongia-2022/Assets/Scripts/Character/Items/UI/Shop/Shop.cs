@@ -34,7 +34,7 @@ namespace AE.Items.UI.Shop
         private void OnEnable()
         {
             if (c is null)
-                c = GameManager.PlayerCharacter;
+                c = SaveData.PlayerCharacter;
 
             for (int i = 0; i < itemShowcases.Length; i++)
             {
@@ -89,8 +89,6 @@ namespace AE.Items.UI.Shop
                     itemShowcases[i].name = itemShowcases[i].Type.ToString() + $" Showcase ({i + 1})";
                 }
             }
-
-            inventoryHolder = GetComponent<InventoryHolder>();
         }
     }
 }
