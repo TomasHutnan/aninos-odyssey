@@ -19,5 +19,5 @@ MonoBehaviour:
   ManaCost: 0
   TargetDamageMultiplier: 0
   CasterDamageMultiplier: 0
-  AffectsTarget: 1
+  AffectsTarget: 0
   AffectsCaster: 0

@@ -21,3 +21,11 @@ MonoBehaviour:
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects:
+  - stat: 0
+    Change: 10
+    Duration: 2
+    Delay: 1
+  CasterEffects: []
