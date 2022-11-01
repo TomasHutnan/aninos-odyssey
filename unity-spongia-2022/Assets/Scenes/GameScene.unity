@@ -14690,6 +14690,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1897978591}
+        m_TargetAssemblyTypeName: SaveBeforeExit, Assembly-CSharp
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1850643262}
         m_TargetAssemblyTypeName: AE.SceneManagment.SceneUtils, Assembly-CSharp
         m_MethodName: LoadScene
@@ -14974,6 +14986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1897978589}
   - component: {fileID: 1897978590}
+  - component: {fileID: 1897978591}
   m_Layer: 5
   m_Name: Options Holder
   m_TagString: Untagged
@@ -15032,6 +15045,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1897978591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897978588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30b6bb7ac2e46e41bd42163c3c11504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1900603044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18197,8 +18222,63 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quit Button
       objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1897978591}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 3402887378248664710}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveBeforeExit, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AE.Settings.ExitGame, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402887378142140919, guid: 50b0db030c355394eac0367a57195184, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50b0db030c355394eac0367a57195184, type: 3}
+--- !u!114 &3402887378248664710 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3402887378142140912, guid: 50b0db030c355394eac0367a57195184, type: 3}
+  m_PrefabInstance: {fileID: 3402887378248664709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3f421af094549418f4bd9b5ad0f97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &3554987490698851721
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18235,7 +18315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3721586862640678951}
   m_Layer: 5
-  m_Name: Sound Buttons
+  m_Name: Options
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

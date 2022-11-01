@@ -10,8 +10,12 @@ namespace AE.MainMenu
 {
     public class SaveButtonsManager : MonoBehaviour
     {
+        [SerializeField] Transform saveButtonsHolder;
         [SerializeField] GameObject[] buttons;
-        [SerializeField] TextMeshProUGUI autoSaveText;
+
+        [SerializeField] GameObject overwriteDialog;
+
+        private SaveSlot selectedSlot = SaveSlot.None;
 
         private void Start()
         {
@@ -26,33 +30,63 @@ namespace AE.MainMenu
 
         private void OnValidate()
         {
-            buttons = new GameObject[transform.childCount];
-
-            for (int i = 0; i < transform.childCount; i++)
+            if (saveButtonsHolder != null)
             {
-                buttons[i] = transform.GetChild(i).gameObject;
-            }
+                buttons = new GameObject[saveButtonsHolder.childCount];
 
-            autoSaveText = buttons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+                for (int i = 0; i < saveButtonsHolder.childCount; i++)
+                {
+                    buttons[i] = saveButtonsHolder.GetChild(i).gameObject;
+                }
+            }
         }
 
         public void HandleButtonPress(int saveSlotIndex)
         {
+            SaveSlot saveSlot = (SaveSlot)saveSlotIndex;
             if (saveSlotIndex == -1)
             {
-                SaveController.StartNew();
+                if (SaveController.IsSlotOccupied(SaveSlot.AutoSave))
+                {
+                    selectedSlot = SaveSlot.AutoSave;
+                    overwriteDialog.SetActive(true);
+                }
+                else
+                {
+                    SaveController.StartNew();
+                    SaveData.AutoSave();
+                    SceneUtils.LoadScene("GameScene");
+                }
             }
-            else if (SaveController.IsSlotOccupied((SaveSlot)saveSlotIndex))
+            else if (SaveController.IsSlotOccupied(saveSlot))
             {
-                SaveController.ActivateSave((SaveSlot)saveSlotIndex);
+                SaveController.ActivateSave(saveSlot);
+                SceneUtils.LoadScene("GameScene");
             }
             else
             {
                 print("Trying to load empty slot!");
                 return;
             }
+        }
+        public void ApproveOverwrite()
+        {
+            if (selectedSlot != SaveSlot.None)
+            {
+                SaveController.StartNew();
+                SaveData.Save(selectedSlot);
+                SceneUtils.LoadScene("GameScene");
+            }
+            else
+            {
+                print("Attempting to save to SaveSlot.None!");
+            }
+        }
 
-            SceneUtils.LoadScene("GameScene");
+        public void RejectOverwrite()
+        {
+            selectedSlot = SaveSlot.None;
+            overwriteDialog.SetActive(false);
         }
     }
 }
