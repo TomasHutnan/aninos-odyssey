@@ -89,8 +89,6 @@ namespace AE.Items.UI.Shop
                     itemShowcases[i].name = itemShowcases[i].Type.ToString() + $" Showcase ({i + 1})";
                 }
             }
-
-            inventoryHolder = GetComponent<InventoryHolder>();
         }
     }
 }

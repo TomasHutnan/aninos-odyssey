@@ -23,19 +23,23 @@ namespace AE.Items.UI.Shop
                 if (_item == null)
                 {
                     image.enabled = false;
+                    border.enabled = false;
                     costText.enabled = false;
                 }
+
                 else
                 {
                     costText.text = "<color=#FFD700>" + ((int)Mathf.Round(_item.value * GameManager.ShopValueMultiplier)).ToString() + " $</color>";
-                    image.sprite = _item.Image;
-                    image.enabled = true;
                     costText.enabled = true;
+                    image.sprite = _item.Icon;
+                    image.enabled = true;
+                    border.sprite = _item.IconBorder;
+                    border.enabled = true;
                 }
             }
         }
 
-        protected override void OnValidate()
+        protected void OnValidate()
         {
             costText = GetComponentInChildren<TextMeshProUGUI>();
         }

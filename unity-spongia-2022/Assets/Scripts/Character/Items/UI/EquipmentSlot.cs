@@ -9,9 +9,8 @@ namespace AE.Items.UI
     {
         public ItemType ItemType;
 
-        protected override void OnValidate()
+        protected void OnValidate()
         {
-            base.OnValidate();
             gameObject.name = ItemType.ToString() + " Slot";
         }
     }
