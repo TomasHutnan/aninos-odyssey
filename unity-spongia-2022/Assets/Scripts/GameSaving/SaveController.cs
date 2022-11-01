@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using AE.Items;
 using Newtonsoft.Json;
+using static AbilityStorage;
 
 namespace AE.GameSave
 {
@@ -66,8 +67,8 @@ namespace AE.GameSave
                 Money = SaveData.Money,
                 Inventory = inventory,
                 EquippedItems = equippedItems,
-                OwnedAbilities = new List<int>(SaveData.OwnedAbilities),
-                EquippedAbilities = new List<int>(SaveData.EquippedAbilities),
+                OwnedAbilities = new List<AbilityName>(SaveData.OwnedAbilities),
+                EquippedAbilities = new List<AbilityName>(SaveData.EquippedAbilities),
                 GameStage = SaveData.GameStage,
                 LevelUpSystem = new JSONLevelUpSystem{
                     Level = SaveData.LevelUpSystem.Level,

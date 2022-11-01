@@ -4,6 +4,7 @@ using UnityEngine;
 using AE.Items;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using static AbilityStorage;
 
 namespace AE.GameSave
 {
@@ -12,8 +13,8 @@ namespace AE.GameSave
         public int Money {get; set;}
         public List<JSONItem> Inventory {get; set;}
         public List<JSONItem> EquippedItems {get; set;}
-        public List<int> OwnedAbilities {get; set;}
-        public List<int> EquippedAbilities {get; set;}
+        public List<AbilityName> OwnedAbilities {get; set;}
+        public List<AbilityName> EquippedAbilities {get; set;}
         [JsonConverter(typeof(StringEnumConverter))]
         public ItemTier GameStage {get; set;}
         public JSONLevelUpSystem LevelUpSystem {get; set;}

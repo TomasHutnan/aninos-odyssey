@@ -7,6 +7,8 @@ using AE.CharacterStats;
 using AE.Items;
 using AE.GameSave;
 using Abilities;
+using static AbilityStorage;
+
 public class Character : InventoryHolder
 {
     public int Money;
@@ -17,8 +19,8 @@ public class Character : InventoryHolder
 
     public LevelUpSystem LevelUpSystem;
 
-    public List<Ability> UnlockedAbilities = new List<Ability>();
-    public List<Ability> EquippedAbilities = new List<Ability>();
+    public HashSet<AbilityName> UnlockedAbilities;
+    public HashSet<AbilityName> EquippedAbilities;
 
     public CharacterStat Damage;
     public CharacterStat CritChance;
@@ -91,7 +93,7 @@ public class Character : InventoryHolder
         (
         int _money = 0, Dictionary<ItemType, Item> _equippedItems = null, List<Item> _inventory = null,
         LevelUpSystem _levelUpSystem = null,
-        List<Ability> _unlockedAbilities = null, List<Ability> _equippedAbilities = null,
+        HashSet<AbilityName> _unlockedAbilities = null, HashSet<AbilityName> _equippedAbilities = null,
         int _baseDamage = 10,
         int _baseCritChance = 0,
         int _baseHealthPoints = 200,
@@ -108,8 +110,8 @@ public class Character : InventoryHolder
 
         LevelUpSystem = _levelUpSystem ?? new LevelUpSystem();
 
-        UnlockedAbilities = _unlockedAbilities ?? new List<Ability>();
-        EquippedAbilities = _equippedAbilities ?? new List<Ability>();
+        UnlockedAbilities = _unlockedAbilities ?? new HashSet<AbilityName>();
+        EquippedAbilities = _equippedAbilities ?? new HashSet<AbilityName>();
 
         // Stat base value
         Damage = new CharacterStat(_baseDamage);

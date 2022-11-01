@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using AE.CharacterStats;
 using AE.Items;
+using static AbilityStorage;
 
 namespace AE.GameSave
 {
@@ -15,7 +16,7 @@ namespace AE.GameSave
         public static List<Item> Inventory = new List<Item>();
         public static Dictionary<ItemType, Item> EquippedItems = new Dictionary<ItemType, Item>();
 
-        public static HashSet<int> OwnedAbilities = new HashSet<int>(), EquippedAbilities = new HashSet<int>();
+        public static HashSet<AbilityName> OwnedAbilities = new HashSet<AbilityName>(), EquippedAbilities = new HashSet<AbilityName>();
 
         public static ItemTier GameStage = ItemTier.Mortal;
         public static LevelUpSystem LevelUpSystem = new LevelUpSystem();
@@ -27,8 +28,8 @@ namespace AE.GameSave
             Money = 0;
             Inventory = new List<Item>();
             EquippedItems = new Dictionary<ItemType, Item>();
-            OwnedAbilities = new HashSet<int>();
-            EquippedAbilities = new HashSet<int>();
+            OwnedAbilities = new HashSet<AbilityName>();
+            EquippedAbilities = new HashSet<AbilityName>();
             GameStage = ItemTier.Mortal;
             LevelUpSystem = new LevelUpSystem();
 
@@ -87,8 +88,8 @@ namespace AE.GameSave
                 ));
             }
 
-            OwnedAbilities = new HashSet<int>(save.OwnedAbilities);
-            EquippedAbilities = new HashSet<int>(save.EquippedAbilities);
+            OwnedAbilities = new HashSet<AbilityName>(save.OwnedAbilities);
+            EquippedAbilities = new HashSet<AbilityName>(save.EquippedAbilities);
             GameStage = save.GameStage;
             LevelUpSystem = new LevelUpSystem(null, save.LevelUpSystem.Level, save.LevelUpSystem.Exp,
                 save.LevelUpSystem.Bonuses.Damage, save.LevelUpSystem.Bonuses.CritChance, save.LevelUpSystem.Bonuses.Health, save.LevelUpSystem.Bonuses.Resistance, save.LevelUpSystem.Bonuses.DodgeChance, save.LevelUpSystem.Bonuses.Stamina, save.LevelUpSystem.Bonuses.Mana);
