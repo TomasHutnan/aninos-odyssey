@@ -55,8 +55,8 @@ namespace AE.GameSave
             Money = PlayerCharacter.Money;
             Inventory = PlayerCharacter.Inventory;
             EquippedItems = PlayerCharacter.EquippedItems;
-            OwnedAbilities = null;
-            EquippedAbilities = null;
+            OwnedAbilities = PlayerCharacter.UnlockedAbilities;
+            EquippedAbilities = PlayerCharacter.EquippedAbilities;
             LevelUpSystem = PlayerCharacter.LevelUpSystem;
 
             if (slot == SaveSlot.None)
@@ -96,7 +96,7 @@ namespace AE.GameSave
 
             PlayerCharacter = new Character(
                 Money, EquippedItems, Inventory, LevelUpSystem,
-                null, null);
+                OwnedAbilities, EquippedAbilities);
             PlayerCharacter.PostInit();
         }
     }
