@@ -108,7 +108,14 @@ namespace AE.Audio
             foreach (DictionaryEntry _kvp in m_JobTable)
             {
                 Coroutine _job = (Coroutine)_kvp.Value;
-                StopCoroutine(_job);
+                try
+                {
+                    StopCoroutine(_job);
+                }
+                catch (System.NullReferenceException)
+                {
+                    Log("Trying to stop already finished Coroutine.");
+                }
             }
         }
 
@@ -130,7 +137,14 @@ namespace AE.Audio
                 return;
             }
             Coroutine _runningJob = (Coroutine)m_JobTable[_type];
-            StopCoroutine(_runningJob);
+            try
+            {
+                StopCoroutine(_runningJob);
+            }
+            catch (System.NullReferenceException)
+            {
+                Log("Trying to stop already finished Coroutine.");
+            }
             m_JobTable.Remove(_type);
         }
 
