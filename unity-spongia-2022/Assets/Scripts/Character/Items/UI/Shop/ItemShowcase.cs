@@ -31,9 +31,9 @@ namespace AE.Items.UI.Shop
                 {
                     costText.text = "<color=#FFD700>" + ((int)Mathf.Round(_item.value * GameManager.ShopValueMultiplier)).ToString() + " $</color>";
                     costText.enabled = true;
-                    image.sprite = _item.Icon;
+                    image.sprite = ItemImages.GetIcon(_item.Type, _item.Class);
                     image.enabled = true;
-                    border.sprite = _item.IconBorder;
+                    border.sprite = ItemImages.GetIconBorder(_item.Tier);
                     border.enabled = true;
                 }
             }

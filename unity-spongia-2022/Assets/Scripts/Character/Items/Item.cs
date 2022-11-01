@@ -68,11 +68,6 @@ namespace AE.Items
         public ItemUsage Usage;
 
         public int value;
-        
-        public Sprite Icon;
-        public Sprite IconBorder;
-
-        public Sprite Image;
 
         public string Name;
 
@@ -109,9 +104,6 @@ namespace AE.Items
             Weight = weight is not null ? (float)weight : GenerateStat(StatType.Weight);
 
             Name = name is not null ? (string)name : GenerateName();
-
-            Icon = ItemImages.GetIcon(Type, Class);
-            IconBorder = ItemImages.GetIconBorder(Tier);
 
             float sumBonus = DamageBonus + CritPercentBonus + ArmorBonus + DodgeBonus + ManaBonus - Weight;
             value = (int)Math.Round(Math.Pow(Math.Abs(sumBonus), 1+0.1*(int)Tier));
