@@ -62,7 +62,7 @@ namespace AE.GameSave
             foreach (Item item in SaveData.EquippedItems.Values)
                 equippedItems.Add(ToJSONItem(item));
 
-            data.Add((int) slot, new JSONSave{
+            data[(int) slot] = new JSONSave{
                 LastModified = DateTime.Now.Ticks,
                 Money = SaveData.Money,
                 Inventory = inventory,
@@ -83,7 +83,7 @@ namespace AE.GameSave
                         Mana = SaveData.LevelUpSystem.Mana,
                     }
                 }
-            });
+            };
 
             SaveToFile();
         }

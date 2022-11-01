@@ -34,9 +34,9 @@ namespace AE.Items.UI
 
                 else
                 {
-                    image.sprite = _item.Icon;
+                    image.sprite = ItemImages.GetIcon(_item.Type, _item.Class);
                     image.enabled = true;
-                    border.sprite = _item.IconBorder;
+                    border.sprite = ItemImages.GetIconBorder(_item.Tier);
                     border.enabled = true;
                 }
             }

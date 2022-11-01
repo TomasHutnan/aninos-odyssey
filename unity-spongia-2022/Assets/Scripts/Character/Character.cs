@@ -149,7 +149,7 @@ public class Character : InventoryHolder
 
         foreach (Item item in EquippedItems.Values)
         {
-            EquipItem(item);
+            item.Equip(this);
         }
     }
 }
