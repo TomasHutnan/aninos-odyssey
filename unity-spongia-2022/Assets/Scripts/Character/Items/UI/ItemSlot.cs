@@ -11,6 +11,7 @@ namespace AE.Items.UI
     public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected Image image;
+        [SerializeField] protected Image border;
 
         private Sprite defaultSprite;
 
@@ -26,12 +27,17 @@ namespace AE.Items.UI
                 _item = value;
 
                 if (_item == null)
+                {
                     image.enabled = false;
-                //image.sprite = defaultSprite;
+                    border.enabled = false;
+                }
+
                 else
                 {
                     image.sprite = _item.Icon;
                     image.enabled = true;
+                    border.sprite = _item.IconBorder;
+                    border.enabled = true;
                 }
             }
         }
@@ -62,15 +68,6 @@ namespace AE.Items.UI
         public void OnPointerExit(PointerEventData eventData)
         {
             EventManager.EventManager.TriggerItemSlotExit();
-        }
-
-        protected virtual void OnValidate()
-        {
-            if (image == null)
-                image = GetComponent<Image>();
-
-            if (defaultSprite == null)
-                defaultSprite = GetComponent<Image>().sprite;
         }
     }
 }

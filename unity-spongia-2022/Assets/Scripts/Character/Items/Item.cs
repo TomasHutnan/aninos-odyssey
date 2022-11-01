@@ -70,6 +70,8 @@ namespace AE.Items
         public int value;
         
         public Sprite Icon;
+        public Sprite IconBorder;
+
         public Sprite Image;
 
         public string Name;
@@ -108,7 +110,8 @@ namespace AE.Items
 
             Name = name is not null ? (string)name : GenerateName();
 
-            Icon = Resources.Load<Sprite>("Items\\icon");
+            Icon = ItemImages.GetIcon(Type, Class);
+            IconBorder = ItemImages.GetIconBorder(Tier);
 
             float sumBonus = DamageBonus + CritPercentBonus + ArmorBonus + DodgeBonus + ManaBonus - Weight;
             value = (int)Math.Round(Math.Pow(Math.Abs(sumBonus), 1+0.1*(int)Tier));
