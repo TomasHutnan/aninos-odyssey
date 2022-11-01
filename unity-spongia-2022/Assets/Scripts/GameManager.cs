@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public static Character PlayerCharacter;
-
     public static float ShopValueMultiplier = 10;
 
     private void Awake()
@@ -22,8 +20,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(transform);
-
-            PlayerCharacter = SaveData.PlayerCharacter;
         }
     }
 }

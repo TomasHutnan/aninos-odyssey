@@ -39,5 +39,11 @@ namespace AE.GameSave
             set { PlayerPrefs.SetInt(MuteSFXKey, Convert.ToInt32(value)); _muteSFX = value; PlayerPrefs.Save(); }
         }
 
+        public static void Defaults()
+        {
+            ConfirmSell = true;
+            MuteMusic = false;
+            MuteSFX = false;
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace AE.Items.UI
         private void OnEnable()
         {
             if (c is null)
-                c = GameManager.PlayerCharacter;
+                c = SaveData.PlayerCharacter;
 
             c.InventoryUpdateEvent += RefreshUI;
 

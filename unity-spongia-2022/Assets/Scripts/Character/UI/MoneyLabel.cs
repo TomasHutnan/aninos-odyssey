@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using AE.GameSave;
 
 public class MoneyLabel : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class MoneyLabel : MonoBehaviour
     private void OnEnable()
     {
         if (c is null)
-            c = GameManager.PlayerCharacter;
+            c = SaveData.PlayerCharacter;
 
         c.MoneyUpdateEvent += updateMoneyLabel;
 
