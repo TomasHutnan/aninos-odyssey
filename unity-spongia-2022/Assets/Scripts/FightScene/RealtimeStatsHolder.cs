@@ -6,6 +6,8 @@ using TMPro;
 using System;
 using Abilities;
 using Newtonsoft.Json.Linq;
+using static AbilityStorage;
+using System.Linq;
 
 namespace AE.FightManager
 {
@@ -27,7 +29,7 @@ namespace AE.FightManager
     public class RealtimeStatsHolder : MonoBehaviour
     {
 
-        public List<Ability> AvailableAbilities = new List<Ability>();
+        public AbilityName[] AvailableAbilities;
         public TextMeshProUGUI text;
         public List<ActiveEffect> delayedEffects = new List<ActiveEffect>();
         public Dictionary<Stat, List<ActiveEffect>> activeEffects =new Dictionary<Stat, List<ActiveEffect>>()
@@ -73,7 +75,7 @@ namespace AE.FightManager
             StatHolder.Add(Stat.Mana, character.Mana.Value);
             StatHolder.Add(Stat.Weight, character.Weight.Value);
             StatHolder.Add(Stat.Stun, 0);
-            AvailableAbilities = character.EquippedAbilities;
+            AvailableAbilities = character.EquippedAbilities.ToArray();
             _fighter = character;
         }
        
@@ -81,7 +83,7 @@ namespace AE.FightManager
         {
             print("NextRound");
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
-            AvailableAbilities = _fighter.EquippedAbilities;
+            AvailableAbilities = _fighter.EquippedAbilities.ToArray(); ;
 
 
 
