@@ -1007,6 +1007,8 @@ MonoBehaviour:
     ability: {fileID: 11400000, guid: 9e40f4d43b855a645935963b8d603295, type: 2}
   - Name: 41
     ability: {fileID: 11400000, guid: 5be8d4f39dedfce4ca5c21bca41452f1, type: 2}
+  - Name: 42
+    ability: {fileID: 11400000, guid: 1fa2ee762a5659f44913a4240381aecb, type: 2}
 --- !u!1 &897105148
 GameObject:
   m_ObjectHideFlags: 0

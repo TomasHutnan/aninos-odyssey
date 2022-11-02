@@ -54,6 +54,8 @@ public class AbilityStorage : MonoBehaviour
         Earthen_Shield,
         Heavens_Blessing,
         Total_Precision,
+        Greater_Dodge_Chance_Blessing,
+        
 
 
 
