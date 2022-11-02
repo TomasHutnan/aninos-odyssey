@@ -22,6 +22,8 @@ public class Character : InventoryHolder
     public HashSet<AbilityName> UnlockedAbilities;
     public HashSet<AbilityName> EquippedAbilities;
 
+    public int LevelUpAbilitiesCount;
+
     public CharacterStat Damage;
     public CharacterStat CritChance;
 
@@ -94,6 +96,7 @@ public class Character : InventoryHolder
         int _money = 0, Dictionary<ItemType, Item> _equippedItems = null, List<Item> _inventory = null,
         LevelUpSystem _levelUpSystem = null,
         HashSet<AbilityName> _unlockedAbilities = null, HashSet<AbilityName> _equippedAbilities = null,
+        int _levelUpAbilitiesCount = 0,
         int _baseDamage = 10,
         int _baseCritChance = 0,
         int _baseHealthPoints = 200,
@@ -113,6 +116,8 @@ public class Character : InventoryHolder
 
         UnlockedAbilities = _unlockedAbilities ?? new HashSet<AbilityName>();
         EquippedAbilities = _equippedAbilities ?? new HashSet<AbilityName>();
+
+        LevelUpAbilitiesCount = _levelUpAbilitiesCount;
 
         // Stat base value
         Damage = new CharacterStat(_baseDamage);

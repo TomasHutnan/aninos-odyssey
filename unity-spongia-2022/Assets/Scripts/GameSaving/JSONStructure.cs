@@ -15,6 +15,7 @@ namespace AE.GameSave
         public List<JSONItem> EquippedItems {get; set;}
         public List<AbilityName> OwnedAbilities {get; set;}
         public List<AbilityName> EquippedAbilities {get; set;}
+        public int LevelUpAbilitiesCount;
         [JsonConverter(typeof(StringEnumConverter))]
         public ItemTier GameStage {get; set;}
         public JSONLevelUpSystem LevelUpSystem {get; set;}

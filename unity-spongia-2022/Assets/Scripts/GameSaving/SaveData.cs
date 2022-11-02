@@ -17,6 +17,7 @@ namespace AE.GameSave
         public static Dictionary<ItemType, Item> EquippedItems = new Dictionary<ItemType, Item>();
 
         public static HashSet<AbilityName> OwnedAbilities = new HashSet<AbilityName>(), EquippedAbilities = new HashSet<AbilityName>();
+        public static int LevelUpAbilitiesCount;
 
         public static ItemTier GameStage = ItemTier.Mortal;
         public static LevelUpSystem LevelUpSystem = new LevelUpSystem();
@@ -30,6 +31,7 @@ namespace AE.GameSave
             EquippedItems = new Dictionary<ItemType, Item>();
             OwnedAbilities = new HashSet<AbilityName>();
             EquippedAbilities = new HashSet<AbilityName>();
+            LevelUpAbilitiesCount = 0;
             GameStage = ItemTier.Mortal;
             LevelUpSystem = new LevelUpSystem();
 
@@ -57,6 +59,7 @@ namespace AE.GameSave
             EquippedItems = PlayerCharacter.EquippedItems;
             OwnedAbilities = PlayerCharacter.UnlockedAbilities;
             EquippedAbilities = PlayerCharacter.EquippedAbilities;
+            LevelUpAbilitiesCount = PlayerCharacter.LevelUpAbilitiesCount;
             LevelUpSystem = PlayerCharacter.LevelUpSystem;
 
             if (slot == SaveSlot.None)
@@ -90,6 +93,7 @@ namespace AE.GameSave
 
             OwnedAbilities = new HashSet<AbilityName>(save.OwnedAbilities);
             EquippedAbilities = new HashSet<AbilityName>(save.EquippedAbilities);
+            LevelUpAbilitiesCount = save.LevelUpAbilitiesCount;
             GameStage = save.GameStage;
             LevelUpSystem = new LevelUpSystem(null, save.LevelUpSystem.Level, save.LevelUpSystem.Exp,
                 save.LevelUpSystem.Bonuses.Damage, save.LevelUpSystem.Bonuses.CritChance, save.LevelUpSystem.Bonuses.Health, save.LevelUpSystem.Bonuses.Resistance, save.LevelUpSystem.Bonuses.DodgeChance, save.LevelUpSystem.Bonuses.Stamina, save.LevelUpSystem.Bonuses.Mana);

@@ -62,13 +62,14 @@ namespace AE.GameSave
             foreach (Item item in SaveData.EquippedItems.Values)
                 equippedItems.Add(ToJSONItem(item));
 
-            data[(int) slot] = new JSONSave{
+            data[(int)slot] = new JSONSave {
                 LastModified = DateTime.Now.Ticks,
                 Money = SaveData.Money,
                 Inventory = inventory,
                 EquippedItems = equippedItems,
                 OwnedAbilities = new List<AbilityName>(SaveData.OwnedAbilities),
                 EquippedAbilities = new List<AbilityName>(SaveData.EquippedAbilities),
+                LevelUpAbilitiesCount = SaveData.LevelUpAbilitiesCount,
                 GameStage = SaveData.GameStage,
                 LevelUpSystem = new JSONLevelUpSystem{
                     Level = SaveData.LevelUpSystem.Level,
