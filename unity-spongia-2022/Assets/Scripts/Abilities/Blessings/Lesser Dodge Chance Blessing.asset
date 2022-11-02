@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lesser Dodge Chance Blessing
   m_EditorClassIdentifier: 
   AbilityTags: 0d0000000600000012000000
-  AbilityDescription: 
+  AbilityDescription: Call upon the gods to receive temporary bonus dodge chance.
   AbilityCount: 0
   StaminaCost: 0
   ManaCost: 15
@@ -21,3 +21,11 @@ MonoBehaviour:
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects:
+  - stat: 4
+    Change: 2.5
+    Duration: 1
+    Delay: 0

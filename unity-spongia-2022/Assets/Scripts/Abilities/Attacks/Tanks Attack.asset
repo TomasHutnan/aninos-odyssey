@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tanks Attack
   m_EditorClassIdentifier: 
   AbilityTags: 0a0000000d0000000500000012000000
-  AbilityDescription: 
+  AbilityDescription: Strike your enemy while gaining temporary defense.
   AbilityCount: 1
   StaminaCost: 30
   ManaCost: 0
@@ -21,3 +21,11 @@ MonoBehaviour:
   CasterDamageMultiplier: 1
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects:
+  - stat: 3
+    Change: 2.5
+    Duration: 1
+    Delay: 0

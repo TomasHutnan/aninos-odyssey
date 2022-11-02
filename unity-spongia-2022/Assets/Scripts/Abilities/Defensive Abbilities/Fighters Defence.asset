@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Fighters Defence
   m_EditorClassIdentifier: 
-  AbilityTags:
-  - abilityTag: 0
-    Multiplier: 1
-  AbilityDescription: 
+  AbilityTags: 0d00000005000000120000000200000013000000
+  AbilityDescription: 'Fortifie yourself with your weapon gaining stamina and temporary
+    defense. '
   AbilityCount: 1
   StaminaCost: 30
   ManaCost: 0
@@ -25,9 +24,13 @@ MonoBehaviour:
   AffectsCaster: 1
   TargetFinisher: 0
   CasterFinisher: 0
-  TargetEffects:
-  - stat: 0
-    Change: 10
-    Duration: 2
-    Delay: 1
-  CasterEffects: []
+  TargetEffects: []
+  CasterEffects:
+  - stat: 3
+    Change: 5
+    Duration: 1
+    Delay: 0
+  - stat: 5
+    Change: 5
+    Duration: 0
+    Delay: 0

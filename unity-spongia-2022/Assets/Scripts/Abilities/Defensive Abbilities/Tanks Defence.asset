@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Tanks Defence
   m_EditorClassIdentifier: 
-  AbilityTags:
-  - abilityTag: 0
-    Multiplier: 0
-  AbilityDescription: 
+  AbilityTags: 0d00000000000000130000000500000012000000
+  AbilityDescription: Fortifie yourself with your weapon gaining health and temporary
+    defense.
   AbilityCount: 1
   StaminaCost: 35
   ManaCost: 0
@@ -26,4 +25,12 @@ MonoBehaviour:
   TargetFinisher: 0
   CasterFinisher: 0
   TargetEffects: []
-  CasterEffects: []
+  CasterEffects:
+  - stat: 0
+    Change: 5
+    Duration: 0
+    Delay: 0
+  - stat: 3
+    Change: 10
+    Duration: 1
+    Delay: 0

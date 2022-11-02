@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Greater Defense Blessing
   m_EditorClassIdentifier: 
   AbilityTags: 0d000000050000001200000011000000
-  AbilityDescription: 
+  AbilityDescription: Call upon the gods to receive temporary bonus defense.
   AbilityCount: 0
   StaminaCost: 0
   ManaCost: 45
@@ -21,3 +21,11 @@ MonoBehaviour:
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects:
+  - stat: 3
+    Change: 10
+    Duration: 2
+    Delay: 1

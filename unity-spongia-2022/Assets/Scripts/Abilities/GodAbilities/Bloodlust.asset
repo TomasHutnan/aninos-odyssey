@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Bloodlust
   m_EditorClassIdentifier: 
   AbilityTags: 0d000000020000001200000011000000030000001200000011000000
-  AbilityDescription: 
+  AbilityDescription: Awaken the will of Ares and feed upon the suffering of your
+    enemies, gaining inexhaustable reserves of stamina and bonus damage.
   AbilityCount: 1
   StaminaCost: 0
   ManaCost: 100
@@ -21,3 +22,15 @@ MonoBehaviour:
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects:
+  - stat: 5
+    Change: 1000
+    Duration: 2
+    Delay: 1
+  - stat: 2
+    Change: 50
+    Duration: 2
+    Delay: 1
