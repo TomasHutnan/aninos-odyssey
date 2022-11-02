@@ -909,6 +909,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678701180}
   m_CullTransparentMesh: 1
+--- !u!1 &728682852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799145709388390199, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+  m_PrefabInstance: {fileID: 1557010885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &728682854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728682852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4460be699e0bf0e4d809cf65d315b0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StoredAbilities:
+  - Name: 1
+    ability: {fileID: 11400000, guid: 2bce957dbbb876e4ab92df11299f331c, type: 2}
+  - Name: 2
+    ability: {fileID: 11400000, guid: f4c1147e6cc62b84f9b706a0dc25b9bf, type: 2}
+  - Name: 3
+    ability: {fileID: 11400000, guid: eb00c1e5ee5766a4bbcc4f5c7dc2b467, type: 2}
+  - Name: 4
+    ability: {fileID: 11400000, guid: e5f06dad517640d49b4ef937a1591278, type: 2}
+  - Name: 5
+    ability: {fileID: 11400000, guid: 8ea7d2679ad6d374598aff8fadde6d4a, type: 2}
+  - Name: 6
+    ability: {fileID: 11400000, guid: a5d419e1356a4b34992e8f8c948ca87f, type: 2}
+  - Name: 7
+    ability: {fileID: 11400000, guid: 0c28a37014e677a4d9702f9f4fc4998f, type: 2}
+  - Name: 8
+    ability: {fileID: 11400000, guid: 45225869f18023f4a804ff694843e905, type: 2}
+  - Name: 9
+    ability: {fileID: 11400000, guid: 34ca8bd2f0a348d4faaab39a2712086e, type: 2}
+  - Name: 10
+    ability: {fileID: 11400000, guid: 2f1667758dc5fd54a896549b95674e09, type: 2}
+  - Name: 11
+    ability: {fileID: 11400000, guid: b7d3204e5ea23264292a805430a18a61, type: 2}
+  - Name: 12
+    ability: {fileID: 11400000, guid: 3e8f075ed47058040a6a7c4bf99f373c, type: 2}
+  - Name: 13
+    ability: {fileID: 11400000, guid: 8a821acdcedeb3f4eb75fa8cd771dada, type: 2}
+  - Name: 14
+    ability: {fileID: 11400000, guid: 43ae5d355fa133549812179879184cc0, type: 2}
+  - Name: 15
+    ability: {fileID: 11400000, guid: d8c4c7bacb814e5468cbdad33d811754, type: 2}
+  - Name: 16
+    ability: {fileID: 11400000, guid: d0f0f6d1fc7fdaf40b17c1fc28779cd2, type: 2}
+  - Name: 18
+    ability: {fileID: 11400000, guid: 1498f8ffdba2b39469b91375c98f776c, type: 2}
+  - Name: 19
+    ability: {fileID: 11400000, guid: 6b2bbb8d9db7998409dd329a7312a2ae, type: 2}
+  - Name: 20
+    ability: {fileID: 11400000, guid: 3b28c98b595f30c42bd1ffaefbf66983, type: 2}
+  - Name: 21
+    ability: {fileID: 11400000, guid: 42db85a347ed469469181099d09860e4, type: 2}
+  - Name: 22
+    ability: {fileID: 11400000, guid: 71e483b370ba9f14f99415634ed2200b, type: 2}
+  - Name: 23
+    ability: {fileID: 11400000, guid: a9e23377a0c861246b28bbbde7300d20, type: 2}
+  - Name: 24
+    ability: {fileID: 11400000, guid: 1a1ffbca72009644b87219a7a4ffcddd, type: 2}
+  - Name: 25
+    ability: {fileID: 11400000, guid: f8a11e01003b31645a7864addb677f70, type: 2}
+  - Name: 26
+    ability: {fileID: 11400000, guid: 400a05804cbf1c747baeb1698a1b2f42, type: 2}
+  - Name: 27
+    ability: {fileID: 11400000, guid: 2ce3350cebbffa8429449332c9606b3e, type: 2}
+  - Name: 28
+    ability: {fileID: 11400000, guid: d34c27a2074de5040a3df36ef748d3a3, type: 2}
+  - Name: 29
+    ability: {fileID: 11400000, guid: f7bd25c730173e849a404f52b0b168c2, type: 2}
+  - Name: 30
+    ability: {fileID: 11400000, guid: 3258373fcd6b53e4585ec3907823bd92, type: 2}
+  - Name: 31
+    ability: {fileID: 11400000, guid: a1662303cc8eceb49b54febc2464aea7, type: 2}
+  - Name: 32
+    ability: {fileID: 11400000, guid: fda543813d048664faa06f942783e664, type: 2}
+  - Name: 33
+    ability: {fileID: 11400000, guid: b2631acbf7ac8e24696905630f582f3f, type: 2}
+  - Name: 34
+    ability: {fileID: 11400000, guid: 9641f3708dc81884b9a680919737fa15, type: 2}
+  - Name: 35
+    ability: {fileID: 11400000, guid: 6b0617ee9d83c084da7caddcb576977e, type: 2}
+  - Name: 36
+    ability: {fileID: 11400000, guid: cada1a7baaf6b7e4db8ee500b32d86b2, type: 2}
+  - Name: 37
+    ability: {fileID: 11400000, guid: 171f70c36d7756b4a92ced4f09bbe540, type: 2}
+  - Name: 38
+    ability: {fileID: 11400000, guid: 56ac51a032540c14785151f58d1c47aa, type: 2}
+  - Name: 39
+    ability: {fileID: 11400000, guid: 636f4db3ed098f14abe08ab872f170b4, type: 2}
+  - Name: 40
+    ability: {fileID: 11400000, guid: 9e40f4d43b855a645935963b8d603295, type: 2}
+  - Name: 41
+    ability: {fileID: 11400000, guid: 5be8d4f39dedfce4ca5c21bca41452f1, type: 2}
 --- !u!1 &897105148
 GameObject:
   m_ObjectHideFlags: 0
