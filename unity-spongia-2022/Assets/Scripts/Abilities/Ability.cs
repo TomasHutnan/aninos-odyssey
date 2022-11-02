@@ -19,13 +19,6 @@ namespace Abilities
         public float Duration;
         public float Delay;
     }
-    [System.Serializable]
-    public class Tag
-    {
-        public AbilityTags abilityTag;
-       
-        public float Multiplier = 1f;
-    }
     class StatProperties
     {
    
@@ -71,7 +64,7 @@ namespace Abilities
     [CreateAssetMenu]
     public class Ability : ScriptableObject
     {
-        public List<Tag> AbilityTags;
+        public List<AbilityTags> AbilityTags;
         public string AbilityDescription;
         public int AbilityCount = 1;
         public int StaminaCost;
