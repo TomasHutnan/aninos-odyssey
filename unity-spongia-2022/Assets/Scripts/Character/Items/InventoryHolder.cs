@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 namespace AE.Items
 {
@@ -15,7 +16,7 @@ namespace AE.Items
             if (item is null)
                 return false;
 
-            Inventory.Add(item);
+            Inventory.Insert(SearchInsertIndex(item), item);
             triggerInventoryUpdateEvent();
             return true;
         }
@@ -30,6 +31,36 @@ namespace AE.Items
                 return true;
             }
             return false;
+        }
+
+        private int SearchInsertIndex(Item item)
+        {
+            int i = 0;
+
+            for (; i < Inventory.Count; i++)
+            {
+                if (Inventory[i].Tier <= item.Tier)
+                    break;
+            }
+            for (; i < Inventory.Count; i++)
+            {
+                if (Inventory[i].Type >= item.Type)
+                    break;
+            }
+            for (; i < Inventory.Count; i++)
+            {
+                if (Inventory[i].Class >= item.Class)
+                    break;
+            }
+
+            return i;
+        }
+
+        public void sortInventory()
+        {
+            Inventory = Inventory.OrderByDescending(item => item.Tier)
+                .ThenBy(item => item.Type)
+                .ThenBy(item => item.Class).ToList();
         }
 
         protected void triggerInventoryUpdateEvent()

@@ -107,6 +107,7 @@ public class Character : InventoryHolder
         Money = _money;
         EquippedItems = _equippedItems ?? new Dictionary<ItemType, Item>();
         Inventory = _inventory ?? new List<Item>();
+        sortInventory();
 
         LevelUpSystem = _levelUpSystem ?? new LevelUpSystem();
 
