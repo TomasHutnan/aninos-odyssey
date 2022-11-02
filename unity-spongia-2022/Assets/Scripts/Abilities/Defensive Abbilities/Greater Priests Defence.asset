@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Greater Priests Defence
   m_EditorClassIdentifier: 
-  AbilityTags: 0d0000000500000012000000
+  AbilityTags: []
   AbilityDescription: 
   AbilityCount: 1
   StaminaCost: 50
@@ -21,3 +21,7 @@ MonoBehaviour:
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects: []

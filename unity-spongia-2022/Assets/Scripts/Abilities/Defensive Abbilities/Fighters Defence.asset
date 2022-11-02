@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Fighters Defence
   m_EditorClassIdentifier: 
-  AbilityTags: 0d0000000500000012000000
+  AbilityTags:
+  - abilityTag: 0
+    Multiplier: 1
   AbilityDescription: 
   AbilityCount: 1
   StaminaCost: 30
