@@ -35,22 +35,25 @@ namespace AE.Items
 
         private int SearchInsertIndex(Item item)
         {
+            if (Inventory.Count == 0)
+                return 0;
+
             int i = 0;
 
             for (; i < Inventory.Count; i++)
             {
-                if (Inventory[i].Tier <= item.Tier)
+                if (Inventory[i].Tier < item.Tier)
                     break;
-            }
-            for (; i < Inventory.Count; i++)
-            {
-                if (Inventory[i].Type >= item.Type)
-                    break;
-            }
-            for (; i < Inventory.Count; i++)
-            {
-                if (Inventory[i].Class >= item.Class)
-                    break;
+                else if (Inventory[i].Tier == item.Tier)
+                {
+                    if (Inventory[i].Type > item.Type)
+                        break;
+                    else if (Inventory[i].Type == item.Type)
+                    {
+                        if (Inventory[i].Class >= item.Class)
+                            break;
+                    }
+                }
             }
 
             return i;
