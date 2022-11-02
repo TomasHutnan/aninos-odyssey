@@ -7,16 +7,14 @@ namespace AE.CharacterStats.UI
 {
     public class LevelUpPanelManager : MonoBehaviour
     {
-        [SerializeField] GameObject LevelUpPanel;
-        [SerializeField] Character c;
+        [SerializeField] GameObject[] LevelUpPanels;
+        [SerializeField] Character c = SaveData.PlayerCharacter;
 
         void Start()
         {
-            if (c is null)
-                c = SaveData.PlayerCharacter;
-
             if (c.LevelUpSystem.UnspentSkillPoints > 0)
-                LevelUpPanel.SetActive(true);
+                foreach (GameObject panel in LevelUpPanels)
+                    panel.SetActive(true);
         }
     }
 }

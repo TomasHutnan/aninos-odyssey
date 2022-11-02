@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using AE.GameSave;
+using AE.Abilities.UI;
+using static AbilityStorage;
 
 namespace AE.CharacterStats.UI
 {
@@ -11,10 +13,10 @@ namespace AE.CharacterStats.UI
     {
         [SerializeField] Transform LevelUpDisplaysParent;
         [SerializeField] TextMeshProUGUI unspentPointsText;
-
         [SerializeField] LevelUpDisplay[] levelUpDisplays;
+        [Space]
 
-        [SerializeField] Character c;
+        [SerializeField] Character c = SaveData.PlayerCharacter;
 
         private void Start()
         {
@@ -27,8 +29,9 @@ namespace AE.CharacterStats.UI
 
         private void OnEnable()
         {
-            if (c is null)
-                c = SaveData.PlayerCharacter;
+            if (c.LevelUpSystem.UnspentSkillPoints <= 0)
+                gameObject.SetActive(false);
+
             updateUnspentPointsText();
 
             for (int i = 0; i < Enum.GetValues(typeof(LevelUpModType)).Length; i++)

@@ -22,6 +22,8 @@ namespace AE.Abilities
             new AbilityName[] {AbilityName.None, AbilityName.None, AbilityName.None, AbilityName.None},
         };
 
+        public static int choicesMax { get { return levelUpAbilityChoices.Length; } }
+
         public static AbilityName[] GetAbilityChoices(int _level)
         {
             if (_level > 0 && _level - 1 < levelUpAbilityChoices.Length)
