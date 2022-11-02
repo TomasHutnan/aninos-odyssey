@@ -64,6 +64,7 @@ namespace Abilities
     [CreateAssetMenu]
     public class Ability : ScriptableObject
     {
+        public Sprite Icon;
         public List<AbilityTags> AbilityTags;
         public string AbilityDescription;
         public int AbilityCount = 1;
