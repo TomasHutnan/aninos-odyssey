@@ -63,9 +63,9 @@ namespace Abilities
     public enum Level
     {
         None = -1,
-        Lesser,
-        Paradigm,
-        Greater,
+        Lesser = 0,
+        Paradigm = 1,
+        Greater = 2,
     }
     public enum AbilityTags
     {
@@ -94,6 +94,11 @@ namespace Abilities
         Delay,
         Temporary,
         Permanent,
+
+        //Ability Type
+        Attack_Ability,
+        Defense_Ability,
+        Blessing_Ability,
     }
     [CreateAssetMenu]
     public class Ability : ScriptableObject
