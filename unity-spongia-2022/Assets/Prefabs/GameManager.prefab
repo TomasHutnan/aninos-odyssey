@@ -166,13 +166,13 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 0e03c2393f8e94748a270d618712f14c, type: 3}
   WeaponIcons:
   - _class: 0
-    image: {fileID: 21300000, guid: 205a9defc529bf340a8dd47415523bb0, type: 3}
+    image: {fileID: 21300000, guid: 1e294779e22fa4a4299b257be231e2b8, type: 3}
   - _class: 1
-    image: {fileID: 21300000, guid: 205a9defc529bf340a8dd47415523bb0, type: 3}
+    image: {fileID: 21300000, guid: fdcc177d99222c54c989b91160be5474, type: 3}
   - _class: 2
-    image: {fileID: 21300000, guid: 205a9defc529bf340a8dd47415523bb0, type: 3}
+    image: {fileID: 21300000, guid: a2a24496a6bce4f47aa5e69c29eb723f, type: 3}
   - _class: 3
-    image: {fileID: 21300000, guid: 205a9defc529bf340a8dd47415523bb0, type: 3}
+    image: {fileID: 21300000, guid: 102f4574a7de12d4a93256513fbe36c4, type: 3}
   IconBorders:
   - tier: 0
     image: {fileID: 21300000, guid: 41ff2ce818d0f274fbe896d2cad8e926, type: 3}
@@ -246,16 +246,16 @@ MonoBehaviour:
   WeaponImages:
   - tier: 0
     _class: 0
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 018949e6985341248823adc837b2833c, type: 3}
   - tier: 1
     _class: 0
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: eebe97cf18d30124ea338667ea78ed47, type: 3}
   - tier: 2
     _class: 0
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 7f2ac8ebc4d6dc643ada57fcad4cb2f6, type: 3}
   - tier: 3
     _class: 0
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 2dbed96d9eca3f041b4413a0ed7322b1, type: 3}
   - tier: 0
     _class: 1
     image: {fileID: 21300000, guid: b017e36f2b866ed40aa17260568cd66a, type: 3}
@@ -270,16 +270,16 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 03878a7ecf3fc2443a66b365a15206ea, type: 3}
   - tier: 0
     _class: 2
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 20c07141f85115240bbbd4026801a948, type: 3}
   - tier: 1
     _class: 2
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 28aa6836e5c4b0a41a088c6cf93d388b, type: 3}
   - tier: 2
     _class: 2
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: be7d0debcbd260848a6f97a001cdc7f3, type: 3}
   - tier: 3
     _class: 2
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: b4683f4e80e7591409e80bbf9e1ac56a, type: 3}
   - tier: 0
     _class: 3
     image: {fileID: 21300000, guid: e487823e10402cd4a8b3d7312bf9f8b5, type: 3}
