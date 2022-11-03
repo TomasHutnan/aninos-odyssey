@@ -33,6 +33,22 @@ namespace Abilities
             StatType = _StatType;
         }
     }
+    public enum Family
+    {
+        None = -1,
+        Crit_Chance,
+        Heal,
+
+
+    }
+    public enum Level
+    {
+        None = -1,
+        Lesser,
+        Paradigm,
+        Greater,
+
+    }
     public enum AbilityTags
     {
         //Effected stats
@@ -256,7 +272,7 @@ namespace Abilities
 
 
 
-
+            
 
         }
 
