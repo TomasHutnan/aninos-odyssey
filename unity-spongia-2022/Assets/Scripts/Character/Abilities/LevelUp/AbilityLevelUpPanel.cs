@@ -1,4 +1,5 @@
 using AE.GameSave;
+using AE.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,7 +55,14 @@ namespace AE.Abilities.UI
 
             updateRemainingChoicesText();
 
-            choices = LevelUpAbilitiesProvider.GetAbilityChoices(c.LevelUpAbilitiesCount + 1);
+            AbilityName[] loadedChoices = LevelUpAbilitiesProvider.GetAbilityChoices(c.LevelUpAbilitiesCount + 1);
+            
+            if (loadedChoices.Length <= AbilityDisplays.Length)
+                choices = LevelUpAbilitiesProvider.GetAbilityChoices(c.LevelUpAbilitiesCount + 1);
+            else
+            {
+                choices = RandomUtils.CreateLimitedShuffledDeck(LevelUpAbilitiesProvider.GetAbilityChoices(c.LevelUpAbilitiesCount + 1), AbilityDisplays.Length).ToArray();
+            }
 
             for (int i = 0; i < AbilityDisplays.Length; i++)
             {
