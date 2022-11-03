@@ -19086,6 +19086,8 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 6f9b86d45cf2c5048864b523e3e3a374, type: 3}
   - tier: 3
     image: {fileID: 21300000, guid: 28ea611fc08766d4abefa08fc7b005ad, type: 3}
+  ArmorImages: []
+  WeaponImages: []
 --- !u!1001 &3031906950574537286
 PrefabInstance:
   m_ObjectHideFlags: 0

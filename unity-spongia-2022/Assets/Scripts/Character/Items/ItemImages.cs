@@ -10,6 +10,9 @@ namespace AE.Items
         public WeaponIcon[] WeaponIcons;
         public IconBorder[] IconBorders;
 
+        public ArmorImage[] ArmorImages;
+        public WeaponImage[] WeaponImages;
+
         [System.Serializable]
         public class ArmorIcon
         {
@@ -30,9 +33,16 @@ namespace AE.Items
             public Sprite image;
         }
         [System.Serializable]
-        public class Image
+        public class ArmorImage
         {
+            public ItemTier tier;
             public ItemType type;
+            public Sprite image;
+        }
+        [System.Serializable]
+        public class WeaponImage
+        {
+            public ItemTier tier;
             public ItemClass _class;
             public Sprite image;
         }
@@ -40,6 +50,9 @@ namespace AE.Items
         static Dictionary<ItemType, Sprite> _armorIconsDict = new();
         static Dictionary<ItemClass, Sprite> _weaponIconsDict = new();
         static Dictionary<ItemTier, Sprite> _iconBordersDict = new();
+
+        static Dictionary<ItemTier, Dictionary<ItemType, Sprite>> _armorImagesDict = new();
+        static Dictionary<ItemTier, Dictionary<ItemClass, Sprite>> _weaponImagesDict = new();
 
         public static Sprite GetIcon(ItemType _type, ItemClass _class)
         {
@@ -67,6 +80,28 @@ namespace AE.Items
             return null;
         }
 
+        public static Sprite GetImage(ItemTier _tier, ItemType _type, ItemClass _class)
+        {
+            if (_type == ItemType.Weapon)
+                if (_weaponImagesDict.ContainsKey(_tier))
+                {
+                    Sprite _image;
+                    bool containsKey = _weaponImagesDict[_tier].TryGetValue(_class, out _image);
+                    if (containsKey)
+                        return _image;
+                }
+            else
+                if (_armorImagesDict.ContainsKey(_tier))
+                {
+                    Sprite _image;
+                    bool containsKey = _armorImagesDict[_tier].TryGetValue(_type, out _image);
+                    if (containsKey)
+                        return _image;
+                }
+
+            return null;
+        }
+
         private void Awake()
         {
             foreach (ArmorIcon icon in ArmorIcons)
@@ -81,6 +116,15 @@ namespace AE.Items
             foreach (IconBorder iconBorder in IconBorders)
             {
                 _iconBordersDict[iconBorder.tier] = iconBorder.image;
+            }
+
+            foreach(ArmorImage image in ArmorImages)
+            {
+                _armorImagesDict[image.tier][image.type] = image.image;
+            }
+            foreach (WeaponImage image in WeaponImages)
+            {
+                _weaponImagesDict[image.tier][image._class] = image.image;
             }
         }
     }
