@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Abilities;
+using System.Linq;
+
 public class AbilityStorage : MonoBehaviour
 {
     public enum AbilityName
@@ -74,15 +76,48 @@ public class AbilityStorage : MonoBehaviour
     }
     public List<StoredAbility> StoredAbilities = new List<StoredAbility>();
     public static Dictionary<AbilityName,Ability> GetAbility = new Dictionary<AbilityName,Ability>();
+
+    static Dictionary<AbilityTags, Dictionary<Family, SortedList<AbilityName, AbilityName>>> abilityFamilyTypes = new Dictionary<AbilityTags, Dictionary<Family, SortedList<AbilityName, AbilityName>>>
+    {
+        {AbilityTags.Attack_Ability, new Dictionary<Family, SortedList<AbilityName, AbilityName>> { } },
+        {AbilityTags.Defense_Ability, new Dictionary<Family, SortedList<AbilityName, AbilityName>> { } },
+        {AbilityTags.Blessing_Ability, new Dictionary<Family, SortedList<AbilityName, AbilityName>> { } },
+    };
+
     private void Awake()
     {
         GetAbility[AbilityName.None] = null;
-        foreach (var item in StoredAbilities)
+        foreach (StoredAbility item in StoredAbilities)
         {
-            GetAbility[item.Name] = item.ability;
+            AbilityName abilityName = item.Name;
+            Ability ability = item.ability;
+
+            GetAbility[abilityName] = ability;
+
+            if (ability.AbilityType != AbilityTags.None)
+            {
+                addAbilityToFamilyDict(abilityName, ability);
+            }
         }
         print(GetAbility[AbilityName.Tank_Attack]);
     }
     // Start is called before the first frame update
 
+    public SortedList<AbilityName, AbilityName>[] GetAllAbilityNamesByType(AbilityTags abilityType)
+    {
+        Dictionary<Family, SortedList<AbilityName, AbilityName>> outVal;
+        bool keyExists = abilityFamilyTypes.TryGetValue(abilityType, out outVal);
+        if (keyExists)
+            return outVal.Values.ToArray();
+
+        return null;
+    }
+
+    private void addAbilityToFamilyDict(AbilityName abilityName, Ability ability)
+    {
+        abilityFamilyTypes.TryAdd(ability.AbilityType, new Dictionary<Family, SortedList<AbilityName, AbilityName>>());
+        abilityFamilyTypes[ability.AbilityType].TryAdd(ability.AbilityFamily, new SortedList<AbilityName, AbilityName>());
+
+        abilityFamilyTypes[ability.AbilityType][ability.AbilityFamily].Add(abilityName, abilityName);
+    }
 }
