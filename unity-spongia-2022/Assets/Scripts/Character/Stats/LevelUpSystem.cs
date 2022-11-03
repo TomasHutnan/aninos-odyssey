@@ -19,6 +19,8 @@ namespace AE.CharacterStats
     public class LevelUpSystem
     {
         public int Level { get; private set; }
+
+        public int MaxLevel { get { return 20; } }
         public int Exp { get; private set; }
 
         public int UnspentSkillPoints { get { return Level - Levels.Values.Sum(); } }
@@ -66,11 +68,11 @@ namespace AE.CharacterStats
 
         private Dictionary<LevelUpModType, float> statBonuses = new Dictionary<LevelUpModType, float>()
         {
-            {LevelUpModType.Damage, 3 },
-            {LevelUpModType.CritChance, 2 },
-            {LevelUpModType.Health, 20 },
-            {LevelUpModType.Resistance, 5 },
-            {LevelUpModType.DodgeChance, 5 },
+            {LevelUpModType.Damage, 2 },
+            {LevelUpModType.CritChance, 1 },
+            {LevelUpModType.Health, 10 },
+            {LevelUpModType.Resistance, 2.5f },
+            {LevelUpModType.DodgeChance, 2.5f },
             {LevelUpModType.Stamina, 10 },
             {LevelUpModType.Mana, 10 },
         };
@@ -106,7 +108,7 @@ namespace AE.CharacterStats
         {
             int remainingExp = Exp + exp;
 
-            while (remainingExp - (defaultExpRequirement + Level * incrementalExpRequirement) >= 0)
+            while (remainingExp - (defaultExpRequirement + Level * incrementalExpRequirement) >= 0 && Level < MaxLevel)
             {
                 remainingExp -= defaultExpRequirement + Level * incrementalExpRequirement;
                 Level++;
