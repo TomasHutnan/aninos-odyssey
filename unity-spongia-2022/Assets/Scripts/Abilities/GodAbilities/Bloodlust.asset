@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Bloodlust
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 0d000000020000001200000011000000030000001200000011000000
   AbilityDescription: Awaken the will of Ares and feed upon the suffering of your
     enemies, gaining inexhaustable reserves of stamina and bonus damage.
@@ -28,9 +29,9 @@ MonoBehaviour:
   CasterEffects:
   - stat: 5
     Change: 1000
-    Duration: 2
-    Delay: 1
+    Duration: 3
+    Delay: 2
   - stat: 2
     Change: 50
-    Duration: 2
-    Delay: 1
+    Duration: 3
+    Delay: 2

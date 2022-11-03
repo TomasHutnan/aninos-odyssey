@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: "Heaven\u2019s blessing"
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 0d000000010000001200000011000000030000001200000011000000
   AbilityDescription: Communicate with the will of Gaia and obtaine her wisdom, gaining
     damage and inexhaustable reserves of mana.
@@ -28,9 +29,9 @@ MonoBehaviour:
   CasterEffects:
   - stat: 2
     Change: 50
-    Duration: 2
-    Delay: 1
+    Duration: 3
+    Delay: 2
   - stat: 7
     Change: 1000
-    Duration: 2
-    Delay: 1
+    Duration: 3
+    Delay: 2

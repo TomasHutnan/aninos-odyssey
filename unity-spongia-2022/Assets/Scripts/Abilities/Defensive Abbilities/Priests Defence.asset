@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Priests Defence
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 0d00000005000000120000000100000013000000
   AbilityDescription: Fortifie yourself with your weapon gaining mana and temporary
     defense.
@@ -28,7 +29,7 @@ MonoBehaviour:
   CasterEffects:
   - stat: 3
     Change: 5
-    Duration: 1
+    Duration: 2
     Delay: 0
   - stat: 7
     Change: 5

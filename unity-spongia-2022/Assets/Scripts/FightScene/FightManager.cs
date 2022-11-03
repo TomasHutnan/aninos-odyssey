@@ -71,12 +71,13 @@ public class FightManager : MonoBehaviour
         if (PlayerFighter.StatHolder[Stat.HealthPoints]<= 0)
         {
             PlayerFighter.StatHolder[Stat.HealthPoints] = 0;
-            Victory();  
+           
+            Defeat();
         }
         if(EnemyFighter.StatHolder[Stat.HealthPoints]<= 0)
         {
             EnemyFighter.StatHolder[Stat.HealthPoints] = 0;
-            Defeat();
+            Victory();
         }
     }
 }

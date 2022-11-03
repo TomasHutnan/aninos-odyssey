@@ -28,5 +28,5 @@ MonoBehaviour:
   CasterEffects:
   - stat: 1
     Change: 10
-    Duration: 2
+    Duration: 3
     Delay: 1

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Earthen Shield
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 0d000000050000001200000011000000000000001300000011000000
   AbilityDescription: Absorb the essence of Earth and the power of mountains, gaining
     health and infinite defense.
@@ -29,8 +30,8 @@ MonoBehaviour:
   - stat: 0
     Change: 50
     Duration: 0
-    Delay: 1
+    Delay: 2
   - stat: 3
     Change: 100
-    Duration: 2
-    Delay: 1
+    Duration: 3
+    Delay: 2

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Greater Tank Attack
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 0a0000000d0000000500000012000000
   AbilityDescription: Strike your enemy while gaining temporary defense.
   AbilityCount: 1
@@ -27,5 +28,5 @@ MonoBehaviour:
   CasterEffects:
   - stat: 3
     Change: 5
-    Duration: 1
+    Duration: 2
     Delay: 0
