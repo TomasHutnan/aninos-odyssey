@@ -31,10 +31,16 @@ namespace AE.Items.UI.Shop
                 {
                     costText.text = "<color=#FFD700>" + ((int)Mathf.Round(_item.value * GameManager.ShopValueMultiplier)).ToString() + " $</color>";
                     costText.enabled = true;
-                    image.sprite = ItemImages.GetIcon(_item.Type, _item.Class);
+                    Sprite _image = ItemImages.GetImage(_item.Tier, _item.Type, _item.Class);
+                    if (_image != null)
+                        image.sprite = _image;
+                    else
+                    {
+                        image.sprite = ItemImages.GetIcon(_item.Type, _item.Class);
+                        border.sprite = ItemImages.GetIconBorder(_item.Tier);
+                        border.enabled = true;
+                    }
                     image.enabled = true;
-                    border.sprite = ItemImages.GetIconBorder(_item.Tier);
-                    border.enabled = true;
                 }
             }
         }

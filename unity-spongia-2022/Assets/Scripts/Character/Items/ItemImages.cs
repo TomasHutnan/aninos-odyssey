@@ -51,8 +51,20 @@ namespace AE.Items
         static Dictionary<ItemClass, Sprite> _weaponIconsDict = new();
         static Dictionary<ItemTier, Sprite> _iconBordersDict = new();
 
-        static Dictionary<ItemTier, Dictionary<ItemType, Sprite>> _armorImagesDict = new();
-        static Dictionary<ItemTier, Dictionary<ItemClass, Sprite>> _weaponImagesDict = new();
+        static Dictionary<ItemTier, Dictionary<ItemType, Sprite>> _armorImagesDict = new Dictionary<ItemTier, Dictionary<ItemType, Sprite>> 
+        {
+            {ItemTier.Mortal, new Dictionary<ItemType, Sprite>() },
+            {ItemTier.Earth, new Dictionary<ItemType, Sprite>() },
+            {ItemTier.Heaven, new Dictionary<ItemType, Sprite>() },
+            {ItemTier.God, new Dictionary<ItemType, Sprite>() },
+        };
+        static Dictionary<ItemTier, Dictionary<ItemClass, Sprite>> _weaponImagesDict = new Dictionary<ItemTier, Dictionary<ItemClass, Sprite>>
+        {
+            {ItemTier.Mortal, new Dictionary<ItemClass, Sprite>() },
+            {ItemTier.Earth, new Dictionary<ItemClass, Sprite>() },
+            {ItemTier.Heaven, new Dictionary<ItemClass, Sprite>() },
+            {ItemTier.God, new Dictionary<ItemClass, Sprite>() },
+        };
 
         public static Sprite GetIcon(ItemType _type, ItemClass _class)
         {

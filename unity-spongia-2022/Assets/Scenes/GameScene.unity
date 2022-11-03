@@ -19086,8 +19086,116 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 6f9b86d45cf2c5048864b523e3e3a374, type: 3}
   - tier: 3
     image: {fileID: 21300000, guid: 28ea611fc08766d4abefa08fc7b005ad, type: 3}
-  ArmorImages: []
-  WeaponImages: []
+  ArmorImages:
+  - tier: 0
+    type: 0
+    image: {fileID: 0}
+  - tier: 1
+    type: 0
+    image: {fileID: 0}
+  - tier: 2
+    type: 0
+    image: {fileID: 0}
+  - tier: 3
+    type: 0
+    image: {fileID: 0}
+  - tier: 0
+    type: 1
+    image: {fileID: 0}
+  - tier: 1
+    type: 1
+    image: {fileID: 0}
+  - tier: 2
+    type: 1
+    image: {fileID: 0}
+  - tier: 3
+    type: 1
+    image: {fileID: 0}
+  - tier: 0
+    type: 2
+    image: {fileID: 0}
+  - tier: 1
+    type: 2
+    image: {fileID: 0}
+  - tier: 2
+    type: 2
+    image: {fileID: 0}
+  - tier: 3
+    type: 2
+    image: {fileID: 0}
+  - tier: 0
+    type: 3
+    image: {fileID: 0}
+  - tier: 1
+    type: 3
+    image: {fileID: 0}
+  - tier: 2
+    type: 3
+    image: {fileID: 0}
+  - tier: 3
+    type: 3
+    image: {fileID: 0}
+  - tier: 0
+    type: 4
+    image: {fileID: 0}
+  - tier: 1
+    type: 4
+    image: {fileID: 0}
+  - tier: 2
+    type: 4
+    image: {fileID: 0}
+  - tier: 3
+    type: 4
+    image: {fileID: 0}
+  WeaponImages:
+  - tier: 0
+    _class: 0
+    image: {fileID: 0}
+  - tier: 1
+    _class: 0
+    image: {fileID: 0}
+  - tier: 2
+    _class: 0
+    image: {fileID: 0}
+  - tier: 3
+    _class: 0
+    image: {fileID: 0}
+  - tier: 0
+    _class: 1
+    image: {fileID: 21300000, guid: b017e36f2b866ed40aa17260568cd66a, type: 3}
+  - tier: 1
+    _class: 1
+    image: {fileID: 21300000, guid: dd15436f1f5563348833afb76fd27030, type: 3}
+  - tier: 2
+    _class: 1
+    image: {fileID: 21300000, guid: 3193af3a05ecd5943a06b006868f619a, type: 3}
+  - tier: 3
+    _class: 1
+    image: {fileID: 21300000, guid: 03878a7ecf3fc2443a66b365a15206ea, type: 3}
+  - tier: 0
+    _class: 2
+    image: {fileID: 0}
+  - tier: 1
+    _class: 2
+    image: {fileID: 0}
+  - tier: 2
+    _class: 2
+    image: {fileID: 0}
+  - tier: 3
+    _class: 2
+    image: {fileID: 0}
+  - tier: 0
+    _class: 3
+    image: {fileID: 21300000, guid: e487823e10402cd4a8b3d7312bf9f8b5, type: 3}
+  - tier: 1
+    _class: 3
+    image: {fileID: 21300000, guid: 56cd8d10c8cb4694f8e8ece59e566d68, type: 3}
+  - tier: 2
+    _class: 3
+    image: {fileID: 21300000, guid: 30c3441ffb9244e4694bc91f45fd3b7a, type: 3}
+  - tier: 3
+    _class: 3
+    image: {fileID: 21300000, guid: 76e20484d506f8143b43c97cfa20e3c0, type: 3}
 --- !u!1001 &3031906950574537286
 PrefabInstance:
   m_ObjectHideFlags: 0
