@@ -181,7 +181,7 @@ namespace AE.FightManager
         private void Update()
         {
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
-            print($"DelayedEffectLength{delayedEffects.Count}");
+            
             foreach (var item in delayedEffects)
             {
                 if(item.delay != 0) { continue; };

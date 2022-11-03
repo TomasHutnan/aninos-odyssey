@@ -8,6 +8,7 @@ using static AbilityStorage;
 public class ButtonAbility : MonoBehaviour
 {
     public int AbbilityNumber;
+
     public void Cast()
     {
         GameObject Target = null;
@@ -17,6 +18,7 @@ public class ButtonAbility : MonoBehaviour
             var child = FightManager.GetChild(i);
             if(child != transform.parent)
             {
+                print(transform.parent.gameObject.name);
                 AbilityName abilityName = transform.parent.gameObject.GetComponent<RealtimeStatsHolder>().AvailableAbilities[AbbilityNumber];
                 if (abilityName == AbilityName.None) { return; }
                 Ability ability = AbilityStorage.GetAbility[abilityName];

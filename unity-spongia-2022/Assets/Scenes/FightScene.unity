@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5253b0f7940198b48bbed44c6fb739d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvailableAbilities: 
+  AvailableAbilities: 03000000
   text: {fileID: 897105150}
 --- !u!1 &111969393
 GameObject:
@@ -221,7 +221,7 @@ MonoBehaviour:
   EnemyFighter: {fileID: 1365485809}
   PlayerFighter: {fileID: 39233713}
   EnemyGameObject: {fileID: 1365485805}
-  EnemyAbilities: 0e00000001000000200000001c0000001900000018000000
+  EnemyAbilities: 0e00000003000000200000001c0000001900000018000000
 --- !u!1 &152215831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,6 +1861,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerHolder: {fileID: 39233713}
   EnemyHolder: {fileID: 1365485809}
+  PlayerObject: {fileID: 39233711}
+  EnemyObject: {fileID: 1365485805}
   List: 
 --- !u!1 &1532173565
 GameObject:

@@ -13,6 +13,8 @@ public class EnemyBrain : MonoBehaviour
     public RealtimeStatsHolder EnemyHolder;
     public Character Player;
     public Character Enemy;
+    public GameObject PlayerObject;
+    public GameObject EnemyObject;
     public List<AbilityName> List;
     public System.Linq.IOrderedEnumerable<KeyValuePair<List<AbilityName>,List<float>>> sortedStaminaDict;
     public System.Linq.IOrderedEnumerable<KeyValuePair<List<AbilityName>, List<float>>> sortedManaDict;
@@ -54,7 +56,7 @@ public class EnemyBrain : MonoBehaviour
             float CombinedManaCost = 0;
             foreach (var spell in SpellCombination)
             {
-                print($"Tuna{spell}");
+                //print($"Tuna{spell}");
                 CombinedStaminaCost += AbilityStorage.GetAbility[spell].StaminaCost ;
                 CombinedManaCost += AbilityStorage.GetAbility[spell].ManaCost;
                 foreach (var item in AbilityStorage.GetAbility[spell].CasterEffects)
@@ -242,7 +244,7 @@ public class EnemyBrain : MonoBehaviour
             }
 
         }
-        Dictionary<List<AbilityName>, float> BestOption = new Dictionary<List<AbilityName>, float>();
+        Dictionary<List<AbilityName>, List<float>> BestOption = new Dictionary<List<AbilityName>, List<float>>();
         foreach (var combo in CanCast)
         {
             float ComboEstimatedPlayerDamage = EstimatedPlayerDamage;
@@ -293,29 +295,43 @@ public class EnemyBrain : MonoBehaviour
 
             }
             //Estimating Damage Taken
-            float ComboEstimatedEnemyDamageTaken = (ComboEstimatedPlayerDamage * (1 + ComboEstimatedPlayerCritChance)) * (1 - ComboEstimatedEnemyDefence) * (1 - ComboEstimatedEnemyDodgeChance) - ComboEstimatedEnemyHealthChange;
-            if(ComboEnemyShield <= ComboEstimatedEnemyDamageTaken) 
+            float ComboEstimatedEnemyDamageTaken = (ComboEstimatedPlayerDamage * (1 + ComboEstimatedPlayerCritChance/100)) * (1 - ComboEstimatedEnemyDefence/100) * (1 - ComboEstimatedEnemyDodgeChance/100) - ComboEstimatedEnemyHealthChange;
+
+            if (ComboEstimatedEnemyDamageTaken>0)
             {
-                ComboEstimatedEnemyDamageTaken -= ComboEnemyShield; 
+                if(ComboEnemyShield <= ComboEstimatedEnemyDamageTaken) 
+                {
+                    ComboEstimatedEnemyDamageTaken -= ComboEnemyShield; 
+                }
+                else if(ComboEnemyShield > ComboEstimatedEnemyDamageTaken)
+                {
+                    ComboEstimatedEnemyDamageTaken = ComboEnemyShield - ComboEstimatedEnemyDamageTaken;
+                }
+                
             }
-            else
-            {
-                ComboEstimatedEnemyDamageTaken = ComboEnemyShield - ComboEstimatedEnemyDamageTaken;
-            }
+
+            
+            
+            //print($"EnemyDamageTaken{ComboEstimatedEnemyDamageTaken},ComboEstimatedPlayerDamage{ComboEstimatedPlayerDamage},ComboEstimatedPlayerCritChance{ComboEstimatedPlayerCritChance},ComboEstimatedEnemyDefence{ComboEstimatedEnemyDefence},ComboEstimatedEnemyDodgeChance{ComboEstimatedEnemyDodgeChance},ComboEstimatedEnemyHealthChange{ComboEstimatedEnemyHealthChange}ComboEnemyShield{ComboEnemyShield}");
+
             float ComboEnemyHealthPercentageChange = 100 / ( Enemy.HealthPoints.Value / ComboEstimatedEnemyDamageTaken );
+            print(ComboEnemyHealthPercentageChange);
             //Enemy Damage
 
             float ComboEstimatedEnemyDamage = EstimatedEnemyDamage;
+            List<float> ComboEstimatedEnemyDamageGiven = new List<float>();
             float ComboEstimatedEnemyCritChance = EstimatedEnemyCritChance;
             float ComboEstimatedPlayerDefence = EstimatedPlayerDefence;
             float ComboPlayerShield = PlayerShield;
             float ComboEstimatedPlayerDodgeChance = EstimatedPlayerDodgeChance;
             float ComboEstimatedPlayerHealthChange = EstimatedPlayerHealthChange;
+            //print($"{ComboEstimatedEnemyDamage},{ComboEstimatedEnemyCritChance},{ComboEstimatedPlayerDefence},{ComboPlayerShield},{ComboEstimatedPlayerDodgeChance},{ComboEstimatedPlayerHealthChange}");
 
 
             foreach (var item in combo)
             {
-                //Estimating Player Damage
+                
+                //Estimating Player Damage Taken
                 foreach (var effect in AbilityStorage.GetAbility[item].CasterEffects)
                 {
                     if (effect.stat == Stat.Damage & effect.Delay == 0)
@@ -332,48 +348,80 @@ public class EnemyBrain : MonoBehaviour
                 {
                     if (effect.stat == Stat.DodgeChance & effect.Delay == 0)
                     {
-                        ComboEstimatedEnemyDodgeChance += effect.Change;
+                        ComboEstimatedPlayerDodgeChance += effect.Change;
                     }
                     if (effect.stat == Stat.DamageReduction & effect.Delay == 0)
                     {
-                        ComboEstimatedEnemyDefence += effect.Change;
+                        ComboEstimatedPlayerDefence += effect.Change;
                     }
                     if (effect.stat == Stat.HealthPoints & effect.Delay == 0)
                     {
                         if (effect.Duration == 0)
                         {
-                            ComboEstimatedEnemyHealthChange += effect.Change * (Player.HealthPoints.Value / 100);
+                            ComboEstimatedPlayerHealthChange += effect.Change * (Player.HealthPoints.Value / 100);
                         }
                         else
                         {
-                            ComboEnemyShield += effect.Change * (Player.HealthPoints.Value / 100);
+                            ComboPlayerShield += effect.Change * (Player.HealthPoints.Value / 100);
                         }
                     }
+
+                    
                 }
+                
+                
+            }
+            foreach (var VARIABLE in combo)
+            {
+                //print($"DamageMultiplier{AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier}");
+                ComboEstimatedEnemyDamageGiven.Add(AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier * EstimatedEnemyDamage);
+
 
             }
+            print($"DamageGiven{ComboEstimatedEnemyDamageGiven[0]},Length{ComboEstimatedEnemyDamageGiven.Count},SUM{ComboEstimatedEnemyDamageGiven.Sum()}");
+
+
+
+            //print($"ComboEnemyDamage{ComboEstimatedEnemyDamage},ComboEstimatedEnemyCritChance{ComboEstimatedEnemyCritChance},ComboEstimatedPlayerDefence{ComboEstimatedPlayerDefence},ComboEstimatedPlayerDodgeChance{ComboEstimatedPlayerDodgeChance},ComboEstimatedPlayerHealthChange{ComboEstimatedPlayerHealthChange}");
             //Estimating Damage Taken
-            float ComboEstimatedPlayerDamageTaken = (ComboEstimatedEnemyDamage * (1 + ComboEstimatedEnemyCritChance)) * (1 - ComboEstimatedPlayerDefence) * (1 - ComboEstimatedPlayerDodgeChance) - ComboEstimatedPlayerHealthChange;
-            if (ComboPlayerShield <= ComboEstimatedPlayerDamageTaken)
+            float ComboEstimatedPlayerDamageTaken = (ComboEstimatedEnemyDamageGiven.Sum() * (1 + ComboEstimatedEnemyCritChance/100)) * (1 - ComboEstimatedPlayerDefence/100) * (1 - ComboEstimatedPlayerDodgeChance/100) - ComboEstimatedPlayerHealthChange;
+            //print($"YYYYComboEnemyDamage{ComboEstimatedPlayerDamageTaken}");
+            if (ComboEstimatedPlayerDamageTaken>0)
             {
-                ComboEstimatedPlayerDamageTaken -= ComboPlayerShield;
+                if (ComboPlayerShield <= ComboEstimatedPlayerDamageTaken)
+                {
+                    ComboEstimatedPlayerDamageTaken -= ComboPlayerShield;
+                }
+                else
+                {
+                    ComboEstimatedPlayerDamageTaken = ComboPlayerShield - ComboEstimatedPlayerDamageTaken;
+                }
+                
             }
-            else
-            {
-                ComboEstimatedPlayerDamageTaken = ComboPlayerShield - ComboEstimatedPlayerDamageTaken;
-            }
+            
+            //print($"PlayerDamageRecieved{ComboEstimatedPlayerDamageTaken},EnemyDamageRecieved{ComboEnemyHealthPercentageChange}");
             float ComboPlayerHealthPercentageChange = 100 / (Player.HealthPoints.Value / ComboEstimatedPlayerDamageTaken);
-
-            BestOption[combo] = ComboPlayerHealthPercentageChange + ComboEnemyHealthPercentageChange;
+            
+            BestOption[combo] = new List<float>()
+                { ComboPlayerHealthPercentageChange - ComboEnemyHealthPercentageChange,ComboPlayerHealthPercentageChange,ComboEnemyHealthPercentageChange };
 
 
 
 
         }
-        var SortedBestOption = from entry in BestOption orderby entry.Value descending select entry;
-
-        print(SortedBestOption.First());
+        var SortedBestOption = from entry in BestOption orderby entry.Value[0] descending select entry;
         var ChosenCombo = SortedBestOption.First();
+        foreach (var VARIABLE in ChosenCombo.Key)
+        {
+            print(VARIABLE);
+            AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject);
+        }
+        foreach (var item in ChosenCombo.Value)
+        {
+            print(item);
+        }
+
+        
 
 
 

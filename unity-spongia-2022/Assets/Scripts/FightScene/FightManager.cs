@@ -21,6 +21,7 @@ public class FightManager : MonoBehaviour
         
         Character PlayerCharatcer = new Character();
         PlayerCharatcer.PostInit();
+        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Fighters_Attack);
         EnemyBrain enemyBrain =  EnemyGameObject.GetComponent<EnemyBrain>();
         EnemyFighter.SetCharacter(EnemyCharatcer);
         PlayerFighter.SetCharacter(PlayerCharatcer);
