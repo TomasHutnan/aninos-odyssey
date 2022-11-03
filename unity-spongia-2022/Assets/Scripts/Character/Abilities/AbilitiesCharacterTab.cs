@@ -16,6 +16,7 @@ namespace AE.Abilities.UI
 
         Character c = SaveData.PlayerCharacter;
 
+        private int emptyEquippedSlots { get { return equippedAbilities.MaxEquipped - c.EquippedAbilities.Count; } }
 
         private void OnEnable()
         {
@@ -32,6 +33,11 @@ namespace AE.Abilities.UI
 
         private void handleOwnedClick(AbilitySlot abilitySlot)
         {
+            if (emptyEquippedSlots > 0)
+            {
+                c.EquippedAbilities.Add(abilitySlot.AbilityName);
+                deselect();
+            }
             if (selectedAbilitySlot == null && selectedAbilityDisplay == null)
             {
                 selectedAbilitySlot = abilitySlot;
@@ -42,15 +48,12 @@ namespace AE.Abilities.UI
                 c.EquippedAbilities.Remove(selectedAbilityDisplay.AbilityName);
                 c.EquippedAbilities.Add(abilitySlot.AbilityName);
 
-                selectedAbilityDisplay.IsSelected = false;
-                selectedAbilityDisplay = null;
-
+                deselect();
                 refreshUI();
             }
             else
             {
-                selectedAbilitySlot.IsSelected = false;
-
+                deselect();
                 selectedAbilitySlot = abilitySlot;
                 abilitySlot.IsSelected = true;
             }
@@ -59,25 +62,36 @@ namespace AE.Abilities.UI
         {
             if (selectedAbilitySlot == null && selectedAbilityDisplay == null)
             {
-                selectedAbilityDisplay = abilityDisplay;
-                abilityDisplay.IsSelected = true;
+                c.EquippedAbilities.Remove(abilityDisplay.AbilityName);
+                deselect();
             }
             else if (selectedAbilitySlot != null)
             {
                 c.EquippedAbilities.Remove(abilityDisplay.AbilityName);
                 c.EquippedAbilities.Add(selectedAbilitySlot.AbilityName);
 
-                selectedAbilitySlot.IsSelected = false;
-                selectedAbilitySlot = null;
-
+                deselect();
                 refreshUI();
             }
             else
             {
-                selectedAbilityDisplay.IsSelected = false;
-
+                deselect();
                 selectedAbilityDisplay = abilityDisplay;
                 abilityDisplay.IsSelected = true;
+            }
+        }
+
+        private void deselect()
+        {
+            if (selectedAbilitySlot != null)
+            {
+                selectedAbilitySlot.IsSelected = false;
+                selectedAbilitySlot = null;
+            }
+            if (selectedAbilityDisplay != null)
+            {
+                selectedAbilityDisplay.IsSelected = false;
+                selectedAbilityDisplay = null;
             }
         }
 

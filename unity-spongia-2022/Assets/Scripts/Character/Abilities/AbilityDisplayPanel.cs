@@ -15,6 +15,8 @@ namespace AE.Abilities.UI
         [Space]
         [SerializeField] Character c = SaveData.PlayerCharacter;
 
+        public int MaxEquipped { get { return abilityDisplays.Length; } }
+
         public event Action<AbilityDisplay> OnAbilityClickedEvent;
 
         private void OnEnable()
