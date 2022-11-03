@@ -8,6 +8,12 @@ using TMPro;
 using AE.Items;
 using System.Text;
 
+using static AbilityStorage;
+using static UnityEditor.Progress;
+using Abilities;
+using System.Drawing;
+using Item = AE.Items.Item;
+
 public class Tooltip : MonoBehaviour
 {
     [SerializeField] GameObject tooltipParent;
@@ -31,13 +37,19 @@ public class Tooltip : MonoBehaviour
         tooltipParent.SetActive(false);
         isShown = false;
 
-        EventManager.OnItemSlotEnterEvent += ShowTooltip;
-        EventManager.OnItemSlotExitEvent += HideTooltip;
+        EventManager.OnItemSlotEnterEvent += handleItemTooltip;
+        EventManager.OnItemSlotExitEvent += hideTooltip;
+
+        EventManager.OnAbilitySlotEnterEvent += handleAbilityTooltip;
+        EventManager.OnAbilitySlotExitEvent += hideTooltip;
     }
     private void OnDisable()
     {
-        EventManager.OnItemSlotEnterEvent -= ShowTooltip;
-        EventManager.OnItemSlotExitEvent -= HideTooltip;
+        EventManager.OnItemSlotEnterEvent -= handleItemTooltip;
+        EventManager.OnItemSlotExitEvent -= hideTooltip;
+
+        EventManager.OnAbilitySlotEnterEvent -= handleAbilityTooltip;
+        EventManager.OnAbilitySlotExitEvent -= hideTooltip;
     }
 
     private void Update()
@@ -68,40 +80,63 @@ public class Tooltip : MonoBehaviour
             tooltipRectTransform = tooltipParent.GetComponent<RectTransform>();
     }
 
-    private void ShowTooltip(Item item)
+    private void handleItemTooltip(Item item)
     {
         if (item is null)
             return;
 
-        tooltipParent.SetActive(true);
-        isShown = true;
-
         nameLabel.text = item.Name;
         typeLabel.text = item.Type.ToString();
-        valueLabel.text = item.value.ToString() + "$";
+        valueLabel.text = $"<color=#FFD700>{ item.value} $</color>";
 
         sb.Length = 0;
 
-        AddModLine(item.DamageBonus, "Damage", false);
-        AddModLine(item.CritPercentBonus, "Crit Chance", true);
+        addModLine(item.DamageBonus, "Damage", false);
+        addModLine(item.CritPercentBonus, "Crit Chance", true);
 
-        AddModLine(item.ArmorBonus, "Armor", false);
-        AddModLine(item.DodgeBonus, "Dodge", false);
+        addModLine(item.ArmorBonus, "Armor", false);
+        addModLine(item.DodgeBonus, "Dodge", false);
 
-        AddModLine(item.ManaBonus, "Mana", false);
+        addModLine(item.ManaBonus, "Mana", false);
 
+        addModLine(item.Weight, "Weight", false);
 
-        AddModLine(item.Weight, "Weight", false);
+        showTooltip();
+    }
+    private void handleAbilityTooltip(AbilityName abilityName)
+    {
+        if (abilityName == AbilityName.None)
+            return;
+
+        Ability ability = AbilityStorage.GetAbility[abilityName];
+        if (ability == null)
+            return;
+
+        sb.Length = 0;
+
+        nameLabel.text = ability.name;
+        typeLabel.text = ability.AffectsCaster ? "<color=#C1FFC1>SELF</color>" : "<color=#8B0000>ENEMY</color>";
+        valueLabel.text = ability.ManaCost == 0 ? $"<color=#E1AD0F>{ability.StaminaCost}$</color>" : $"<color=#2986CC>{ability.ManaCost}$</color>";
+
+        sb.Append("NOT IMPLEMENTED");
+
+        showTooltip();
+    }
+
+    private void showTooltip()
+    {
+        tooltipParent.SetActive(true);
+        isShown = true;
 
         modsLabel.text = sb.ToString();
     }
-    private void HideTooltip()
+    private void hideTooltip()
     {
         tooltipParent.SetActive(false);
         isShown = false;
     }
 
-    private void AddModLine(float statMod, string statName, bool isPercentual)
+    private void addModLine(float statMod, string statName, bool isPercentual)
     {
         if (statMod == 0)
             return;

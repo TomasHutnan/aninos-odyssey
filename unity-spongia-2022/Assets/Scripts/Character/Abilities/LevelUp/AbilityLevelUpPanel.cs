@@ -62,8 +62,10 @@ namespace AE.Abilities.UI
             }
         }
 
-        private void handleAbilityChoice(AbilityName _abilityName)
+        private void handleAbilityChoice(AbilityDisplay abilityDisplay)
         {
+            AbilityName _abilityName = abilityDisplay.AbilityName;
+
             if (_abilityName == AbilityName.None)
             {
                 print("Trying to add AbilityName.None");

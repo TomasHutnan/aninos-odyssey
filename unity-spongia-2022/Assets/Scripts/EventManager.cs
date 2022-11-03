@@ -4,6 +4,7 @@ using AE.Items.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using static AbilityStorage;
 
 namespace AE.EventManager
 {
@@ -11,6 +12,9 @@ namespace AE.EventManager
     {
         public static event Action<Item> OnItemSlotEnterEvent;
         public static event Action OnItemSlotExitEvent;
+
+        public static event Action<AbilityName> OnAbilitySlotEnterEvent;
+        public static event Action OnAbilitySlotExitEvent;
 
         public static event Action<CharacterStat> OnStatEnterEvent;
         public static event Action OnStatExitEvent;
@@ -27,6 +31,15 @@ namespace AE.EventManager
         public static void TriggerItemSlotExit()
         {
             OnItemSlotExitEvent?.Invoke();
+        }
+
+        public static void TriggerAbilitySlotEnter(AbilityName abilityName)
+        {
+            OnAbilitySlotEnterEvent?.Invoke(abilityName);
+        }
+        public static void TriggerAbilitySlotExit()
+        {
+            OnAbilitySlotExitEvent?.Invoke();
         }
 
         public static void TriggerStatEnter(CharacterStat stat)

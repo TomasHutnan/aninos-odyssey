@@ -7,16 +7,30 @@ using TMPro;
 using System;
 using Abilities;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 namespace AE.Abilities.UI
 {
     public class AbilityDisplay : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] Image icon;
+        [SerializeField] AbilitySlot abilitySlot;
         [SerializeField] TextMeshProUGUI nameLabel;
         [SerializeField] TextMeshProUGUI descriptionLabel;
 
-        public event Action<AbilityName> OnAbilityClickedEvent;
+        [SerializeField] GameObject opacity;
+
+        public event Action<AbilityDisplay> OnAbilityClickedEvent;
+
+        private bool _isSelected = false;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                resloveSelection();
+            }
+        }
 
         private AbilityName _abilityName;
         public AbilityName AbilityName
@@ -26,20 +40,24 @@ namespace AE.Abilities.UI
             {
                 _abilityName = value;
 
+                abilitySlot.AbilityName = _abilityName;
+
                 if (_abilityName == AbilityName.None)
                 {
-                    icon.sprite = null;
-                    nameLabel.text = "Missing name";
-                    descriptionLabel.text = "Missing description";
+                    nameLabel.text = "EMPTY";
+                    descriptionLabel.text = "";
                 }
                 else
                 {
                     Ability ability = AbilityStorage.GetAbility[_abilityName];
-                    //icon.sprite = ability.Icon;
                     nameLabel.text = ability.name;
                     descriptionLabel.text = ability.AbilityDescription;
                 }
             }
+        }
+        private void resloveSelection()
+        {
+            opacity.GetComponent<Outline>().enabled = IsSelected;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -49,7 +67,7 @@ namespace AE.Abilities.UI
                 if (eventData.button == PointerEventData.InputButton.Left
                     || eventData.button == PointerEventData.InputButton.Right)
                 {
-                    OnAbilityClickedEvent?.Invoke(AbilityName);
+                    OnAbilityClickedEvent?.Invoke(this);
                 }
             }
         }
