@@ -36,10 +36,28 @@ namespace Abilities
     public enum Family
     {
         None = -1,
-        Crit_Chance,
-        Heal,
+        
+        // Attack - basic 0
+        Fighter_Attack_01, // 1, 2
+        Tank_Attack_01, // 1, 2
+        Rogue_Attack_01, // 1, 2
+        Priest_Attack_01, // 1, 2
 
+        // Debufs
+        Armor_Break_01, // 1, 2
 
+        // Defense - basic 0
+        Fighter_Defense_01, // 1, 2
+        Tank_Defense_01, // 1, 2
+        Rogue_Defense_01, // 1, 2
+        Priest_Defense_01, // 1, 2
+
+        // Blessings
+        Crit_Chance_Blessing_01, // 0, 1, 2
+        Damage_Blessing_01, // 0, 1, 2
+        Defense_Blessing_01, // 0, 1, 2
+        Dodge_Blessing_01, // 0, 1, 2
+        Health_Blessing_01, // 0, 1, 2
     }
     public enum Level
     {
@@ -47,12 +65,11 @@ namespace Abilities
         Lesser,
         Paradigm,
         Greater,
-
     }
     public enum AbilityTags
     {
         //Effected stats
-        Healt,
+        Health,
         Mana,
         Stamina,
         Damage,
@@ -82,6 +99,8 @@ namespace Abilities
     {
         public Sprite Icon;
         public List<AbilityTags> AbilityTags;
+        public Family AbilityFamily;
+        public Level AbilityLevel;
         public string AbilityDescription;
         public int AbilityCount = 1;
         public int StaminaCost;
