@@ -97,7 +97,7 @@ public class Character : InventoryHolder
         LevelUpSystem _levelUpSystem = null,
         HashSet<AbilityName> _unlockedAbilities = null, HashSet<AbilityName> _equippedAbilities = null,
         int _levelUpAbilitiesCount = 0,
-        int _baseDamage = 10,
+        int _baseDamage = 20,
         int _baseCritChance = 0,
         int _baseHealthPoints = 200,
         int _baseDamageReduction = 0,
