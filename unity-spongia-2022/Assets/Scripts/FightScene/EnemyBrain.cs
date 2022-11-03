@@ -56,20 +56,25 @@ public class EnemyBrain : MonoBehaviour
             float CombinedManaCost = 0;
             foreach (var spell in SpellCombination)
             {
-                //print($"Tuna{spell}");
-                CombinedStaminaCost += AbilityStorage.GetAbility[spell].StaminaCost ;
-                CombinedManaCost += AbilityStorage.GetAbility[spell].ManaCost;
-                foreach (var item in AbilityStorage.GetAbility[spell].CasterEffects)
+                for (int i = 0; i < AbilityStorage.GetAbility[spell].AbilityCount; i++)
                 {
-                    if(item.stat == Stat.Stamina & item.Duration == 0)
+                    //print($"Tuna{spell}");
+                    CombinedStaminaCost += AbilityStorage.GetAbility[spell].StaminaCost * EnemyHolder.StatHolder[Stat.Weight] / 80; ;
+                    CombinedManaCost += AbilityStorage.GetAbility[spell].ManaCost;
+                    foreach (var item in AbilityStorage.GetAbility[spell].CasterEffects)
                     {
-                        CombinedStaminaCost -= item.Change * (Enemy.Stamina.Value / 100);
+                        if (item.stat == Stat.Stamina & item.Duration == 0)
+                        {
+                            CombinedStaminaCost -= item.Change * (Enemy.Stamina.Value / 100);
+                        }
+                        else if (item.stat == Stat.Mana & item.Duration == 0)
+                        {
+                            CombinedManaCost -= item.Change * (Enemy.Mana.Value / 100);
+                        }
                     }
-                    else if (item.stat == Stat.Mana & item.Duration == 0)
-                    {
-                        CombinedManaCost -= item.Change * (Enemy.Mana.Value / 100);
-                    }
+
                 }
+                
             }
             AbilityCosts[SpellCombination] = new List<float>() { CombinedStaminaCost, CombinedManaCost };
            
@@ -253,47 +258,59 @@ public class EnemyBrain : MonoBehaviour
             float ComboEnemyShield = EnemyShield;
             float ComboEstimatedEnemyDodgeChance = EstimatedEnemyDodgeChance;
             float ComboEstimatedEnemyHealthChange = EstimatedEnemyHealthChange;
-            
+            bool StunPresent = false;
 
             foreach (var item in combo)
             {
-                //Estimating Player Damage
-                foreach (var effect in AbilityStorage.GetAbility[item].TargetEffects)
+                
+                for (int i = 0; i < AbilityStorage.GetAbility[item].AbilityCount; i++)
                 {
-                    if(effect.stat == Stat.Damage & effect.Delay == 0)
+                    //Estimating Player Damage
+                    foreach (var effect in AbilityStorage.GetAbility[item].TargetEffects)
                     {
-                        ComboEstimatedPlayerDamage += effect.Change * (Player.Damage.Value / 100);
-                    }
-                    if (effect.stat == Stat.CritChance & effect.Delay == 0)
-                    {
-                        ComboEstimatedPlayerCritChance += effect.Change ;
-                    }
-                }
-                //Estimating Enemy DamageReductions
-                foreach (var effect in AbilityStorage.GetAbility[item].CasterEffects)
-                {
-                    if (effect.stat == Stat.DodgeChance & effect.Delay == 0)
-                    {
-                        ComboEstimatedEnemyDodgeChance += effect.Change;
-                    }
-                    if (effect.stat == Stat.DamageReduction & effect.Delay == 0)
-                    {
-                        ComboEstimatedEnemyDefence += effect.Change;
-                    }
-                    if (effect.stat == Stat.HealthPoints & effect.Delay == 0)
-                    {
-                        if (effect.Duration == 0)
+                        if (effect.stat == Stat.Stun)
                         {
-                            ComboEstimatedEnemyHealthChange += effect.Change * (Enemy.HealthPoints.Value / 100);
+                            StunPresent = true;
                         }
-                        else
+                        if (effect.stat == Stat.Damage & effect.Delay == 0)
                         {
-                            ComboEnemyShield += effect.Change * (Enemy.HealthPoints.Value / 100);
+                            ComboEstimatedPlayerDamage += effect.Change * (Player.Damage.Value / 100);
+                        }
+                        if (effect.stat == Stat.CritChance & effect.Delay == 0)
+                        {
+                            ComboEstimatedPlayerCritChance += effect.Change;
                         }
                     }
+                    //Estimating Enemy DamageReductions
+                    foreach (var effect in AbilityStorage.GetAbility[item].CasterEffects)
+                    {
+
+                        if (effect.stat == Stat.DodgeChance & effect.Delay == 0)
+                        {
+                            ComboEstimatedEnemyDodgeChance += effect.Change;
+                        }
+                        if (effect.stat == Stat.DamageReduction & effect.Delay == 0)
+                        {
+                            ComboEstimatedEnemyDefence += effect.Change;
+                        }
+                        if (effect.stat == Stat.HealthPoints & effect.Delay == 0)
+                        {
+                            if (effect.Duration == 0)
+                            {
+                                ComboEstimatedEnemyHealthChange += effect.Change * (Enemy.HealthPoints.Value / 100);
+                            }
+                            else
+                            {
+                                ComboEnemyShield += effect.Change * (Enemy.HealthPoints.Value / 100);
+                            }
+                        }
+                    }
+
                 }
+               
 
             }
+            float StunMultiplier = StunPresent ? 0 : 1;
             //Estimating Damage Taken
             float ComboEstimatedEnemyDamageTaken = (ComboEstimatedPlayerDamage * (1 + ComboEstimatedPlayerCritChance/100)) * (1 - ComboEstimatedEnemyDefence/100) * (1 - ComboEstimatedEnemyDodgeChance/100) - ComboEstimatedEnemyHealthChange;
 
@@ -315,7 +332,7 @@ public class EnemyBrain : MonoBehaviour
             //print($"EnemyDamageTaken{ComboEstimatedEnemyDamageTaken},ComboEstimatedPlayerDamage{ComboEstimatedPlayerDamage},ComboEstimatedPlayerCritChance{ComboEstimatedPlayerCritChance},ComboEstimatedEnemyDefence{ComboEstimatedEnemyDefence},ComboEstimatedEnemyDodgeChance{ComboEstimatedEnemyDodgeChance},ComboEstimatedEnemyHealthChange{ComboEstimatedEnemyHealthChange}ComboEnemyShield{ComboEnemyShield}");
 
             float ComboEnemyHealthPercentageChange = 100 / ( Enemy.HealthPoints.Value / ComboEstimatedEnemyDamageTaken );
-            print(ComboEnemyHealthPercentageChange);
+            //print(ComboEnemyHealthPercentageChange);
             //Enemy Damage
 
             float ComboEstimatedEnemyDamage = EstimatedEnemyDamage;
@@ -330,55 +347,68 @@ public class EnemyBrain : MonoBehaviour
 
             foreach (var item in combo)
             {
-                
-                //Estimating Player Damage Taken
+                for (int i = 0; i < AbilityStorage.GetAbility[item].AbilityCount; i++)
+                {
+                 //Estimating Player Damage Taken
                 foreach (var effect in AbilityStorage.GetAbility[item].CasterEffects)
-                {
-                    if (effect.stat == Stat.Damage & effect.Delay == 0)
                     {
-                        ComboEstimatedEnemyDamage += effect.Change * (Enemy.Damage.Value / 100);
-                    }
-                    if (effect.stat == Stat.CritChance & effect.Delay == 0)
-                    {
-                        ComboEstimatedEnemyCritChance += effect.Change;
-                    }
-                }
-                //Estimating Player DamageReductions
-                foreach (var effect in AbilityStorage.GetAbility[item].TargetEffects)
-                {
-                    if (effect.stat == Stat.DodgeChance & effect.Delay == 0)
-                    {
-                        ComboEstimatedPlayerDodgeChance += effect.Change;
-                    }
-                    if (effect.stat == Stat.DamageReduction & effect.Delay == 0)
-                    {
-                        ComboEstimatedPlayerDefence += effect.Change;
-                    }
-                    if (effect.stat == Stat.HealthPoints & effect.Delay == 0)
-                    {
-                        if (effect.Duration == 0)
+                        if (effect.stat == Stat.Damage & effect.Delay == 0)
                         {
-                            ComboEstimatedPlayerHealthChange += effect.Change * (Player.HealthPoints.Value / 100);
+                            ComboEstimatedEnemyDamage += effect.Change * (Enemy.Damage.Value / 100);
                         }
-                        else
+                        if (effect.stat == Stat.CritChance & effect.Delay == 0)
                         {
-                            ComboPlayerShield += effect.Change * (Player.HealthPoints.Value / 100);
+                            ComboEstimatedEnemyCritChance += effect.Change;
                         }
+                    }
+                    //Estimating Player DamageReductions
+                    foreach (var effect in AbilityStorage.GetAbility[item].TargetEffects)
+                    {
+                        if (effect.stat == Stat.DodgeChance & effect.Delay == 0)
+                        {
+                            ComboEstimatedPlayerDodgeChance += effect.Change;
+                        }
+                        if (effect.stat == Stat.DamageReduction & effect.Delay == 0)
+                        {
+                            ComboEstimatedPlayerDefence += effect.Change;
+                        }
+                        if (effect.stat == Stat.HealthPoints & effect.Delay == 0)
+                        {
+                            if (effect.Duration == 0)
+                            {
+                                ComboEstimatedPlayerHealthChange += effect.Change * (Player.HealthPoints.Value / 100);
+                            }
+                            else
+                            {
+                                ComboPlayerShield += effect.Change * (Player.HealthPoints.Value / 100);
+                            }
+                        }
+
+
                     }
 
-                    
                 }
+
+                
                 
                 
             }
             foreach (var VARIABLE in combo)
             {
-                //print($"DamageMultiplier{AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier}");
-                ComboEstimatedEnemyDamageGiven.Add(AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier * EstimatedEnemyDamage);
+                for (int i = 0; i < AbilityStorage.GetAbility[VARIABLE].AbilityCount; i++)
+                {
+
+                    //print($"DamageMultiplier{AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier}");
+                    ComboEstimatedEnemyDamageGiven.Add(AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier * EstimatedEnemyDamage);
+                }
 
 
             }
-            print($"DamageGiven{ComboEstimatedEnemyDamageGiven[0]},Length{ComboEstimatedEnemyDamageGiven.Count},SUM{ComboEstimatedEnemyDamageGiven.Sum()}");
+            if(ComboEstimatedEnemyDamageGiven.Count == 0)
+            {
+                ComboEstimatedEnemyDamageGiven.Add(0);
+            }
+           // print($"DamageGiven{ComboEstimatedEnemyDamageGiven[0]},Length{ComboEstimatedEnemyDamageGiven.Count},SUM{ComboEstimatedEnemyDamageGiven.Sum()}");
 
 
 
@@ -418,9 +448,9 @@ public class EnemyBrain : MonoBehaviour
         }
         foreach (var item in ChosenCombo.Value)
         {
-            print(item);
+            //print(item);
         }
-
+        EnemyHolder.NextRound();
         
 
 

@@ -92,10 +92,12 @@ namespace Abilities
 
         public void UseAbility(GameObject CasterObject, GameObject TargetObject)
         {
-        
+
            
+          
             RealtimeStatsHolder TargetHolder = TargetObject.GetComponent<RealtimeStatsHolder>();
             RealtimeStatsHolder CasterHolder = CasterObject.GetComponent<RealtimeStatsHolder>();
+            CasterHolder.Print("Idem");
             Character TargetCharacter = TargetHolder._fighter;
             Character CasterCharacter = CasterHolder._fighter;
             if (CasterHolder.StatHolder[Stat.Stun] != 0) { return; }
@@ -149,31 +151,16 @@ namespace Abilities
 
                 if (item.stat == Stat.Stun)
                 {
+                   
                     float change = item.Change;
                     ActiveEffect effect = new ActiveEffect(change, item.stat, item.Duration, item.Delay, TargetStats[item.stat].StatType);
                     TargetHolder.delayedEffects.Add(effect);
 
                 }
-                else if(item.stat == Stat.HealthPoints)
-                {
-                    float Damage = Caster[Stat.Damage];
-                    float CriticalChance = Caster[Stat.CritChance];
-                    int Chance = UnityEngine.Random.Range(1, 101);
-                    int DodgeRoll = UnityEngine.Random.Range(1, 101);
-                    float DodgeChance = Target[Stat.DodgeChance];
-                    int DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
-                    int CasterCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
-                    //Calculating CasterOutput Damage
-                    float CasterOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * CasterCriticalMultiplier * DodgeMultiplier;
-
-                    float change =( item.Change * (TargetStats[item.stat].Maximum / 100) ) + (-CasterOutputDamage * (1 - Target[Stat.DamageReduction] / 100));
-                    ActiveEffect effect = new ActiveEffect(change, item.stat, item.Duration, item.Delay, TargetStats[item.stat].StatType);
-                    TargetHolder.delayedEffects.Add(effect);
-
-                }
+                
                 else if(item.Change != 0)
                 {
-                    
+                    CasterHolder.Print(item.Delay.ToString());
                     float change = item.Change * (TargetStats[item.stat].Maximum/100);
                     ActiveEffect effect = new ActiveEffect(change, item.stat, item.Duration, item.Delay, TargetStats[item.stat].StatType);
                     TargetHolder.delayedEffects.Add(effect);
@@ -188,31 +175,57 @@ namespace Abilities
                     CasterHolder.delayedEffects.Add(effect);
 
                 }
-                else if(item.stat == Stat.HealthPoints)
-                {
-                    float Damage = Caster[Stat.Damage];
-                    float CriticalChance = Caster[Stat.CritChance];
-                    int DodgeRoll = UnityEngine.Random.Range(1, 101);
-                    float DodgeChance = Caster[Stat.DodgeChance];
-                    int DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
-                    int Chance = UnityEngine.Random.Range(1, 101);
-                    int TargetCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
-                    //Caclulating TargetOutput Damage
-                    float TargetOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * TargetCriticalMultiplier * DodgeMultiplier;
-                   
-                    float change = (item.Change * (CasterStats[item.stat].Maximum / 100)) + (-TargetOutputDamage * (1 - Caster[Stat.DamageReduction] / 100));
-                    ActiveEffect effect = new ActiveEffect(change, item.stat, item.Duration, item.Delay, CasterStats[item.stat].StatType);
-                    CasterHolder.delayedEffects.Add(effect);
-
-                }
+                
                 else if (item.Change != 0)
                 {
-                    
+                    CasterHolder.Print(item.Delay.ToString());
                     float change = item.Change * (CasterStats[item.stat].Maximum / 100);
-                    ActiveEffect effect = new ActiveEffect(change, item.stat,item.Delay ,item.Duration, CasterStats[item.stat].StatType);
+                    ActiveEffect effect = new ActiveEffect(change, item.stat,item.Duration ,item.Delay, CasterStats[item.stat].StatType);
                     CasterHolder.delayedEffects.Add(effect);
                 }
             }
+            if(CasterDamageMultiplier != 0)
+            {
+               
+                float Damage = Caster[Stat.Damage];
+                float CriticalChance = Caster[Stat.CritChance];
+                int Chance = UnityEngine.Random.Range(1, 101);
+                int DodgeRoll = UnityEngine.Random.Range(1, 101);
+                float DodgeChance = Target[Stat.DodgeChance];
+                int DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
+                int CasterCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
+                //Calculating CasterOutput Damage
+                float CasterOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * CasterCriticalMultiplier * DodgeMultiplier;
+
+
+                ActiveEffect DDamage = new ActiveEffect(-CasterOutputDamage, Stat.HealthPoints, 0, 0, StatType.Flat);
+                TargetHolder.delayedEffects.Add(DDamage);
+            }
+
+
+            if (TargetDamageMultiplier != 0)
+            {
+                float Damage = Caster[Stat.Damage];
+                float CriticalChance = Caster[Stat.CritChance];
+                float DodgeRoll = UnityEngine.Random.Range(1, 101);
+                float DodgeChance = Caster[Stat.DodgeChance];
+                float DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
+                float Chance = UnityEngine.Random.Range(1, 101);
+                float TargetCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
+                //Caclulating TargetOutput Damage
+                float TargetOutputDamage = (float)Math.Round(Damage * TargetDamageMultiplier) * TargetCriticalMultiplier * DodgeMultiplier;
+
+
+                ActiveEffect DDamage = new ActiveEffect(-TargetOutputDamage, Stat.HealthPoints, 0, 0, StatType.Flat);
+                CasterHolder.delayedEffects.Add(DDamage);
+
+            }
+
+            
+
+            
+
+
 
             //All spells that dont affect Caster
             if (Target != null)
