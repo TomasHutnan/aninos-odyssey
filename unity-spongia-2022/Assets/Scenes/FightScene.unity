@@ -220,6 +220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyFighter: {fileID: 1365485809}
   PlayerFighter: {fileID: 39233713}
+  EnemyGameObject: {fileID: 1365485805}
+  EnemyAbilities: 0e00000001000000200000001c0000001900000018000000
 --- !u!1 &152215831
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,9 +724,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775622001}
-        m_TargetAssemblyTypeName: ButtonAbility, Assembly-CSharp
-        m_MethodName: Cast
+      - m_Target: {fileID: 1365485810}
+        m_TargetAssemblyTypeName: EnemyBrain, Assembly-CSharp
+        m_MethodName: MakeMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1807,6 +1809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1365485806}
   - component: {fileID: 1365485809}
+  - component: {fileID: 1365485810}
   m_Layer: 0
   m_Name: EnemyFighter
   m_TagString: Untagged
@@ -1844,6 +1847,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AvailableAbilities: 
   text: {fileID: 1177279416}
+--- !u!114 &1365485810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365485805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27d74ccaf47d3543a2b8001b5ad89b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerHolder: {fileID: 39233713}
+  EnemyHolder: {fileID: 1365485809}
+  List: 
 --- !u!1 &1532173565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,8 +2052,8 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     m_RemovedComponents:
+    - {fileID: 0}
     - {fileID: 2799145709388390193, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
-    - {fileID: 2799145709388390192, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
 --- !u!1 &1660180411
 GameObject:

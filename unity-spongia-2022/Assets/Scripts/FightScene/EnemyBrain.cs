@@ -13,12 +13,13 @@ public class EnemyBrain : MonoBehaviour
     public RealtimeStatsHolder EnemyHolder;
     public Character Player;
     public Character Enemy;
+    public List<AbilityName> List;
     public System.Linq.IOrderedEnumerable<KeyValuePair<List<AbilityName>,List<float>>> sortedStaminaDict;
     public System.Linq.IOrderedEnumerable<KeyValuePair<List<AbilityName>, List<float>>> sortedManaDict;
     public void Init()
     {
 
-        List<AbilityName> List = null;
+        
         List<List<AbilityName>> SecondList = new List<List<AbilityName>>();
         for (int a = 0; a < List.Count; a++)
         {
@@ -53,6 +54,7 @@ public class EnemyBrain : MonoBehaviour
             float CombinedManaCost = 0;
             foreach (var spell in SpellCombination)
             {
+                print($"Tuna{spell}");
                 CombinedStaminaCost += AbilityStorage.GetAbility[spell].StaminaCost ;
                 CombinedManaCost += AbilityStorage.GetAbility[spell].ManaCost;
                 foreach (var item in AbilityStorage.GetAbility[spell].CasterEffects)
@@ -67,9 +69,8 @@ public class EnemyBrain : MonoBehaviour
                     }
                 }
             }
-            AbilityCosts[SpellCombination][0] = CombinedStaminaCost;
-            AbilityCosts[SpellCombination][1] = CombinedManaCost;
-
+            AbilityCosts[SpellCombination] = new List<float>() { CombinedStaminaCost, CombinedManaCost };
+           
 
         }
         sortedStaminaDict = from entry in AbilityCosts orderby entry.Value[0] ascending select entry;

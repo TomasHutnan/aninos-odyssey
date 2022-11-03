@@ -81,6 +81,7 @@ public class AbilityStorage : MonoBehaviour
         {
             GetAbility[item.Name] = item.ability;
         }
+        print(GetAbility[AbilityName.Tank_Attack]);
     }
     // Start is called before the first frame update
 
