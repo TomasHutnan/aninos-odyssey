@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Greater Rogue Attack
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 0b000000
+  AbilityFamily: 2
+  AbilityLevel: 2
   AbilityDescription: Assasinate your enemy with multiple quick strikes.
   AbilityCount: 10
   StaminaCost: 5

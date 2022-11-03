@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Greater Armor Break
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 100000000500000012000000
+  AbilityFamily: 4
+  AbilityLevel: 2
   AbilityDescription: Termorarily break the armor of your enemy making them take
     increased damage.
   AbilityCount: 1

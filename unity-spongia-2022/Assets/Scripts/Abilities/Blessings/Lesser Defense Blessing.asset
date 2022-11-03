@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d0000000500000012000000
+  AbilityFamily: 12
+  AbilityLevel: 0
   AbilityDescription: Call upon the gods to receive temporary bonus defense.
   AbilityCount: 1
   StaminaCost: 0

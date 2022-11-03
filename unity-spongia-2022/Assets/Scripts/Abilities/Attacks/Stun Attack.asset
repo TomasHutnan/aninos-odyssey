@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Stun Attack
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 100000000c00000012000000
+  AbilityFamily: -1
+  AbilityLevel: -1
   AbilityDescription: Stuns your enemy for 1 turn rendering them incapable of doing
     anything.
   AbilityCount: 1

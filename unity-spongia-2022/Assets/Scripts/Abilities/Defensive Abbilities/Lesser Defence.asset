@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d0000000500000012000000
+  AbilityFamily: -1
+  AbilityLevel: -1
   AbilityDescription: Fortifie yourself with your bare hands,
   AbilityCount: 1
   StaminaCost: 15

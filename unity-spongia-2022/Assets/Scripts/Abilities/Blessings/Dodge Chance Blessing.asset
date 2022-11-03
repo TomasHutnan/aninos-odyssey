@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d0000000600000012000000
+  AbilityFamily: 13
+  AbilityLevel: 1
   AbilityDescription: Call upon the gods to receive temporary bonus dodge chance.
   AbilityCount: 1
   StaminaCost: 0

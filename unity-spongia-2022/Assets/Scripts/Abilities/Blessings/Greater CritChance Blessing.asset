@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d000000040000001200000011000000
+  AbilityFamily: 10
+  AbilityLevel: 2
   AbilityDescription: Call upon the gods to receive temporary bonus crit chance.
   AbilityCount: 1
   StaminaCost: 0

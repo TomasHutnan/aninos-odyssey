@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d00000005000000120000000200000013000000
+  AbilityFamily: 6
+  AbilityLevel: 1
   AbilityDescription: 'Fortifie yourself with your weapon gaining stamina and temporary
     defense. '
   AbilityCount: 1

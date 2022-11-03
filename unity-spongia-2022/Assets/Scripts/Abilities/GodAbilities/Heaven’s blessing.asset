@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d000000010000001200000011000000030000001200000011000000
+  AbilityFamily: -1
+  AbilityLevel: -1
   AbilityDescription: Communicate with the will of Gaia and obtaine her wisdom, gaining
     damage and inexhaustable reserves of mana.
   AbilityCount: 1

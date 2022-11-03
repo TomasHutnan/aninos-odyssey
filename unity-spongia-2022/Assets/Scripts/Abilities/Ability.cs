@@ -45,6 +45,7 @@ namespace Abilities
 
         // Debufs
         Armor_Break_01, // 1, 2
+        Fatigue_01, // 1, 2
 
         // Defense - basic 0
         Fighter_Defense_01, // 1, 2

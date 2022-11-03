@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
-  m_Name: Greater Heal Blessing
+  m_Name: Health Blessing
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 0d0000000000000013000000
+  AbilityFamily: 14
+  AbilityLevel: 1
   AbilityDescription: Call upon the gods to regenerate your health.
   AbilityCount: 1
   StaminaCost: 0
-  ManaCost: 45
+  ManaCost: 30
   TargetDamageMultiplier: 0
   CasterDamageMultiplier: 0
   AffectsTarget: 0
@@ -26,6 +29,6 @@ MonoBehaviour:
   TargetEffects: []
   CasterEffects:
   - stat: 0
-    Change: 20
+    Change: 10
     Duration: 0
     Delay: 0
