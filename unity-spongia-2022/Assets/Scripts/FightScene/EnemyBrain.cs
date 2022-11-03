@@ -272,13 +272,13 @@ public class EnemyBrain : MonoBehaviour
                         {
                             StunPresent = true;
                         }
-                        if (effect.stat == Stat.Damage & effect.Delay == 0)
+                        if (effect.stat == Stat.Damage )
                         {
-                            ComboEstimatedPlayerDamage += effect.Change * (Player.Damage.Value / 100);
+                            ComboEstimatedPlayerDamage += effect.Change * (Player.Damage.Value / 100) * (1 - 0.2f * effect.Delay); ;
                         }
-                        if (effect.stat == Stat.CritChance & effect.Delay == 0)
+                        if (effect.stat == Stat.CritChance )
                         {
-                            ComboEstimatedPlayerCritChance += effect.Change;
+                            ComboEstimatedPlayerCritChance += effect.Change * (1 - 0.2f * effect.Delay); ;
                         }
                     }
                     //Estimating Enemy DamageReductions
@@ -287,21 +287,21 @@ public class EnemyBrain : MonoBehaviour
 
                         if (effect.stat == Stat.DodgeChance & effect.Delay == 0)
                         {
-                            ComboEstimatedEnemyDodgeChance += effect.Change;
+                            ComboEstimatedEnemyDodgeChance += effect.Change * (1 - 0.2f * effect.Delay); ;
                         }
-                        if (effect.stat == Stat.DamageReduction & effect.Delay == 0)
+                        if (effect.stat == Stat.DamageReduction )
                         {
-                            ComboEstimatedEnemyDefence += effect.Change;
+                            ComboEstimatedEnemyDefence += effect.Change * (1-0.2f*effect.Delay);
                         }
-                        if (effect.stat == Stat.HealthPoints & effect.Delay == 0)
+                        if (effect.stat == Stat.HealthPoints )
                         {
                             if (effect.Duration == 0)
                             {
-                                ComboEstimatedEnemyHealthChange += effect.Change * (Enemy.HealthPoints.Value / 100);
+                                ComboEstimatedEnemyHealthChange += effect.Change * (Enemy.HealthPoints.Value / 100) * (1 - 0.2f * effect.Delay); ;
                             }
                             else
                             {
-                                ComboEnemyShield += effect.Change * (Enemy.HealthPoints.Value / 100);
+                                ComboEnemyShield += effect.Change * (Enemy.HealthPoints.Value / 100) * (1 - 0.2f * effect.Delay); ;
                             }
                         }
                     }
@@ -352,35 +352,35 @@ public class EnemyBrain : MonoBehaviour
                  //Estimating Player Damage Taken
                 foreach (var effect in AbilityStorage.GetAbility[item].CasterEffects)
                     {
-                        if (effect.stat == Stat.Damage & effect.Delay == 0)
+                        if (effect.stat == Stat.Damage)
                         {
-                            ComboEstimatedEnemyDamage += effect.Change * (Enemy.Damage.Value / 100);
+                            ComboEstimatedEnemyDamage += effect.Change * (Enemy.Damage.Value / 100) * (1 - 0.2f * effect.Delay); ;
                         }
-                        if (effect.stat == Stat.CritChance & effect.Delay == 0)
+                        if (effect.stat == Stat.CritChance )
                         {
-                            ComboEstimatedEnemyCritChance += effect.Change;
+                            ComboEstimatedEnemyCritChance += effect.Change * (1 - 0.2f * effect.Delay); ;
                         }
                     }
                     //Estimating Player DamageReductions
                     foreach (var effect in AbilityStorage.GetAbility[item].TargetEffects)
                     {
-                        if (effect.stat == Stat.DodgeChance & effect.Delay == 0)
+                        if (effect.stat == Stat.DodgeChance )
                         {
-                            ComboEstimatedPlayerDodgeChance += effect.Change;
+                            ComboEstimatedPlayerDodgeChance += effect.Change * (1 - 0.2f * effect.Delay); ;
                         }
-                        if (effect.stat == Stat.DamageReduction & effect.Delay == 0)
+                        if (effect.stat == Stat.DamageReduction )
                         {
-                            ComboEstimatedPlayerDefence += effect.Change;
+                            ComboEstimatedPlayerDefence += effect.Change * (1 - 0.2f * effect.Delay); ;
                         }
-                        if (effect.stat == Stat.HealthPoints & effect.Delay == 0)
+                        if (effect.stat == Stat.HealthPoints )
                         {
                             if (effect.Duration == 0)
                             {
-                                ComboEstimatedPlayerHealthChange += effect.Change * (Player.HealthPoints.Value / 100);
+                                ComboEstimatedPlayerHealthChange += effect.Change * (Player.HealthPoints.Value / 100) * (1 - 0.2f * effect.Delay); ;
                             }
                             else
                             {
-                                ComboPlayerShield += effect.Change * (Player.HealthPoints.Value / 100);
+                                ComboPlayerShield += effect.Change * (Player.HealthPoints.Value / 100) * (1 - 0.2f * effect.Delay); ;
                             }
                         }
 
