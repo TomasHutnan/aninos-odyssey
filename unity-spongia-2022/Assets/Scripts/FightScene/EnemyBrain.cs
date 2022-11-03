@@ -111,7 +111,7 @@ public class EnemyBrain : MonoBehaviour
             {
                 foreach (var effect in ActiveEffect.Value)
                 {
-                    if (effect.duration == 1)
+                    if (effect.duration == 2)
                     {
                         EstimatedPlayerDamage -= effect.change * (Player.Damage.Value / 100);
                     }
@@ -122,7 +122,7 @@ public class EnemyBrain : MonoBehaviour
             {
                 foreach (var effect in ActiveEffect.Value)
                 {
-                    if (effect.duration == 1)
+                    if (effect.duration == 2)
                     {
                         EstimatedPlayerCritChance -= effect.change;
                     }
