@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d00000005000000120000000600000012000000
+  AbilityType: 21
   AbilityFamily: 8
   AbilityLevel: 1
   AbilityDescription: Fortifie yourself with your weapon gaining temporary defense

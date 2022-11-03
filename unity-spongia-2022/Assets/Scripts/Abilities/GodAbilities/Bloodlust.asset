@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d000000020000001200000011000000030000001200000011000000
+  AbilityType: -1
   AbilityFamily: -1
   AbilityLevel: -1
   AbilityDescription: Awaken the will of Ares and feed upon the suffering of your

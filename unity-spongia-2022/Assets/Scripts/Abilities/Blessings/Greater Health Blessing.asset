@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d0000000000000013000000
+  AbilityType: 22
   AbilityFamily: 14
   AbilityLevel: 2
   AbilityDescription: Call upon the gods to regenerate your health.

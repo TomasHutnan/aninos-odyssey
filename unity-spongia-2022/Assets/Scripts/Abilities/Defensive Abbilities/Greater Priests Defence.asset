@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d00000005000000120000000100000013000000
+  AbilityType: 21
   AbilityFamily: 9
   AbilityLevel: 2
   AbilityDescription: Fortifie yourself with your weapon gaining mana and temporary

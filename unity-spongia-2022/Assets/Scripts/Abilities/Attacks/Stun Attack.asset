@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 100000000c00000012000000
+  AbilityType: 20
   AbilityFamily: -1
   AbilityLevel: -1
   AbilityDescription: Stuns your enemy for 1 turn rendering them incapable of doing

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 09000000
+  AbilityType: 20
   AbilityFamily: 0
   AbilityLevel: 1
   AbilityDescription: Strike your enemy with devastating force.

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 080000000d0000000100000013000000
+  AbilityType: 20
   AbilityFamily: 3
   AbilityLevel: 2
   AbilityDescription: Strike your enemy while gaining mana.

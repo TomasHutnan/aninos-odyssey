@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 0d0000000500000012000000
+  AbilityType: 21
   AbilityFamily: -1
   AbilityLevel: -1
   AbilityDescription: Fortifie yourself with your bare hands,

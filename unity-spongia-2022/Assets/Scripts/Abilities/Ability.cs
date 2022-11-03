@@ -99,12 +99,15 @@ namespace Abilities
         Attack_Ability,
         Defense_Ability,
         Blessing_Ability,
+
+        None = -1,
     }
     [CreateAssetMenu]
     public class Ability : ScriptableObject
     {
         public Sprite Icon;
         public List<AbilityTags> AbilityTags;
+        public AbilityTags AbilityType;
         public Family AbilityFamily;
         public Level AbilityLevel;
         public string AbilityDescription;

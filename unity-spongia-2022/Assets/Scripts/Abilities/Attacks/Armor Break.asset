@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 100000000500000012000000
+  AbilityType: 20
   AbilityFamily: 4
   AbilityLevel: 1
   AbilityDescription: Termorarily break the armor of your enemy making them take
