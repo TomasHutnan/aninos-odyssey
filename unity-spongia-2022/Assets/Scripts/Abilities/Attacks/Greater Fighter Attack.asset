@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Greater Fighter Attack
   m_EditorClassIdentifier: 
   AbilityTags: 09000000
-  AbilityDescription: 
+  AbilityDescription: Strike your enemy with devastating force.
   AbilityCount: 1
   StaminaCost: 50
   ManaCost: 0
@@ -21,3 +21,7 @@ MonoBehaviour:
   CasterDamageMultiplier: 2.5
   AffectsTarget: 0
   AffectsCaster: 0
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects: []

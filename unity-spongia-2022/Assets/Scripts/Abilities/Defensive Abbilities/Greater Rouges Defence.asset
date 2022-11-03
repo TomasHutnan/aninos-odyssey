@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Greater Rouges Defence
   m_EditorClassIdentifier: 
   AbilityTags: 0d00000005000000120000000600000012000000
-  AbilityDescription: 
+  AbilityDescription: Fortifie yourself with your weapon gaining temporary defense
+    and dodge chance.
   AbilityCount: 1
   StaminaCost: 50
   ManaCost: 0
@@ -21,3 +22,15 @@ MonoBehaviour:
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects:
+  - stat: 3
+    Change: 7.5
+    Duration: 1
+    Delay: 0
+  - stat: 4
+    Change: 5
+    Duration: 1
+    Delay: 0

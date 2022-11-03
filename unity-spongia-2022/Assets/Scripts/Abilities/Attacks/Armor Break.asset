@@ -13,11 +13,20 @@ MonoBehaviour:
   m_Name: Armor Break
   m_EditorClassIdentifier: 
   AbilityTags: 100000000500000012000000
-  AbilityDescription: 
+  AbilityDescription: Termorarily break the armor of your enemy making them take
+    increased damage.
   AbilityCount: 1
   StaminaCost: 40
   ManaCost: 0
   TargetDamageMultiplier: 0
   CasterDamageMultiplier: 0
-  AffectsTarget: 1
+  AffectsTarget: 0
   AffectsCaster: 0
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects:
+  - stat: 3
+    Change: -5
+    Duration: 2
+    Delay: 0
+  CasterEffects: []

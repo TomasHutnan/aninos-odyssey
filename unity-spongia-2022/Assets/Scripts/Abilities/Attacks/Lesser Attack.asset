@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lesser Attack
   m_EditorClassIdentifier: 
   AbilityTags: 08000000090000000a0000000b000000
-  AbilityDescription: 
+  AbilityDescription: Strike your enemy with your bare hands,
   AbilityCount: 1
   StaminaCost: 20
   ManaCost: 0
@@ -21,3 +21,7 @@ MonoBehaviour:
   CasterDamageMultiplier: 0.5
   AffectsTarget: 0
   AffectsCaster: 0
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects: []

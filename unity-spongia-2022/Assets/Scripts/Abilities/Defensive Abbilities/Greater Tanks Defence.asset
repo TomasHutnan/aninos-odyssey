@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Greater Tanks Defence
   m_EditorClassIdentifier: 
   AbilityTags: 0d00000000000000130000000500000012000000
-  AbilityDescription: 
+  AbilityDescription: Fortifie yourself with your weapon gaining health and temporary
+    defense.
   AbilityCount: 1
   StaminaCost: 70
   ManaCost: 0
@@ -21,3 +22,15 @@ MonoBehaviour:
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects:
+  - stat: 0
+    Change: 10
+    Duration: 0
+    Delay: 0
+  - stat: 3
+    Change: 15
+    Duration: 1
+    Delay: 0

@@ -10,14 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
-  m_Name: Paradigm CritChance Blessing
+  m_Name: Dodge Chance Blessing
   m_EditorClassIdentifier: 
-  AbilityTags: 0d0000000400000012000000
-  AbilityDescription: 
-  AbilityCount: 0
+  Icon: {fileID: 0}
+  AbilityTags: 0d0000000600000012000000
+  AbilityDescription: Call upon the gods to receive temporary bonus dodge chance.
+  AbilityCount: 1
   StaminaCost: 0
   ManaCost: 30
   TargetDamageMultiplier: 0
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects:
+  - stat: 4
+    Change: 5
+    Duration: 1
+    Delay: 0

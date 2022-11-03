@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Rouges Attack
   m_EditorClassIdentifier: 
   AbilityTags: 0b000000
-  AbilityDescription: You can attack a maximum of 5 times. Each attack costs you
-    5 stamina.
+  AbilityDescription: Assasinate your enemy with multiple quick strikes.
   AbilityCount: 5
   StaminaCost: 5
   ManaCost: 0
@@ -22,3 +21,7 @@ MonoBehaviour:
   CasterDamageMultiplier: 0.25
   AffectsTarget: 0
   AffectsCaster: 0
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects: []

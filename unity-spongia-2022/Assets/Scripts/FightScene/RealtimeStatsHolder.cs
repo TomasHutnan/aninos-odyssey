@@ -28,6 +28,10 @@ namespace AE.FightManager
    
     public class RealtimeStatsHolder : MonoBehaviour
     {
+        public void Print(string msg)
+        {
+            print(msg);
+        }
 
         public AbilityName[] AvailableAbilities;
         public TextMeshProUGUI text;
@@ -63,9 +67,9 @@ namespace AE.FightManager
         public Character _fighter;
         public void SetCharacter(Character character)
         {
-            print("HEJJEBEMI");
+           
             StatHolder.Add(Stat.HealthPoints, character.HealthPoints.Value);
-            print(StatHolder[Stat.HealthPoints]);
+          
             StatHolder.Add(Stat.CritChance, character.CritChance.Value);
             StatHolder.Add(Stat.Damage, character.Damage.Value);
             StatHolder.Add(Stat.DamageReduction, character.DamageReduction.Value);
@@ -81,6 +85,10 @@ namespace AE.FightManager
        
         public void NextRound()
         {
+            Update();
+            StatHolder[Stat.Stamina] += _fighter.Stamina.Value * 0.25f;
+            StatHolder[Stat.Mana] += _fighter.Mana.Value *0.1f;
+
             print("NextRound");
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
             AvailableAbilities = _fighter.EquippedAbilities.ToArray(); ;
@@ -181,10 +189,12 @@ namespace AE.FightManager
         private void Update()
         {
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
-            print($"DelayedEffectLength{delayedEffects.Count}");
+            //print(delayedEffects.Count);
             foreach (var item in delayedEffects)
             {
-                if(item.delay != 0) { continue; };
+                print(item.delay);
+                if (item.delay != 0) { continue; };
+                
                 ChangeInStats(item.stat, item.change);
                 if(item.duration != 0) 
                 {

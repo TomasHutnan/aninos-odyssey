@@ -12,12 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e281fd849e4284893d78856a745672, type: 3}
   m_Name: Greater Damage Blessing
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   AbilityTags: 0d000000030000001200000011000000
-  AbilityDescription: 
-  AbilityCount: 0
+  AbilityDescription: Call upon the gods to receive temporary bonus damage.
+  AbilityCount: 1
   StaminaCost: 0
   ManaCost: 45
   TargetDamageMultiplier: 0
   CasterDamageMultiplier: 0
   AffectsTarget: 0
   AffectsCaster: 1
+  TargetFinisher: 0
+  CasterFinisher: 0
+  TargetEffects: []
+  CasterEffects:
+  - stat: 2
+    Change: 10
+    Duration: 2
+    Delay: 1
