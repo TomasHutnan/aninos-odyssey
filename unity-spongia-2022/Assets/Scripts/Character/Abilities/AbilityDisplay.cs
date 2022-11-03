@@ -55,6 +55,16 @@ namespace AE.Abilities.UI
                 }
             }
         }
+
+        private void OnEnable()
+        {
+            abilitySlot.OnAbilityClickedEvent += abilityClicked;
+        }
+        private void OnDisable()
+        {
+            abilitySlot.OnAbilityClickedEvent -= abilityClicked;
+        }
+
         private void resloveSelection()
         {
             opacity.GetComponent<Outline>().enabled = IsSelected;
@@ -70,6 +80,11 @@ namespace AE.Abilities.UI
                     OnAbilityClickedEvent?.Invoke(this);
                 }
             }
+        }
+
+        private void abilityClicked(AbilitySlot abilitySlot)
+        {
+            OnAbilityClickedEvent?.Invoke(this);
         }
     }
 }
