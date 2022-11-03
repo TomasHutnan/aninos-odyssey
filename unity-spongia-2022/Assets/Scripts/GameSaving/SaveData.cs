@@ -17,7 +17,7 @@ namespace AE.GameSave
         public static Dictionary<ItemType, Item> EquippedItems = new Dictionary<ItemType, Item>();
 
         public static HashSet<AbilityName> OwnedAbilities = new HashSet<AbilityName>(), EquippedAbilities = new HashSet<AbilityName>();
-        public static int LevelUpAbilitiesCount;
+        public static int LevelUpAbilitiesCount = 0;
 
         public static ItemTier GameStage = ItemTier.Mortal;
         public static LevelUpSystem LevelUpSystem = new LevelUpSystem();
@@ -100,7 +100,7 @@ namespace AE.GameSave
 
             PlayerCharacter = new Character(
                 Money, EquippedItems, Inventory, LevelUpSystem,
-                OwnedAbilities, EquippedAbilities);
+                OwnedAbilities, EquippedAbilities, LevelUpAbilitiesCount);
             PlayerCharacter.PostInit();
         }
     }

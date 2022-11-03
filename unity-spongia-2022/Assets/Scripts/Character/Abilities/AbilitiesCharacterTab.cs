@@ -57,6 +57,7 @@ namespace AE.Abilities.UI
                 selectedAbilitySlot = abilitySlot;
                 abilitySlot.IsSelected = true;
             }
+            refreshUI();
         }
         private void handleEquippedClick(AbilityDisplay abilityDisplay)
         {
@@ -79,6 +80,7 @@ namespace AE.Abilities.UI
                 selectedAbilityDisplay = abilityDisplay;
                 abilityDisplay.IsSelected = true;
             }
+            refreshUI();
         }
 
         private void deselect()

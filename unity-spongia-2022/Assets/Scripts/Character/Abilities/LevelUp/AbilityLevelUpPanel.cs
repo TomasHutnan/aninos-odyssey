@@ -73,7 +73,6 @@ namespace AE.Abilities.UI
 
         private AbilityName[] GetChoices(int level)
         {
-            print(GetAllAbilityNamesByType(AbilityTags.Attack_Ability).Length);
             List<AbilityName> _choices = new();
 
             SortedList<Level, AbilityName>[] loadedChoices = LevelUpAbilitiesProvider.GetAbilityChoices(level);
@@ -110,7 +109,7 @@ namespace AE.Abilities.UI
 
             c.UnlockedAbilities.Add(_abilityName);
             c.LevelUpAbilitiesCount++;
-
+            print(c.LevelUpAbilitiesCount);
             updateChoices();
         }
 

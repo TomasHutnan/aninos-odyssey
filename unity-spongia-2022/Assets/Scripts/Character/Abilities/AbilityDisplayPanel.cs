@@ -23,15 +23,20 @@ namespace AE.Abilities.UI
         {
             for (int i = 0; i < abilityDisplays.Length; i++)
             {
-                abilityDisplays[i].OnAbilityClickedEvent -= OnAbilityClickedEvent;
+                abilityDisplays[i].OnAbilityClickedEvent += handleClick;
             }
         }
         private void OnDisable()
         {
             for (int i = 0; i < abilityDisplays.Length; i++)
             {
-                abilityDisplays[i].OnAbilityClickedEvent -= OnAbilityClickedEvent;
+                abilityDisplays[i].OnAbilityClickedEvent -= handleClick;
             }
+        }
+
+        private void handleClick(AbilityDisplay abilityDisplay)
+        {
+            OnAbilityClickedEvent?.Invoke(abilityDisplay);
         }
 
         public void refreshUI()

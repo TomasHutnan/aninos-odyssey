@@ -37,15 +37,20 @@ namespace AE.Abilities.UI
         {
             for (int i = 0; i < abilitySlots.Length; i++)
             {
-                abilitySlots[i].OnAbilityClickedEvent -= OnAbilityClickedEvent;
+                abilitySlots[i].OnAbilityClickedEvent += handleClick;
             }
         }
         private void OnDisable()
         {
             for (int i = 0; i < abilitySlots.Length; i++)
             {
-                abilitySlots[i].OnAbilityClickedEvent -= OnAbilityClickedEvent;
+                abilitySlots[i].OnAbilityClickedEvent -= handleClick;
             }
+        }
+
+        private void handleClick(AbilitySlot abilitySlot)
+        {
+            OnAbilityClickedEvent?.Invoke(abilitySlot);
         }
 
         public void refreshUI()
@@ -58,13 +63,15 @@ namespace AE.Abilities.UI
             int i = 0;
             int skipped = 0;
             AbilityName[] abilities = c.UnlockedAbilities.ToArray();
-            for (; i + skipped < c.UnlockedAbilities.Count - abilitySlots.Length * currentPage && i < abilitySlots.Length; i++)
-            {
-                while (c.EquippedAbilities.Contains(abilities[i + skipped]))
-                    skipped++;
+            print(abilities.Length);
+            for (; i + skipped < abilities.Length - abilitySlots.Length * currentPage && i < abilitySlots.Length; i++)
+                for (; i + skipped < abilities.Length - abilitySlots.Length * currentPage; skipped++)
+                    if (!c.EquippedAbilities.Contains(abilities[i + skipped]))
+                    {
+                        abilitySlots[i].AbilityName = abilities[abilitySlots.Length * currentPage + i + skipped];
+                        break;
+                    }
 
-                abilitySlots[i + skipped].AbilityName = abilities[abilitySlots.Length * currentPage + i + skipped];
-            }
             for (; i < abilitySlots.Length; i++)
             {
                 abilitySlots[i].AbilityName = AbilityName.None;
