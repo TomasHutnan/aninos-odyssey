@@ -36,7 +36,7 @@ namespace AE.Utils
 
         public static Stack<T> CreateShuffledDeck<T>(IEnumerable<T> values)
         {
-            return CreateLimitedShuffledDeck<T>(values, values.Count());
+            return CreateLimitedShuffledDeck(values, values.Count());
         }
     }
 }

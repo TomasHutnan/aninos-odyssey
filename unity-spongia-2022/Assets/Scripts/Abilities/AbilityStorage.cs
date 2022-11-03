@@ -77,15 +77,18 @@ public class AbilityStorage : MonoBehaviour
     public List<StoredAbility> StoredAbilities = new List<StoredAbility>();
     public static Dictionary<AbilityName,Ability> GetAbility = new Dictionary<AbilityName,Ability>();
 
-    static Dictionary<AbilityTags, Dictionary<Family, SortedList<AbilityName, AbilityName>>> abilityFamilyTypes = new Dictionary<AbilityTags, Dictionary<Family, SortedList<AbilityName, AbilityName>>>
+    static Dictionary<AbilityTags, Dictionary<Family, SortedList<Level, AbilityName>>> abilityFamilyTypes = new Dictionary<AbilityTags, Dictionary<Family, SortedList<Level, AbilityName>>>
     {
-        {AbilityTags.Attack_Ability, new Dictionary<Family, SortedList<AbilityName, AbilityName>> { } },
-        {AbilityTags.Defense_Ability, new Dictionary<Family, SortedList<AbilityName, AbilityName>> { } },
-        {AbilityTags.Blessing_Ability, new Dictionary<Family, SortedList<AbilityName, AbilityName>> { } },
+        {AbilityTags.Attack_Ability, new Dictionary<Family, SortedList<Level, AbilityName>> { } },
+        {AbilityTags.Defense_Ability, new Dictionary<Family, SortedList<Level, AbilityName>> { } },
+        {AbilityTags.Blessing_Ability, new Dictionary<Family, SortedList<Level, AbilityName>> { } },
     };
 
     private void Awake()
     {
+        if (GetAbility.Values.Count != 0)
+            return;
+
         GetAbility[AbilityName.None] = null;
         foreach (StoredAbility item in StoredAbilities)
         {
@@ -99,13 +102,12 @@ public class AbilityStorage : MonoBehaviour
                 addAbilityToFamilyDict(abilityName, ability);
             }
         }
-        print(GetAbility[AbilityName.Tank_Attack]);
     }
     // Start is called before the first frame update
 
-    public SortedList<AbilityName, AbilityName>[] GetAllAbilityNamesByType(AbilityTags abilityType)
+    public static SortedList<Level, AbilityName>[] GetAllAbilityNamesByType(AbilityTags abilityType)
     {
-        Dictionary<Family, SortedList<AbilityName, AbilityName>> outVal;
+        Dictionary<Family, SortedList<Level, AbilityName>> outVal;
         bool keyExists = abilityFamilyTypes.TryGetValue(abilityType, out outVal);
         if (keyExists)
             return outVal.Values.ToArray();
@@ -115,9 +117,10 @@ public class AbilityStorage : MonoBehaviour
 
     private void addAbilityToFamilyDict(AbilityName abilityName, Ability ability)
     {
-        abilityFamilyTypes.TryAdd(ability.AbilityType, new Dictionary<Family, SortedList<AbilityName, AbilityName>>());
-        abilityFamilyTypes[ability.AbilityType].TryAdd(ability.AbilityFamily, new SortedList<AbilityName, AbilityName>());
+        abilityFamilyTypes.TryAdd(ability.AbilityType, new Dictionary<Family, SortedList<Level, AbilityName>>());
+        abilityFamilyTypes[ability.AbilityType].TryAdd(ability.AbilityFamily, new SortedList<Level, AbilityName>());
 
-        abilityFamilyTypes[ability.AbilityType][ability.AbilityFamily].Add(abilityName, abilityName);
+        if (ability.AbilityLevel != Level.None)
+            abilityFamilyTypes[ability.AbilityType][ability.AbilityFamily].Add(key: ability.AbilityLevel, value: abilityName);
     }
 }

@@ -116,7 +116,7 @@ public class Tooltip : MonoBehaviour
 
         nameLabel.text = ability.name;
         typeLabel.text = ability.AffectsCaster ? "<color=#C1FFC1>SELF</color>" : "<color=#8B0000>ENEMY</color>";
-        valueLabel.text = ability.ManaCost == 0 ? $"<color=#E1AD0F>{ability.StaminaCost}$</color>" : $"<color=#2986CC>{ability.ManaCost}$</color>";
+        valueLabel.text = ability.ManaCost == 0 ? $"<color=#E1AD0F>{ability.StaminaCost} stamina</color>" : $"<color=#2986CC>{ability.ManaCost} mana</color>";
 
         sb.Append("NOT IMPLEMENTED");
 

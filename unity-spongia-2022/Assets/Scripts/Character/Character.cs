@@ -152,6 +152,7 @@ public class Character : InventoryHolder
     public void PostInit()
     {
         LevelUpSystem.UpdateActiveCharacter(this);
+        LevelUpSystem.addExp(3000);
 
         foreach (Item item in EquippedItems.Values)
         {
