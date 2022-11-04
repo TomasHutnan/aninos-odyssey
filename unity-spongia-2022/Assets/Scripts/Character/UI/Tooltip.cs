@@ -13,6 +13,7 @@ using static UnityEditor.Progress;
 using Abilities;
 using System.Drawing;
 using Item = AE.Items.Item;
+using UnityEngine.UI;
 
 public class Tooltip : MonoBehaviour
 {
@@ -118,17 +119,26 @@ public class Tooltip : MonoBehaviour
         typeLabel.text = ability.AffectsCaster ? "<color=#C1FFC1>SELF</color>" : "<color=#8B0000>ENEMY</color>";
         valueLabel.text = ability.ManaCost == 0 ? $"<color=#E1AD0F>{ability.StaminaCost} stamina</color>" : $"<color=#2986CC>{ability.ManaCost} mana</color>";
 
-        sb.Append("NOT IMPLEMENTED");
+        sb.Append(ability.AbilityDescription);
 
         showTooltip();
     }
 
     private void showTooltip()
     {
-        tooltipParent.SetActive(true);
-        isShown = true;
-
         modsLabel.text = sb.ToString();
+
+        nameLabel.ForceMeshUpdate();
+        typeLabel.ForceMeshUpdate();
+        valueLabel.ForceMeshUpdate();
+
+        tooltipParent.SetActive(true);
+
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)tooltipParent.transform);
+        tooltipParent.GetComponent<VerticalLayoutGroup>().SetLayoutVertical();
+
+        isShown = true;
     }
     private void hideTooltip()
     {
