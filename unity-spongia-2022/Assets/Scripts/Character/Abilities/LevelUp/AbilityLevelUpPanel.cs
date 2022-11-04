@@ -58,7 +58,7 @@ namespace AE.Abilities.UI
 
             updateRemainingChoicesText();
 
-            choices = GetChoices(c.LevelUpAbilitiesCount + 1);
+            choices = LevelUpAbilitiesProvider.GetChoices(c, c.LevelUpAbilitiesCount + 1);
 
             int i = 0;
             for (; i < AbilityDisplays.Length && i < choices.Length; i++)
@@ -69,32 +69,6 @@ namespace AE.Abilities.UI
             {
                 AbilityDisplays[i].AbilityName = AbilityName.None;
             }
-        }
-
-        private AbilityName[] GetChoices(int level)
-        {
-            List<AbilityName> _choices = new();
-
-            SortedList<Level, AbilityName>[] loadedChoices = LevelUpAbilitiesProvider.GetAbilityChoices(level);
-            SortedList<Level, AbilityName>[] shuffledChoices = RandomUtils.CreateShuffledDeck(loadedChoices).ToArray();
-
-            int i = 0;
-            while (_choices.Count < AbilityDisplays.Length && i < shuffledChoices.Length)
-            {
-                AbilityName abilityName = AbilityName.None;
-
-                foreach(AbilityName _abilityName in shuffledChoices[i].Values)
-                    if (!c.UnlockedAbilities.Contains(_abilityName))
-                    {
-                        abilityName = _abilityName;
-                        break;
-                    }
-                if (abilityName != AbilityName.None)
-                    _choices.Add(abilityName);
-
-                i++;
-            }
-            return _choices.ToArray();
         }
 
         private void handleAbilityChoice(AbilityDisplay abilityDisplay)

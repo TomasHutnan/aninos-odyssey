@@ -1,4 +1,6 @@
 using Abilities;
+using AE.Abilities.UI;
+using AE.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +36,33 @@ namespace AE.Abilities
             }
             else
                 return null; // god abilities
+        }
+
+
+        public static AbilityName[] GetChoices(Character c, int level, int choices = 4)
+        {
+            List<AbilityName> _choices = new();
+
+            SortedList<Level, AbilityName>[] loadedChoices = LevelUpAbilitiesProvider.GetAbilityChoices(level);
+            SortedList<Level, AbilityName>[] shuffledChoices = RandomUtils.CreateShuffledDeck(loadedChoices).ToArray();
+
+            int i = 0;
+            while (_choices.Count < choices && i < shuffledChoices.Length)
+            {
+                AbilityName abilityName = AbilityName.None;
+
+                foreach (AbilityName _abilityName in shuffledChoices[i].Values)
+                    if (!c.UnlockedAbilities.Contains(_abilityName))
+                    {
+                        abilityName = _abilityName;
+                        break;
+                    }
+                if (abilityName != AbilityName.None)
+                    _choices.Add(abilityName);
+
+                i++;
+            }
+            return _choices.ToArray();
         }
     }
 }
