@@ -13,7 +13,7 @@ namespace AE.Abilities
         public static int maxAutoLevel = 18;
         public static int godAbilityLevel = 19;
 
-        public static SortedList<Level, AbilityName>[] GetAbilityChoices(int _level)
+        public static SortedList<Level, AbilityName>[] GetAllAbilityChoices(int _level)
         {
             if (_level < 0 || _level > godAbilityLevel)
                 return null;
@@ -43,7 +43,7 @@ namespace AE.Abilities
         {
             List<AbilityName> _choices = new();
 
-            SortedList<Level, AbilityName>[] loadedChoices = LevelUpAbilitiesProvider.GetAbilityChoices(level);
+            SortedList<Level, AbilityName>[] loadedChoices = GetAllAbilityChoices(level);
             SortedList<Level, AbilityName>[] shuffledChoices = RandomUtils.CreateShuffledDeck(loadedChoices).ToArray();
 
             int i = 0;
