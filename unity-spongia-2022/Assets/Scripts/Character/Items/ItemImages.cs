@@ -95,6 +95,7 @@ namespace AE.Items
         public static Sprite GetImage(ItemTier _tier, ItemType _type, ItemClass _class)
         {
             if (_type == ItemType.Weapon)
+            {
                 if (_weaponImagesDict.ContainsKey(_tier))
                 {
                     Sprite _image;
@@ -102,14 +103,14 @@ namespace AE.Items
                     if (containsKey)
                         return _image;
                 }
-            else
-                if (_armorImagesDict.ContainsKey(_tier))
-                {
-                    Sprite _image;
-                    bool containsKey = _armorImagesDict[_tier].TryGetValue(_type, out _image);
-                    if (containsKey)
-                        return _image;
-                }
+            }
+            else if (_armorImagesDict.ContainsKey(_tier))
+            {
+                Sprite _image;
+                bool containsKey = _armorImagesDict[_tier].TryGetValue(_type, out _image);
+                if (containsKey)
+                    return _image;
+            }
 
             return null;
         }

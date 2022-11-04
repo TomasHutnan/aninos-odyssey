@@ -31,7 +31,9 @@ namespace AE.Items.UI.Shop
                 {
                     costText.text = ((int)Mathf.Round(_item.value * GameManager.ShopValueMultiplier)).ToString() + " $";
                     costText.enabled = true;
+                    print($"tier:{_item.Tier}; type:{_item.Type}; class:{_item.Class}");
                     Sprite _image = ItemImages.GetImage(_item.Tier, _item.Type, _item.Class);
+                    print(_image);
                     if (_image != null)
                     {
                         image.sprite = _image;
