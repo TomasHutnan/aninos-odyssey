@@ -9,9 +9,7 @@ using AE.Items;
 using System.Text;
 
 using static AbilityStorage;
-using static UnityEditor.Progress;
 using Abilities;
-using System.Drawing;
 using Item = AE.Items.Item;
 using UnityEngine.UI;
 

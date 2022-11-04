@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using AE.Items;
 using System;
-using Unity.PlasticSCM.Editor.WebApi;
 using AE.CharacterStats;
 
 public class EnemyGeneration 
