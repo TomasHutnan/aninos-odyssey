@@ -38,7 +38,7 @@ namespace AE.Abilities.UI
                 c.EquippedAbilities.Add(abilitySlot.AbilityName);
                 deselect();
             }
-            if (selectedAbilitySlot == null && selectedAbilityDisplay == null)
+            else if (selectedAbilitySlot == null && selectedAbilityDisplay == null)
             {
                 selectedAbilitySlot = abilitySlot;
                 abilitySlot.IsSelected = true;

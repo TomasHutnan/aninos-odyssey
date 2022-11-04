@@ -109,7 +109,6 @@ namespace AE.Abilities.UI
 
             c.UnlockedAbilities.Add(_abilityName);
             c.LevelUpAbilitiesCount++;
-            print(c.LevelUpAbilitiesCount);
             updateChoices();
         }
 

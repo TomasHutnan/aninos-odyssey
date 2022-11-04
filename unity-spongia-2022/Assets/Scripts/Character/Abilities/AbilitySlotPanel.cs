@@ -63,7 +63,6 @@ namespace AE.Abilities.UI
             int i = 0;
             int skipped = 0;
             AbilityName[] abilities = c.UnlockedAbilities.ToArray();
-            print(abilities.Length);
             for (; i + skipped < abilities.Length - abilitySlots.Length * currentPage && i < abilitySlots.Length; i++)
                 for (; i + skipped < abilities.Length - abilitySlots.Length * currentPage; skipped++)
                     if (!c.EquippedAbilities.Contains(abilities[i + skipped]))
