@@ -29,11 +29,14 @@ namespace AE.Items.UI.Shop
 
                 else
                 {
-                    costText.text = "<color=#FFD700>" + ((int)Mathf.Round(_item.value * GameManager.ShopValueMultiplier)).ToString() + " $</color>";
+                    costText.text = ((int)Mathf.Round(_item.value * GameManager.ShopValueMultiplier)).ToString() + " $";
                     costText.enabled = true;
                     Sprite _image = ItemImages.GetImage(_item.Tier, _item.Type, _item.Class);
                     if (_image != null)
+                    {
                         image.sprite = _image;
+                        border.enabled = false;
+                    }
                     else
                     {
                         image.sprite = ItemImages.GetIcon(_item.Type, _item.Class);
@@ -43,11 +46,6 @@ namespace AE.Items.UI.Shop
                     image.enabled = true;
                 }
             }
-        }
-
-        protected void OnValidate()
-        {
-            costText = GetComponentInChildren<TextMeshProUGUI>();
         }
     }
 }
