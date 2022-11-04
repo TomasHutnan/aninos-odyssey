@@ -26104,6 +26104,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2338981701506031478, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: ArmorImages.Array.data[0].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 7c1ab64f57e209c4ab05887e57bd3d86, type: 3}
+    - target: {fileID: 2338981701506031478, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: ArmorImages.Array.data[1].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 75da9172dbd5cd54396431a65087c55c, type: 3}
+    - target: {fileID: 2338981701506031478, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: ArmorImages.Array.data[2].image
+      value: 
+      objectReference: {fileID: 21300000, guid: ea314197c9ff9c84bb0911f424e0a333, type: 3}
+    - target: {fileID: 2338981701506031478, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: ArmorImages.Array.data[3].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 57cfe5d386adcd749b63e188f6ebe09b, type: 3}
+    - target: {fileID: 2338981701506031478, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
       propertyPath: ArmorImages.Array.data[16].image
       value: 
       objectReference: {fileID: 21300000, guid: 7a7fd1f7ad24bf246b00a225925c65c0, type: 3}
