@@ -47,15 +47,13 @@ namespace AE.Abilities.UI
                 }
                 else
                 {
-                    Ability ability = GetAbility[_abilityName];
-
-                    background.sprite = null; // ability.icon_bg
+                    background.sprite = AbilityImages.GetBG(); // ability.icon_bg
                     background.enabled = true;
 
-                    icon.sprite = null; // ability.icon
+                    icon.sprite = GetAbilityIcon(_abilityName); // ability.icon
                     icon.enabled = true;
 
-                    foreground.sprite = null; // ability.icon_fg
+                    foreground.sprite = AbilityImages.GetLevelFG(_abilityName); // ability.icon_fg
                     foreground.enabled = true;
                 }
             }

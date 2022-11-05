@@ -72,10 +72,13 @@ public class AbilityStorage : MonoBehaviour
        
         public AbilityName Name;
         public Ability ability;
+        public Sprite Icon;
         
     }
     public List<StoredAbility> StoredAbilities = new List<StoredAbility>();
     public static Dictionary<AbilityName,Ability> GetAbility = new Dictionary<AbilityName,Ability>();
+
+    static Dictionary<AbilityName, Sprite> _abilitySpriteDict = new Dictionary<AbilityName, Sprite>();
 
     static Dictionary<AbilityTags, Dictionary<Family, SortedList<Level, AbilityName>>> abilityFamilyTypes = new Dictionary<AbilityTags, Dictionary<Family, SortedList<Level, AbilityName>>>
     {
@@ -91,8 +94,10 @@ public class AbilityStorage : MonoBehaviour
         {
             AbilityName abilityName = item.Name;
             Ability ability = item.ability;
+            Sprite icon = item.Icon;
 
             GetAbility[abilityName] = ability;
+            _abilitySpriteDict[abilityName] = icon;
 
             if (ability.AbilityType != AbilityTags.None)
             {
@@ -109,6 +114,15 @@ public class AbilityStorage : MonoBehaviour
         if (keyExists)
             return outVal.Values.ToArray();
 
+        return null;
+    }
+
+    public static Sprite GetAbilityIcon(AbilityName abilityName)
+    {
+        Sprite image;
+        bool contains = _abilitySpriteDict.TryGetValue(abilityName, out image);
+        if (contains)
+            return image;
         return null;
     }
 
