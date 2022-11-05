@@ -16,7 +16,7 @@ MonoBehaviour:
   AbilityTags: 08000000090000000a0000000b000000
   AbilityType: 20
   AbilityFamily: -1
-  AbilityLevel: -1
+  AbilityLevel: 0
   AbilityDescription: Strike your enemy with your bare hands,
   AbilityCount: 1
   StaminaCost: 20

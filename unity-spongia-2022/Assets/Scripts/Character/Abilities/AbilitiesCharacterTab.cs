@@ -51,6 +51,11 @@ namespace AE.Abilities.UI
                 deselect();
                 refreshUI();
             }
+            else if (selectedAbilitySlot == abilitySlot)
+            {
+                deselect();
+                refreshUI();
+            }
             else
             {
                 deselect();
@@ -72,6 +77,11 @@ namespace AE.Abilities.UI
                 c.EquippedAbilities.Remove(abilityDisplay.AbilityName);
                 c.EquippedAbilities.Add(selectedAbilitySlot.AbilityName);
 
+                deselect();
+                refreshUI();
+            }
+            else if (selectedAbilityDisplay == abilityDisplay)
+            {
                 deselect();
                 refreshUI();
             }

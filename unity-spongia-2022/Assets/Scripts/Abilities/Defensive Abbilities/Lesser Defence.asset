@@ -16,7 +16,7 @@ MonoBehaviour:
   AbilityTags: 0d0000000500000012000000
   AbilityType: 21
   AbilityFamily: -1
-  AbilityLevel: -1
+  AbilityLevel: 0
   AbilityDescription: Fortifie yourself with your bare hands,
   AbilityCount: 1
   StaminaCost: 15

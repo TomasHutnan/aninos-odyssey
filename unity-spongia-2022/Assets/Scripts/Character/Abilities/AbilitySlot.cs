@@ -12,6 +12,7 @@ namespace AE.Abilities.UI
 {
     public class AbilitySlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [SerializeField] Image outline;
         [SerializeField] Image background;
         [SerializeField] Image icon;
         [SerializeField] Image foreground;
@@ -39,6 +40,7 @@ namespace AE.Abilities.UI
 
                 if (_abilityName == AbilityName.None)
                 {
+                    outline.enabled = false;
                     background.enabled = false;
                     icon.enabled = false;
                     foreground.enabled = false;
@@ -47,6 +49,8 @@ namespace AE.Abilities.UI
                 }
                 else
                 {
+                    outline.enabled = true;
+
                     background.sprite = AbilityImages.GetBG(); // ability.icon_bg
                     background.enabled = true;
 
@@ -55,13 +59,15 @@ namespace AE.Abilities.UI
 
                     foreground.sprite = AbilityImages.GetLevelFG(_abilityName); // ability.icon_fg
                     foreground.enabled = true;
+                    if (foreground.sprite == null)
+                        foreground.enabled = false;
                 }
             }
         }
 
         private void resloveSelection()
         {
-            background.GetComponent<Outline>().enabled = IsSelected;
+            outline.GetComponent<Outline>().enabled = IsSelected;
         }
 
         public void OnPointerClick(PointerEventData eventData)
