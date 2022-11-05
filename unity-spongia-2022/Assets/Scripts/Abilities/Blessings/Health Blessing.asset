@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Health Blessing
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d0000000000000013000000
+  AbilityTags: 1700000018000000190000001a0000000d0000000000000013000000
   AbilityType: 22
   AbilityFamily: 14
   AbilityLevel: 1

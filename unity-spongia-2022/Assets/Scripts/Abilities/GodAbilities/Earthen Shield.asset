@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Earthen Shield
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d000000050000001200000011000000000000001300000011000000
+  AbilityTags: 190000000d000000050000001200000011000000000000001300000011000000
   AbilityType: -1
   AbilityFamily: -1
   AbilityLevel: -1

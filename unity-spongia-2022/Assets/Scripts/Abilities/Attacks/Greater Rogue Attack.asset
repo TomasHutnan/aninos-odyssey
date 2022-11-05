@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Greater Rogue Attack
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0b000000
+  AbilityTags: 180000000b000000
   AbilityType: 20
   AbilityFamily: 2
   AbilityLevel: 2

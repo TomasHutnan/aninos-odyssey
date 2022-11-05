@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lesser CritChance Blessing
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d0000000400000012000000
+  AbilityTags: 18000000170000000d0000000400000012000000
   AbilityType: 22
   AbilityFamily: 10
   AbilityLevel: 0

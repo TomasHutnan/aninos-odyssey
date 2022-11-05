@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Total Precision
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d000000040000001200000011000000060000001200000011000000
+  AbilityTags: 180000000d000000040000001200000011000000060000001200000011000000
   AbilityType: -1
   AbilityFamily: -1
   AbilityLevel: -1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lesser Damage Blessing
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d0000000300000012000000
+  AbilityTags: 17000000180000000d0000000300000012000000
   AbilityType: 22
   AbilityFamily: 11
   AbilityLevel: 0
