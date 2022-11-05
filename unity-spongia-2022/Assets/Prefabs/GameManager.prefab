@@ -263,16 +263,16 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: df76b9fc5249371439ddb78134cc5ec5, type: 3}
   - tier: 0
     type: 3
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: d051f07bbf0db5c4db709678752db699, type: 3}
   - tier: 1
     type: 3
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 34467431ecadf2a439566241d159b03e, type: 3}
   - tier: 2
     type: 3
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: f713476afcf55a241b34dadb2da64f3d, type: 3}
   - tier: 3
     type: 3
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 8135f719837fba04cacfbf7a7a2ef39c, type: 3}
   - tier: 0
     type: 4
     image: {fileID: 21300000, guid: 7a7fd1f7ad24bf246b00a225925c65c0, type: 3}
