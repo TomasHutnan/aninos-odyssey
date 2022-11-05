@@ -15,13 +15,15 @@ public class EnemyBrain : MonoBehaviour
     public Character Enemy;
     public GameObject PlayerObject;
     public GameObject EnemyObject;
+    public GameObject Button;
     public List<AbilityName> List;
     public System.Linq.IOrderedEnumerable<KeyValuePair<List<AbilityName>,List<float>>> sortedStaminaDict;
     public System.Linq.IOrderedEnumerable<KeyValuePair<List<AbilityName>, List<float>>> sortedManaDict;
     public void Init()
     {
 
-        
+        List = EnemyHolder._fighter.EquippedAbilities.ToList();
+        print($"INIIIT{List.Count}");
         List<List<AbilityName>> SecondList = new List<List<AbilityName>>();
         for (int a = 0; a < List.Count; a++)
         {
@@ -56,6 +58,7 @@ public class EnemyBrain : MonoBehaviour
             float CombinedManaCost = 0;
             foreach (var spell in SpellCombination)
             {
+                print($"Spell{spell}");
                 for (int i = 0; i < AbilityStorage.GetAbility[spell].AbilityCount; i++)
                 {
                     //print($"Tuna{spell}");
@@ -84,8 +87,9 @@ public class EnemyBrain : MonoBehaviour
       
 
     }
-    public void MakeMove()
+    public  void MakeMove()
     {
+        Button.SetActive(false);
         List<List<AbilityName>> CanCast = new List<List<AbilityName>>();
         foreach (var item in sortedStaminaDict)
         {
@@ -297,7 +301,13 @@ public class EnemyBrain : MonoBehaviour
                         {
                             if (effect.Duration == 0)
                             {
-                                ComboEstimatedEnemyHealthChange += effect.Change * (Enemy.HealthPoints.Value / 100) * (1 - 0.2f * effect.Delay); ;
+                                float ActualChange = effect.Change * (Enemy.HealthPoints.Value / 100);
+                                if (EnemyHolder.StatHolder[effect.stat] + ActualChange > EnemyHolder._fighter.HealthPoints.Value)
+                                {
+                                    ActualChange -= EnemyHolder.StatHolder[effect.stat] + ActualChange - EnemyHolder._fighter.HealthPoints.Value;
+
+                                }
+                                ComboEstimatedEnemyHealthChange += ActualChange  * (1 - 0.2f * effect.Delay); ;
                             }
                             else
                             {
@@ -439,19 +449,25 @@ public class EnemyBrain : MonoBehaviour
 
 
         }
+
         var SortedBestOption = from entry in BestOption orderby entry.Value[0] descending select entry;
-        var ChosenCombo = SortedBestOption.First();
-        foreach (var VARIABLE in ChosenCombo.Key)
+        if(SortedBestOption.ToList().Count != 0)
         {
-            print(VARIABLE);
-            AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject);
+            var ChosenCombo = SortedBestOption.First();
+            foreach (var VARIABLE in ChosenCombo.Key)
+            {
+                print(VARIABLE);
+                AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject);
+            }
+            foreach (var item in ChosenCombo.Value)
+            {
+                //print(item);
+            }
+
         }
-        foreach (var item in ChosenCombo.Value)
-        {
-            //print(item);
-        }
-        EnemyHolder.NextRound();
         
+        EnemyHolder.NextRound();
+        Button.SetActive(true);
 
 
 
