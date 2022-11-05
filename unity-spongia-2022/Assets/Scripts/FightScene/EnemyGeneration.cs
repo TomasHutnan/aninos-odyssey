@@ -10,6 +10,7 @@ using Abilities;
 using AE.Abilities;
 
 using static AbilityStorage;
+using System.Linq;
 
 public class EnemyGeneration 
 {
@@ -97,7 +98,7 @@ public class EnemyGeneration
             else if (Dice > GearChance[EnemyClass][ItemClass.Priest][0] & Dice <= GearChance[EnemyClass][ItemClass.Priest][1]) { ClassLevels[EnemyClass][stat] += 1; }
 
         }
-        List<AbilityName> UnlockedAbilities = new();
+        List<AbilityName> UnlockedAbilities = character.UnlockedAbilities.ToList();
         character.LevelUpSystem = new LevelUpSystem(character, EnemyLevel, 0, ClassLevels[ItemClass.Fighter][0], ClassLevels[ItemClass.Rogue][0], ClassLevels[ItemClass.Tank][0] + ClassLevels[ItemClass.Priest][1], ClassLevels[ItemClass.Tank][1], ClassLevels[ItemClass.Rogue][1], ClassLevels[ItemClass.Fighter][1], ClassLevels[ItemClass.Priest][0]);
         for (int i = 0; i < EnemyLevel; i++)
         {
