@@ -222,6 +222,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4547975663892585664, guid: 7e3ef540b7d30d44187ff6bd296c49e2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2feefb49e232bcc4b98b05c58657ab06, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e3ef540b7d30d44187ff6bd296c49e2, type: 3}
 --- !u!114 &74788781 stripped
@@ -343,6 +347,10 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 11400000, guid: 9a46e047c1a76c7419ee3607a8390a3d, type: 2}
+    - target: {fileID: 4547975663892585664, guid: 7e3ef540b7d30d44187ff6bd296c49e2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2feefb49e232bcc4b98b05c58657ab06, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e3ef540b7d30d44187ff6bd296c49e2, type: 3}
 --- !u!114 &198214882 stripped

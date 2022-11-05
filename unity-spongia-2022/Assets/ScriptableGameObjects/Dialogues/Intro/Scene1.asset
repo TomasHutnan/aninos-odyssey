@@ -18,7 +18,7 @@ MonoBehaviour:
   - name: 100
     text: I'm sorry, but' you'll have to pay for this round first.
   - name: 200
-    text: '*looks into purse*'
+    text: '*looks into wallet*'
   - name: 200
     text: Oh no, I don't think I have enough.
   - name: 200
@@ -30,6 +30,6 @@ MonoBehaviour:
   - name: 100
     text: I don't think so... But... Can you keep a secret?
   - name: 200
-    text: Wel..
+    text: Well..
   - name: 100
     text: Ah of course you can!
