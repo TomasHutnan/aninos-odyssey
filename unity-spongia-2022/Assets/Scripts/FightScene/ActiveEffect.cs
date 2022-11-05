@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using AE.CharacterStats;
 using AE.FightManager;
+using AE.Abilities;
+using Abilities;
+
 public enum StatType
 {
     Flat,
@@ -18,7 +21,8 @@ public class ActiveEffect
     public float duration;
     public float delay;
     public StatType type;
-    public ActiveEffect(float _change,Stat _stat,float _duration,float _delay,StatType _type)
+    
+    public ActiveEffect(float _change,Stat _stat,float _duration,float _delay,StatType _type )
     {
         change = _change;
         stat = _stat;   

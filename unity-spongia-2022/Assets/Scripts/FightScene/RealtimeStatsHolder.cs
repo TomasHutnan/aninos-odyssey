@@ -79,6 +79,7 @@ namespace AE.FightManager
             StatHolder.Add(Stat.Mana, character.Mana.Value);
             StatHolder.Add(Stat.Weight, character.Weight.Value);
             StatHolder.Add(Stat.Stun, 0);
+            print(character.EquippedAbilities.Count);
             AvailableAbilities = character.EquippedAbilities.ToArray();
             _fighter = character;
         }
@@ -87,7 +88,9 @@ namespace AE.FightManager
         {
             Update();
             StatHolder[Stat.Stamina] += _fighter.Stamina.Value * 0.25f;
+            if(StatHolder[Stat.Stamina] > _fighter.Stamina.Value) { StatHolder[Stat.Stamina] = _fighter.Stamina.Value; }
             StatHolder[Stat.Mana] += _fighter.Mana.Value *0.1f;
+            if (StatHolder[Stat.Mana] > _fighter.Mana.Value) { StatHolder[Stat.Mana] = _fighter.Mana.Value; }
 
             print("NextRound");
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
@@ -121,7 +124,31 @@ namespace AE.FightManager
                 item.delay -= 1;
                 if (item.delay == 0)
                 {
-                    ChangeInStats(item.stat, item.change);
+                    float ActualChange = item.change;
+                    if( item.stat == Stat.HealthPoints)
+                    {
+                        if (StatHolder[item.stat]+ActualChange > _fighter.HealthPoints.Value)
+                        {
+                            ActualChange -= StatHolder[item.stat] +ActualChange - _fighter.HealthPoints.Value;
+
+                        }
+                    }
+                    if (item.stat == Stat.Stamina)
+                    {
+                        if (StatHolder[item.stat] + ActualChange > _fighter.Stamina.Value)
+                        {
+                            ActualChange -= StatHolder[item.stat] + ActualChange - _fighter.Stamina.Value;
+                        }
+                    }
+                    if (item.stat == Stat.Mana)
+                    {
+                        if (StatHolder[item.stat] + ActualChange > _fighter.Mana.Value)
+                        {
+                            ActualChange -= StatHolder[item.stat] + ActualChange - _fighter.Mana.Value;
+                        }
+                    }
+                    ChangeInStats(item.stat, ActualChange);
+                    item.change = ActualChange;
                     ToDelete.Add(item);
                     if (item.duration != 0)
                     {
@@ -194,8 +221,31 @@ namespace AE.FightManager
             {
                 print(item.delay);
                 if (item.delay != 0) { continue; };
-                
-                ChangeInStats(item.stat, item.change);
+                float ActualChange = item.change;
+                if (item.stat == Stat.HealthPoints)
+                {
+                    if (StatHolder[item.stat] + ActualChange > _fighter.HealthPoints.Value)
+                    {
+                        ActualChange -= StatHolder[item.stat] + ActualChange - _fighter.HealthPoints.Value;
+
+                    }
+                }
+                if (item.stat == Stat.Stamina)
+                {
+                    if (StatHolder[item.stat] + ActualChange > _fighter.Stamina.Value)
+                    {
+                        ActualChange -= StatHolder[item.stat] + ActualChange - _fighter.Stamina.Value;
+                    }
+                }
+                if (item.stat == Stat.Mana)
+                {
+                    if (StatHolder[item.stat] + ActualChange > _fighter.Mana.Value)
+                    {
+                        ActualChange -= StatHolder[item.stat] + ActualChange - _fighter.Mana.Value;
+                    }
+                }
+                ChangeInStats(item.stat, ActualChange);
+                item.change = ActualChange;
                 if(item.duration != 0) 
                 {
                     activeEffects[item.stat].Add(item);

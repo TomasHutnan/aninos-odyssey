@@ -1,5 +1,7 @@
 using AE.FightManager;
 using AE.GameSave;
+using AE.Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +18,12 @@ public class FightManager : MonoBehaviour
     public Character PlayerCharatcer;
     private void Start()
     {
-        
-        EnemyCharatcer = EnemyGeneration.Generate(SaveData.GameStage);
+        Array classes = ItemClass.GetValues(typeof(ItemClass));
+        ItemClass EnemyClass = (ItemClass)classes.GetValue(UnityEngine.Random.Range(0, classes.Length));
+        EnemyCharatcer = EnemyGeneration.Generate(SaveData.GameStage,5, EnemyClass);
         EnemyCharatcer.PostInit();
-        
+        EnemyGeneration.SetLevels(EnemyCharatcer, 5, EnemyClass);
+
         PlayerCharatcer = new Character();
         PlayerCharatcer.PostInit();
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Fighters_Attack);
@@ -27,7 +31,7 @@ public class FightManager : MonoBehaviour
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Heal_Blessing);
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Fighters_Defence);
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Lesser_Heal_Blessing);
-        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Stun_Attack);
+        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Stun_Attack); 
         EnemyBrain enemyBrain =  EnemyGameObject.GetComponent<EnemyBrain>();
         EnemyFighter.SetCharacter(EnemyCharatcer);
         PlayerFighter.SetCharacter(PlayerCharatcer);
