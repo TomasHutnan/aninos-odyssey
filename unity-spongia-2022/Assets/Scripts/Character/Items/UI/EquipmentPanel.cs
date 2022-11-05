@@ -23,6 +23,19 @@ namespace AE.Items.UI
             RefreshUI();
         }
 
+        private void Awake()
+        {
+            if (equipmentSlots.Keys.Count != Enum.GetValues(typeof(ItemType)).Length)
+            {
+                equipmentSlots = new Dictionary<ItemType, EquipmentSlot> { };
+                foreach (Transform slotGrid in equipmentSlotsGrids)
+                    foreach (EquipmentSlot equipmentSlot in slotGrid.GetComponentsInChildren<EquipmentSlot>())
+                    {
+                        equipmentSlots[equipmentSlot.ItemType] = equipmentSlot;
+                    }
+            }
+        }
+
         private void OnEnable()
         {
             if (c is null)
