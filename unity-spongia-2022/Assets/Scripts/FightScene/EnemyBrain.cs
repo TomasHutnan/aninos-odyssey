@@ -410,7 +410,10 @@ public class EnemyBrain : MonoBehaviour
                     //print($"DamageMultiplier{AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier}");
                     ComboEstimatedEnemyDamageGiven.Add(AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier * EstimatedEnemyDamage);
                 }
-
+                if(VARIABLE == AbilityName.Mana_Burst)
+                {
+                    print($"Sum{ComboEstimatedEnemyDamageGiven.Sum()}");
+                }
 
             }
             if(ComboEstimatedEnemyDamageGiven.Count == 0)
