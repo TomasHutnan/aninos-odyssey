@@ -44,7 +44,6 @@ public class EnemyGeneration
 
        
         
-        Dictionary<ItemType, AE.Items.Item> EnemyGear = new Dictionary<ItemType, AE.Items.Item>();
         //THIS IS SHITY REPLACE LATER
         Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> GearChance = new Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> {
                {ItemClass.Tank,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { 0, priority[0] } }, { ItemClass.Fighter, new List<int> { priority[0], priority[1] } }, { ItemClass.Rogue, new List<int> { priority[1], priority[2] } }, { ItemClass.Priest, new List<int> { priority[2], priority[3] } } } },//Tank
@@ -65,8 +64,8 @@ public class EnemyGeneration
             AE.Items.Item CurrentItem = new AE.Items.Item(itemClass, Stage, item);
             
             
-            EnemyGear.Add(item,CurrentItem );
-            CurrentItem.Equip(character);
+            character.AddItem(CurrentItem);
+            character.EquipItem(CurrentItem);
             
         }
         return character;

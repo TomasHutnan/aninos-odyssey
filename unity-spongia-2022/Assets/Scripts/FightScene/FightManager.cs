@@ -1,6 +1,7 @@
 using AE.FightManager;
 using AE.GameSave;
 using AE.Items;
+using AE.SceneManagment;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,8 +25,8 @@ public class FightManager : MonoBehaviour
         EnemyCharatcer.PostInit();
         EnemyGeneration.SetLevels(EnemyCharatcer, 5, EnemyClass);
 
-        PlayerCharatcer = new Character();
-        PlayerCharatcer.PostInit();
+        PlayerCharatcer = SaveData.PlayerCharacter;
+        PlayerCharatcer.EquippedAbilities = new HashSet<AbilityName>();
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Fighters_Attack);
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Damage_Blessing);
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Heal_Blessing);
@@ -59,16 +60,19 @@ public class FightManager : MonoBehaviour
     public void Victory()
     {
         print("VICTORY");
-        foreach (var item in EnemyCharatcer.EquippedItems.Values)
+        print(EnemyCharatcer.EquippedItems.Values.Count);
+        foreach (Item item in EnemyCharatcer.EquippedItems.Values)
         {
-            PlayerCharatcer.AddItem(item);
+            print($"ADDING ITEM: {item.Name}");
+            SaveData.PlayerCharacter.AddItem(item);
         }
-
+        SaveData.AutoSave();
+        SceneUtils.LoadScene("GameScene");
     }
     public void Defeat()
     {
         print("Defeat");
-        
+        SceneUtils.LoadScene("MainScene");
     }
     public void Update()
     {
