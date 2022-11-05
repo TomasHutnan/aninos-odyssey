@@ -82,8 +82,6 @@ namespace AE.FightManager
             print(character.EquippedAbilities.Count);
             AvailableAbilities = character.EquippedAbilities.ToArray();
             _fighter = character;
-            
-            GetComponent<DisplayController>().UpdateStartingValues();
         }
        
         public void NextRound()
