@@ -4,13 +4,20 @@ using UnityEngine;
 
 namespace AE.Dialogue
 {
+    public enum Identity
+    {
+        None = -1,
+        Anino = 100,
+        Bartender = 200,
+    }
+
     [CreateAssetMenu]
     public class Dialogue : ScriptableObject
     {
         [System.Serializable]
         public class Sentance
         {
-            public string name;
+            public Identity name;
             [TextArea(3, 10)]
             public string text;
         }

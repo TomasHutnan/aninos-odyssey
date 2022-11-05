@@ -12,9 +12,17 @@ namespace AE.Fight
         Egypt,
     }
 
+    public enum FightType
+    {
+        None = -1,
+        Tutorial,
+        Normal,
+        Boss,
+    }
+
     public class FightData
     {
         public static Location Location;
-        public static bool IsBoss;
+        public static FightType FightType;
     }
 }

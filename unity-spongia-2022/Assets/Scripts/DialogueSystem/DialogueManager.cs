@@ -13,7 +13,7 @@ namespace AE.Dialogue
         [SerializeField] TextMeshProUGUI nameComponent;
         [SerializeField] TextMeshProUGUI textComponent;
 
-        public float speed;
+        public float speed = 0.05f;
 
         private int index;
 
@@ -37,7 +37,7 @@ namespace AE.Dialogue
 
         private IEnumerator typeLine()
         {
-            nameComponent.text = dialogue.sentances[index].name;
+            nameComponent.text = dialogue.sentances[index].name.ToString();
             foreach (char c in dialogue.sentances[index].text.ToCharArray())
             {
                 textComponent.text += c;

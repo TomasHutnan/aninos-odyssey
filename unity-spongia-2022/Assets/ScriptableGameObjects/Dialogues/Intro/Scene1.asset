@@ -13,9 +13,41 @@ MonoBehaviour:
   m_Name: Scene1
   m_EditorClassIdentifier: 
   sentances:
-  - name: Bartender
-    text: Hello There!
-  - name: Bartender
-    text: "I\u2665you"
-  - name: Bartender
-    text: Bye :(
+  - name: 100
+    text: Another round?
+  - name: 200
+    text: I'm sorry Anino, but' you'll have to pay for this round first.
+  - name: 100
+    text: '*looks into purse*'
+  - name: 100
+    text: Oh no, I don't think I have enough.
+  - name: 100
+    text: I've been low on money lately.
+  - name: 200
+    text: Anino, Anino, ...
+  - name: 100
+    text: Isn't there anything I could do to pay it off? Help in the kitchen?
+  - name: 200
+    text: I don't think so... But... Can you keep a secret?
+  - name: 100
+    text: Wel..
+  - name: 200
+    text: Ah of course you can!
+  - name: 200
+    text: We have a secret fight club downstairs, but don't tell anyone, because
+      it's illegal.
+  - name: 100
+    text: Say whaaaat???
+  - name: 200
+    text: You can participate if you want, but it's a fight to death.
+  - name: 200
+    text: That's not a problem for you, is it?
+  - name: 100
+    text: I wouldn't s...
+  - name: 200
+    text: There's a fight happening now. I can get you into the next match you can
+      pay me off with your winnings.
+  - name: 100
+    text: Wait a second!
+  - name: 200
+    text: Come, come, no time to waste!

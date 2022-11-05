@@ -1,4 +1,5 @@
 using AE.Dialogue;
+using AE.Fight;
 using AE.SceneManagment;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,7 +57,10 @@ public class IntroScene : MonoBehaviour
         }
         else
         {
-            SceneUtils.LoadScene("GameScene");
+            FightData.FightType = FightType.Tutorial;
+            FightData.Location = Location.Greece;
+
+            SceneUtils.LoadScene("FightScene");
         }
     }
 
