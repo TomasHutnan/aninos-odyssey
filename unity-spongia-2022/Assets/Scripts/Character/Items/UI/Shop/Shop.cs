@@ -14,6 +14,9 @@ namespace AE.Items.UI.Shop
         [SerializeField] InventoryHolder inventoryHolder = new InventoryHolder();
         [SerializeField] Character c;
 
+        [Space]
+        [SerializeField] ItemTier maxTierOffer = ItemTier.God;
+
         private Item sellableItem = null;
 
         private void Start()
@@ -23,11 +26,22 @@ namespace AE.Items.UI.Shop
                 Item _item = new Item
                 (
                     _class: itemShowcases[i].randomizeClass ? null : itemShowcases[i].Class,
-                    tier: SaveData.GameStage,
+                    tier: currentOffer,
                     type: itemShowcases[i].Type
                 );
                 inventoryHolder.AddItem(_item);
                 itemShowcases[i].Item = _item;
+            }
+        }
+
+        private ItemTier currentOffer
+        {
+            get
+            {
+                if ((int)SaveData.GameStage < (int)maxTierOffer)
+                    return (ItemTier)((int)SaveData.GameStage + 1);
+                else
+                    return maxTierOffer;
             }
         }
 
