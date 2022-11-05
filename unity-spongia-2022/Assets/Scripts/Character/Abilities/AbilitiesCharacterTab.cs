@@ -63,8 +63,9 @@ namespace AE.Abilities.UI
         {
             if (selectedAbilitySlot == null && selectedAbilityDisplay == null)
             {
-                c.EquippedAbilities.Remove(abilityDisplay.AbilityName);
                 deselect();
+                selectedAbilityDisplay = abilityDisplay;
+                abilityDisplay.IsSelected = true;
             }
             else if (selectedAbilitySlot != null)
             {

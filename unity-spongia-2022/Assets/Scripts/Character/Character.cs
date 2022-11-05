@@ -117,8 +117,8 @@ public class Character : InventoryHolder
         LevelUpSystem = _levelUpSystem ?? new LevelUpSystem();
 
         UnlockedAbilities = _unlockedAbilities ?? new HashSet<AbilityName>();
-        TryAddDefaultAbilities();
         EquippedAbilities = _equippedAbilities ?? new HashSet<AbilityName>();
+        TryAddDefaultAbilities();
 
         LevelUpAbilitiesCount = _levelUpAbilitiesCount;
 
