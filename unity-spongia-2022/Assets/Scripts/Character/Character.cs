@@ -22,6 +22,8 @@ public class Character : InventoryHolder
     public HashSet<AbilityName> UnlockedAbilities;
     public HashSet<AbilityName> EquippedAbilities;
 
+    public readonly int maxAbilties = 6;
+
     public int LevelUpAbilitiesCount;
 
     public CharacterStat Damage;
@@ -115,6 +117,7 @@ public class Character : InventoryHolder
         LevelUpSystem = _levelUpSystem ?? new LevelUpSystem();
 
         UnlockedAbilities = _unlockedAbilities ?? new HashSet<AbilityName>();
+        TryAddDefaultAbilities();
         EquippedAbilities = _equippedAbilities ?? new HashSet<AbilityName>();
 
         LevelUpAbilitiesCount = _levelUpAbilitiesCount;
@@ -149,10 +152,23 @@ public class Character : InventoryHolder
         Weight.Label = "Weight";
     }
 
+    private void TryAddDefaultAbilities()
+    {
+        AbilityName[] abilities = new AbilityName[] { AbilityName.Lesser_Attack, AbilityName.Lesser_Defence };
+        foreach (AbilityName ability in abilities)
+        {
+            if (!UnlockedAbilities.Contains(ability))
+            {
+                UnlockedAbilities.Add(ability);
+                if (!EquippedAbilities.Contains(ability) && EquippedAbilities.Count < maxAbilties)
+                    EquippedAbilities.Add(ability);
+            }
+        }
+    }
+
     public void PostInit()
     {
         LevelUpSystem.UpdateActiveCharacter(this);
-        LevelUpSystem.addExp(3000);
 
         foreach (Item item in EquippedItems.Values)
         {
