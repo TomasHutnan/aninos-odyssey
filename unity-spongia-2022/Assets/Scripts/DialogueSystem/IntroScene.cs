@@ -64,6 +64,14 @@ public class IntroScene : MonoBehaviour
         }
     }
 
+    public void SkipAll()
+    {
+        FightData.FightType = FightType.Tutorial;
+        FightData.Location = Location.Greece;
+
+        SceneUtils.LoadScene("FightScene");
+    }
+
     private void OnValidate()
     {
         acts = GetComponentsInChildren<DialogueManager>();
