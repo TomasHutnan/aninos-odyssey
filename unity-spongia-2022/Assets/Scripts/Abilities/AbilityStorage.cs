@@ -86,9 +86,6 @@ public class AbilityStorage : MonoBehaviour
 
     private void Awake()
     {
-        if (GetAbility.Values.Count != 0)
-            return;
-
         GetAbility[AbilityName.None] = null;
         foreach (StoredAbility item in StoredAbilities)
         {
@@ -120,7 +117,7 @@ public class AbilityStorage : MonoBehaviour
         abilityFamilyTypes.TryAdd(ability.AbilityType, new Dictionary<Family, SortedList<Level, AbilityName>>());
         abilityFamilyTypes[ability.AbilityType].TryAdd(ability.AbilityFamily, new SortedList<Level, AbilityName>());
 
-        if (ability.AbilityLevel != Level.None)
+        if (ability.AbilityLevel != Level.None && !abilityFamilyTypes[ability.AbilityType][ability.AbilityFamily].Contains(new KeyValuePair<Level, AbilityName>(ability.AbilityLevel, abilityName)))
             abilityFamilyTypes[ability.AbilityType][ability.AbilityFamily].Add(key: ability.AbilityLevel, value: abilityName);
     }
 }
