@@ -84,7 +84,6 @@ namespace AE.FightManager
             StatHolder.Add(Stat.Mana, character.Mana.Value);
             StatHolder.Add(Stat.Weight, character.Weight.Value);
             StatHolder.Add(Stat.Stun, 0);
-            print(character.EquippedAbilities.Count);
             AvailableAbilities = character.EquippedAbilities.ToArray();
             _fighter = character;
         }
@@ -186,7 +185,6 @@ namespace AE.FightManager
                 //Check if sign of our current change is the opposite of change in active effects buffer
                 if(item.change/Math.Abs(item.change)*-1 == ChangeValue / Math.Abs(ChangeValue))
                 {
-                    print($"Detected,{item.change},{ChangeValue}");
                     item.change += ChangeValue;
                     //BULLSHIT
                     if((item.change / Math.Abs(item.change) )* item.change <= 0)
@@ -221,10 +219,8 @@ namespace AE.FightManager
         private void Update()
         {
             List<ActiveEffect> ToDelete = new List<ActiveEffect>();
-            //print(delayedEffects.Count);
             foreach (var item in delayedEffects)
             {
-                print(item.delay);
                 if (item.delay != 0) { continue; };
                 float ActualChange = item.change;
                 if (item.stat == Stat.HealthPoints)
@@ -263,7 +259,6 @@ namespace AE.FightManager
                 delayedEffects.Remove(item);
             }
 
-            //print(activeEffects.Count);
             string String = "";
             foreach (Stat item in Enum.GetValues(typeof(Stat)))
             {

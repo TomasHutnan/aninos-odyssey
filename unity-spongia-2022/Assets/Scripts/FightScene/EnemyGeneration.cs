@@ -17,40 +17,24 @@ using AE.Abilities.UI;
 
 public class EnemyGeneration 
 {
+    public static int[] priority = new int[] {60,85,95,100 };
 
-   
-    public static Character Generate(ItemTier Stage, int EnemyLevel,ItemClass EnemyClass, bool HaveItems = true)
-    {
-        
-        int[] priority = new int[] {60,85,95,100 };
-
-        Character character = new Character();
-
-        //character.Weight = new CharacterStat(80);
-        //character.CritChance = new CharacterStat(0);
-        //character.HealthPoints = new CharacterStat(0);
-        //character.Stamina = new CharacterStat(0);
-        //character.StaminaRegen = new CharacterStat(0);
-        //character.Damage = new CharacterStat(0);
-        //character.DamageReduction = new CharacterStat(0);
-        //character.DodgeChance = new CharacterStat(0);
-        //character.Mana = new CharacterStat(0);
-        //character.Inventory = new List<Item> { };
-        //character.EquippedItems = new Dictionary<ItemType, Item> { };
-
-
-
-
-        if (!HaveItems) { return character; }
-        
-        //THIS IS SHITY REPLACE LATER
-        Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> GearChance = new Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> {
+    public static Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> GearChance = new Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> {
                {ItemClass.Tank,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { 0, priority[0] } }, { ItemClass.Fighter, new List<int> { priority[0], priority[1] } }, { ItemClass.Rogue, new List<int> { priority[1], priority[2] } }, { ItemClass.Priest, new List<int> { priority[2], priority[3] } } } },//Tank
             {ItemClass.Fighter,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { priority[0], priority[1] } }, { ItemClass.Fighter, new List<int> { 0, priority[0] } }, { ItemClass.Rogue, new List<int> { priority[1], priority[2] } }, { ItemClass.Priest, new List<int> { priority[2], priority[3] } } } },//Fighter
               {ItemClass.Rogue,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { priority[2], priority[3] } }, { ItemClass.Fighter, new List<int> { priority[1], priority[2] } }, { ItemClass.Rogue, new List<int> { 0, priority[0] } }, { ItemClass.Priest, new List<int> { priority[0], priority[1] } } } },//Rouge
              {ItemClass.Priest,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { priority[2], priority[3] } }, { ItemClass.Fighter, new List<int> { priority[1], priority[2] } }, { ItemClass.Rogue, new List<int> { priority[0], priority[1] } }, { ItemClass.Priest, new List<int> { 0, priority[0] } } } },//Priest
         };
-       
+
+    public static Character Generate(ItemTier Stage, int EnemyLevel,ItemClass EnemyClass, bool HaveItems = true)
+    {
+        
+        
+
+        Character character = new Character();
+
+        if (!HaveItems) { return character; }
+   
         foreach (ItemType item in ItemType.GetValues(typeof(ItemType)))
         {
             int Dice = UnityEngine.Random.Range(1, 100);
@@ -77,12 +61,7 @@ public class EnemyGeneration
     public static void SetLevels(Character character,int EnemyLevel, ItemClass EnemyClass)
     {
         int[] priority = new int[] { 60, 85, 95, 100 };
-        Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> GearChance = new Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> {
-               {ItemClass.Tank,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { 0, priority[0] } }, { ItemClass.Fighter, new List<int> { priority[0], priority[1] } }, { ItemClass.Rogue, new List<int> { priority[1], priority[2] } }, { ItemClass.Priest, new List<int> { priority[2], priority[3] } } } },//Tank
-            {ItemClass.Fighter,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { priority[0], priority[1] } }, { ItemClass.Fighter, new List<int> { 0, priority[0] } }, { ItemClass.Rogue, new List<int> { priority[1], priority[2] } }, { ItemClass.Priest, new List<int> { priority[2], priority[3] } } } },//Fighter
-              {ItemClass.Rogue,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { priority[2], priority[3] } }, { ItemClass.Fighter, new List<int> { priority[1], priority[2] } }, { ItemClass.Rogue, new List<int> { 0, priority[0] } }, { ItemClass.Priest, new List<int> { priority[0], priority[1] } } } },//Rouge
-             {ItemClass.Priest,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { priority[2], priority[3] } }, { ItemClass.Fighter, new List<int> { priority[1], priority[2] } }, { ItemClass.Rogue, new List<int> { priority[0], priority[1] } }, { ItemClass.Priest, new List<int> { 0, priority[0] } } } },//Priest
-        };
+        
         Dictionary<ItemClass, List<int>> ClassLevels = new Dictionary<ItemClass, List<int>>()
         {
             {ItemClass.Tank,new List<int> { 0,0 } },
@@ -105,7 +84,6 @@ public class EnemyGeneration
         character.LevelUpSystem = new LevelUpSystem(character, EnemyLevel, 0, ClassLevels[ItemClass.Fighter][0], ClassLevels[ItemClass.Rogue][0], ClassLevels[ItemClass.Tank][0] + ClassLevels[ItemClass.Priest][1], ClassLevels[ItemClass.Tank][1], ClassLevels[ItemClass.Rogue][1], ClassLevels[ItemClass.Fighter][1], ClassLevels[ItemClass.Priest][0]);
         for (int i = 0; i < EnemyLevel; i++)
         {
-            MonoBehaviour.print("Vyberam");
             AbilityName[] choices = LevelUpAbilitiesProvider.GetChoices(character, i + 1);
             bool AbilityChosen = false;
             foreach (AbilityName choice in choices)
@@ -114,6 +92,8 @@ public class EnemyGeneration
                 Ability ability = GetAbility[choice];
                 foreach (AbilityTags item in ability.AbilityTags)
                 {
+                    //checking if the ability class matches with the enemy class
+                    //checking if the speel is better then lesser
                     if (item.ToString() == EnemyClass.ToString() || ability.AbilityLevel >= Level.Paradigm)
                     {
                         UnlockedAbilities.Add(choice);
@@ -133,49 +113,36 @@ public class EnemyGeneration
             {
                 UnlockedAbilities.Add(choices[UnityEngine.Random.Range(0, 4)]);
             }
-
-            //UnlockedAbilities.Add(choices[UnityEngine.Random.Range(0, 4)]);
-
         }
 
-        MonoBehaviour.print(EnemyClass);
-        foreach (var item in UnlockedAbilities)
-        {
-            MonoBehaviour.print(item.ToString());
-        }
-
-        MonoBehaviour.print("Printujem");
         var placeHolder = from entry in UnlockedAbilities orderby GetAbility[entry].AbilityLevel descending select entry;
         List<AbilityName> SortedUnlockedAbilities = placeHolder.ToList();
         int index = 0;
 
+        //Adding all posible abilities
         for (int i = 0; i < 6; i++)
         {
             if (UnlockedAbilities.Count != 0)
-            {
-                MonoBehaviour.print("Pridavam");
-                
+            {                
                 List<AbilityName> ToDelete = new List<AbilityName>(SortedUnlockedAbilities);
                 List <AbilityTags> AbilityChooseOrder= new List<AbilityTags>() { AbilityTags.Attack_Ability, AbilityTags.Defense_Ability, AbilityTags.Blessing_Ability};
 
                 foreach (AbilityName currentAbility in ToDelete)
                 {
                     Ability ability = GetAbility[currentAbility];
+                    //if attack, defense, blessing abilities have been chosen
                     if (index == 3)
                     {
                         AbilityName chosenAbility = SortedUnlockedAbilities[UnityEngine.Random.Range(0, SortedUnlockedAbilities.Count)];
                         character.EquippedAbilities.Add(chosenAbility);
                         SortedUnlockedAbilities.Remove(chosenAbility);
-                        MonoBehaviour.print($"{chosenAbility} random vybrata abilita");
                     }
-
+                    //if not
                     else if (ability.AbilityType == AbilityChooseOrder[index])
                     {
                         character.EquippedAbilities.Add(currentAbility);
                         SortedUnlockedAbilities.Remove(currentAbility);
                         index += 1;
-                        MonoBehaviour.print($"{currentAbility} big brain vybrata abilita");
-
                     }
                 }    
             }

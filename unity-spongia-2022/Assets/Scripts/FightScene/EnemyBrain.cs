@@ -58,7 +58,6 @@ public class EnemyBrain : MonoBehaviour
             float CombinedManaCost = 0;
             foreach (var spell in SpellCombination)
             {
-                print($"Spell{spell}");
                 for (int i = 0; i < AbilityStorage.GetAbility[spell].AbilityCount; i++)
                 {
                     //print($"Tuna{spell}");
