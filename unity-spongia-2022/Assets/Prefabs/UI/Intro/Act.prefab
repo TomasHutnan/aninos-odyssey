@@ -54,7 +54,7 @@ MonoBehaviour:
   dialogue: {fileID: 11400000, guid: 9c677a1fdf7ee7d4099f161230c40d58, type: 2}
   nameComponent: {fileID: 4547975664929234033}
   textComponent: {fileID: 4547975664444695404}
-  speed: 0.3
+  speed: 0.05
 --- !u!1 &4547975663892585534
 GameObject:
   m_ObjectHideFlags: 0
