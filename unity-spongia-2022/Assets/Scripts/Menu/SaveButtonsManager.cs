@@ -53,9 +53,7 @@ namespace AE.MainMenu
                 }
                 else
                 {
-                    SaveController.StartNew();
-                    SaveData.AutoSave();
-                    SceneUtils.LoadScene("GameScene");
+                    newGame();
                 }
             }
             else if (SaveController.IsSlotOccupied(saveSlot))
@@ -69,13 +67,19 @@ namespace AE.MainMenu
                 return;
             }
         }
+
+        private void newGame()
+        {
+            SaveController.StartNew();
+            SaveData.AutoSave();
+            SceneUtils.LoadScene("IntroScene");
+        } 
+
         public void ApproveOverwrite()
         {
             if (selectedSlot != SaveSlot.None)
             {
-                SaveController.StartNew();
-                SaveData.Save(selectedSlot);
-                SceneUtils.LoadScene("GameScene");
+                newGame();
             }
             else
             {
