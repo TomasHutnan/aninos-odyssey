@@ -23,7 +23,7 @@ public class FightManager : MonoBehaviour
         ItemClass EnemyClass = (ItemClass)classes.GetValue(UnityEngine.Random.Range(0, classes.Length));
         EnemyCharatcer = EnemyGeneration.Generate(SaveData.GameStage,5, EnemyClass);
         EnemyCharatcer.PostInit();
-        EnemyGeneration.SetLevels(EnemyCharatcer, 3, EnemyClass);
+        EnemyGeneration.SetLevels(EnemyCharatcer, 6, EnemyClass);
 
         PlayerCharatcer = SaveData.PlayerCharacter;
         PlayerCharatcer.EquippedAbilities = new HashSet<AbilityName>();

@@ -11,6 +11,9 @@ using AE.Abilities;
 
 using static AbilityStorage;
 using System.Linq;
+using Unity.VisualScripting.FullSerializer;
+using Unity.VisualScripting;
+using AE.Abilities.UI;
 
 public class EnemyGeneration 
 {
@@ -104,17 +107,77 @@ public class EnemyGeneration
         {
             MonoBehaviour.print("Vyberam");
             AbilityName[] choices = LevelUpAbilitiesProvider.GetChoices(character, i + 1);
-            UnlockedAbilities.Add(choices[UnityEngine.Random.Range(0, 4)]);
+            bool AbilityChosen = false;
+            foreach (AbilityName choice in choices)
+            {
+
+                Ability ability = GetAbility[choice];
+                foreach (AbilityTags item in ability.AbilityTags)
+                {
+                    if (item.ToString() == EnemyClass.ToString() || ability.AbilityLevel >= Level.Paradigm)
+                    {
+                        UnlockedAbilities.Add(choice);
+                        AbilityChosen = true;
+                        character.UnlockedAbilities.Add(choice);
+                        break;
+                    }
+                }
+
+                if (AbilityChosen)
+                {
+                    break;
+                }
+            }
+            
+            if (!AbilityChosen)
+            {
+                UnlockedAbilities.Add(choices[UnityEngine.Random.Range(0, 4)]);
+            }
+
+            //UnlockedAbilities.Add(choices[UnityEngine.Random.Range(0, 4)]);
+
         }
+
+        MonoBehaviour.print(EnemyClass);
+        foreach (var item in UnlockedAbilities)
+        {
+            MonoBehaviour.print(item.ToString());
+        }
+
         MonoBehaviour.print("Printujem");
+        var placeHolder = from entry in UnlockedAbilities orderby GetAbility[entry].AbilityLevel descending select entry;
+        List<AbilityName> SortedUnlockedAbilities = placeHolder.ToList();
+        int index = 0;
+
         for (int i = 0; i < 6; i++)
         {
             if (UnlockedAbilities.Count != 0)
             {
                 MonoBehaviour.print("Pridavam");
-                AbilityName chosenAbility = UnlockedAbilities[UnityEngine.Random.Range(0, UnlockedAbilities.Count)];
-                character.EquippedAbilities.Add(chosenAbility);
-                UnlockedAbilities.Remove(chosenAbility);
+                
+                List<AbilityName> ToDelete = new List<AbilityName>(SortedUnlockedAbilities);
+                List <AbilityTags> AbilityChooseOrder= new List<AbilityTags>() { AbilityTags.Attack_Ability, AbilityTags.Defense_Ability, AbilityTags.Blessing_Ability};
+
+                foreach (AbilityName currentAbility in ToDelete)
+                {
+                    Ability ability = GetAbility[currentAbility];
+                    if (index == 3)
+                    {
+                        AbilityName chosenAbility = SortedUnlockedAbilities[UnityEngine.Random.Range(0, SortedUnlockedAbilities.Count)];
+                        character.EquippedAbilities.Add(chosenAbility);
+                        SortedUnlockedAbilities.Remove(chosenAbility);
+                        MonoBehaviour.print($"{chosenAbility} random vybrata abilita");
+                    }
+
+                    else if (ability.AbilityType == AbilityChooseOrder[index])
+                    {
+                        character.EquippedAbilities.Add(currentAbility);
+                        SortedUnlockedAbilities.Remove(currentAbility);
+                        index += 1;
+                        MonoBehaviour.print($"{currentAbility} big brain vybrata abilita");
+
+                    }
+                }    
             }
             else
             {

@@ -100,6 +100,12 @@ namespace Abilities
         Defense_Ability,
         Blessing_Ability,
 
+        //Class
+        Fighter,
+        Rogue,
+        Tank,
+        Priest,
+
         None = -1,
     }
     [CreateAssetMenu]
