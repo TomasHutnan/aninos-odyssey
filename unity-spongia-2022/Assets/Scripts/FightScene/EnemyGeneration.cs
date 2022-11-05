@@ -4,17 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using AE.Items;
 using System;
-using Unity.PlasticSCM.Editor.WebApi;
 using AE.CharacterStats;
 using AE.FightManager;
 using Abilities;
 using AE.Abilities;
 
 using static AbilityStorage;
-using static UnityEditor.Progress;
-using UnityEngine.UIElements;
-using UnityEngine.TextCore.Text;
-using Unity.VisualScripting.FullSerializer;
 
 public class EnemyGeneration 
 {
