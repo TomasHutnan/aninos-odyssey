@@ -8,7 +8,7 @@ namespace AE.Dialogue
     {
         None = -1,
         Anino = 100,
-        Bartender = 200,
+        You = 200,
     }
 
     [CreateAssetMenu]
