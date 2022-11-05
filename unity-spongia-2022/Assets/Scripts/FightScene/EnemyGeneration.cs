@@ -20,7 +20,7 @@ public class EnemyGeneration
 {
 
    
-    public static Character Generate(ItemTier Stage, int EnemyLevel,ItemClass EnemyClass)
+    public static Character Generate(ItemTier Stage, int EnemyLevel,ItemClass EnemyClass, bool HaveItems = true)
     {
         
         int[] priority = new int[] {60,85,95,100 };
@@ -38,11 +38,11 @@ public class EnemyGeneration
         //character.Mana = new CharacterStat(0);
         //character.Inventory = new List<Item> { };
         //character.EquippedItems = new Dictionary<ItemType, Item> { };
-       
 
 
 
-       
+
+        if (!HaveItems) { return character; }
         
         //THIS IS SHITY REPLACE LATER
         Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> GearChance = new Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> {
