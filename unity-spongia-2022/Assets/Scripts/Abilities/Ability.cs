@@ -59,6 +59,10 @@ namespace Abilities
         Defense_Blessing_01, // 0, 1, 2
         Dodge_Blessing_01, // 0, 1, 2
         Health_Blessing_01, // 0, 1, 2
+
+        //Mana attack
+        Mana_Bullet_01, // 1, 2
+        Mana_Burst_01,
     }
     public enum Level
     {

@@ -57,9 +57,11 @@ public class AbilityStorage : MonoBehaviour
         Heavens_Blessing,
         Total_Precision,
         Greater_Dodge_Chance_Blessing,
-        
 
-
+        //ManaAttacks
+        Mana_Bullet,
+        Greater_Mana_Bullet,
+        Mana_Burst,
 
 
 
