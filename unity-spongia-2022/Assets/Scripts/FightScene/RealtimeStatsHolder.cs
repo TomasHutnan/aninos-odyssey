@@ -28,9 +28,14 @@ namespace AE.FightManager
    
     public class RealtimeStatsHolder : MonoBehaviour
     {
-        public void Print(string msg)
+
+        public void CriticalStrike()
         {
-            print(msg);
+            print("Crit");
+        }
+        public void Dodged()
+        {
+            print("Dodged");
         }
 
         public AbilityName[] AvailableAbilities;
