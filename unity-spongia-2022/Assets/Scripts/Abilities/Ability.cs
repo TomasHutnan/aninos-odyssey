@@ -141,7 +141,7 @@ namespace Abilities
           
             RealtimeStatsHolder TargetHolder = TargetObject.GetComponent<RealtimeStatsHolder>();
             RealtimeStatsHolder CasterHolder = CasterObject.GetComponent<RealtimeStatsHolder>();
-            CasterHolder.Print("Idem");
+         
             Character TargetCharacter = TargetHolder._fighter;
             Character CasterCharacter = CasterHolder._fighter;
             if (CasterHolder.StatHolder[Stat.Stun] != 0) { return; }
@@ -204,7 +204,7 @@ namespace Abilities
                 
                 else if(item.Change != 0)
                 {
-                    CasterHolder.Print(item.Delay.ToString());
+                   
                     float change = item.Change * (TargetStats[item.stat].Maximum/100);
                     ActiveEffect effect = new ActiveEffect(change, item.stat, item.Duration, item.Delay, TargetStats[item.stat].StatType);
                     TargetHolder.delayedEffects.Add(effect);
@@ -222,7 +222,7 @@ namespace Abilities
                 
                 else if (item.Change != 0)
                 {
-                    CasterHolder.Print(item.Delay.ToString());
+                  
                     float change = item.Change * (CasterStats[item.stat].Maximum / 100);
                     ActiveEffect effect = new ActiveEffect(change, item.stat,item.Duration ,item.Delay, CasterStats[item.stat].StatType);
                     CasterHolder.delayedEffects.Add(effect);
@@ -238,6 +238,14 @@ namespace Abilities
                 float DodgeChance = Target[Stat.DodgeChance];
                 int DodgeMultiplier = DodgeRoll <= DodgeChance ? 0 : 1;
                 int CasterCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
+                if(CasterCriticalMultiplier == 2)
+                {
+                    TargetHolder.CriticalStrike();
+                }
+                if (DodgeMultiplier == 0)
+                {
+                    TargetHolder.Dodged();
+                }
                 //Calculating CasterOutput Damage
                 float CasterOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * CasterCriticalMultiplier * DodgeMultiplier;
 
