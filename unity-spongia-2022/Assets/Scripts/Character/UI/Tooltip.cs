@@ -56,6 +56,9 @@ public class Tooltip : MonoBehaviour
         if (!isShown)
             return;
 
+        if (tooltipRectTransform == null)
+            tooltipRectTransform = tooltipParent.GetComponent<RectTransform>();
+
         Vector2 anchoredPosition = Input.mousePosition / canvasRectTransform.localScale.x;
         anchoredPosition += offset;
 
