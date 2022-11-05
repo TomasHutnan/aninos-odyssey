@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   AbilityTags: 1000000002000000120000000600000012000000
-  AbilityType: 20
+  AbilityType: 22
   AbilityFamily: 5
   AbilityLevel: 1
   AbilityDescription: 'Tire your enemy for 1 turn making reducing his stamina and

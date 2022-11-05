@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Priests Attack
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 080000000d0000000100000013000000
+  AbilityTags: 1a000000080000000d0000000100000013000000
   AbilityType: 20
   AbilityFamily: 3
   AbilityLevel: 1

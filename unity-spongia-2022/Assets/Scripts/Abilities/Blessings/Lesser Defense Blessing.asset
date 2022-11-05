@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lesser Defense Blessing
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d0000000500000012000000
+  AbilityTags: 190000000d0000000500000012000000
   AbilityType: 22
   AbilityFamily: 12
   AbilityLevel: 0

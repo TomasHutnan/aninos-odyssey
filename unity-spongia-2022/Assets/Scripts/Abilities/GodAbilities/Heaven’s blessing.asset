@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Heaven\u2019s blessing"
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d000000010000001200000011000000030000001200000011000000
+  AbilityTags: 1a0000000d000000010000001200000011000000030000001200000011000000
   AbilityType: -1
   AbilityFamily: -1
   AbilityLevel: -1

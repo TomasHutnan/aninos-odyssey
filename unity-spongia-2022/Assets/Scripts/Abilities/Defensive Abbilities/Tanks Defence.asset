@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tanks Defence
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d00000000000000130000000500000012000000
+  AbilityTags: 190000000d00000000000000130000000500000012000000
   AbilityType: 21
   AbilityFamily: 7
   AbilityLevel: 1

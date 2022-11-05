@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lesser Dodge Chance Blessing
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d0000000600000012000000
+  AbilityTags: 180000000d0000000600000012000000
   AbilityType: 22
   AbilityFamily: 13
   AbilityLevel: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tanks Attack
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0a0000000d0000000500000012000000
+  AbilityTags: 190000000a0000000d0000000500000012000000
   AbilityType: 20
   AbilityFamily: 1
   AbilityLevel: 1

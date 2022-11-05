@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Greater Defense Blessing
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d000000050000001200000011000000
+  AbilityTags: 190000000d000000050000001200000011000000
   AbilityType: 22
   AbilityFamily: 12
   AbilityLevel: 2

@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Mana Burst
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 
-  AbilityType: 0
-  AbilityFamily: 0
-  AbilityLevel: 0
+  AbilityTags: 1a000000
+  AbilityType: 20
+  AbilityFamily: 16
+  AbilityLevel: 2
   AbilityDescription: 
-  AbilityCount: 1
+  AbilityCount: 200
   StaminaCost: 0
-  ManaCost: 0
+  ManaCost: 1
   TargetDamageMultiplier: 0
-  CasterDamageMultiplier: 0
+  CasterDamageMultiplier: 0.025
   AffectsTarget: 0
   AffectsCaster: 0
   TargetFinisher: 0
