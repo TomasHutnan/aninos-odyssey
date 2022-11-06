@@ -46,6 +46,9 @@ namespace AE.Abilities.UI
                     foreground.enabled = false;
 
                     IsSelected = false;
+
+                    if (GetComponent<Image>() != null)
+                        GetComponent<Image>().enabled = false;
                 }
                 else
                 {
@@ -61,6 +64,9 @@ namespace AE.Abilities.UI
                     foreground.enabled = true;
                     if (foreground.sprite == null)
                         foreground.enabled = false;
+
+                    if (GetComponent<Image>() != null)
+                        GetComponent<Image>().enabled = true;
                 }
             }
         }

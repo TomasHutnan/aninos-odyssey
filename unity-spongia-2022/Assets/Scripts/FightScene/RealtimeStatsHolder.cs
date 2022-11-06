@@ -257,6 +257,7 @@ namespace AE.FightManager
                 ActualChange = ActualChange * (1 - StatHolder[Stat.DamageReduction] / 100);
                 ChangeInStats(item.stat, ActualChange);
                 item.change = ActualChange;
+                print("BEFORE IF");
                 if(item.duration != 0) 
                 {
                     activeEffects[item.stat].Add(item);
