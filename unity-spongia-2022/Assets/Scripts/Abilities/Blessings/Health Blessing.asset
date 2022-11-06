@@ -17,6 +17,7 @@ MonoBehaviour:
   AbilityType: 22
   AbilityFamily: 14
   AbilityLevel: 1
+  AbilityAnimationType: 2
   AbilityDescription: Call upon the gods to regenerate your health.
   AbilityCount: 1
   StaminaCost: 0

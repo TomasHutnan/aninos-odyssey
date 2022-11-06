@@ -1,3 +1,4 @@
+using AE.GameSave;
 using AE.Items;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace AE.Fight.UI
         Fighter,
         Tank,
         Rogue,
-        Pries,
+        Priest,
     }
 
     public class StanceController : MonoBehaviour
@@ -39,6 +40,7 @@ namespace AE.Fight.UI
         private Dictionary<AnimationWeaponClass, Dictionary<StanceType, Image[]>> _stanceImages = new Dictionary<AnimationWeaponClass, Dictionary<StanceType, Image[]>>();
 
         private AnimationWeaponClass weaponType;
+        private StanceType currentStance= StanceType.Idle;
 
         public Character character 
         { 
@@ -48,7 +50,17 @@ namespace AE.Fight.UI
                 bool contains = value.EquippedItems.TryGetValue(ItemType.Weapon, out weapon);
 
                 if (contains)
+                {
                     weaponType = (AnimationWeaponClass)((int)weapon.Class + 1);
+                    foreach (Image[] images in _stanceImages[weaponType].Values)
+                    {
+                        foreach (Image image in images)
+                        {
+                            if (image.name == "Weapon")
+                                image.sprite = ItemImages.GetImage(weapon.Tier, weapon.Type, weapon.Class);
+                        }
+                    }
+                }
                 else
                     weaponType = AnimationWeaponClass.NoWeapon;
 
@@ -57,11 +69,32 @@ namespace AE.Fight.UI
         }
 
         [Header("Animation")]
-        public int AnimationLength;
+        public float AnimationLength;
+
+        private void Start()
+        {
+            // SaveData.PlayerCharacter.EquipItem(new Item(ItemClass.Tank, ItemTier.God, ItemType.Weapon));
+            character = SaveData.PlayerCharacter;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+                Animate(StanceType.Idle);
+            if (Input.GetKeyDown(KeyCode.W))
+                Animate(StanceType.Attack);
+            if (Input.GetKeyDown(KeyCode.E))
+                Animate(StanceType.Defend);
+        }
 
         public void Animate(StanceType stanceType)
         {
+            StopAllResetState();
+            if (stanceType == currentStance)
+                return;
 
+            fadeGroups(_stanceImages[weaponType][stanceType], _stanceImages[weaponType][currentStance]);
+            currentStance = stanceType;
         }
 
         private void Awake()
@@ -80,10 +113,30 @@ namespace AE.Fight.UI
             }
         }
 
+        private void StopAllResetState()
+        {
+            StopAllCoroutines();
+            foreach (Image image in _stanceImages[weaponType][StanceType.Attack])
+                image.color = currentStance == StanceType.Attack ? visible : transparet;
+            foreach (Image image in _stanceImages[weaponType][StanceType.Defend])
+                image.color = currentStance == StanceType.Defend ? visible : transparet;
+            foreach (Image image in _stanceImages[weaponType][StanceType.Idle])
+                image.color = currentStance == StanceType.Idle ? visible : transparet;
+        }
+
+        private Color transparet = new Color(1, 1, 1, 0);
+        private Color visible = new Color(1, 1, 1, 1);
+
         private void updateClass()
         {
             StopAllCoroutines();
 
+            for (int i = 0; i < weaponStances.Length; i++)
+            {
+                weaponStances[i].gameObject.SetActive((AnimationWeaponClass)i == weaponType);
+            }
+
+            StopAllResetState();
         }
 
         private void fadeGroups(Image[] fadeInGroup, Image[] fadeOutGroup)

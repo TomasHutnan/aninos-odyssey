@@ -6,6 +6,8 @@ using UnityEngine;
 using System.Linq;
 
 using static AbilityStorage;
+using AE.Fight.UI;
+using Unity.Burst.Intrinsics;
 
 public class EnemyBrain : MonoBehaviour
 {
@@ -16,9 +18,14 @@ public class EnemyBrain : MonoBehaviour
     public GameObject PlayerObject;
     public GameObject EnemyObject;
     public GameObject Button;
+    public AbilitySlotsPopulator slotsPopulator;
     public List<AbilityName> List;
     public System.Linq.IOrderedEnumerable<KeyValuePair<List<AbilityName>,List<float>>> sortedStaminaDict;
     public System.Linq.IOrderedEnumerable<KeyValuePair<List<AbilityName>, List<float>>> sortedManaDict;
+
+    [SerializeField] StanceController stanceController;
+    [SerializeField] float castDelay = 1;
+
     public void Init()
     {
 
@@ -89,6 +96,8 @@ public class EnemyBrain : MonoBehaviour
     public  void MakeMove()
     {
         Button.SetActive(false);
+        slotsPopulator.DisableButtons();
+
         List<List<AbilityName>> CanCast = new List<List<AbilityName>>();
         foreach (var item in sortedStaminaDict)
         {
@@ -454,27 +463,26 @@ public class EnemyBrain : MonoBehaviour
         if(SortedBestOption.ToList().Count != 0)
         {
             var ChosenCombo = SortedBestOption.First();
-            foreach (var VARIABLE in ChosenCombo.Key)
-            {
-                //print(VARIABLE);
-                for (int i = 0; i < GetAbility[VARIABLE].AbilityCount; i++)
-                {
-                    AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject);
-                }
-               
-                    
-            }
-            foreach (var item in ChosenCombo.Value)
-            {
-                //print(item);
-            }
+            StartCoroutine(castCombo(ChosenCombo));
 
         }
         
+
+    }
+
+    IEnumerator castCombo(KeyValuePair<List<AbilityName>, List<float>> combo)
+    {
+        foreach (var VARIABLE in combo.Key)
+        {
+            for (int i = 0; i < GetAbility[VARIABLE].AbilityCount; i++)
+            {
+                AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject, stanceController);
+                yield return new WaitForSeconds(castDelay);
+            }
+        }
         EnemyHolder.NextRound();
         Button.SetActive(true);
-
-
+        slotsPopulator.EnableButtons();
 
     }
 }

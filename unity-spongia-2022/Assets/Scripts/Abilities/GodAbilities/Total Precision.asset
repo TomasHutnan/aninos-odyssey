@@ -17,6 +17,7 @@ MonoBehaviour:
   AbilityType: -1
   AbilityFamily: -1
   AbilityLevel: -1
+  AbilityAnimationType: 1
   AbilityDescription: Predict every move of your enemy, gaining dodge chance and
     prefect critical chance.
   AbilityCount: 1

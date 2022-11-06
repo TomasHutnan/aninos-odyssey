@@ -17,6 +17,7 @@ MonoBehaviour:
   AbilityType: 22
   AbilityFamily: 10
   AbilityLevel: 0
+  AbilityAnimationType: 2
   AbilityDescription: Call upon the gods to receive temporary bonus crit chance.
   AbilityCount: 1
   StaminaCost: 0

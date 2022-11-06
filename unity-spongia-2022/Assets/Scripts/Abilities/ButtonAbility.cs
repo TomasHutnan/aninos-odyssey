@@ -4,10 +4,12 @@ using UnityEngine;
 using Abilities;
 using AE.FightManager;
 using static AbilityStorage;
+using AE.Fight.UI;
 
 public class ButtonAbility : MonoBehaviour
 {
     public int AbbilityNumber;
+    [SerializeField] StanceController stanceController;
 
     public void Cast()
     {
@@ -27,7 +29,7 @@ public class ButtonAbility : MonoBehaviour
                 {
                     print("Castujem");
                     Target = child.gameObject;
-                    ability.UseAbility(transform.parent.gameObject, Target);
+                    ability.UseAbility(transform.parent.gameObject, Target, stanceController);
 
                 }
                 transform.parent.gameObject.GetComponent<RealtimeStatsHolder>().AvailableAbilities[AbbilityNumber] = AbilityName.None;

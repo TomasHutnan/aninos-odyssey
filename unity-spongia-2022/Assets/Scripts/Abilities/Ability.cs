@@ -122,6 +122,7 @@ namespace Abilities
         public AbilityTags AbilityType;
         public Family AbilityFamily;
         public Level AbilityLevel;
+        public StanceType AbilityAnimationType = StanceType.Idle;
         public string AbilityDescription;
         public int AbilityCount = 1;
         public int StaminaCost;
@@ -146,7 +147,7 @@ namespace Abilities
 
 
 
-        public void UseAbility(GameObject CasterObject, GameObject TargetObject)
+        public void UseAbility(GameObject CasterObject, GameObject TargetObject, StanceController stanceController)
         {
 
            
@@ -309,19 +310,20 @@ namespace Abilities
             {
                 Caster[Stat.HealthPoints] = 0;
             }
-            
-            
-            
 
-            
-            
+            stanceController.Animate(AbilityAnimationType);
 
 
 
 
 
 
-            
+
+
+
+
+
+
 
         }
 

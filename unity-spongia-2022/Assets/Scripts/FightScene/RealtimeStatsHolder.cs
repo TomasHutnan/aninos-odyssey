@@ -8,6 +8,7 @@ using Abilities;
 using Newtonsoft.Json.Linq;
 using static AbilityStorage;
 using System.Linq;
+using AE.Fight.UI;
 
 namespace AE.FightManager
 {
@@ -28,6 +29,7 @@ namespace AE.FightManager
    
     public class RealtimeStatsHolder : MonoBehaviour
     {
+        [SerializeField] StanceController stanceController;
 
         public void CriticalStrike()
         {
@@ -86,10 +88,14 @@ namespace AE.FightManager
             StatHolder.Add(Stat.Stun, 0);
             AvailableAbilities = character.EquippedAbilities.ToArray();
             _fighter = character;
+
+            stanceController.character = character;
         }
        
         public void NextRound()
         {
+            stanceController.Animate(StanceType.Idle);
+
             Update();
             StatHolder[Stat.Stamina] += _fighter.Stamina.Value * 0.25f;
             if(StatHolder[Stat.Stamina] > _fighter.Stamina.Value) { StatHolder[Stat.Stamina] = _fighter.Stamina.Value; }
