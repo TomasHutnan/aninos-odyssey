@@ -52,6 +52,10 @@ namespace AE.GameSave
             SaveData.Load(slot, data[(int) slot]);
         }
 
+        public static JSONSave GetData(SaveSlot slot) {
+            return data[(int) slot];
+        }
+
         public static void SaveCurrentDataTo(SaveSlot slot) {
             if (slot == SaveSlot.None)
                 throw new ArgumentException("Cannot save to slot None!");
