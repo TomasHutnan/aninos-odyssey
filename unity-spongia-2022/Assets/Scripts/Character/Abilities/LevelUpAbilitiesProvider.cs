@@ -17,7 +17,8 @@ namespace AE.Abilities
         {
             if (_level < 0 || _level > godAbilityLevel)
                 return null;
-            if (_level - 1 < maxAutoLevel)
+            
+            else if (_level - 1 < maxAutoLevel)
             {
                 AbilityTags abilityType = AbilityTags.None;
                 switch ((_level - 1) % 3)
@@ -35,7 +36,15 @@ namespace AE.Abilities
                 return GetAllAbilityNamesByType(abilityType);
             }
             else
-                return null; // god abilities
+            {
+                SortedList<Level, AbilityName>[] GodAbilities =new SortedList<Level, AbilityName>[4];
+                GodAbilities[0] =new SortedList < Level, AbilityName>(){ {Level.Greater, AbilityName.Earthen_Shield } };
+                GodAbilities[1] = new SortedList<Level, AbilityName>() { { Level.Greater, AbilityName.BloodLust } };
+                GodAbilities[2] = new SortedList<Level, AbilityName>() { { Level.Greater, AbilityName.Heavens_Blessing } };
+                GodAbilities[3] = new SortedList<Level, AbilityName>() { { Level.Greater, AbilityName.Total_Precision } };
+                return GodAbilities; // god abilities
+            }
+                
         }
 
 

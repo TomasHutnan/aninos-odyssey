@@ -32,7 +32,7 @@ public class FightManager : MonoBehaviour
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Heal_Blessing);
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Fighters_Defence);
         PlayerCharatcer.EquippedAbilities.Add(AbilityName.Lesser_Heal_Blessing);
-        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Mana_Burst); 
+        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Mana_Bullet); 
         EnemyBrain enemyBrain =  EnemyGameObject.GetComponent<EnemyBrain>();
         EnemyFighter.SetCharacter(EnemyCharatcer);
         PlayerFighter.SetCharacter(PlayerCharatcer);

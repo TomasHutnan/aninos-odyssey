@@ -5,6 +5,7 @@ using UnityEngine;
 using AE.FightManager;
 using Unity.VisualScripting.FullSerializer;
 using System.Diagnostics;
+using AE.Fight.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -14,6 +15,7 @@ namespace Abilities
     [System.Serializable]
     public class CreationAbility
     {
+        public StanceType stance;
         public Stat stat;
         public float Change;
         public float Duration;
