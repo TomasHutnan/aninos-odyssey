@@ -58,7 +58,6 @@ public class EnemyBrain : MonoBehaviour
             float CombinedManaCost = 0;
             foreach (var spell in SpellCombination)
             {
-                print($"Spell{spell}");
                 for (int i = 0; i < AbilityStorage.GetAbility[spell].AbilityCount; i++)
                 {
                     //print($"Tuna{spell}");
@@ -411,7 +410,8 @@ public class EnemyBrain : MonoBehaviour
                     //print($"DamageMultiplier{AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier}");
                     ComboEstimatedEnemyDamageGiven.Add(AbilityStorage.GetAbility[VARIABLE].CasterDamageMultiplier * EstimatedEnemyDamage);
                 }
-
+               
+               
 
             }
             if(ComboEstimatedEnemyDamageGiven.Count == 0)
@@ -456,8 +456,13 @@ public class EnemyBrain : MonoBehaviour
             var ChosenCombo = SortedBestOption.First();
             foreach (var VARIABLE in ChosenCombo.Key)
             {
-                print(VARIABLE);
-                AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject);
+                //print(VARIABLE);
+                for (int i = 0; i < GetAbility[VARIABLE].AbilityCount; i++)
+                {
+                    AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject);
+                }
+               
+                    
             }
             foreach (var item in ChosenCombo.Value)
             {

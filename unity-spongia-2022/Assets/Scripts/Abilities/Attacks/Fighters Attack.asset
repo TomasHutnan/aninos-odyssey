@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fighters Attack
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 09000000
+  AbilityTags: 1700000009000000
   AbilityType: 20
   AbilityFamily: 0
   AbilityLevel: 1

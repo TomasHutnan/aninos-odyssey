@@ -59,6 +59,10 @@ namespace Abilities
         Defense_Blessing_01, // 0, 1, 2
         Dodge_Blessing_01, // 0, 1, 2
         Health_Blessing_01, // 0, 1, 2
+
+        //Mana attack
+        Mana_Bullet_01, // 1, 2
+        Mana_Burst_01,
     }
     public enum Level
     {
@@ -99,6 +103,12 @@ namespace Abilities
         Attack_Ability,
         Defense_Ability,
         Blessing_Ability,
+
+        //Class
+        Fighter,
+        Rogue,
+        Tank,
+        Priest,
 
         None = -1,
     }
@@ -247,10 +257,11 @@ namespace Abilities
                     TargetHolder.Dodged();
                 }
                 //Calculating CasterOutput Damage
-                float CasterOutputDamage = (float)Math.Round(Damage * CasterDamageMultiplier) * CasterCriticalMultiplier * DodgeMultiplier;
+                float CasterOutputDamage = Damage * CasterDamageMultiplier * CasterCriticalMultiplier * DodgeMultiplier;
 
 
                 ActiveEffect DDamage = new ActiveEffect(-CasterOutputDamage, Stat.HealthPoints, 0, 0, StatType.Flat);
+                MonoBehaviour.print($"Damage{DDamage.change}");
                 TargetHolder.delayedEffects.Add(DDamage);
             }
 
@@ -265,7 +276,7 @@ namespace Abilities
                 float Chance = UnityEngine.Random.Range(1, 101);
                 float TargetCriticalMultiplier = Chance <= CriticalChance ? 2 : 1;
                 //Caclulating TargetOutput Damage
-                float TargetOutputDamage = (float)Math.Round(Damage * TargetDamageMultiplier) * TargetCriticalMultiplier * DodgeMultiplier;
+                float TargetOutputDamage = Damage * TargetDamageMultiplier * TargetCriticalMultiplier * DodgeMultiplier;
 
 
                 ActiveEffect DDamage = new ActiveEffect(-TargetOutputDamage, Stat.HealthPoints, 0, 0, StatType.Flat);

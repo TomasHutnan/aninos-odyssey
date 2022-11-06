@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Priests Defence
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  AbilityTags: 0d00000005000000120000000100000013000000
+  AbilityTags: 1a0000000d00000005000000120000000100000013000000
   AbilityType: 21
   AbilityFamily: 9
   AbilityLevel: 1

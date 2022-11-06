@@ -4269,6 +4269,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.size
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[41].Name
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[42].Name
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[43].Name
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[44].Name
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[41].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: f57d1b07d7093324fa41f892ba1559aa, type: 2}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[42].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c9d1b286463e4f4e991ca969e720513, type: 2}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[43].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e62a45f180b9a14294e7906fc202e3d, type: 2}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[44].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: e896bdcd970dbdb4d86d5755579d34bd, type: 2}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 2799145709388390193, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
