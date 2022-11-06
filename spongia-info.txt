@@ -6,3 +6,17 @@ Fonty:
 * Cinzel
 Zdroj: https://www.1001fonts.com/cinzel-font.html
 Licencia: SIL Open Font License (OFL)
+
+Ikony:
+* Ability
+* Ikona Nastavení
+Zdroj: https://game-icons.net/
+Licencia: Attribution 3.0 Unported (CC BY 3.0)
+
+Pozadia:
+* Ulice Grécka
+* Pantheon
+* Nastavenia
+* Hlavné menu
+Zdroj: https://www.midjourney.com
+Licencia: Attribution-NonCommercial 4.0 International
