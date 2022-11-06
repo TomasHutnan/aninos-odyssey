@@ -41,6 +41,8 @@ namespace AE.Audio
         SFX_MENU_BUTTON_HOVER_01,
         SFX_MENU_BUTTON_PRESSED_01,
 
+        SFX_INVENTORY_OPEN_01,
+
         //  - Fight
         SFX_FIGHT_HIT_NORMAL_01,
         SFX_FIGHT_HIT_CRITICAL_01,
