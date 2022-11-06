@@ -12171,7 +12171,7 @@ MonoBehaviour:
   - {fileID: 1698861829277725712}
   - {fileID: 1698861829517118083}
   - {fileID: 1698861828785488047}
-  maxTierOffer: 2
+  maxTierOffer: 3
 --- !u!1 &917469465
 GameObject:
   m_ObjectHideFlags: 0

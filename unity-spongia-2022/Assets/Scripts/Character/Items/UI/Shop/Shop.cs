@@ -1,3 +1,4 @@
+using Abilities;
 using AE.GameSave;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace AE.Items.UI.Shop
 
         [Space]
         [SerializeField] InventoryHolder inventoryHolder = new InventoryHolder();
-        [SerializeField] Character c;
+        [SerializeField] Character c = SaveData.PlayerCharacter;
 
         [Space]
         [SerializeField] ItemTier maxTierOffer = ItemTier.God;
@@ -47,9 +48,6 @@ namespace AE.Items.UI.Shop
 
         private void OnEnable()
         {
-            if (c is null)
-                c = SaveData.PlayerCharacter;
-
             for (int i = 0; i < itemShowcases.Length; i++)
             {
                 itemShowcases[i].OnItemRightClickedEvent += handleItemClick;
