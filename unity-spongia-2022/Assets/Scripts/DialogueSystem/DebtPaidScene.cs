@@ -5,8 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IntroScene : DialogueScene
+public class DebtPaidScene : DialogueScene
 {
+    [SerializeField] GameObject SceneObject;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -20,9 +22,6 @@ public class IntroScene : DialogueScene
 
     private void onSceneFinished()
     {
-        FightData.FightType = FightType.Tutorial;
-        FightData.Location = Location.Greece;
-
-        SceneUtils.LoadScene("FightScene");
+        SceneObject.SetActive(false);
     }
 }

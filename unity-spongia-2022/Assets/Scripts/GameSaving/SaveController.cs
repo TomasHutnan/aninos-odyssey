@@ -58,9 +58,27 @@ namespace AE.GameSave
 
             List<JSONItem> inventory = new List<JSONItem>(), equippedItems = new List<JSONItem>();
             foreach (Item item in SaveData.Inventory)
-                inventory.Add(ToJSONItem(item));
+            {
+                try
+                {
+                    inventory.Add(ToJSONItem(item));
+                }
+                catch (NullReferenceException)
+                {
+                    continue;
+                }
+            }
             foreach (Item item in SaveData.EquippedItems.Values)
-                equippedItems.Add(ToJSONItem(item));
+            {
+                try
+                {
+                    equippedItems.Add(ToJSONItem(item));
+                }
+                catch (NullReferenceException)
+                {
+                    continue;
+                }
+            }
 
             data[(int)slot] = new JSONSave {
                 LastModified = DateTime.Now.Ticks,

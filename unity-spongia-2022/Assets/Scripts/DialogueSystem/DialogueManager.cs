@@ -56,7 +56,6 @@ namespace AE.Dialogue
             else
             {
                 OnDialogueFinishEvent?.Invoke();
-                gameObject.SetActive(false);
             }
         }
         public void ShowFullLine()

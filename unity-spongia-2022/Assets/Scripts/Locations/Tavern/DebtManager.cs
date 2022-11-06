@@ -12,6 +12,8 @@ public class DebtManager : MonoBehaviour
     [Space]
     [SerializeField] TextMeshProUGUI selectedAmountText;
     [SerializeField] Scrollbar amountSelector;
+    [Space]
+    [SerializeField] GameObject debtPaidScene;
 
     int debt;
     int maxPayableAmount { get { return debt < c.Money ? debt : c.Money; } }
@@ -47,5 +49,10 @@ public class DebtManager : MonoBehaviour
         amountSelector.value = 0;
 
         updateValues();
+
+        if (SaveData.DebtRemaining <= 0)
+        {
+            debtPaidScene.SetActive(true);
+        }
     }
 }
