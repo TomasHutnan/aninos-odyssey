@@ -16,7 +16,7 @@ MonoBehaviour:
   - name: 200
     text: Another round?
   - name: 100
-    text: I'm sorry, but' you'll have to pay for this round first.
+    text: I'm sorry, but you'll have to pay for this round first.
   - name: 200
     text: '*looks into wallet*'
   - name: 200
