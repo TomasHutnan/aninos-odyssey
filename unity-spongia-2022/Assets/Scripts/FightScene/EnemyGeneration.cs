@@ -17,6 +17,100 @@ using AE.Abilities.UI;
 
 public class EnemyGeneration 
 {
+    public Enemy[] GetFightChoises(ItemTier Stage,int choiseAmount = 3)
+    {
+        List<string> EnemyNames = new List<string>() 
+        {
+            "Diomedes",
+"Phokas",
+"Oecleus",
+"Attalos",
+"Charillos",
+"Crathis",
+"Chares",
+"Asklepios",
+"Kannadis",
+"Euaemon",
+"Basileios",
+"Epaphroditus",
+"Dithyrambos",
+"Proxenos",
+"Iphikrates",
+"Coes",
+"Philopoemon",
+"Kapaneus",
+"Talaemenes",
+"Palmys",
+"Telemachos",
+"Kerkyon",
+"Hermolycus",
+"Nausithous",
+"Antikles",
+"Onesiphorus",
+"Hieronymus",
+"Posidonios",
+"Neoptolemos",
+"Epaenetus",
+"Panites",
+"Pylenor",
+"Thrasymedes",
+"Eryximachos",
+"Anacharsis",
+"Lycidas",
+"Ameinokles",
+"Kandaules",
+"Euphenes",
+"Ibanolis",
+"Orion",
+"Eleon",
+"Peolpidas",
+"Echestratos",
+"Timonax",
+"Belos",
+"Epeius",
+"Coeranus",
+"Acaeus",
+"Terillos",
+"Blathyllos",
+"Cephalos",
+"Clytius",
+"Xiphilinus",
+"Aberkios",
+"Evelthon",
+"Gorgythion",
+"Sosipatros",
+"Aster",
+"Arridaios",
+"Chromis",
+"Coronos",
+"Oenopion",
+"Androbulos",
+        };
+        Dictionary<ItemTier,List<int> > StageLevels = new Dictionary<ItemTier, List<int>>() 
+        {
+            {ItemTier.Mortal, new List<int>(){0,6}},
+            {ItemTier.Earth, new List<int>(){6,11}},
+            {ItemTier.Heaven, new List<int>(){11,16}},
+            {ItemTier.God, new List<int>(){16,21}},
+        };
+        Enemy[] choices = new Enemy[choiseAmount];
+        Array classes = ItemClass.GetValues(typeof(ItemClass));
+       
+        for (int i = 0; i < choiseAmount; i++)
+        {
+            ItemClass EnemyClass = (ItemClass)classes.GetValue(UnityEngine.Random.Range(0, classes.Length));
+            int EnemyLevel = UnityEngine.Random.Range(StageLevels[Stage][0], StageLevels[Stage][1]);
+            Enemy character = Generate(Stage, EnemyLevel, EnemyClass);
+            SetLevels(character,EnemyLevel,EnemyClass);
+            character.Name = EnemyNames[UnityEngine.Random.Range(0, EnemyNames.Count)];
+            character.Class = EnemyClass;
+            character.Money = 10 * (int)Math.Pow((int)Stage+1, 3) * (UnityEngine.Random.Range(8, 12) / 10); 
+        }
+        
+        return choices;
+       
+
+    }
     public static int[] priority = new int[] {60,85,95,100 };
 
     public static Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> GearChance = new Dictionary<ItemClass, Dictionary<ItemClass, List<int>>> {
@@ -26,12 +120,12 @@ public class EnemyGeneration
              {ItemClass.Priest,new Dictionary<ItemClass,List<int>>(){{ItemClass.Tank,new List<int> { priority[2], priority[3] } }, { ItemClass.Fighter, new List<int> { priority[1], priority[2] } }, { ItemClass.Rogue, new List<int> { priority[0], priority[1] } }, { ItemClass.Priest, new List<int> { 0, priority[0] } } } },//Priest
         };
 
-    public static Character Generate(ItemTier Stage, int EnemyLevel,ItemClass EnemyClass, bool HaveItems = true)
+    public static Enemy Generate(ItemTier Stage, int EnemyLevel,ItemClass EnemyClass, bool HaveItems = true)
     {
-        
-        
 
-        Character character = new Character();
+
+
+        Enemy character = new Enemy();
 
         if (!HaveItems) { return character; }
    
