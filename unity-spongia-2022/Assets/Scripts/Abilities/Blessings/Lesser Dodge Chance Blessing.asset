@@ -15,6 +15,7 @@ MonoBehaviour:
   Icon: {fileID: 0}
   AbilityTags: 180000000d0000000600000012000000
   AbilityType: 22
+  abilityName: 22
   AbilityFamily: 13
   AbilityLevel: 0
   AbilityAnimationType: 2
@@ -30,7 +31,8 @@ MonoBehaviour:
   CasterFinisher: 0
   TargetEffects: []
   CasterEffects:
-  - stat: 4
+  - stance: 0
+    stat: 4
     Change: 2.5
     Duration: 2
     Delay: 0

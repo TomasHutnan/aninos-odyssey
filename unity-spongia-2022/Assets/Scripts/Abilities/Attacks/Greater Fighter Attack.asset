@@ -15,6 +15,7 @@ MonoBehaviour:
   Icon: {fileID: 0}
   AbilityTags: 1700000009000000
   AbilityType: 20
+  abilityName: 6
   AbilityFamily: 0
   AbilityLevel: 2
   AbilityAnimationType: 1
