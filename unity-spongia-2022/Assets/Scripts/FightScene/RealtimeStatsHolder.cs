@@ -151,6 +151,7 @@ namespace AE.FightManager
                             ActualChange -= StatHolder[item.stat] + ActualChange - _fighter.Mana.Value;
                         }
                     }
+                    ActualChange = ActualChange * (1 - StatHolder[Stat.DamageReduction] / 100);
                     ChangeInStats(item.stat, ActualChange);
                     item.change = ActualChange;
                     ToDelete.Add(item);
@@ -245,6 +246,7 @@ namespace AE.FightManager
                         ActualChange -= StatHolder[item.stat] + ActualChange - _fighter.Mana.Value;
                     }
                 }
+                ActualChange = ActualChange * (1 - StatHolder[Stat.DamageReduction] / 100);
                 ChangeInStats(item.stat, ActualChange);
                 item.change = ActualChange;
                 if(item.duration != 0) 
