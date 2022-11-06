@@ -17,6 +17,7 @@ MonoBehaviour:
   AbilityType: 21
   AbilityFamily: 7
   AbilityLevel: 2
+  AbilityAnimationType: 2
   AbilityDescription: Fortifie yourself with your weapon gaining health and temporary
     defense.
   AbilityCount: 1

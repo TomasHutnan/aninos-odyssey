@@ -26,13 +26,7 @@ public class FightManager : MonoBehaviour
         EnemyGeneration.SetLevels(EnemyCharatcer, 6, EnemyClass);
 
         PlayerCharatcer = SaveData.PlayerCharacter;
-        PlayerCharatcer.EquippedAbilities = new HashSet<AbilityName>();
-        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Fighters_Attack);
-        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Damage_Blessing);
-        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Heal_Blessing);
-        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Fighters_Defence);
-        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Lesser_Heal_Blessing);
-        PlayerCharatcer.EquippedAbilities.Add(AbilityName.Mana_Burst); 
+
         EnemyBrain enemyBrain =  EnemyGameObject.GetComponent<EnemyBrain>();
         EnemyFighter.SetCharacter(EnemyCharatcer);
         PlayerFighter.SetCharacter(PlayerCharatcer);

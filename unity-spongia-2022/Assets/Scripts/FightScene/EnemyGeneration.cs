@@ -17,9 +17,7 @@ using AE.Abilities.UI;
 
 public class EnemyGeneration 
 {
-    public Enemy[] GetFightChoises(ItemTier Stage,int choiseAmount = 3)
-    {
-        List<string> EnemyNames = new List<string>() 
+    static List<string> EnemyNames = new List<string>()
         {
             "Diomedes",
 "Phokas",
@@ -86,6 +84,9 @@ public class EnemyGeneration
 "Oenopion",
 "Androbulos",
         };
+
+    public Enemy[] GetFightChoises(ItemTier Stage,int choiseAmount = 3)
+    {
         Dictionary<ItemTier,List<int> > StageLevels = new Dictionary<ItemTier, List<int>>() 
         {
             {ItemTier.Mortal, new List<int>(){0,6}},
@@ -102,8 +103,6 @@ public class EnemyGeneration
             int EnemyLevel = UnityEngine.Random.Range(StageLevels[Stage][0], StageLevels[Stage][1]);
             Enemy character = Generate(Stage, EnemyLevel, EnemyClass);
             SetLevels(character,EnemyLevel,EnemyClass);
-            character.Name = EnemyNames[UnityEngine.Random.Range(0, EnemyNames.Count)];
-            character.Class = EnemyClass;
             character.Money = 10 * (int)Math.Pow((int)Stage+1, 3) * (UnityEngine.Random.Range(8, 12) / 10); 
         }
         
@@ -125,7 +124,7 @@ public class EnemyGeneration
 
 
 
-        Enemy character = new Enemy();
+        Enemy character = new Enemy(EnemyNames[UnityEngine.Random.Range(0, EnemyNames.Count)], EnemyClass);
 
         if (!HaveItems) { return character; }
    

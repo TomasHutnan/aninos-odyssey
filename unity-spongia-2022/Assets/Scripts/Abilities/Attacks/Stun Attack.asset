@@ -17,6 +17,7 @@ MonoBehaviour:
   AbilityType: 20
   AbilityFamily: -1
   AbilityLevel: -1
+  AbilityAnimationType: 1
   AbilityDescription: Stuns your enemy for 1 turn rendering them incapable of doing
     anything.
   AbilityCount: 1

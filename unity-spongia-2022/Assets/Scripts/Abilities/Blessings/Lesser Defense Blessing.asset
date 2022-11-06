@@ -17,6 +17,7 @@ MonoBehaviour:
   AbilityType: 22
   AbilityFamily: 12
   AbilityLevel: 0
+  AbilityAnimationType: 2
   AbilityDescription: Call upon the gods to receive temporary bonus defense.
   AbilityCount: 1
   StaminaCost: 0

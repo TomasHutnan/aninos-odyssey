@@ -17,6 +17,7 @@ MonoBehaviour:
   AbilityType: 22
   AbilityFamily: 4
   AbilityLevel: 1
+  AbilityAnimationType: 1
   AbilityDescription: Termorarily break the armor of your enemy making them take
     increased damage.
   AbilityCount: 1
