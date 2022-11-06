@@ -19,7 +19,7 @@ MonoBehaviour:
     text: I wouldn't s...
   - name: 100
     text: There's a fight happening right now. I can get you into the next match
-      you can pay me off with your winnings.
+      and you can pay me off with your winnings.
   - name: 200
     text: Wait a second!
   - name: 100
