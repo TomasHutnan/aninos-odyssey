@@ -22,6 +22,8 @@ namespace AE.GameSave
         public static ItemTier GameStage = ItemTier.Mortal;
         public static LevelUpSystem LevelUpSystem = new LevelUpSystem();
 
+        public static int DebtRemaining = 5000;
+
         public static Character PlayerCharacter = new Character();
 
         public static void SetDefaults() {
@@ -34,6 +36,8 @@ namespace AE.GameSave
             LevelUpAbilitiesCount = 0;
             GameStage = ItemTier.Mortal;
             LevelUpSystem = new LevelUpSystem();
+
+            DebtRemaining = 5000;
 
             PlayerCharacter = new Character();
             PlayerCharacter.PostInit();
@@ -97,6 +101,8 @@ namespace AE.GameSave
             GameStage = save.GameStage;
             LevelUpSystem = new LevelUpSystem(null, save.LevelUpSystem.Level, save.LevelUpSystem.Exp,
                 save.LevelUpSystem.Bonuses.Damage, save.LevelUpSystem.Bonuses.CritChance, save.LevelUpSystem.Bonuses.Health, save.LevelUpSystem.Bonuses.Resistance, save.LevelUpSystem.Bonuses.DodgeChance, save.LevelUpSystem.Bonuses.Stamina, save.LevelUpSystem.Bonuses.Mana);
+
+            DebtRemaining = save.DebtRemaining;
 
             PlayerCharacter = new Character(
                 Money, EquippedItems, Inventory, LevelUpSystem,

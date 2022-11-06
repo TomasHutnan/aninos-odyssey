@@ -83,7 +83,8 @@ namespace AE.GameSave
                         Stamina = SaveData.LevelUpSystem.Stamina,
                         Mana = SaveData.LevelUpSystem.Mana,
                     }
-                }
+                },
+                DebtRemaining = SaveData.DebtRemaining,
             };
 
             SaveToFile();

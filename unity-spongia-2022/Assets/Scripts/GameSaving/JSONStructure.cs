@@ -19,6 +19,8 @@ namespace AE.GameSave
         [JsonConverter(typeof(StringEnumConverter))]
         public ItemTier GameStage {get; set;}
         public JSONLevelUpSystem LevelUpSystem {get; set;}
+
+        public int DebtRemaining;
     }
 
     public class JSONLevelUpSystem {
