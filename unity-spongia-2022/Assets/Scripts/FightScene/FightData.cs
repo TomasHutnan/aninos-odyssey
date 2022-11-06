@@ -8,8 +8,6 @@ namespace AE.Fight
     {
         None = -1,
         Greece,
-        Rome,
-        Egypt,
     }
 
     public enum FightType

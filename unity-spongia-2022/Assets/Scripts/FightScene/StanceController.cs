@@ -151,6 +151,7 @@ namespace AE.Fight.UI
                 image.color = new Color(1, 1, 1, i / AnimationLength);
                 yield return null;
             }
+            image.color = visible;
         }
         private IEnumerator FadeOut(Image image)
         {
@@ -159,6 +160,7 @@ namespace AE.Fight.UI
                 image.color = new Color(1, 1, 1, i / AnimationLength);
                 yield return null;
             }
+            image.color = transparet;
         }
 
         private void OnValidate()
