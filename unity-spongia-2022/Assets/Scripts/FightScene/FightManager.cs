@@ -60,6 +60,9 @@ public class FightManager : MonoBehaviour
             print($"ADDING ITEM: {item.Name}");
             SaveData.PlayerCharacter.AddItem(item);
         }
+        SaveData.PlayerCharacter.Money += EnemyCharatcer.Money;
+        int expGain = 80 + (EnemyCharatcer.LevelUpSystem.Level) * 50;
+        SaveData.PlayerCharacter.LevelUpSystem.addExp(expGain);
         SaveData.AutoSave();
         SceneUtils.LoadScene("GameScene");
     }
