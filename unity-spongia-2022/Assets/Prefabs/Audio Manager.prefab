@@ -64,7 +64,9 @@ MonoBehaviour:
     - type: 9
       clip: {fileID: 8300000, guid: 98d42c33c5ffc3f42bfe0ce43899f97a, type: 3}
   - source: {fileID: 4405145280212455758}
-    audio: []
+    audio:
+    - type: 21
+      clip: {fileID: 8300000, guid: 991e8fc1ad60e1b41b006959ea56e65b, type: 3}
 --- !u!114 &4405145278914783075
 MonoBehaviour:
   m_ObjectHideFlags: 0
