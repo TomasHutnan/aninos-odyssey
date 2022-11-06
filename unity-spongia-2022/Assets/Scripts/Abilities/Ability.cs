@@ -15,6 +15,7 @@ namespace Abilities
     [System.Serializable]
     public class CreationAbility
     {
+        public StanceType stance;
         public Stat stat;
         public float Change;
         public float Duration;

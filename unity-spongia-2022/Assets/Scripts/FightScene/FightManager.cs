@@ -26,7 +26,7 @@ public class FightManager : MonoBehaviour
         EnemyGeneration.SetLevels(EnemyCharatcer, 6, EnemyClass);
 
         PlayerCharatcer = SaveData.PlayerCharacter;
-
+        
         EnemyBrain enemyBrain =  EnemyGameObject.GetComponent<EnemyBrain>();
         EnemyFighter.SetCharacter(EnemyCharatcer);
         PlayerFighter.SetCharacter(PlayerCharatcer);
