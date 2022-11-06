@@ -264,7 +264,7 @@ namespace Abilities
 
 
                 ActiveEffect DDamage = new ActiveEffect(-CasterOutputDamage, Stat.HealthPoints, 0, 0, StatType.Flat);
-                MonoBehaviour.print($"Damage{DDamage.change}");
+               
                 TargetHolder.delayedEffects.Add(DDamage);
             }
 

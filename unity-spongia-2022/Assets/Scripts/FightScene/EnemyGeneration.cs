@@ -213,12 +213,14 @@ public class EnemyGeneration
         int index = 0;
 
         //Adding all posible abilities
-        for (int i = 0; i < 6; i++)
+        character.EquippedAbilities = new HashSet<AbilityName>();
+        while (character.EquippedAbilities.Count < 6)
         {
-            if (UnlockedAbilities.Count != 0)
-            {                
+            
+            if (UnlockedAbilities.Count != 0 )
+            {
                 List<AbilityName> ToDelete = new List<AbilityName>(SortedUnlockedAbilities);
-                List <AbilityTags> AbilityChooseOrder= new List<AbilityTags>() { AbilityTags.Attack_Ability, AbilityTags.Defense_Ability, AbilityTags.Blessing_Ability};
+                List<AbilityTags> AbilityChooseOrder = new List<AbilityTags>() { AbilityTags.Attack_Ability, AbilityTags.Defense_Ability, AbilityTags.Blessing_Ability };
 
                 foreach (AbilityName currentAbility in ToDelete)
                 {
@@ -237,12 +239,16 @@ public class EnemyGeneration
                         SortedUnlockedAbilities.Remove(currentAbility);
                         index += 1;
                     }
-                }    
+                }
             }
             else
             {
-                character.EquippedAbilities.Add(AbilityName.None);
+                break;
             }
+            
+            
+
         }
+        
     }
 }

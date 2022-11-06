@@ -476,6 +476,7 @@ public class EnemyBrain : MonoBehaviour
         {
             for (int i = 0; i < GetAbility[VARIABLE].AbilityCount; i++)
             {
+               
                 AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject, stanceController);
                 yield return new WaitForSeconds(castDelay);
             }
