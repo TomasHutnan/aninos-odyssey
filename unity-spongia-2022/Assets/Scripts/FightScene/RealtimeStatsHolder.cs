@@ -89,7 +89,8 @@ namespace AE.FightManager
             AvailableAbilities = character.EquippedAbilities.ToArray();
             _fighter = character;
 
-            stanceController.character = character;
+            AE.Items.Item weapon;
+            stanceController.Weapon = character.EquippedItems.TryGetValue(Items.ItemType.Weapon, out weapon) ? weapon : null;
         }
        
         public void NextRound()

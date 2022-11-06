@@ -42,14 +42,13 @@ namespace AE.Fight.UI
         private AnimationWeaponClass weaponType;
         private StanceType currentStance= StanceType.Idle;
 
-        public Character character 
+        public Item Weapon 
         { 
             set 
             {
-                Item weapon;
-                bool contains = value.EquippedItems.TryGetValue(ItemType.Weapon, out weapon);
+                Item weapon = value;
 
-                if (contains)
+                if (weapon != null)
                 {
                     weaponType = (AnimationWeaponClass)((int)weapon.Class + 1);
                     foreach (Image[] images in _stanceImages[weaponType].Values)
@@ -70,12 +69,6 @@ namespace AE.Fight.UI
 
         [Header("Animation")]
         public float AnimationLength;
-
-        private void Start()
-        {
-            // SaveData.PlayerCharacter.EquipItem(new Item(ItemClass.Tank, ItemTier.God, ItemType.Weapon));
-            character = SaveData.PlayerCharacter;
-        }
 
         private void Update()
         {
