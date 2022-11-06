@@ -16,6 +16,9 @@ namespace AE.EventManager
         public static event Action<AbilityName> OnAbilitySlotEnterEvent;
         public static event Action OnAbilitySlotExitEvent;
 
+        public static event Action<ActiveEffect> OnActiveEffectSlotEnterEvent;
+        public static event Action OnActiveEffectSlotExitEvent;
+
         public static event Action<CharacterStat> OnStatEnterEvent;
         public static event Action OnStatExitEvent;
 
@@ -40,6 +43,15 @@ namespace AE.EventManager
         public static void TriggerAbilitySlotExit()
         {
             OnAbilitySlotExitEvent?.Invoke();
+        }
+
+        public static void TriggerActiveEffectSlotEnter(ActiveEffect activeEffect)
+        {
+            OnActiveEffectSlotEnterEvent?.Invoke(activeEffect);
+        }
+        public static void TriggerActiveEffectSlotExit()
+        {
+            OnActiveEffectSlotExitEvent?.Invoke();
         }
 
         public static void TriggerStatEnter(CharacterStat stat)

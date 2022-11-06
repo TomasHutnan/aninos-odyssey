@@ -40,6 +40,7 @@ namespace AE.FightManager
             print("Dodged");
         }
 
+        public ActiveEffectsManager effectsManager;
         public AbilityName[] AvailableAbilities;
         public TextMeshProUGUI text;
         public List<ActiveEffect> delayedEffects = new List<ActiveEffect>();
@@ -175,7 +176,7 @@ namespace AE.FightManager
                 delayedEffects.Remove(delete);
 
             }
-
+            effectsManager.UpdateAllEfects(activeEffects);
 
 
 
@@ -259,6 +260,7 @@ namespace AE.FightManager
                 if(item.duration != 0) 
                 {
                     activeEffects[item.stat].Add(item);
+                    effectsManager.AddEfect(item);
                 };
                 ToDelete.Add(item); 
             }

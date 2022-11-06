@@ -41,6 +41,9 @@ public class Tooltip : MonoBehaviour
 
         EventManager.OnAbilitySlotEnterEvent += handleAbilityTooltip;
         EventManager.OnAbilitySlotExitEvent += hideTooltip;
+
+        EventManager.OnActiveEffectSlotEnterEvent += handleActiveEffectTooltip;
+        EventManager.OnActiveEffectSlotExitEvent += hideTooltip;
     }
     private void OnDisable()
     {
@@ -49,6 +52,9 @@ public class Tooltip : MonoBehaviour
 
         EventManager.OnAbilitySlotEnterEvent -= handleAbilityTooltip;
         EventManager.OnAbilitySlotExitEvent -= hideTooltip;
+
+        EventManager.OnActiveEffectSlotEnterEvent -= handleActiveEffectTooltip;
+        EventManager.OnActiveEffectSlotExitEvent -= hideTooltip;
     }
 
     private void Update()
@@ -122,6 +128,25 @@ public class Tooltip : MonoBehaviour
 
         sb.Append(ability.AbilityDescription);
 
+        showTooltip();
+    }
+
+    private void handleActiveEffectTooltip(ActiveEffect activeEffect)
+    {
+        if (activeEffect == null || activeEffect.abilityName == AbilityName.None)
+            return;
+
+        Ability ability = AbilityStorage.GetAbility[activeEffect.abilityName];
+        if (ability == null)
+            return;
+
+        sb.Length = 0;
+
+        nameLabel.text = ability.name;
+        typeLabel.text = activeEffect.stat.ToString();
+        valueLabel.text = activeEffect.change.ToString();
+
+        sb.Append($"Duration: {activeEffect.duration} rounds.");
         showTooltip();
     }
 
