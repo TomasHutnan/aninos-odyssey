@@ -2213,7 +2213,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 886670184}
-  - component: {fileID: 886670185}
   m_Layer: 5
   m_Name: No Weapon
   m_TagString: Untagged
@@ -2244,23 +2243,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &886670185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 886670183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5b37c59557820946821793fdabe6f2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponStances:
-  - {fileID: 2042367012}
-  - {fileID: 1519127062}
-  - {fileID: 206820801}
-  AnimationLength: 0
 --- !u!1 &897105148
 GameObject:
   m_ObjectHideFlags: 0
@@ -4269,6 +4251,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.size
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[36].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 15655e818b6df0b4cb7fa48802833e6d, type: 3}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[37].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 15655e818b6df0b4cb7fa48802833e6d, type: 3}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[38].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 15655e818b6df0b4cb7fa48802833e6d, type: 3}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[39].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 15655e818b6df0b4cb7fa48802833e6d, type: 3}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[41].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 79a2fa4926d1c9340aef4e4eeab44fd2, type: 3}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[41].Name
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[42].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 79a2fa4926d1c9340aef4e4eeab44fd2, type: 3}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[42].Name
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[43].Name
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[41].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c9d1b286463e4f4e991ca969e720513, type: 2}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[42].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e62a45f180b9a14294e7906fc202e3d, type: 2}
+    - target: {fileID: 6077302988091940238, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
+      propertyPath: StoredAbilities.Array.data[43].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: e896bdcd970dbdb4d86d5755579d34bd, type: 2}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 2799145709388390193, guid: 2cbd08130d7d2fd4083b42557cdec11b, type: 3}
