@@ -7,40 +7,47 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 
-namespace AE.GameSave {
+namespace AE.GameSave
+{
+    public enum DownloadNetworkStatus
+    {
+        None, Pending, Success, NetworkError, ServerError, NotFound
+    }
+
+    public enum UploadNetworkStatus
+    {
+        None, Pending, Success, NetworkError, ServerError
+    }
     public class NetworkingController : MonoBehaviour
     {
+        public static event Action<DownloadNetworkStatus> OnDownloadStatusUpdate;
+        public static event Action<UploadNetworkStatus> OnUploadStatusUpdate;
 
-        public static DownloadNetworkStatus DownloadStatus = DownloadNetworkStatus.Success;
-        public static UploadNetworkStatus UploadStatus = UploadNetworkStatus.Success;
-        public static string Key = null;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            DownloadStatus = DownloadNetworkStatus.Success;
-            UploadStatus = UploadNetworkStatus.Success;
-            Key = null;
-        }
+        public static string UploadKey = null;
 
         public void Download(int key) {
-            DownloadStatus = DownloadNetworkStatus.Pending;
+            OnDownloadStatusUpdate?.Invoke(DownloadNetworkStatus.Pending);
             StartCoroutine(SendDownloadRequest(key));
         }
 
         IEnumerator SendDownloadRequest(int key) {
             using (UnityWebRequest webRequest = UnityWebRequest.Get("https://aninos-odyssey-server.vercel.app/api/download?key=" + key)) {
                 yield return webRequest.SendWebRequest();
-                if (webRequest.result != UnityWebRequest.Result.Success) {
-                    DownloadStatus = DownloadNetworkStatus.NetworkError;
-                } else {
+                if (webRequest.result != UnityWebRequest.Result.Success)
+                {
+                    OnDownloadStatusUpdate?.Invoke(DownloadNetworkStatus.NetworkError);
+                } 
+                else 
+                {
                     string received = webRequest.downloadHandler.text;
                     if (received.StartsWith("{\"message\":") || received == "{\"data\":null}") {
-                        DownloadStatus = DownloadNetworkStatus.ServerError;
-                    } else if (received == "{\"data\":\"\"}") {
-                        DownloadStatus = DownloadNetworkStatus.NotFound;
-                    } else {
-                        DownloadStatus = DownloadNetworkStatus.Success;
+                        OnDownloadStatusUpdate?.Invoke(DownloadNetworkStatus.ServerError);
+                    } else if (received == "{\"data\":\"\"}")
+                    {
+                        OnDownloadStatusUpdate?.Invoke(DownloadNetworkStatus.NotFound);
+                    } else
+                    {
+                        OnDownloadStatusUpdate?.Invoke(DownloadNetworkStatus.Success);
                         SaveData.Load(SaveSlot.None, JsonConvert.DeserializeObject<JSONSave>(Encoding.UTF8.GetString(Convert.FromBase64String(received.Substring(9, received.Length - 11)))));
                     }
                 }
@@ -51,8 +58,8 @@ namespace AE.GameSave {
             if (!SaveController.IsSlotOccupied(slot))
                 return;
 
-            UploadStatus = UploadNetworkStatus.Pending;
-            Key = null;
+            OnUploadStatusUpdate?.Invoke(UploadNetworkStatus.Pending);
+            UploadKey = null;
             StartCoroutine(SendUploadRequest(Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(SaveController.GetData(slot), Formatting.Indented, new JsonSerializerSettings{ NullValueHandling = NullValueHandling.Include })))));
         }
 
@@ -61,26 +68,22 @@ namespace AE.GameSave {
             form.AddField("data", data);
             using (UnityWebRequest webRequest = UnityWebRequest.Post("https://aninos-odyssey-server.vercel.app/api/upload", form)) {
                 yield return webRequest.SendWebRequest();
-                if (webRequest.result != UnityWebRequest.Result.Success) {
-                    UploadStatus = UploadNetworkStatus.NetworkError;
+                print(webRequest.result);
+                if (webRequest.result != UnityWebRequest.Result.Success)
+                {
+                    OnUploadStatusUpdate?.Invoke(UploadNetworkStatus.NetworkError);
                 } else {
                     string received = webRequest.downloadHandler.text;
-                    if (received.StartsWith("{\"message\":") || received == "{\"key\":null}") {
-                        UploadStatus = UploadNetworkStatus.ServerError;
-                    } else {
-                        DownloadStatus = DownloadNetworkStatus.Success;
-                        Key = received.Substring(8, received.Length - 10);
+                    if (received.StartsWith("{\"message\":") || received == "{\"key\":null}")
+                    {
+                        OnUploadStatusUpdate?.Invoke(UploadNetworkStatus.ServerError);
+                    } else
+                    {
+                        OnUploadStatusUpdate?.Invoke(UploadNetworkStatus.Success);
+                        UploadKey = received.Substring(8, received.Length - 10);
                     }
                 }
             }
-        }
-
-        public enum DownloadNetworkStatus {
-            Pending, Success, NetworkError, ServerError, NotFound
-        }
-
-        public enum UploadNetworkStatus {
-            Pending, Success, NetworkError, ServerError
         }
     }
 }
