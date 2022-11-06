@@ -5,6 +5,7 @@ using AE.CharacterStats;
 using AE.FightManager;
 using AE.Abilities;
 using Abilities;
+using static AbilityStorage;
 
 public enum StatType
 {
@@ -21,6 +22,8 @@ public class ActiveEffect
     public float duration;
     public float delay;
     public StatType type;
+
+    public AbilityName abilityName = AbilityName.None;
     
     public ActiveEffect(float _change,Stat _stat,float _duration,float _delay,StatType _type )
     {

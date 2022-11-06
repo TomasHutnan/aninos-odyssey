@@ -6,6 +6,7 @@ using AE.FightManager;
 using Unity.VisualScripting.FullSerializer;
 using System.Diagnostics;
 using AE.Fight.UI;
+using static AbilityStorage;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -120,6 +121,7 @@ namespace Abilities
         public Sprite Icon;
         public List<AbilityTags> AbilityTags;
         public AbilityTags AbilityType;
+        public AbilityName abilityName;
         public Family AbilityFamily;
         public Level AbilityLevel;
         public StanceType AbilityAnimationType = StanceType.Idle;
@@ -211,6 +213,7 @@ namespace Abilities
                    
                     float change = item.Change;
                     ActiveEffect effect = new ActiveEffect(change, item.stat, item.Duration, item.Delay, TargetStats[item.stat].StatType);
+                    effect.abilityName = abilityName;
                     TargetHolder.delayedEffects.Add(effect);
 
                 }
@@ -220,6 +223,7 @@ namespace Abilities
                    
                     float change = item.Change * (TargetStats[item.stat].Maximum/100);
                     ActiveEffect effect = new ActiveEffect(change, item.stat, item.Duration, item.Delay, TargetStats[item.stat].StatType);
+                    effect.abilityName = abilityName;
                     TargetHolder.delayedEffects.Add(effect);
                 }
             }
@@ -229,6 +233,7 @@ namespace Abilities
                 {
                     float change = item.Change;
                     ActiveEffect effect = new ActiveEffect(change, item.stat, item.Duration, item.Delay, CasterStats[item.stat].StatType);
+                    effect.abilityName = abilityName;
                     CasterHolder.delayedEffects.Add(effect);
 
                 }
@@ -238,6 +243,7 @@ namespace Abilities
                   
                     float change = item.Change * (CasterStats[item.stat].Maximum / 100);
                     ActiveEffect effect = new ActiveEffect(change, item.stat,item.Duration ,item.Delay, CasterStats[item.stat].StatType);
+                    effect.abilityName = abilityName;
                     CasterHolder.delayedEffects.Add(effect);
                 }
             }
@@ -264,7 +270,8 @@ namespace Abilities
 
 
                 ActiveEffect DDamage = new ActiveEffect(-CasterOutputDamage, Stat.HealthPoints, 0, 0, StatType.Flat);
-               
+                DDamage.abilityName = abilityName;
+
                 TargetHolder.delayedEffects.Add(DDamage);
             }
 
@@ -283,6 +290,8 @@ namespace Abilities
 
 
                 ActiveEffect DDamage = new ActiveEffect(-TargetOutputDamage, Stat.HealthPoints, 0, 0, StatType.Flat);
+                DDamage.abilityName = abilityName;
+
                 CasterHolder.delayedEffects.Add(DDamage);
 
             }
