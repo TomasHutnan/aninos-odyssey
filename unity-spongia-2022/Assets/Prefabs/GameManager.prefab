@@ -170,31 +170,25 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: e7083f8e6a469ab40a049d2f27d698c0, type: 3}
   - Name: 38
     ability: {fileID: 11400000, guid: 56ac51a032540c14785151f58d1c47aa, type: 2}
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 15655e818b6df0b4cb7fa48802833e6d, type: 3}
   - Name: 39
     ability: {fileID: 11400000, guid: 636f4db3ed098f14abe08ab872f170b4, type: 2}
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 15655e818b6df0b4cb7fa48802833e6d, type: 3}
   - Name: 40
     ability: {fileID: 11400000, guid: 9e40f4d43b855a645935963b8d603295, type: 2}
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 15655e818b6df0b4cb7fa48802833e6d, type: 3}
   - Name: 41
     ability: {fileID: 11400000, guid: 5be8d4f39dedfce4ca5c21bca41452f1, type: 2}
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 15655e818b6df0b4cb7fa48802833e6d, type: 3}
   - Name: 42
     ability: {fileID: 11400000, guid: 1fa2ee762a5659f44913a4240381aecb, type: 2}
     Icon: {fileID: 21300000, guid: 9ef99d35f3638074f89595a893e2e178, type: 3}
-  - Name: 0
-    ability: {fileID: 11400000, guid: f57d1b07d7093324fa41f892ba1559aa, type: 2}
-    Icon: {fileID: 21300000, guid: 9ef99d35f3638074f89595a893e2e178, type: 3}
   - Name: 43
     ability: {fileID: 11400000, guid: 5c9d1b286463e4f4e991ca969e720513, type: 2}
-    Icon: {fileID: 21300000, guid: 9ef99d35f3638074f89595a893e2e178, type: 3}
+    Icon: {fileID: 21300000, guid: 79a2fa4926d1c9340aef4e4eeab44fd2, type: 3}
   - Name: 44
     ability: {fileID: 11400000, guid: 0e62a45f180b9a14294e7906fc202e3d, type: 2}
-    Icon: {fileID: 21300000, guid: 9ef99d35f3638074f89595a893e2e178, type: 3}
-  - Name: 45
-    ability: {fileID: 11400000, guid: e896bdcd970dbdb4d86d5755579d34bd, type: 2}
-    Icon: {fileID: 21300000, guid: 9ef99d35f3638074f89595a893e2e178, type: 3}
+    Icon: {fileID: 21300000, guid: 79a2fa4926d1c9340aef4e4eeab44fd2, type: 3}
 --- !u!114 &2338981701506031478
 MonoBehaviour:
   m_ObjectHideFlags: 0
