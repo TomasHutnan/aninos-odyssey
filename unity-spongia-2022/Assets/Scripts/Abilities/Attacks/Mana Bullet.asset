@@ -19,7 +19,8 @@ MonoBehaviour:
   AbilityFamily: 15
   AbilityLevel: 1
   AbilityAnimationType: 1
-  AbilityDescription: 
+  AbilityDescription: Condens Mana into an projectile that you can then shoot at
+    you enemies.
   AbilityCount: 1
   StaminaCost: 0
   ManaCost: 35
