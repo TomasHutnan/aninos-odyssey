@@ -2281,6 +2281,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2839611466316419740, guid: 565de66e17708f94093b0809d5ff84a1, type: 3}
+      propertyPath: m_ReverseArrangement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3603753915408650672, guid: 565de66e17708f94093b0809d5ff84a1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
