@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56801f355812c0a4cb7131393ab0091f, type: 3}
+  m_Name: Act 9
+  m_EditorClassIdentifier: 
+  sentances:
+  - name: 300
+    text: One more thing.
+  - name: 300
+    text: You may have noticed these buttons.
+  - name: 300
+    text: They are used for uploading and downloading saves from and to the internet.
+  - name: 300
+    text: When you upload your save, you get a unique key, that you can copy and
+      share with your friends.
+  - name: 300
+    text: Your friends can then enter your key and play with your character.
+  - name: 300
+    text: That's all! We wish you the best of luck!
