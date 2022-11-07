@@ -7,6 +7,7 @@ public class Enemy : Character
 {
     public string Name;
     public ItemClass Class;
+    public int ExpGain;
 
     public Enemy(string _name, ItemClass _class) : base()
     {
