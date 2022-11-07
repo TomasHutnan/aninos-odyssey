@@ -27,6 +27,9 @@ namespace AE.EventManager
         public static event Action<Item, PromptType> ItemPromptQuestionEvent;
         public static event Action<Item, PromptType, bool> ItemPromptAnswerEvent;
 
+
+        public static event Action<AbilityName> OnSuccessfulCastEvent;
+
         public static void TriggerItemSlotEnter(Item item)
         {
             OnItemSlotEnterEvent?.Invoke(item);
@@ -75,6 +78,12 @@ namespace AE.EventManager
         public static void TriggerItemPromptAnswer(Item item, PromptType promptType, bool answer)
         {
             ItemPromptAnswerEvent?.Invoke(item, promptType, answer);
+        }
+
+
+        public static void TriggerSuccessfulCast(AbilityName abilityName)
+        {
+            OnSuccessfulCastEvent?.Invoke(abilityName);
         }
     }
 }

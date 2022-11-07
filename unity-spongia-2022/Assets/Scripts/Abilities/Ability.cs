@@ -7,6 +7,7 @@ using Unity.VisualScripting.FullSerializer;
 using System.Diagnostics;
 using AE.Fight.UI;
 using static AbilityStorage;
+using AE.EventManager;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -136,8 +137,6 @@ namespace Abilities
 
         public float TargetFinisher;
         public float CasterFinisher;
-
-
 
 
 
@@ -321,7 +320,7 @@ namespace Abilities
             }
 
             stanceController.Animate(AbilityAnimationType);
-
+            EventManager.TriggerSuccessfulCast(abilityName);
 
 
 

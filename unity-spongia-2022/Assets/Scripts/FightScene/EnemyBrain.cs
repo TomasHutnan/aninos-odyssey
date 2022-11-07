@@ -11,6 +11,7 @@ using Unity.Burst.Intrinsics;
 
 public class EnemyBrain : MonoBehaviour
 {
+    public FightSFXProvider fightSFX;
     public RealtimeStatsHolder PlayerHolder;
     public RealtimeStatsHolder EnemyHolder;
     public Character Player;
@@ -478,6 +479,17 @@ public class EnemyBrain : MonoBehaviour
             {
                
                 AbilityStorage.GetAbility[VARIABLE].UseAbility(EnemyObject, PlayerObject, stanceController);
+
+                if (GetAbility[VARIABLE].AbilityAnimationType == StanceType.Attack)
+                {
+                    AE.Items.Item weapon;
+                    bool contains = Enemy.EquippedItems.TryGetValue(AE.Items.ItemType.Weapon, out weapon);
+                    if (contains || weapon != null)
+                        fightSFX.PlaySFX((AnimationWeaponClass)weapon.Class);
+                    else
+                        fightSFX.PlaySFX(AnimationWeaponClass.NoWeapon);
+                }
+
                 yield return new WaitForSeconds(castDelay);
             }
         }

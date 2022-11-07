@@ -8,6 +8,7 @@ using AE.Fight.UI;
 
 public class ButtonAbility : MonoBehaviour
 {
+    public FightSFXProvider fightSFX;
     public int AbbilityNumber;
     [SerializeField] StanceController stanceController;
 
@@ -30,6 +31,16 @@ public class ButtonAbility : MonoBehaviour
                     print("Castujem");
                     Target = child.gameObject;
                     ability.UseAbility(transform.parent.gameObject, Target, stanceController);
+
+                    if (ability.AbilityAnimationType == StanceType.Attack)
+                    {
+                        AE.Items.Item weapon;
+                        bool contains = transform.parent.GetComponent<RealtimeStatsHolder>()._fighter.EquippedItems.TryGetValue(AE.Items.ItemType.Weapon, out weapon);
+                        if (contains || weapon != null)
+                            fightSFX.PlaySFX((AnimationWeaponClass)weapon.Class);
+                        else
+                            fightSFX.PlaySFX(AnimationWeaponClass.NoWeapon);
+                    }
 
                 }
                 transform.parent.gameObject.GetComponent<RealtimeStatsHolder>().AvailableAbilities[AbbilityNumber] = AbilityName.None;

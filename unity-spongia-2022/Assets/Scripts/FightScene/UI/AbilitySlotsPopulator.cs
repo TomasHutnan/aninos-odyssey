@@ -3,6 +3,7 @@ using AE.GameSave;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AE.EventManager;
 using UnityEngine;
 using UnityEngine.UI;
 using static AbilityStorage;
@@ -22,22 +23,11 @@ namespace AE.Fight.UI
 
         private void OnEnable()
         {
-            AbilityName[] equipped = c.EquippedAbilities.ToArray();
-
-            for (int i = 0; i < equipped.Length && i < abilitySlots.Length; i++)
-            {
-                abilitySlots[i].OnAbilityClickedEvent += DisableButton;
-            }
-
+            EventManager.EventManager.OnSuccessfulCastEvent += DisableButton;
         }
         private void OnDisable()
         {
-            AbilityName[] equipped = c.EquippedAbilities.ToArray();
-
-            for (int i = 0; i < equipped.Length && i < abilitySlots.Length; i++)
-            {
-                abilitySlots[i].OnAbilityClickedEvent -= DisableButton;
-            }
+            EventManager.EventManager.OnSuccessfulCastEvent += DisableButton;
 
         }
 
@@ -46,9 +36,15 @@ namespace AE.Fight.UI
             abilitySlots = GetComponentsInChildren<AbilitySlot>();
         }
 
-        private void DisableButton(AbilitySlot abilitySlot)
+        private void DisableButton(AbilityName abilityName)
         {
-            abilitySlot.AbilityName = AbilityName.None;
+            foreach (AbilitySlot abilitySlot in abilitySlots)
+            {
+                if (abilitySlot.AbilityName == abilityName)
+                {
+                    abilitySlot.AbilityName = AbilityName.None;
+                }
+            }
         }
 
         public void DisableButtons()
