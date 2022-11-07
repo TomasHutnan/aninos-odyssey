@@ -22,6 +22,7 @@ namespace AE.Items.UI.Shop
 
         private void Start()
         {
+            SaveData.GameStage = Mathf.FloorToInt(c.LevelUpSystem.Level / 5) < 3 ? (ItemTier)(c.LevelUpSystem.Level / 5) : ItemTier.God;
             for (int i = 0; i < itemShowcases.Length; i++)
             {
                 Item _item = new Item

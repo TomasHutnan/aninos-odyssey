@@ -105,7 +105,7 @@ namespace AE.Items
 
             Name = name is not null ? (string)name : GenerateName();
 
-            float sumBonus = DamageBonus + CritPercentBonus + ArmorBonus + DodgeBonus + ManaBonus - Weight;
+            float sumBonus = DamageBonus*1.3f + CritPercentBonus*0.6f + ArmorBonus + DodgeBonus + ManaBonus*0.6f;
             value = (int)Math.Round(Math.Pow(Math.Abs(sumBonus), 1+0.1*(int)Tier));
         }
 

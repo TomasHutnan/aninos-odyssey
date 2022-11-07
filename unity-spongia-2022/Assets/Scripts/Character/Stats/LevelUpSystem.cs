@@ -91,7 +91,6 @@ namespace AE.CharacterStats
             Level = level;
             Exp = 0;
             addExp(exp);
-            updateCurrentStage();
 
             Levels = new Dictionary<LevelUpModType, int> { };
 
@@ -107,11 +106,6 @@ namespace AE.CharacterStats
                 UpdateMods();
         }
 
-        private void updateCurrentStage()
-        {
-            SaveData.GameStage = Mathf.FloorToInt(Level / 5) < 3 ? (ItemTier)(Level % 5) : ItemTier.God;
-        }
-
         public void addExp(int exp)
         {
             int remainingExp = Exp + exp;
@@ -123,7 +117,6 @@ namespace AE.CharacterStats
             }
 
             Exp = remainingExp;
-            updateCurrentStage();
         }
 
         public bool LevelUp(LevelUpModType modType)
