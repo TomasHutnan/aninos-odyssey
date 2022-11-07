@@ -85,7 +85,7 @@ public class EnemyGeneration
 "Androbulos",
         };
 
-    public Enemy[] GetFightChoises(ItemTier Stage,int choiseAmount = 3)
+    public static Enemy[] GetFightChoises(ItemTier Stage,int choiseAmount = 3)
     {
         Dictionary<ItemTier,List<int> > StageLevels = new Dictionary<ItemTier, List<int>>() 
         {
@@ -105,8 +105,11 @@ public class EnemyGeneration
             SetLevels(character,EnemyLevel,EnemyClass);
             character.Money = (int)Math.Pow((int)Stage+1, 3) * (UnityEngine.Random.Range(8, 12) ); 
             character.ExpGain = 80 + (EnemyLevel) * 50;
+
+            choices[i] = character;
         }
-        
+
+        MonoBehaviour.print(choices.Length);
         return choices;
        
 
@@ -176,13 +179,12 @@ public class EnemyGeneration
         }
         List<AbilityName> UnlockedAbilities = character.UnlockedAbilities.ToList();
         character.LevelUpSystem = new LevelUpSystem(character, EnemyLevel, 0, ClassLevels[ItemClass.Fighter][0], ClassLevels[ItemClass.Rogue][0], ClassLevels[ItemClass.Tank][0] + ClassLevels[ItemClass.Priest][1], ClassLevels[ItemClass.Tank][1], ClassLevels[ItemClass.Rogue][1], ClassLevels[ItemClass.Fighter][1], ClassLevels[ItemClass.Priest][0]);
-        for (int i = 0; i < EnemyLevel; i++)
+        for (int i = 0; i < EnemyLevel && i <= LevelUpAbilitiesProvider.godAbilityLevel; i++)
         {
             AbilityName[] choices = LevelUpAbilitiesProvider.GetChoices(character, i + 1);
             bool AbilityChosen = false;
             foreach (AbilityName choice in choices)
             {
-
                 Ability ability = GetAbility[choice];
                 foreach (AbilityTags item in ability.AbilityTags)
                 {
@@ -202,10 +204,10 @@ public class EnemyGeneration
                     break;
                 }
             }
-            
-            if (!AbilityChosen)
+
+            if (!AbilityChosen && choices.Length > 0)
             {
-                UnlockedAbilities.Add(choices[UnityEngine.Random.Range(0, 4)]);
+                UnlockedAbilities.Add(choices[UnityEngine.Random.Range(0, choices.Length)]);
             }
         }
 

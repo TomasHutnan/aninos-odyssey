@@ -22,5 +22,6 @@ namespace AE.Fight
     {
         public static Location Location;
         public static FightType FightType;
+        public static Enemy PreCreatedEnemy = null;
     }
 }
