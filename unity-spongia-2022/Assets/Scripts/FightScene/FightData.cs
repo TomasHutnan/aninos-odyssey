@@ -20,8 +20,8 @@ namespace AE.Fight
 
     public class FightData
     {
-        public static Location Location;
-        public static FightType FightType;
+        public static Location Location = Location.None;
+        public static FightType FightType = FightType.None;
         public static Enemy PreCreatedEnemy = null;
     }
 }

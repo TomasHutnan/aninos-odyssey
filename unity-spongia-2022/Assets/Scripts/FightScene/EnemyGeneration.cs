@@ -223,7 +223,8 @@ public class EnemyGeneration
         }
         else
         {
-            while (character.EquippedAbilities.Count < 6 || character.EquippedAbilities.Count != character.UnlockedAbilities.Count)
+            int maxLoopCount = 6;
+            while (character.EquippedAbilities.Count < 6 || character.EquippedAbilities.Count != character.UnlockedAbilities.Count || maxLoopCount > 0)
             {
 
                 if (UnlockedAbilities.Count != 0)
@@ -254,7 +255,7 @@ public class EnemyGeneration
                 {
                     break;
                 }
-
+                maxLoopCount--;
 
 
             }
