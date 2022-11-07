@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public static float ShopValueMultiplier = 10;
+    public static float ShopValueMultiplier = 3;
 
     private void Awake()
     {
