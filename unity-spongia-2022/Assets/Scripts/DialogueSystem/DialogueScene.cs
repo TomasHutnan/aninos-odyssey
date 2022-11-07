@@ -20,7 +20,7 @@ public class DialogueScene : MonoBehaviour
 
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         acts[actIndex].gameObject.SetActive(true);
     }

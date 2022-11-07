@@ -9,6 +9,7 @@ namespace AE.Dialogue
         None = -1,
         Anino = 100,
         You = 200,
+        Analphabetic_Elephant = 300,
     }
 
     [CreateAssetMenu]
