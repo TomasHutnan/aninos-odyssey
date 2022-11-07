@@ -82,6 +82,8 @@ namespace AE.Abilities.UI
             }
 
             c.UnlockedAbilities.Add(_abilityName);
+            if (c.EquippedAbilities.Count < 6)
+                c.EquippedAbilities.Add(_abilityName);
             c.LevelUpAbilitiesCount++;
             updateChoices();
         }
