@@ -144,7 +144,7 @@ public class Tooltip : MonoBehaviour
 
         nameLabel.text = ability.name;
         typeLabel.text = activeEffect.stat.ToString();
-        valueLabel.text = activeEffect.change.ToString();
+        valueLabel.text = (activeEffect.change > 0 ? "+" : "") + Mathf.Round(activeEffect.change).ToString();
 
         sb.Append($"Duration: {activeEffect.duration} rounds.");
         showTooltip();

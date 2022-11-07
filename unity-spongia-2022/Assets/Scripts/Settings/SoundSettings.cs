@@ -11,7 +11,7 @@ namespace AE.Settings.UI
     {
         [SerializeField] Toggle musicToggle;
         [SerializeField] Toggle sfxToggle;
-        void OnEnable()
+        void Start()
         {
             musicToggle.isOn = !Preferences.MuteMusic;
             sfxToggle.isOn = !Preferences.MuteSFX;
