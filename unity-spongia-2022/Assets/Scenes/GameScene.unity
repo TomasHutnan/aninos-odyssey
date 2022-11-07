@@ -6771,7 +6771,11 @@ PrefabInstance:
     - target: {fileID: 1849366472358252710, guid: 9619b4934c69f94479e40f17c4e6dc32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8633438842696635328}
+      objectReference: {fileID: 1094275565}
+    - target: {fileID: 1849366472358252710, guid: 9619b4934c69f94479e40f17c4e6dc32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 1849366473386591925, guid: 9619b4934c69f94479e40f17c4e6dc32, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
