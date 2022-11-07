@@ -89,7 +89,7 @@ public class EnemyGeneration
     {
         Dictionary<ItemTier,List<int> > StageLevels = new Dictionary<ItemTier, List<int>>() 
         {
-            {ItemTier.Mortal, new List<int>(){0,6}},
+            {ItemTier.Mortal, new List<int>(){1,6}},
             {ItemTier.Earth, new List<int>(){6,11}},
             {ItemTier.Heaven, new List<int>(){11,16}},
             {ItemTier.God, new List<int>(){16,21}},

@@ -32,6 +32,7 @@ public class FightManager : MonoBehaviour
             EnemyCharatcer = EnemyGeneration.Generate(SaveData.GameStage, 5, EnemyClass,false);
             EnemyCharatcer.PostInit();
             EnemyGeneration.SetLevels(EnemyCharatcer, 0, EnemyClass);
+            EnemyCharatcer.HealthPoints.BaseValue = 100;
         }
         else
         {
