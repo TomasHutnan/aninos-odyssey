@@ -1,3 +1,4 @@
+using AE.Fight;
 using AE.FightManager;
 using AE.GameSave;
 using AE.Items;
@@ -21,9 +22,17 @@ public class FightManager : MonoBehaviour
     {
         Array classes = ItemClass.GetValues(typeof(ItemClass));
         ItemClass EnemyClass = (ItemClass)classes.GetValue(UnityEngine.Random.Range(0, classes.Length));
-        EnemyCharatcer = EnemyGeneration.Generate(SaveData.GameStage,5, EnemyClass);
-        EnemyCharatcer.PostInit();
-        EnemyGeneration.SetLevels(EnemyCharatcer, 5, EnemyClass);
+        if (FightData.PreCreatedEnemy != null)
+        {
+            EnemyCharatcer = FightData.PreCreatedEnemy;
+            FightData.PreCreatedEnemy = null;
+        }
+        else
+        {
+            EnemyCharatcer = EnemyGeneration.Generate(SaveData.GameStage, 5, EnemyClass);
+            EnemyCharatcer.PostInit();
+            EnemyGeneration.SetLevels(EnemyCharatcer, 5, EnemyClass);
+        }
     
         PlayerCharatcer = SaveData.PlayerCharacter;
         
