@@ -27,6 +27,12 @@ public class FightManager : MonoBehaviour
             EnemyCharatcer = FightData.PreCreatedEnemy;
             FightData.PreCreatedEnemy = null;
         }
+        else if(FightData.FightType == FightType.Tutorial)
+        {
+            EnemyCharatcer = EnemyGeneration.Generate(SaveData.GameStage, 5, EnemyClass,false);
+            EnemyCharatcer.PostInit();
+            EnemyGeneration.SetLevels(EnemyCharatcer, 0, EnemyClass);
+        }
         else
         {
             EnemyCharatcer = EnemyGeneration.Generate(SaveData.GameStage, 5, EnemyClass);
