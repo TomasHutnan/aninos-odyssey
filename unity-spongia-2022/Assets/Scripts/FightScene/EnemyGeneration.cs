@@ -103,7 +103,7 @@ public class EnemyGeneration
             int EnemyLevel = UnityEngine.Random.Range(StageLevels[Stage][0], StageLevels[Stage][1]);
             Enemy character = Generate(Stage, EnemyLevel, EnemyClass);
             SetLevels(character,EnemyLevel,EnemyClass);
-            character.Money = 10 * (int)Math.Pow((int)Stage+1, 3) * (UnityEngine.Random.Range(8, 12) / 10); 
+            character.Money = (int)Math.Pow((int)Stage+1, 3) * (UnityEngine.Random.Range(8, 12) ); 
             character.ExpGain = 80 + (EnemyLevel) * 50;
         }
         
