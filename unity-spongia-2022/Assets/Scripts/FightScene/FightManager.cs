@@ -33,6 +33,7 @@ public class FightManager : MonoBehaviour
             EnemyCharatcer.PostInit();
             EnemyGeneration.SetLevels(EnemyCharatcer, 0, EnemyClass);
             EnemyCharatcer.HealthPoints.BaseValue = 100;
+            EnemyCharatcer.Money = 300;
         }
         else
         {
