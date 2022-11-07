@@ -9,6 +9,8 @@ public class FightersGrid : MonoBehaviour
 {
     [SerializeField] FighterSlot[] fighterSlots;
     [SerializeField] ItemTier enemyStage;
+    [SerializeField] Location fightLocation;
+    [SerializeField] FightType fightType;
 
     private void Start()
     {
@@ -37,8 +39,10 @@ public class FightersGrid : MonoBehaviour
 
     public void OnEnemySelection(Enemy enemy)
     {
-        print("Selected enemy " + enemy.Name);
         FightData.PreCreatedEnemy = enemy;
+        FightData.Location = fightLocation;
+        FightData.FightType = fightType;
+
         SceneUtils.LoadScene("FightScene");
     }
 

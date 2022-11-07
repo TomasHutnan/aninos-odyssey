@@ -10,14 +10,14 @@ namespace AE.MainMenu
     {
         [SerializeField] AudioController audioController;
         [Space]
-        [SerializeField] AudioType buttonHoverSFX;
+        //[SerializeField] AudioType buttonHoverSFX;
         [SerializeField] AudioType buttonPressedSFX;
 
-        public void OnButtonHover()
-        {
-            if (buttonHoverSFX != AudioType.None)
-                audioController.PlayAudio(buttonHoverSFX);
-        }
+        //public void OnButtonHover()
+        //{
+        //    if (buttonHoverSFX != AudioType.None)
+        //        audioController.PlayAudio(buttonHoverSFX);
+        //}
         public void OnButtonPressed()
         {
             if (buttonPressedSFX != AudioType.None)
