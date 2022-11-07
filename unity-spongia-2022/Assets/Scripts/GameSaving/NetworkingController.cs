@@ -79,8 +79,8 @@ namespace AE.GameSave
                         OnUploadStatusUpdate?.Invoke(UploadNetworkStatus.ServerError);
                     } else
                     {
-                        OnUploadStatusUpdate?.Invoke(UploadNetworkStatus.Success);
                         UploadKey = received.Substring(8, received.Length - 10);
+                        OnUploadStatusUpdate?.Invoke(UploadNetworkStatus.Success);
                     }
                 }
             }

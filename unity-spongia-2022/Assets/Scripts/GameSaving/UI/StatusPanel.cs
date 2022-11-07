@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using AE.GameSave;
 using AE.SceneManagment;
+using System;
+using System.Linq;
 
 public class StatusPanel : MonoBehaviour
 {
@@ -59,7 +61,7 @@ public class StatusPanel : MonoBehaviour
         {
             statusDescription.text = "Copy your save key below.";
             keyHodler.SetActive(true);
-            keyText.text = NetworkingController.UploadKey;
+            keyText.text = removeNonIntegers(NetworkingController.UploadKey);
         }
         else if (value == UploadNetworkStatus.ServerError || value == UploadNetworkStatus.NetworkError)
         {
@@ -67,9 +69,26 @@ public class StatusPanel : MonoBehaviour
         }
     }
 
+    private string removeNonIntegers(string s)
+    {
+        char[] integers = "0123456789".ToCharArray();
+
+        string intOnly = string.Empty;
+
+        foreach (char c in s.ToCharArray())
+        {
+            if (integers.Contains(c))
+            {
+                intOnly += c;
+            }
+        }
+
+        return intOnly;
+    }
+
     public void CopyKey()
     {
-        GUIUtility.systemCopyBuffer = NetworkingController.UploadKey;
+        GUIUtility.systemCopyBuffer = removeNonIntegers(NetworkingController.UploadKey);
     }
 
     public void Close()
