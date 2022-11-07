@@ -89,7 +89,7 @@ public class EnemyGeneration
     {
         Dictionary<ItemTier,List<int> > StageLevels = new Dictionary<ItemTier, List<int>>() 
         {
-            {ItemTier.Mortal, new List<int>(){1,6}},
+            {ItemTier.Mortal, new List<int>(){1, 6}},
             {ItemTier.Earth, new List<int>(){6,11}},
             {ItemTier.Heaven, new List<int>(){11,16}},
             {ItemTier.God, new List<int>(){16,21}},
@@ -217,40 +217,47 @@ public class EnemyGeneration
 
         //Adding all posible abilities
         character.EquippedAbilities = new HashSet<AbilityName>();
-        while (character.EquippedAbilities.Count < 6)
+        if (character.UnlockedAbilities.Count <= 6)
         {
-            
-            if (UnlockedAbilities.Count != 0 )
+            character.EquippedAbilities = character.UnlockedAbilities;
+        }
+        else
+        {
+            while (character.EquippedAbilities.Count < 6 || character.EquippedAbilities.Count != character.UnlockedAbilities.Count)
             {
-                List<AbilityName> ToDelete = new List<AbilityName>(SortedUnlockedAbilities);
-                List<AbilityTags> AbilityChooseOrder = new List<AbilityTags>() { AbilityTags.Attack_Ability, AbilityTags.Defense_Ability, AbilityTags.Blessing_Ability };
 
-                foreach (AbilityName currentAbility in ToDelete)
+                if (UnlockedAbilities.Count != 0)
                 {
-                    Ability ability = GetAbility[currentAbility];
-                    //if attack, defense, blessing abilities have been chosen
-                    if (index == 3)
+                    List<AbilityName> ToDelete = new List<AbilityName>(SortedUnlockedAbilities);
+                    List<AbilityTags> AbilityChooseOrder = new List<AbilityTags>() { AbilityTags.Attack_Ability, AbilityTags.Defense_Ability, AbilityTags.Blessing_Ability };
+
+                    foreach (AbilityName currentAbility in ToDelete)
                     {
-                        AbilityName chosenAbility = SortedUnlockedAbilities[UnityEngine.Random.Range(0, SortedUnlockedAbilities.Count)];
-                        character.EquippedAbilities.Add(chosenAbility);
-                        SortedUnlockedAbilities.Remove(chosenAbility);
-                    }
-                    //if not
-                    else if (ability.AbilityType == AbilityChooseOrder[index])
-                    {
-                        character.EquippedAbilities.Add(currentAbility);
-                        SortedUnlockedAbilities.Remove(currentAbility);
-                        index += 1;
+                        Ability ability = GetAbility[currentAbility];
+                        //if attack, defense, blessing abilities have been chosen
+                        if (index == 3)
+                        {
+                            AbilityName chosenAbility = SortedUnlockedAbilities[UnityEngine.Random.Range(0, SortedUnlockedAbilities.Count)];
+                            character.EquippedAbilities.Add(chosenAbility);
+                            SortedUnlockedAbilities.Remove(chosenAbility);
+                        }
+                        //if not
+                        else if (ability.AbilityType == AbilityChooseOrder[index])
+                        {
+                            character.EquippedAbilities.Add(currentAbility);
+                            SortedUnlockedAbilities.Remove(currentAbility);
+                            index += 1;
+                        }
                     }
                 }
-            }
-            else
-            {
-                break;
-            }
-            
-            
+                else
+                {
+                    break;
+                }
 
+
+
+            }
         }
         
     }
