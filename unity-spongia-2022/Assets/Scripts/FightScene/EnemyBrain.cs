@@ -467,7 +467,12 @@ public class EnemyBrain : MonoBehaviour
             StartCoroutine(castCombo(ChosenCombo));
 
         }
-        
+        else
+        {
+            EnemyHolder.NextRound();
+            Button.SetActive(true);
+            slotsPopulator.EnableButtons();
+        }
 
     }
 
