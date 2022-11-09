@@ -224,7 +224,7 @@ public class EnemyGeneration
         else
         {
             int maxLoopCount = 6;
-            while (character.EquippedAbilities.Count < 6 || character.EquippedAbilities.Count != character.UnlockedAbilities.Count || maxLoopCount > 0)
+            while (character.EquippedAbilities.Count < 6 && maxLoopCount > 0)
             {
 
                 if (UnlockedAbilities.Count != 0)
