@@ -467,7 +467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7386380967162971971, guid: b716f0cc5248a5a48b5d8fbcf1d1d098, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7386380967162971971, guid: b716f0cc5248a5a48b5d8fbcf1d1d098, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5855,7 +5855,7 @@ GameObject:
   - component: {fileID: 396515003}
   - component: {fileID: 396515004}
   m_Layer: 5
-  m_Name: Abilties
+  m_Name: Abilities
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
