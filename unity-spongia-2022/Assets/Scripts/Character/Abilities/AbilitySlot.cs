@@ -56,6 +56,10 @@ namespace AE.Abilities.UI
                     {
                         return;
                     }
+                    catch (NullReferenceException)
+                    {
+                        return;
+                    }
                    
                 }
                 else
