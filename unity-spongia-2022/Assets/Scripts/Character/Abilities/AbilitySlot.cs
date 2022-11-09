@@ -40,15 +40,23 @@ namespace AE.Abilities.UI
 
                 if (_abilityName == AbilityName.None)
                 {
-                    outline.enabled = false;
-                    background.enabled = false;
-                    icon.enabled = false;
-                    foreground.enabled = false;
+                    try
+                    {
+                        outline.enabled = false;
+                        background.enabled = false;
+                        icon.enabled = false;
+                        foreground.enabled = false;
 
-                    IsSelected = false;
+                        IsSelected = false;
 
-                    if (GetComponent<Image>() != null)
-                        GetComponent<Image>().enabled = false;
+                        if (GetComponent<Image>() != null)
+                            GetComponent<Image>().enabled = false;
+
+                    }catch(MissingReferenceException)
+                    {
+                        return;
+                    }
+                   
                 }
                 else
                 {
