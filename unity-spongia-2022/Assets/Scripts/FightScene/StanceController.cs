@@ -70,15 +70,16 @@ namespace AE.Fight.UI
         [Header("Animation")]
         public float AnimationLength;
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-                Animate(StanceType.Idle);
-            if (Input.GetKeyDown(KeyCode.W))
-                Animate(StanceType.Attack);
-            if (Input.GetKeyDown(KeyCode.E))
-                Animate(StanceType.Defend);
-        }
+        // FORGOTTEN UPDATE, LEFT HERE TO ALWAYS BE REMEMBERED
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Q))
+        //        Animate(StanceType.Idle);
+        //    if (Input.GetKeyDown(KeyCode.W))
+        //        Animate(StanceType.Attack);
+        //    if (Input.GetKeyDown(KeyCode.E))
+        //        Animate(StanceType.Defend);
+        //}
 
         public void Animate(StanceType stanceType)
         {
