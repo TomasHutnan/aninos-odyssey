@@ -1,7 +1,3 @@
-Názov tímu: ae
-Názov hry: rizumu
-Vývojové prostredie a prostriedky: Unity, C#, Photoshop
-
 Fonty:
 * Cinzel
 Zdroj: https://www.1001fonts.com/cinzel-font.html
