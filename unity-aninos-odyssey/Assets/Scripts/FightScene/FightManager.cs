@@ -81,7 +81,7 @@ public class FightManager : MonoBehaviour
         int expGain = 80 + (EnemyCharatcer.LevelUpSystem.Level) * 50;
         SaveData.PlayerCharacter.LevelUpSystem.addExp(expGain);
         SaveData.AutoSave();
-        SceneUtils.LoadScene("GameScene");
+        SceneUtils.LoadScene("GameScene", true);
     }
     public void Defeat()
     {

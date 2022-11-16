@@ -43,7 +43,7 @@ public class FightersGrid : MonoBehaviour
         FightData.Location = fightLocation;
         FightData.FightType = fightType;
 
-        SceneUtils.LoadScene("FightScene");
+        SceneUtils.LoadScene("FightScene", true);
     }
 
     private void OnValidate()

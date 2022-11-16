@@ -38,7 +38,7 @@ public class StatusPanel : MonoBehaviour
         statusLabel.text = value.ToString();
         if (value == DownloadNetworkStatus.Success)
         {
-            SceneUtils.LoadScene("GameScene");
+            SceneUtils.LoadScene("GameScene", true);
         }
         else if (value == DownloadNetworkStatus.ServerError || value == DownloadNetworkStatus.NetworkError || value == DownloadNetworkStatus.NotFound)
         {

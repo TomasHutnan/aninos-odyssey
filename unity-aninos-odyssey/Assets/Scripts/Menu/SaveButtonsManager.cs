@@ -59,7 +59,7 @@ namespace AE.MainMenu
             else if (SaveController.IsSlotOccupied(saveSlot))
             {
                 SaveController.ActivateSave(saveSlot);
-                SceneUtils.LoadScene("GameScene");
+                SceneUtils.LoadScene("GameScene", true);
             }
             else
             {
