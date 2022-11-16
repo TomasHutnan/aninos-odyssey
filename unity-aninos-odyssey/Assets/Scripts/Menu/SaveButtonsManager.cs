@@ -5,6 +5,7 @@ using TMPro;
 
 using AE.GameSave;
 using AE.SceneManagment;
+using AE.Fight;
 
 namespace AE.MainMenu
 {
@@ -60,6 +61,7 @@ namespace AE.MainMenu
             {
                 SaveController.ActivateSave(saveSlot);
                 SceneUtils.LoadScene("GameScene", true);
+                FightData.FightType = FightType.None;
             }
             else
             {
