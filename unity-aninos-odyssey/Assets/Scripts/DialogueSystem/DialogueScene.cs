@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class DialogueScene : MonoBehaviour
 {
+    [SerializeField] GameObject holderGameObject;
     [SerializeField] DialogueManager[] acts;
     private int actIndex = 0;
 
@@ -72,6 +73,13 @@ public class DialogueScene : MonoBehaviour
 
     private void OnValidate()
     {
-        acts = GetComponentsInChildren<DialogueManager>();
+        if ( holderGameObject!= null )
+        {
+            acts = holderGameObject.GetComponentsInChildren<DialogueManager>();
+        }
+        else
+        {
+            acts = GetComponentsInChildren<DialogueManager>();
+        }
     }
 }
