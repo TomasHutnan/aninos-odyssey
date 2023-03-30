@@ -7,6 +7,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using static AbilityStorage;
 
 public class FightManager : MonoBehaviour
@@ -18,8 +20,14 @@ public class FightManager : MonoBehaviour
     public List<AbilityName> EnemyAbilities = new List<AbilityName>();
     public Character EnemyCharatcer;
     public Character PlayerCharatcer;
+    public TextMeshProUGUI RoundText;
+
+    private int Round = 1;
+
     private void Start()
     {
+        Round = 1;
+        RoundText.text = "Round 1";
         Array classes = ItemClass.GetValues(typeof(ItemClass));
         ItemClass EnemyClass = (ItemClass)classes.GetValue(UnityEngine.Random.Range(0, classes.Length));
         if (FightData.PreCreatedEnemy != null)
@@ -67,6 +75,8 @@ public class FightManager : MonoBehaviour
     {
         PlayerFighter.NextRound();
         EnemyFighter.GetComponent<EnemyBrain>().MakeMove();
+        Round += 1;
+        RoundText.text = "Round " + Round;
     }
     public void Victory()
     {
