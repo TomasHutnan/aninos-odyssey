@@ -164,6 +164,9 @@ MonoBehaviour:
     FightType: 1
   - AudioTracks: 0a0000000b000000
     FightLocation: 0
+    FightType: 1
+  - AudioTracks: 0c0000000d000000
+    FightLocation: 0
     FightType: 2
 --- !u!4 &2264874
 Transform:
@@ -714,6 +717,7 @@ MonoBehaviour:
   PlayerFighter: {fileID: 39233713}
   EnemyGameObject: {fileID: 1365485805}
   EnemyAbilities: 0e00000003000000200000001c0000001900000018000000
+  RoundText: {fileID: 0}
 --- !u!1 &125892846
 GameObject:
   m_ObjectHideFlags: 0

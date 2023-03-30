@@ -22,6 +22,8 @@ namespace AE.Audio
         //  - Fight Location Themes
         OST_FIGHT_GR_NORMAL_INTRO,
         OST_FIGHT_GR_NORMAL_MAIN,
+        OST_FIGHT_GR_NORMAL2_INTRO,
+        OST_FIGHT_GR_NORMAL2_MAIN,
         OST_FIGHT_GR_BOSS_INTRO,
         OST_FIGHT_GR_BOSS_MAIN,
 
