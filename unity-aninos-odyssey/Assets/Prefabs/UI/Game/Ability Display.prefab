@@ -536,6 +536,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ability Slot
       objectReference: {fileID: 0}
+    - target: {fileID: 6734234084330762201, guid: ff57a0bddd5327b42857aa56d1a484ba, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734234084330762201, guid: ff57a0bddd5327b42857aa56d1a484ba, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734234084330762201, guid: ff57a0bddd5327b42857aa56d1a484ba, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8010428681853443561, guid: ff57a0bddd5327b42857aa56d1a484ba, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

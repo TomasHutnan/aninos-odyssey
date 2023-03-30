@@ -18,18 +18,23 @@ namespace AE.Audio.Fight
         [SerializeField] AudioController audioController;
         [SerializeField] AudioInfo[] audioInfos;
 
-        private Dictionary<Location, Dictionary<FightType, AudioType[]>> _soundTracks = new();
+        private Dictionary<Location, Dictionary<FightType, List<AudioType[]>>> _soundTracks = new();
 
         private int lastPlayedIndex = -1;
+
+        private AudioType[] soundTracks;
 
         private void Awake()
         {
             foreach (AudioInfo audioInfo in audioInfos)
             {
                 if (!_soundTracks.ContainsKey(audioInfo.FightLocation))
-                    _soundTracks[audioInfo.FightLocation] = new Dictionary<FightType, AudioType[]>();
+                    _soundTracks[audioInfo.FightLocation] = new Dictionary<FightType, List<AudioType[]>>();
 
-                _soundTracks[audioInfo.FightLocation][audioInfo.FightType] = audioInfo.AudioTracks;
+                if (!_soundTracks[audioInfo.FightLocation].ContainsKey(audioInfo.FightType))
+                    _soundTracks[audioInfo.FightLocation][audioInfo.FightType] = new List<AudioType[]>();
+
+                _soundTracks[audioInfo.FightLocation][audioInfo.FightType].Add(audioInfo.AudioTracks);
             }
 
             if (FightData.FightType == FightType.None)
@@ -38,9 +43,13 @@ namespace AE.Audio.Fight
                 FightData.Location = Location.Greece;
         }
 
+        private void Start()
+        {
+            soundTracks = _soundTracks[FightData.Location][FightData.FightType][Random.Range(0, _soundTracks[FightData.Location][FightData.FightType].Count)];
+        }
+
         private void Update()
         {
-            AudioType[] soundTracks = _soundTracks[FightData.Location][FightData.FightType];
             if (lastPlayedIndex == -1)
             {
                 lastPlayedIndex = 0;
