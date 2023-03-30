@@ -57,5 +57,8 @@ namespace AE.Audio
 
         SFX_FIGHT_PRIEST_SWOOSH_01,
         SFX_FIGHT_PRIEST_SWOOSH_02,
+
+        //
+        OST_LOC_GR_INTRO_01,
     }
 }
