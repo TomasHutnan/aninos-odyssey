@@ -8958,8 +8958,8 @@ MonoBehaviour:
   - {fileID: 1275715430}
   - {fileID: 1451282378}
   - {fileID: 2000070930}
-  - {fileID: 2073829879}
   - {fileID: 1315508620}
+  - {fileID: 2073829879}
   - {fileID: 1311631187}
   Scene: {fileID: 1947708265}
 --- !u!1001 &1275715428
@@ -13844,9 +13844,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1991141512}
-        m_TargetAssemblyTypeName: Forfeit, Assembly-CSharp
-        m_MethodName: GiveUp
+      - m_Target: {fileID: 111969395}
+        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
+        m_MethodName: Defeat
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -84,6 +84,9 @@ public class FightManager : MonoBehaviour
     }
     public void Victory()
     {
+        endTrigerred = true;
+        EnemyFighter.StatHolder[Stat.HealthPoints] = 0;
+
         print("VICTORY");
         print(EnemyCharatcer.EquippedItems.Values.Count);
         foreach (Item item in EnemyCharatcer.EquippedItems.Values)
@@ -100,6 +103,9 @@ public class FightManager : MonoBehaviour
     }
     public void Defeat()
     {
+        endTrigerred = true;
+        PlayerFighter.StatHolder[Stat.HealthPoints] = 0;
+
         print("Defeat");
         finishManager.Defeat();
         //SceneUtils.LoadScene("MenuScene");
@@ -110,18 +116,10 @@ public class FightManager : MonoBehaviour
             return;
         if (PlayerFighter.StatHolder[Stat.HealthPoints]<= 0)
         {
-            endTrigerred = true;
-
-            PlayerFighter.StatHolder[Stat.HealthPoints] = 0;
-           
             Defeat();
         }
         if(EnemyFighter.StatHolder[Stat.HealthPoints]<= 0)
         {
-            endTrigerred = true;
-
-            EnemyFighter.StatHolder[Stat.HealthPoints] = 0;
-
             Victory();
         }
     }
