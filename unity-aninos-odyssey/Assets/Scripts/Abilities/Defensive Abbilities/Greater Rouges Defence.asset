@@ -19,7 +19,7 @@ MonoBehaviour:
   AbilityFamily: 8
   AbilityLevel: 2
   AbilityAnimationType: 2
-  AbilityDescription: Fortifie yourself with your weapon gaining temporary defense
+  AbilityDescription: Fortify yourself with your weapon gaining temporary defense
     and dodge chance.
   AbilityCount: 1
   StaminaCost: 50

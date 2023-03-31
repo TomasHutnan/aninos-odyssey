@@ -19,7 +19,7 @@ MonoBehaviour:
   AbilityFamily: 9
   AbilityLevel: 1
   AbilityAnimationType: 2
-  AbilityDescription: Fortifie yourself with your weapon gaining mana and temporary
+  AbilityDescription: Fortify yourself with your weapon gaining mana and temporary
     defense.
   AbilityCount: 1
   StaminaCost: 25

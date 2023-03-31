@@ -19,7 +19,7 @@ MonoBehaviour:
   AbilityFamily: 6
   AbilityLevel: 2
   AbilityAnimationType: 2
-  AbilityDescription: 'Fortifie yourself with your weapon gaining stamina and temporary
+  AbilityDescription: 'Fortify yourself with your weapon gaining stamina and temporary
     defense. '
   AbilityCount: 1
   StaminaCost: 60

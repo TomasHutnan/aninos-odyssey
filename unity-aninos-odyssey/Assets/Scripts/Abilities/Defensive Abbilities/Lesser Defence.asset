@@ -19,7 +19,7 @@ MonoBehaviour:
   AbilityFamily: -1
   AbilityLevel: 0
   AbilityAnimationType: 2
-  AbilityDescription: Fortifie yourself with your bare hands,
+  AbilityDescription: Fortify yourself with your bare hands,
   AbilityCount: 1
   StaminaCost: 15
   ManaCost: 0
