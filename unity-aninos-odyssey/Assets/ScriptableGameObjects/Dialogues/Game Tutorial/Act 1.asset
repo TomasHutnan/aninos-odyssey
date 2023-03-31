@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentances:
   - name: 300
-    text: Congratulations on beating your first oponent!
+    text: Congratulations on beating your first opponent!
   - name: 300
     text: We expect great things from you.

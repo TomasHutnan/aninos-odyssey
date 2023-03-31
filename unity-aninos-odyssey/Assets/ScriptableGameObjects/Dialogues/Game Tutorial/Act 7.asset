@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentances:
   - name: 300
-    text: You always have 8 oponent choices.
+    text: You always have 8 opponent choices.
   - name: 300
     text: Start a fight by clicking on an oponent.
