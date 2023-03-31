@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentances:
   - name: 300
-    text: This is your oponent.
+    text: This is your opponent.
   - name: 300
     text: He is very dangerous. Beware!
