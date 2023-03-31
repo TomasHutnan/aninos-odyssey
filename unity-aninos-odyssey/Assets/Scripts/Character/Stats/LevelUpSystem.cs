@@ -27,6 +27,8 @@ namespace AE.CharacterStats
 
         public int UnspentSkillPoints { get { return Level - Levels.Values.Sum(); } }
 
+        public int LevelUpEXP { get { return (defaultExpRequirement + Level * incrementalExpRequirement); } }
+
         private int defaultExpRequirement = 80;
         private int incrementalExpRequirement = 100;
 

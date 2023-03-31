@@ -95,7 +95,7 @@ public class Tooltip : MonoBehaviour
 
         nameLabel.text = item.Name;
         typeLabel.text = item.Type.ToString();
-        valueLabel.text = $"<color=#FFD700>Sell for { item.value} $</color>";
+        valueLabel.text = $"<color=#FFD700>Sell value: { item.value} $</color>";
 
         sb.Length = 0;
 

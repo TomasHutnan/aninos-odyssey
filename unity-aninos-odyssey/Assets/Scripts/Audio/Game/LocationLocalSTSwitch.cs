@@ -19,7 +19,7 @@ namespace AE.Audio.PlayControl
         void Update()
         {
             AudioType currentTrack = lastPlayed == AudioType.OST_SHOP_INTRO || lastPlayed == AudioType.OST_SHOP_MAIN ? locatioSoundTrack[0] : locatioSoundTrack[1];
-            print(currentTrack);
+            
             foreach (GameObject shop in shopGameObjects)
                 if (shop.activeInHierarchy)
                 {
@@ -31,21 +31,14 @@ namespace AE.Audio.PlayControl
                     break;
                 }
 
-            if (!(currentTrack == shopSoundTrack[0] || currentTrack == shopSoundTrack[1]))
-                if (currentTrack == locatioSoundTrack[0])
-                    if (audioController.IsAudioTrackRunning(locatioSoundTrack[0]))
-                        return;
-                    else
-                    {
-                        audioController.PlayAudio(currentTrack, true);
-                        return;
-                    }
+            if (currentTrack == locatioSoundTrack[1] && audioController.IsAudioTrackRunning(locatioSoundTrack[0]))
+                return;
 
             if (audioController.IsAudioTrackRunning(currentTrack))
                 return;
 
             lastPlayed = currentTrack;
-            audioController.PlayAudio(currentTrack, true);
+            audioController.PlayAudio(currentTrack);
         }
     }
 }

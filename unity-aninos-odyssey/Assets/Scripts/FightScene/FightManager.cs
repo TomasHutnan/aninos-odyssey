@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using static AbilityStorage;
+using System.Linq;
 
 public class FightManager : MonoBehaviour
 {
@@ -22,7 +23,10 @@ public class FightManager : MonoBehaviour
     public Character PlayerCharatcer;
     public TextMeshProUGUI RoundText;
 
+    [SerializeField] FightFinishManager finishManager;
+
     private int Round = 1;
+    private bool endTrigerred = false;
 
     private void Start()
     {
@@ -91,24 +95,33 @@ public class FightManager : MonoBehaviour
         int expGain = 80 + (EnemyCharatcer.LevelUpSystem.Level) * 50;
         SaveData.PlayerCharacter.LevelUpSystem.addExp(expGain);
         SaveData.AutoSave();
-        SceneUtils.LoadScene("GameScene", true);
+        finishManager.Victory(EnemyCharatcer.EquippedItems.Values.ToArray<Item>(), EnemyCharatcer.Money, expGain);
+        //SceneUtils.LoadScene("GameScene", true);
     }
     public void Defeat()
     {
         print("Defeat");
-        SceneUtils.LoadScene("MenuScene");
+        finishManager.Defeat();
+        //SceneUtils.LoadScene("MenuScene");
     }
     public void Update()
     {
+        if (endTrigerred)
+            return;
         if (PlayerFighter.StatHolder[Stat.HealthPoints]<= 0)
         {
+            endTrigerred = true;
+
             PlayerFighter.StatHolder[Stat.HealthPoints] = 0;
            
             Defeat();
         }
         if(EnemyFighter.StatHolder[Stat.HealthPoints]<= 0)
         {
+            endTrigerred = true;
+
             EnemyFighter.StatHolder[Stat.HealthPoints] = 0;
+
             Victory();
         }
     }

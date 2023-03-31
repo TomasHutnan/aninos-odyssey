@@ -16,5 +16,9 @@ namespace AE.SceneManagment
                 SaveData.AutoSave();
             }
         }
+        public void SceneLoad(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }
